@@ -1,0 +1,595 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1475AE0424103EAD00F1D24F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AE0324103EAD00F1D24F /* AppDelegate.swift */; };
+		1475AE0624103EAD00F1D24F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AE0524103EAD00F1D24F /* SceneDelegate.swift */; };
+		1475AE0824103EAD00F1D24F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AE0724103EAD00F1D24F /* ViewController.swift */; };
+		1475AE0B24103EAD00F1D24F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1475AE0924103EAD00F1D24F /* Main.storyboard */; };
+		1475AE0D24103EAE00F1D24F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1475AE0C24103EAE00F1D24F /* Assets.xcassets */; };
+		1475AE1024103EAE00F1D24F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1475AE0E24103EAE00F1D24F /* LaunchScreen.storyboard */; };
+		1475AE1B24103EAF00F1D24F /* DuelloTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AE1A24103EAF00F1D24F /* DuelloTests.swift */; };
+		1475AE2624103EAF00F1D24F /* DuelloUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AE2524103EAF00F1D24F /* DuelloUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1475AE1724103EAF00F1D24F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1475ADF824103EAD00F1D24F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1475ADFF24103EAD00F1D24F;
+			remoteInfo = Duello;
+		};
+		1475AE2224103EAF00F1D24F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1475ADF824103EAD00F1D24F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1475ADFF24103EAD00F1D24F;
+			remoteInfo = Duello;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1475AE0024103EAD00F1D24F /* Duello.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Duello.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1475AE0324103EAD00F1D24F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		1475AE0524103EAD00F1D24F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		1475AE0724103EAD00F1D24F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		1475AE0A24103EAD00F1D24F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		1475AE0C24103EAE00F1D24F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1475AE0F24103EAE00F1D24F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		1475AE1124103EAE00F1D24F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1475AE1624103EAF00F1D24F /* DuelloTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DuelloTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1475AE1A24103EAF00F1D24F /* DuelloTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuelloTests.swift; sourceTree = "<group>"; };
+		1475AE1C24103EAF00F1D24F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1475AE2124103EAF00F1D24F /* DuelloUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DuelloUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1475AE2524103EAF00F1D24F /* DuelloUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuelloUITests.swift; sourceTree = "<group>"; };
+		1475AE2724103EAF00F1D24F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1475ADFD24103EAD00F1D24F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1475AE1324103EAF00F1D24F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1475AE1E24103EAF00F1D24F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1475ADF724103EAD00F1D24F = {
+			isa = PBXGroup;
+			children = (
+				1475AE0224103EAD00F1D24F /* Duello */,
+				1475AE1924103EAF00F1D24F /* DuelloTests */,
+				1475AE2424103EAF00F1D24F /* DuelloUITests */,
+				1475AE0124103EAD00F1D24F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1475AE0124103EAD00F1D24F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1475AE0024103EAD00F1D24F /* Duello.app */,
+				1475AE1624103EAF00F1D24F /* DuelloTests.xctest */,
+				1475AE2124103EAF00F1D24F /* DuelloUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1475AE0224103EAD00F1D24F /* Duello */ = {
+			isa = PBXGroup;
+			children = (
+				1475AE0324103EAD00F1D24F /* AppDelegate.swift */,
+				1475AE0524103EAD00F1D24F /* SceneDelegate.swift */,
+				1475AE0724103EAD00F1D24F /* ViewController.swift */,
+				1475AE0924103EAD00F1D24F /* Main.storyboard */,
+				1475AE0C24103EAE00F1D24F /* Assets.xcassets */,
+				1475AE0E24103EAE00F1D24F /* LaunchScreen.storyboard */,
+				1475AE1124103EAE00F1D24F /* Info.plist */,
+			);
+			path = Duello;
+			sourceTree = "<group>";
+		};
+		1475AE1924103EAF00F1D24F /* DuelloTests */ = {
+			isa = PBXGroup;
+			children = (
+				1475AE1A24103EAF00F1D24F /* DuelloTests.swift */,
+				1475AE1C24103EAF00F1D24F /* Info.plist */,
+			);
+			path = DuelloTests;
+			sourceTree = "<group>";
+		};
+		1475AE2424103EAF00F1D24F /* DuelloUITests */ = {
+			isa = PBXGroup;
+			children = (
+				1475AE2524103EAF00F1D24F /* DuelloUITests.swift */,
+				1475AE2724103EAF00F1D24F /* Info.plist */,
+			);
+			path = DuelloUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1475ADFF24103EAD00F1D24F /* Duello */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1475AE2A24103EAF00F1D24F /* Build configuration list for PBXNativeTarget "Duello" */;
+			buildPhases = (
+				1475ADFC24103EAD00F1D24F /* Sources */,
+				1475ADFD24103EAD00F1D24F /* Frameworks */,
+				1475ADFE24103EAD00F1D24F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Duello;
+			productName = Duello;
+			productReference = 1475AE0024103EAD00F1D24F /* Duello.app */;
+			productType = "com.apple.product-type.application";
+		};
+		1475AE1524103EAF00F1D24F /* DuelloTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1475AE2D24103EAF00F1D24F /* Build configuration list for PBXNativeTarget "DuelloTests" */;
+			buildPhases = (
+				1475AE1224103EAF00F1D24F /* Sources */,
+				1475AE1324103EAF00F1D24F /* Frameworks */,
+				1475AE1424103EAF00F1D24F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1475AE1824103EAF00F1D24F /* PBXTargetDependency */,
+			);
+			name = DuelloTests;
+			productName = DuelloTests;
+			productReference = 1475AE1624103EAF00F1D24F /* DuelloTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		1475AE2024103EAF00F1D24F /* DuelloUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1475AE3024103EAF00F1D24F /* Build configuration list for PBXNativeTarget "DuelloUITests" */;
+			buildPhases = (
+				1475AE1D24103EAF00F1D24F /* Sources */,
+				1475AE1E24103EAF00F1D24F /* Frameworks */,
+				1475AE1F24103EAF00F1D24F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1475AE2324103EAF00F1D24F /* PBXTargetDependency */,
+			);
+			name = DuelloUITests;
+			productName = DuelloUITests;
+			productReference = 1475AE2124103EAF00F1D24F /* DuelloUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1475ADF824103EAD00F1D24F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1130;
+				LastUpgradeCheck = 1130;
+				ORGANIZATIONNAME = "Darius Dresp";
+				TargetAttributes = {
+					1475ADFF24103EAD00F1D24F = {
+						CreatedOnToolsVersion = 11.3.1;
+					};
+					1475AE1524103EAF00F1D24F = {
+						CreatedOnToolsVersion = 11.3.1;
+						TestTargetID = 1475ADFF24103EAD00F1D24F;
+					};
+					1475AE2024103EAF00F1D24F = {
+						CreatedOnToolsVersion = 11.3.1;
+						TestTargetID = 1475ADFF24103EAD00F1D24F;
+					};
+				};
+			};
+			buildConfigurationList = 1475ADFB24103EAD00F1D24F /* Build configuration list for PBXProject "Duello" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 1475ADF724103EAD00F1D24F;
+			productRefGroup = 1475AE0124103EAD00F1D24F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1475ADFF24103EAD00F1D24F /* Duello */,
+				1475AE1524103EAF00F1D24F /* DuelloTests */,
+				1475AE2024103EAF00F1D24F /* DuelloUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1475ADFE24103EAD00F1D24F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1475AE1024103EAE00F1D24F /* LaunchScreen.storyboard in Resources */,
+				1475AE0D24103EAE00F1D24F /* Assets.xcassets in Resources */,
+				1475AE0B24103EAD00F1D24F /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1475AE1424103EAF00F1D24F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1475AE1F24103EAF00F1D24F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1475ADFC24103EAD00F1D24F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1475AE0824103EAD00F1D24F /* ViewController.swift in Sources */,
+				1475AE0424103EAD00F1D24F /* AppDelegate.swift in Sources */,
+				1475AE0624103EAD00F1D24F /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1475AE1224103EAF00F1D24F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1475AE1B24103EAF00F1D24F /* DuelloTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1475AE1D24103EAF00F1D24F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1475AE2624103EAF00F1D24F /* DuelloUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1475AE1824103EAF00F1D24F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1475ADFF24103EAD00F1D24F /* Duello */;
+			targetProxy = 1475AE1724103EAF00F1D24F /* PBXContainerItemProxy */;
+		};
+		1475AE2324103EAF00F1D24F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1475ADFF24103EAD00F1D24F /* Duello */;
+			targetProxy = 1475AE2224103EAF00F1D24F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		1475AE0924103EAD00F1D24F /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1475AE0A24103EAD00F1D24F /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		1475AE0E24103EAE00F1D24F /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1475AE0F24103EAE00F1D24F /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1475AE2824103EAF00F1D24F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		1475AE2924103EAF00F1D24F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1475AE2B24103EAF00F1D24F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = A6466G3UZA;
+				INFOPLIST_FILE = Duello/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = nothing.com.Duello;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1475AE2C24103EAF00F1D24F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = A6466G3UZA;
+				INFOPLIST_FILE = Duello/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = nothing.com.Duello;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		1475AE2E24103EAF00F1D24F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = A6466G3UZA;
+				INFOPLIST_FILE = DuelloTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = nothing.com.DuelloTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Duello.app/Duello";
+			};
+			name = Debug;
+		};
+		1475AE2F24103EAF00F1D24F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = A6466G3UZA;
+				INFOPLIST_FILE = DuelloTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = nothing.com.DuelloTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Duello.app/Duello";
+			};
+			name = Release;
+		};
+		1475AE3124103EAF00F1D24F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = A6466G3UZA;
+				INFOPLIST_FILE = DuelloUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = nothing.com.DuelloUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Duello;
+			};
+			name = Debug;
+		};
+		1475AE3224103EAF00F1D24F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = A6466G3UZA;
+				INFOPLIST_FILE = DuelloUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = nothing.com.DuelloUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Duello;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1475ADFB24103EAD00F1D24F /* Build configuration list for PBXProject "Duello" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1475AE2824103EAF00F1D24F /* Debug */,
+				1475AE2924103EAF00F1D24F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1475AE2A24103EAF00F1D24F /* Build configuration list for PBXNativeTarget "Duello" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1475AE2B24103EAF00F1D24F /* Debug */,
+				1475AE2C24103EAF00F1D24F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1475AE2D24103EAF00F1D24F /* Build configuration list for PBXNativeTarget "DuelloTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1475AE2E24103EAF00F1D24F /* Debug */,
+				1475AE2F24103EAF00F1D24F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1475AE3024103EAF00F1D24F /* Build configuration list for PBXNativeTarget "DuelloUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1475AE3124103EAF00F1D24F /* Debug */,
+				1475AE3224103EAF00F1D24F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1475ADF824103EAD00F1D24F /* Project object */;
+}
