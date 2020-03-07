@@ -6,8 +6,6 @@
 //  Copyright © 2020 Darius Dresp. All rights reserved.
 //
 
-//Change: Register to Registration
-
 import RxSwift
 import Firebase
 

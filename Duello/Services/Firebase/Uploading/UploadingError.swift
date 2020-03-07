@@ -6,11 +6,9 @@
 //  Copyright © 2020 Darius Dresp. All rights reserved.
 //
 
-//Change: UploadingError
-
 import Firebase
 
-enum UploadError: DuelloError {
+enum UploadingError: DuelloError {
     
     case userNotLoggedIn
     case networkError

@@ -14,6 +14,10 @@
 
 //fix video loading, creating the asset for the thumbnail takes too much time
 
-//LikePercentageView for user is loading wrongly, random 
-//Flickering after reload
+//Flickering after reload, take more time!
+
 //Showing the wrong image sometimes after reload for a short time
+
+//Sometimes the count doenst work right as the footer is still loading
+
+//Delete is breaking contraints

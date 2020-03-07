@@ -24,7 +24,7 @@ class UploadingService: NetworkService {
             reference.document(id).setData(docData, completion: { (error) in
                 if let error = error {
                     print(error, error.localizedDescription)
-                    observer.onError(UploadError(error: error))
+                    observer.onError(UploadingError(error: error))
                     return
                 }
                 
@@ -40,7 +40,7 @@ class UploadingService: NetworkService {
     func saveQueryRelation(databaseModel: Model, reference: CollectionReference, fromId: String , collectionName: String ,toId: String) -> Observable<Bool> {
         
         guard let docData = databaseModel.getUploadQueryKeys() else {
-            return Observable.error(UploadError.unknown(description: "unknown error"))
+            return Observable.error(UploadingError.unknown(description: "unknown error"))
         }
         
         return Observable.create({(observer) -> Disposable in
@@ -49,7 +49,7 @@ class UploadingService: NetworkService {
             
             ref.setData(docData, completion: { (err) in
                 if let err = err {
-                    observer.onError(UploadError(error: err))
+                    observer.onError(UploadingError(error: err))
                     return
                 }
                 

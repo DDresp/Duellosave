@@ -255,9 +255,6 @@ class PostCell<T: PostDisplayer>: UICollectionViewCell {
         nameLabel.text = displayer.userName
         titleLabel.text = displayer.title
         descriptionLabel.text = displayer.description
-        if onlyForFitting {
-            print("debug: fitting with description: \(displayer.description)")
-        }
     }
     
     private func setupProfileImage(displayer: T) {
@@ -352,7 +349,7 @@ class PostCell<T: PostDisplayer>: UICollectionViewCell {
         displayer.showLikeView.subscribe(onNext: { [weak self] (showLikeView) in
             if showLikeView {
                 self?.blurView.isHidden = false
-                self?.likePercentageView.showLikeViewAnimation(percentage: self?.displayer?.rate ?? 0, with: 0.45, fromStart: true)
+                self?.likePercentageView.showLikeViewAnimation(percentage: self?.displayer?.rate ?? 0, duration: 0.45, fromStart: true)
             } else {
                 self?.blurView.isHidden = true
             }

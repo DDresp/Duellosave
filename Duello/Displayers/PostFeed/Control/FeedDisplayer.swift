@@ -6,7 +6,8 @@
 //  Copyright © 2020 Darius Dresp. All rights reserved.
 //
 
-import Foundation
+import RxSwift
+import RxCocoa
 
 protocol FeedDisplayer {
     
@@ -14,6 +15,13 @@ protocol FeedDisplayer {
     var userHeaderDisplayer: UserHeaderDisplayer? { get }
     var postCollectionDisplayer: PostCollectionDisplayer { get }
     
+    //MARK: - Bindables
+    var loadLink: PublishRelay<String?> { get }
+    var showAdditionalLinkAlert: PublishRelay<String> { get }
+    var showActionSheet: PublishRelay<ActionSheet> { get }
+    var showAlert: PublishRelay<Alert> { get }
+    var showLoading: BehaviorRelay<Bool> { get }
+
 }
 
 extension FeedDisplayer {

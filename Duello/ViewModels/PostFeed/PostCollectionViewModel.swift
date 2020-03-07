@@ -21,15 +21,19 @@ class PostCollectionViewModel: PostCollectionDisplayer {
     //MARK: - Bindables
     var loadLink: PublishRelay<String?> = PublishRelay<String?>()
     var showAdditionalLinkAlert: PublishRelay<String> = PublishRelay<String>()
-    var updateLayout: PublishRelay<Bool> = PublishRelay<Bool>()
     var prefetchingIndexPaths: PublishRelay<[IndexPath]> = PublishRelay<[IndexPath]>()
-    var needsUpdate: PublishRelay<Void> = PublishRelay<Void>()
-    var deleteItem: PublishRelay<String> = PublishRelay<String>()
+    var requestNextPosts: PublishRelay<Void> = PublishRelay<Void>()
     var showActionSheet: PublishRelay<ActionSheet> = PublishRelay<ActionSheet>()
     var didEndDisplayingCell: PublishRelay<Int> = PublishRelay()
     var viewDidDisappear: PublishRelay<Void> = PublishRelay()
     var startPlayingVideo: PublishRelay<Int> = PublishRelay()
     var willDisplayCell: PublishRelay<Int> = PublishRelay()
+    
+    var deleteItem: PublishRelay<String> = PublishRelay<String>()
+    var refreshChanged: PublishSubject<Void> = PublishSubject()
+    var restart: PublishRelay<Void> = PublishRelay()
+    var reload: PublishRelay<Void> = PublishRelay()
+    var updateLayout: PublishRelay<Void> = PublishRelay()
     
     //MARK: - Setup
     init() {
@@ -57,6 +61,18 @@ class PostCollectionViewModel: PostCollectionDisplayer {
     }
     
     //MARK: - Methods
+    func reset() {
+        totalPostsCount = 0
+        postDisplayers = [PostDisplayer]()
+    }
+    
+    func start(with loadedPosts: [UserPost], totalPostsCount: Int) {
+        reset()
+        restart.accept(())
+        update(with: loadedPosts, totalPostsCount: totalPostsCount)
+        
+    }
+    
     func update(with loadedPosts: [UserPost], totalPostsCount: Int?) {
         if let count = totalPostsCount {
             self.totalPostsCount = count
@@ -100,15 +116,23 @@ class PostCollectionViewModel: PostCollectionDisplayer {
             configurePostDisplayer(for: viewModel)
         }
         postDisplayers.append(contentsOf: newPostDisplayers)
-
+        
+        reload.accept(())
     }
     
     //Configuration of ChildPostViewModels
     private func configurePostDisplayer(for viewModel: PostDisplayer) {
         
         viewModel.socialMediaDisplayer.showAdditionalLinkAlert.bind(to: showAdditionalLinkAlert).disposed(by: disposeBag)
+        
         viewModel.socialMediaDisplayer.selectedLink.bind(to: loadLink).disposed(by: disposeBag)
-        viewModel.didExpand.asObservable().bind(to: updateLayout).disposed(by: disposeBag)
+        
+        viewModel.didExpand.filter { (didExpand) -> Bool in
+            return didExpand
+        }.map({ (_) -> Void in
+            return ()
+        }) .bind(to: updateLayout).disposed(by: disposeBag)
+        
         viewModel.showActionSheet.asObservable().bind(to: showActionSheet).disposed(by: disposeBag)
         
         viewDidDisappear.asObservable().bind(to: viewModel.viewDidDisappear).disposed(by: disposeBag)
@@ -169,7 +193,7 @@ class PostCollectionViewModel: PostCollectionDisplayer {
         prefetchingIndexPaths.asObservable().subscribe(onNext: { [weak self] (indexPaths) in
             guard let self = self else { return }
             if indexPaths.contains(where: self.shouldPaginate) {
-                self.needsUpdate.accept(())
+                self.requestNextPosts.accept(())
             }
         }).disposed(by: disposeBag)
         

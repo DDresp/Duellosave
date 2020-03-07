@@ -33,7 +33,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Configuring Firebase
         FirebaseApp.configure()
         
-//        window = UIWindow(frame:UIScreen.main.bounds) //Change
         window?.bounds = UIScreen.main.bounds
         window?.makeKeyAndVisible()
 

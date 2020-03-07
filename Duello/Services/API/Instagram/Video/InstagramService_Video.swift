@@ -41,7 +41,7 @@ extension InstagramService {
             let thumbnailImage = try imageGenerator.copyCGImage(at: CMTimeMake(value: 1, timescale: 60), actualTime: nil)
             return UIImage(cgImage: thumbnailImage)
         } catch let error {
-            print("debug: error \(error.localizedDescription)")
+            print("error \(error.localizedDescription)")
             return nil
         }
     }

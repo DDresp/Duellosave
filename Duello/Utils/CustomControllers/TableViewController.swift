@@ -23,7 +23,6 @@ class TableViewController: UITableViewController {
     override func present(_ viewControllerToPresent: UIViewController,
                           animated flag: Bool,
                           completion: (() -> Void)? = nil) {
-        print("debug: presenting tableviewcontroller")
         viewControllerToPresent.modalPresentationStyle = .fullScreen
         super.present(viewControllerToPresent, animated: flag, completion: completion)
     }

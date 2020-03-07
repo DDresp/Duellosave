@@ -101,7 +101,7 @@ class PostCollectionViewDelegate: NSObject, UICollectionViewDelegate, UICollecti
             videoCell.fit()
             cell = videoCell
         default:
-            print("developing: displayer not known in cell sizing")
+            print("displayer not known in cell sizing")
         }
         
         let size = cell.systemLayoutSizeFitting(.init(width: collectionView.frame.width, height: 1000))

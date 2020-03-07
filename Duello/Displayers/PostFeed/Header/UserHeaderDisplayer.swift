@@ -18,15 +18,15 @@ protocol UserHeaderDisplayer {
     var socialMediaViewModel: SocialMediaDisplayer { get }
     
     //MARK: - Variables
-    var totalRate: Double? { get }
     var imageUrl: String? { get }
     var userName: String? { get }
     var hasSocialMediaNames: Bool { get }
     
     //MARK: - Bindables
-    var totalRateNeedsAnimation: BehaviorRelay<Bool> { get }
+    var score: BehaviorRelay<Double?> { get }
     var isLoading: BehaviorRelay<Bool> { get }
     var imageTapped: PublishRelay<Void> { get }
     var cleanUser: PublishRelay<Void> { get }
+    var reload: PublishRelay<Void> { get }
     
 }

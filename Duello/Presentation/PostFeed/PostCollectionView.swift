@@ -13,6 +13,15 @@ class PostCollectionView: UICollectionView {
     //MARK: - Displayer
     let displayer: FeedDisplayer
     
+    //MARK: - ChildDisplayer
+    var headerDisplayer: UserHeaderDisplayer? {
+        return displayer.userHeaderDisplayer
+    }
+    
+    var postCollectionDisplayer: PostCollectionDisplayer  {
+        return displayer.postCollectionDisplayer
+    }
+
     //MARK: - Variables
     lazy var feedDatasource = PostCollectionViewDatasource(singleImageIdentifier: singleImageIdentifier, imagesIdentifier: imagesIdentifier, videoIdentifier: videoIdentifier, headerIdentifier: headerIdentifier, footerIdentifier: footerIdentifier, emptyIdentifier: emptyIdentifier, displayer: displayer)
     lazy var feedPrefetchDatasource = PostCollectionViewPrefetchingDatasource(displayer: displayer)
@@ -25,17 +34,24 @@ class PostCollectionView: UICollectionView {
     let footerIdentifier = "footer"
     let emptyIdentifier = "empty"
     
+    private let refreshController = UIRefreshControl()
+    
     //MARK: - Setup
     init(displayer: FeedDisplayer) {
         self.displayer = displayer
         super.init(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         backgroundColor = VERYLIGHTGRAYCOLOR
         setup()
+        
+        setupBindablesToDisplayer()
+        setupBindablesFromDisplayer()
     }
     
     private func setup() {
         
         contentInsetAdjustmentBehavior = .never
+        
+        refreshControl = refreshController
         
         dataSource = feedDatasource
         prefetchDataSource = feedPrefetchDatasource
@@ -53,9 +69,36 @@ class PostCollectionView: UICollectionView {
         
     }
     
-    //MARK: - Methods
-    func restart() {
-        feedDelegate.clearCache()
+    //MARK: - Reactive
+    private let disposeBag = DisposeBag()
+    
+    private func setupBindablesToDisplayer() {
+        refreshControl?.rx.controlEvent(.valueChanged).bind(to: postCollectionDisplayer.refreshChanged).disposed(by: disposeBag)
+    }
+    
+    private func setupBindablesFromDisplayer() {
+        
+        postCollectionDisplayer.reload.subscribe(onNext: { [weak self] (_) in
+            if (self?.refreshControl?.isRefreshing == true) {
+                self?.refreshControl?.endRefreshing()
+            }
+            self?.reloadSections(IndexSet(integer: 0))
+        }).disposed(by: disposeBag)
+        
+        postCollectionDisplayer.restart.subscribe(onNext: { [weak self] (_) in
+            self?.setContentOffset(.zero, animated: false)
+            self?.feedDelegate.clearCache()
+        }).disposed(by: disposeBag)
+        
+        postCollectionDisplayer.updateLayout.subscribe(onNext: { [weak self] () in
+            self?.performBatchUpdates({})
+        }).disposed(by: disposeBag)
+        
+        guard let userHeaderDisplayer = headerDisplayer else { return }
+        
+        userHeaderDisplayer.reload.subscribe(onNext: { [weak self] (_) in
+            self?.collectionViewLayout.invalidateLayout()
+        }).disposed(by: disposeBag)
     }
     
     required init?(coder aDecoder: NSCoder) {

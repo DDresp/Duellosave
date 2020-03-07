@@ -49,10 +49,10 @@ class UploadInstagramImagesPostViewModel: UploadPostViewModel<InstagramImagesPos
             
             }, onError: { [weak self] (error) in
                 self?.isLoading.accept(false)
-                if let uploadError = error as? UploadError {
+                if let uploadError = error as? UploadingError {
                     self?.alert.accept(Alert(alertMessage: uploadError.errorMessage, alertHeader: uploadError.errorHeader))
                 }
-                print("developing error: ", error.localizedDescription)
+                print("error: ", error.localizedDescription)
         }).disposed(by: disposeBag)
     }
     

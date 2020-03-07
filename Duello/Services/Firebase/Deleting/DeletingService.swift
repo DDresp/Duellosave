@@ -21,7 +21,7 @@ class DeletingService: NetworkService {
     func deletePost(for postId: String) -> Observable<Void> {
         
         if !hasInternetConnection() { return Observable.error(DeletingError.networkError) }
-        guard let uid = Auth.auth().currentUser?.uid else { return Observable.error(UploadError.userNotLoggedIn)}
+        guard let uid = Auth.auth().currentUser?.uid else { return Observable.error(UploadingError.userNotLoggedIn)}
         
         return deleteUserPostReference(uid: uid, postId: postId).asObservable().flatMap({ (_) -> Observable<Void> in
             return self.deletePostReference(for: postId)})
@@ -33,7 +33,7 @@ class DeletingService: NetworkService {
     
             POST_REFERENCE.document(postId).delete(completion: { (err) in
                 if let err = err {
-                    observer.onError(UploadError.init(error: err))
+                    observer.onError(UploadingError.init(error: err))
                     return
                 }
                 
@@ -49,7 +49,7 @@ class DeletingService: NetworkService {
         return Observable.create({ (observer) -> Disposable in
             USER_POST_REFERENCE.document(uid).collection("posts").document(postId).delete(completion: { (err) in
                 if let err = err {
-                    observer.onError(UploadError.init(error: err))
+                    observer.onError(UploadingError.init(error: err))
                     return
                 }
                 observer.onNext(())

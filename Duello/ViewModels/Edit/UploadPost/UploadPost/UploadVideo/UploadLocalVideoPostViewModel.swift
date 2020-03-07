@@ -60,7 +60,7 @@ class UploadLocalVideoPostViewModel: UploadPostViewModel<LocalVideoPost>, Upload
                     if let uploadError = error as? DuelloError {
                         self?.alert.accept(Alert(alertMessage: uploadError.errorMessage, alertHeader: uploadError.errorHeader))
                     }
-                    print("developing error: ", error.localizedDescription)
+                    print("error: ", error.localizedDescription)
             }).disposed(by: disposeBag)
     }
     

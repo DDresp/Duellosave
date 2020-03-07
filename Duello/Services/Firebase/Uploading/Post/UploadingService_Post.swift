@@ -12,13 +12,13 @@ import RxSwift
 extension UploadingService {
     
     func savePost(post: PostModel) -> Observable<PostModel?> {
-        guard hasInternetConnection() else { return Observable.error(UploadError.networkError)}
+        guard hasInternetConnection() else { return Observable.error(UploadingError.networkError)}
         let postId = UUID().uuidString
         
         return saveDatabaseModel(databaseModel: post, reference: POST_REFERENCE, id: postId)
             .flatMap({ (databaseModel) -> Observable<PostModel?> in
             guard let savedPost = databaseModel as? PostModel else {
-                throw UploadError.unknown(description: "unknown error")
+                throw UploadingError.unknown(description: "unknown error")
             }
             return self.saveUserPostQueryRelation(savedPost: savedPost, postId: postId)
         })
@@ -26,7 +26,7 @@ extension UploadingService {
     }
     
     private func saveUserPostQueryRelation(savedPost: PostModel, postId: String) -> Observable<PostModel?> {
-        guard let uid = Auth.auth().currentUser?.uid else { return Observable.error(UploadError.userNotLoggedIn)}
+        guard let uid = Auth.auth().currentUser?.uid else { return Observable.error(UploadingError.userNotLoggedIn)}
         
         return saveQueryRelation(databaseModel: savedPost, reference: USER_POST_REFERENCE, fromId: uid, collectionName: "posts", toId: postId)
             .map({ (success) -> PostModel? in

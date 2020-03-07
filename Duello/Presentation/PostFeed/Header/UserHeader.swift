@@ -108,25 +108,15 @@ class UserHeader: UICollectionReusableView {
         setupProfileImage(displayer: displayer)
         setupText(displayer: displayer)
         setupSocialMedia(displayer: displayer)
-        setupLikeView(displayer: displayer)
         layoutIfNeeded()
         
         setupBindablesToDisplayer()
+        setupBindablesFromDisplayer()
         
     }
     
     private func setupText(displayer: UserHeaderDisplayer) {
         nameLabel.text = displayer.userName
-    }
-    
-    private func setupLikeView(displayer: UserHeaderDisplayer) {
-        
-        if let totalRate = displayer.totalRate, displayer.totalRateNeedsAnimation.value {
-            likePercentageView.showLikeViewAnimation(percentage: totalRate, fromStart: false)
-            displayer.totalRateNeedsAnimation.accept(false)
-        } else if let totalRate = displayer.totalRate {
-            likePercentageView.showLikeView(percentage: totalRate)
-        }
     }
     
     private func setupProfileImage(displayer: UserHeaderDisplayer) {
@@ -157,6 +147,16 @@ class UserHeader: UICollectionReusableView {
     private func setupBindablesToDisplayer() {
         guard let displayer = displayer else { return }
         profileImageButton.rx.tap.bind(to: displayer.imageTapped).disposed(by: disposeBag)
+    }
+    
+    private func setupBindablesFromDisplayer() {
+        
+        displayer?.score.subscribe(onNext: { [weak self] (score) in
+            guard let score = score else { return }
+            self?.likePercentageView.showLikeViewAnimation(percentage: score)
+            }).disposed(by: disposeBag)
+        
+        
     }
     
     required init?(coder aDecoder: NSCoder) {

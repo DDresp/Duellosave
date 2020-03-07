@@ -70,7 +70,6 @@ class LikePercentageView: UIView {
     }()
     
     //MARK: - Layout
-    
     private func setupLayout() {
         setupLayoutShadowBarView()
         setupLayoutRatingBarView()
@@ -115,18 +114,21 @@ class LikePercentageView: UIView {
         return sizeLabel.frame.width - initialLabelWidth
     }
     
-    func showLikeViewAnimation(percentage: Double, with duration: Double = 1, fromStart: Bool = false) {
+    private func setNewLikeViewWidth(for percentage: Double) {
+        let newLikeWidth = (self.ratingBarView.frame.width) * (CGFloat(percentage))
+        likeWidthConstraint?.constant = newLikeWidth
+    }
+
+    func showLikeViewAnimation(percentage: Double, duration: Double = 1, fromStart: Bool = false, fromPercentage: Double? = nil) {
+        if isAnimating { return }
         
         self.stickView.isHidden = true
         self.percentageLabel.isHidden = true
-        
         if fromStart {
             likeWidthConstraint?.constant = 0
             layoutIfNeeded()
         }
-        
-        setNewLikeView(for: percentage)
-        
+        setNewLikeViewWidth(for: percentage)
         isAnimating = true
         UIView.animate(withDuration: duration, delay: 0, options: [], animations: { [weak self] () in
             self?.layoutIfNeeded()
@@ -134,33 +136,26 @@ class LikePercentageView: UIView {
             self?.setItemsAfterShowingNewLikeView(for: percentage)
             self?.isAnimating = false
         }
-    
     }
     
     func showLikeView(percentage: Double) {
         self.layoutIfNeeded()
-        setNewLikeView(for: percentage)
+        setNewLikeViewWidth(for: percentage)
         self.layoutIfNeeded()
         setItemsAfterShowingNewLikeView(for: percentage)
         
     }
     
-    private func setNewLikeView(for percentage: Double) {
-        let newLikeWidth = (self.ratingBarView.frame.width) * (CGFloat(percentage))
-        likeWidthConstraint?.constant = newLikeWidth
-
-    }
-    
     private func setItemsAfterShowingNewLikeView(for percentage: Double) {
-        
+
         let filledWidth = self.likeBarView.frame.width
         let totalWidth = self.ratingBarView.frame.width
         let percentageDisplay = Double(filledWidth)/Double(totalWidth) * 100
-        
+
         self.percentageLabel.text = "\(Int(round(percentageDisplay)))"
         self.percentageLabel.sizeToFit()
         self.stickView.transform = CGAffineTransform(translationX: filledWidth, y: 0)
-        
+
         var likePercentageStackViewCenter = filledWidth - calculateAddedLabelWidth(percentage: percentage) / 2
         let percentageLabelMaxX = totalWidth - self.percentageLabel.frame.width
         let percentagelabelMinX: CGFloat = self.initialLabelWidth/2

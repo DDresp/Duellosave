@@ -16,43 +16,51 @@ class UserHeaderViewModel: UserHeaderDisplayer {
     
     //MARK: - ChildViewModels
     var socialMediaViewModel: SocialMediaDisplayer = SocialMediaViewModel(isDarkMode: true)
-    
+
     //MARK: - Variables
-    var totalRate: Double?
     var imageUrl: String?
     var userName: String?
     var hasSocialMediaNames = false
     
     //MARK: - Bindables
-    var totalRateNeedsAnimation: BehaviorRelay<Bool> = BehaviorRelay<Bool>(value: false)
     var isLoading: BehaviorRelay<Bool> = BehaviorRelay<Bool>(value: false)
     var imageTapped: PublishRelay<Void> = PublishRelay<Void>()
     var cleanUser: PublishRelay<Void> = PublishRelay<Void>()
+    var score: BehaviorRelay<Double?> = BehaviorRelay<Double?>(value: nil)
+    var reload: PublishRelay<Void> = PublishRelay()
 
     //MARK: - Setup
     init() {
         setupBindablesFromOwnProperties()
     }
     
+    //MARK: - Methods
+    func reset() {
+        isLoading.accept(false)
+        score.accept(nil)
+        imageUrl = nil
+        userName = nil
+        hasSocialMediaNames = false
+    }
+    
     //MARK: - Reactive
     private let disposeBag = DisposeBag()
     
     private func setupBindablesFromOwnProperties() {
+        
         user.asObservable().subscribe(onNext: { [weak self] (user) in
             self?.isLoading.accept(false)
             self?.imageUrl = user?.imageUrl.value?.toStringValue()
             self?.userName = user?.userName.value?.toStringValue()
             self?.hasSocialMediaNames = user?.addedSocialMediaName ?? false
             self?.socialMediaViewModel.user.accept(user)
-            self?.totalRate = user?.score
-            if let _ = user?.score {
-                self?.totalRateNeedsAnimation.accept(true)
-            }
-            
+            self?.score.accept(user?.score)
             self?.cleanUser.accept(())
+            self?.reload.accept(())
         }).disposed(by: disposeBag)
         
         cleanUser.asObservable().bind(to: socialMediaViewModel.cleanCache).disposed(by: disposeBag)
+
     }
 
 }

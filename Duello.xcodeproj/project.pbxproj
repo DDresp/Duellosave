@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		140AEE302411A96400258DE8 /* Ideas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140AEE2F2411A96400258DE8 /* Ideas.swift */; };
+		140AEE322412FD0E00258DE8 /* PostFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140AEE312412FD0E00258DE8 /* PostFeedViewController.swift */; };
 		1475AE0424103EAD00F1D24F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AE0324103EAD00F1D24F /* AppDelegate.swift */; };
 		1475AE0824103EAD00F1D24F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AE0724103EAD00F1D24F /* ViewController.swift */; };
 		1475AE0B24103EAD00F1D24F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1475AE0924103EAD00F1D24F /* Main.storyboard */; };
@@ -34,7 +35,7 @@
 		1475AE6E2410425800F1D24F /* StoringService_Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AE6D2410425800F1D24F /* StoringService_Images.swift */; };
 		1475AE702410426E00F1D24F /* StoringService_Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AE6F2410426E00F1D24F /* StoringService_Video.swift */; };
 		1475AE72241042A400F1D24F /* UploadingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AE71241042A400F1D24F /* UploadingService.swift */; };
-		1475AE74241042D000F1D24F /* UploadError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AE73241042D000F1D24F /* UploadError.swift */; };
+		1475AE74241042D000F1D24F /* UploadingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AE73241042D000F1D24F /* UploadingError.swift */; };
 		1475AE782410430D00F1D24F /* UploadingService_User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AE772410430D00F1D24F /* UploadingService_User.swift */; };
 		1475AE7A2410431E00F1D24F /* UploadingService_Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AE792410431E00F1D24F /* UploadingService_Post.swift */; };
 		1475AE7C2410433700F1D24F /* FetchingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AE7B2410433700F1D24F /* FetchingService.swift */; };
@@ -45,7 +46,7 @@
 		1475AE89241043CA00F1D24F /* FetchingService_Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AE88241043CA00F1D24F /* FetchingService_Post.swift */; };
 		1475AE8B241043F000F1D24F /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AE8A241043F000F1D24F /* AuthenticationService.swift */; };
 		1475AE8D2410440400F1D24F /* AuthenticationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AE8C2410440300F1D24F /* AuthenticationError.swift */; };
-		1475AE922410446500F1D24F /* AuthenticationService_Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AE912410446500F1D24F /* AuthenticationService_Register.swift */; };
+		1475AE922410446500F1D24F /* AuthenticationService_Registration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AE912410446500F1D24F /* AuthenticationService_Registration.swift */; };
 		1475AE942410449000F1D24F /* AuthenticationService_Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AE932410449000F1D24F /* AuthenticationService_Login.swift */; };
 		1475AE96241044A600F1D24F /* AuthenticationService_ForgotPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AE95241044A600F1D24F /* AuthenticationService_ForgotPassword.swift */; };
 		1475AE9B2410452200F1D24F /* RawUserPostsFootprint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AE9A2410452200F1D24F /* RawUserPostsFootprint.swift */; };
@@ -293,6 +294,7 @@
 /* Begin PBXFileReference section */
 		140AEE2E2411935300258DE8 /* Duello.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Duello.entitlements; sourceTree = "<group>"; };
 		140AEE2F2411A96400258DE8 /* Ideas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ideas.swift; sourceTree = "<group>"; };
+		140AEE312412FD0E00258DE8 /* PostFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostFeedViewController.swift; sourceTree = "<group>"; };
 		1475AE0024103EAD00F1D24F /* Duello.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Duello.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1475AE0324103EAD00F1D24F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1475AE0724103EAD00F1D24F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -325,7 +327,7 @@
 		1475AE6D2410425800F1D24F /* StoringService_Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoringService_Images.swift; sourceTree = "<group>"; };
 		1475AE6F2410426E00F1D24F /* StoringService_Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoringService_Video.swift; sourceTree = "<group>"; };
 		1475AE71241042A400F1D24F /* UploadingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadingService.swift; sourceTree = "<group>"; };
-		1475AE73241042D000F1D24F /* UploadError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadError.swift; sourceTree = "<group>"; };
+		1475AE73241042D000F1D24F /* UploadingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadingError.swift; sourceTree = "<group>"; };
 		1475AE772410430D00F1D24F /* UploadingService_User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadingService_User.swift; sourceTree = "<group>"; };
 		1475AE792410431E00F1D24F /* UploadingService_Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadingService_Post.swift; sourceTree = "<group>"; };
 		1475AE7B2410433700F1D24F /* FetchingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchingService.swift; sourceTree = "<group>"; };
@@ -336,7 +338,7 @@
 		1475AE88241043CA00F1D24F /* FetchingService_Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchingService_Post.swift; sourceTree = "<group>"; };
 		1475AE8A241043F000F1D24F /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
 		1475AE8C2410440300F1D24F /* AuthenticationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationError.swift; sourceTree = "<group>"; };
-		1475AE912410446500F1D24F /* AuthenticationService_Register.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService_Register.swift; sourceTree = "<group>"; };
+		1475AE912410446500F1D24F /* AuthenticationService_Registration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService_Registration.swift; sourceTree = "<group>"; };
 		1475AE932410449000F1D24F /* AuthenticationService_Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService_Login.swift; sourceTree = "<group>"; };
 		1475AE95241044A600F1D24F /* AuthenticationService_ForgotPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService_ForgotPassword.swift; sourceTree = "<group>"; };
 		1475AE9A2410452200F1D24F /* RawUserPostsFootprint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawUserPostsFootprint.swift; sourceTree = "<group>"; };
@@ -860,7 +862,7 @@
 				1475AE71241042A400F1D24F /* UploadingService.swift */,
 				1475AE76241042F300F1D24F /* User */,
 				1475AE75241042ED00F1D24F /* Post */,
-				1475AE73241042D000F1D24F /* UploadError.swift */,
+				1475AE73241042D000F1D24F /* UploadingError.swift */,
 			);
 			path = Uploading;
 			sourceTree = "<group>";
@@ -949,7 +951,7 @@
 		1475AE8E2410440A00F1D24F /* Registration */ = {
 			isa = PBXGroup;
 			children = (
-				1475AE912410446500F1D24F /* AuthenticationService_Register.swift */,
+				1475AE912410446500F1D24F /* AuthenticationService_Registration.swift */,
 			);
 			path = Registration;
 			sourceTree = "<group>";
@@ -1960,6 +1962,7 @@
 		1475B01D24105A4500F1D24F /* PostFeed */ = {
 			isa = PBXGroup;
 			children = (
+				140AEE312412FD0E00258DE8 /* PostFeedViewController.swift */,
 				1475B03524105B0F00F1D24F /* PostCollectionView.swift */,
 				1475B03724105B1D00F1D24F /* PostCollectionViewDelegate.swift */,
 				1475B03924105B2B00F1D24F /* PostCollectionViewDatasource.swift */,
@@ -2701,6 +2704,7 @@
 				1475B06324105CC900F1D24F /* UploadPostTableViewController.swift in Sources */,
 				1475AE5B2410416100F1D24F /* InstagramService_Video.swift in Sources */,
 				1475AFAC2410540A00F1D24F /* UploadPostDescriptionViewModel.swift in Sources */,
+				140AEE322412FD0E00258DE8 /* PostFeedViewController.swift in Sources */,
 				1475AEE22410483200F1D24F /* InstagramSingleImagePostModel.swift in Sources */,
 				1475AEB32410462700F1D24F /* RawRegistrationUser.swift in Sources */,
 				1475B0AC24105FCC00F1D24F /* HoshiTextField+ReactiveExtension.swift in Sources */,
@@ -2725,7 +2729,7 @@
 				1475B07424105D4D00F1D24F /* UploadImagesMediaPostCell.swift in Sources */,
 				1475B05724105C6D00F1D24F /* UploadUserTableViewController.swift in Sources */,
 				1475AEE42410484B00F1D24F /* ImagesPostModel.swift in Sources */,
-				1475AE74241042D000F1D24F /* UploadError.swift in Sources */,
+				1475AE74241042D000F1D24F /* UploadingError.swift in Sources */,
 				1475B0D62410611C00F1D24F /* SmallIconImageView.swift in Sources */,
 				1475B0042410595100F1D24F /* UploadSingleImagePostDisplayer.swift in Sources */,
 				1475B0B024105FFC00F1D24F /* Alert.swift in Sources */,
@@ -2806,7 +2810,7 @@
 				1475AFA8241053E100F1D24F /* UploadInstagramImagesLinkViewModel.swift in Sources */,
 				1475B010241059CA00F1D24F /* EmailLoginDisplayer.swift in Sources */,
 				1475AE96241044A600F1D24F /* AuthenticationService_ForgotPassword.swift in Sources */,
-				1475AE922410446500F1D24F /* AuthenticationService_Register.swift in Sources */,
+				1475AE922410446500F1D24F /* AuthenticationService_Registration.swift in Sources */,
 				1475AF8F241052F400F1D24F /* ImagesPostViewModel.swift in Sources */,
 				1475B04524105B9100F1D24F /* PostCell.swift in Sources */,
 				1475AFF3241058AA00F1D24F /* UploadUserHeaderDisplayer.swift in Sources */,

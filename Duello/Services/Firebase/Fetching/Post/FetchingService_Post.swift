@@ -36,7 +36,7 @@ extension FetchingService {
         case MediaType.instagramSingleImage.rawValue: post = InstagramSingleImagePost()
         case MediaType.instagramImages.rawValue: post = InstagramImagesPost()
         default:
-            print("debug developing: MEDIATYPE not found while configuring the post")
+            ()
         }
         
         post?.configure(with: data, id: postId)
