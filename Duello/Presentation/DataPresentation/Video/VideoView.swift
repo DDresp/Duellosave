@@ -126,8 +126,15 @@ class VideoView: UIView {
     
     //MARK: - Methods
     private func startVideo() {
-        guard let url = displayer?.localVideoUrl.value else { return }
-        playerItem = AVPlayerItem(url: url)
+        //guard let url = displayer?.localVideoUrl.value else { return }
+        //Developing
+//        playerItem = AVPlayerItem(url: url)
+        guard let urlString = displayer?.remoteVideoUrl else { return }
+        let remoteTestUrl = URL(string: urlString)
+        
+        playerItem = AVPlayerItem(url: remoteTestUrl!)
+        
+        //
         let duration = self.playerItem?.asset.duration
 
         let seconds = CMTimeGetSeconds(duration ?? CMTimeMake(value: 0, timescale: 0))

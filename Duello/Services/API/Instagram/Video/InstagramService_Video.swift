@@ -34,7 +34,7 @@ extension InstagramService {
     
     private func makeInstagramVideoThumbnail(from videoUrl: URL) -> UIImage? {
         //Todo: ATTENTION
-        return #imageLiteral(resourceName: "image5")
+        return #imageLiteral(resourceName: "image2")
         let asset = AVAsset(url: videoUrl)
         let imageGenerator = AVAssetImageGenerator(asset: asset)
         do {

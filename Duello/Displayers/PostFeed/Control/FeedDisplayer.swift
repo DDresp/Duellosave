@@ -21,6 +21,7 @@ protocol FeedDisplayer {
     var showActionSheet: PublishRelay<ActionSheet> { get }
     var showAlert: PublishRelay<Alert> { get }
     var showLoading: BehaviorRelay<Bool> { get }
+    var viewDidDisappear: PublishRelay<Void> { get }
 
 }
 

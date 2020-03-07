@@ -26,7 +26,8 @@ protocol PostCollectionDisplayer {
     
     var refreshChanged: PublishSubject<Void> { get }
     var restart: PublishRelay<Void> { get }
-    var reload: PublishRelay<Void> { get }
+    var reloadSection: PublishRelay<Void> { get }
+    var reloadData: PublishRelay<Void> { get }
     var updateLayout: PublishRelay<Void> { get }
     
     var loadLink: PublishRelay<String?> { get }
@@ -39,7 +40,7 @@ protocol PostCollectionDisplayer {
     func getPostDisplayer(at index: Int) -> PostDisplayer?
     
     //MARK: - Methods
-    func start(with userPosts: [UserPost], totalPostsCount: Int)
-    func update(with userPosts: [UserPost], totalPostsCount: Int?)
+//    func start(with userPosts: [UserPost], totalPostsCount: Int)
+    func update(with userPosts: [UserPost], totalPostsCount: Int?, fromStart: Bool)
     
 }

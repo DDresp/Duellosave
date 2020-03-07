@@ -39,21 +39,25 @@ class HomeViewModel: FeedDisplayer {
         }
     }
     
-    var isStarting = true
+    var isStartingFetching = true
     var lastFetchedPost: PostModel?
     var isFetchingNextPosts: Bool = false
     
     //MARK: - Bindables
     var restart: PublishRelay<Void> = PublishRelay<Void>()
-    var deletePost: PublishRelay<String> = PublishRelay<String>()
     
+    //HomeViewModel Specific
+    var deletePost: PublishRelay<String> = PublishRelay<String>()
     var settingsTapped: PublishSubject<Void> = PublishSubject<Void>()
     var logoutTapped: PublishSubject<Void> = PublishSubject<Void>()
+    //
+    
     var loadLink: PublishRelay<String?> = PublishRelay<String?>()
     var showAdditionalLinkAlert: PublishRelay<String> = PublishRelay<String>()
     var showActionSheet: PublishRelay<ActionSheet> = PublishRelay<ActionSheet>()
     var showAlert: PublishRelay<Alert> = PublishRelay<Alert>()
     var showLoading: BehaviorRelay<Bool> = BehaviorRelay<Bool>(value: false)
+    
     var viewDidDisappear: PublishRelay<Void> = PublishRelay()
     
     //MARK: - Setup
@@ -67,7 +71,7 @@ class HomeViewModel: FeedDisplayer {
         
         guard let uid = Auth.auth().currentUser?.uid else { return }
         
-        isStarting = true
+        isStartingFetching = true
         self.userHeaderDisplayer?.isLoading.accept(true)
         
         FetchingService.shared.fetchUser(for: uid)
@@ -77,7 +81,6 @@ class HomeViewModel: FeedDisplayer {
                 let userPosts = FetchingService.shared.fetchUserPosts(for: uid, at: nil, limit: 10)
                 return Observable.zip(userFootPrint, userPosts) }
             .subscribe(onNext: { [weak self] (userFootPrint, posts) in
-                //PERHAPS BUG HERE, CONSIDER CASE DELETE + RELOAD
                 if self?.deletedPost == true {
                     guard let currentNumberOfPosts = self?.numberOfPosts else { return }
                     self?.numberOfPosts = currentNumberOfPosts - 1
@@ -161,11 +164,11 @@ class HomeViewModel: FeedDisplayer {
             guard let _ = posts else { return }
             guard let userPosts = self?.userPosts else { return }
             
-            if self?.isStarting == true, let postsCount = self?.numberOfPosts {
-                self?.postCollectionDisplayer.start(with: userPosts, totalPostsCount: postsCount)
-                self?.isStarting = false
+            if self?.isStartingFetching == true, let postsCount = self?.numberOfPosts {
+                self?.postCollectionDisplayer.update(with: userPosts, totalPostsCount: postsCount, fromStart: true)
+                self?.isStartingFetching = false
             } else {
-                self?.postCollectionDisplayer.update(with: userPosts, totalPostsCount: self?.numberOfPosts)
+                self?.postCollectionDisplayer.update(with: userPosts, totalPostsCount: self?.numberOfPosts, fromStart: false)
             }
             
         }).disposed(by: disposeBag)
@@ -191,8 +194,8 @@ class HomeViewModel: FeedDisplayer {
     
     private func setupBindablesFromChildViewModels() {
         
-        userHeaderDisplayer?.socialMediaViewModel.selectedLink.asObservable().bind(to: loadLink).disposed(by: disposeBag)
-        userHeaderDisplayer?.socialMediaViewModel.showAdditionalLinkAlert.asObservable().bind(to: showAdditionalLinkAlert).disposed(by: disposeBag)
+        userHeaderDisplayer?.socialMediaDisplayer.selectedLink.asObservable().bind(to: loadLink).disposed(by: disposeBag)
+        userHeaderDisplayer?.socialMediaDisplayer.showAdditionalLinkAlert.asObservable().bind(to: showAdditionalLinkAlert).disposed(by: disposeBag)
         
         postCollectionDisplayer.loadLink.bind(to: loadLink).disposed(by: disposeBag)
         postCollectionDisplayer.showAdditionalLinkAlert.bind(to: showAdditionalLinkAlert).disposed(by: disposeBag)

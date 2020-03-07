@@ -12,6 +12,7 @@ import RxCocoa
 protocol VideoPlayerDisplayer {
     
     //MARK: - Bindables
+    var remoteVideoUrl: String? { get } //Developing
     var localVideoUrl: BehaviorRelay<URL?> { get }
     var localThumbnailImage: BehaviorRelay<UIImage?> { get }
     var remoteThumbnailUrlString: BehaviorRelay<String?> { get }

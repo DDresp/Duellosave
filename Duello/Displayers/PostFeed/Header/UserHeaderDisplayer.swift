@@ -15,18 +15,17 @@ protocol UserHeaderDisplayer {
     var user: BehaviorRelay<UserModel?> { get }
     
     //MARK: - ChildDisplayers
-    var socialMediaViewModel: SocialMediaDisplayer { get }
-    
-    //MARK: - Variables
-    var imageUrl: String? { get }
-    var userName: String? { get }
-    var hasSocialMediaNames: Bool { get }
+    var socialMediaDisplayer: SocialMediaDisplayer { get }
     
     //MARK: - Bindables
     var score: BehaviorRelay<Double?> { get }
     var isLoading: BehaviorRelay<Bool> { get }
     var imageTapped: PublishRelay<Void> { get }
-    var cleanUser: PublishRelay<Void> { get }
     var reload: PublishRelay<Void> { get }
+    
+    //MARK: - Getters
+    var imageUrl: String? { get }
+    var userName: String? { get }
+    var hasSocialMediaNames: Bool { get }
     
 }

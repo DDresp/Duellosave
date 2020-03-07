@@ -14,6 +14,7 @@ class UploadInstagramVideoPostViewModel: UploadPostViewModel<InstagramVideoPost>
     //MARK: - Variables
     var type: MediaType = .instagramVideo
     let apiLink: String
+    var remoteVideoUrl: String? = nil //developing
     
     //MARK: - Bindables
     let localVideoUrl: BehaviorRelay<URL?> = BehaviorRelay(value: nil)

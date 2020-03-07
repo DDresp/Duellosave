@@ -101,8 +101,8 @@ class UserHeader: UICollectionReusableView {
     }
     
     func configure() {
-        disposeBag = DisposeBag()
         
+        disposeBag = DisposeBag()
         guard let displayer = displayer else { return }
         
         setupProfileImage(displayer: displayer)
@@ -135,7 +135,7 @@ class UserHeader: UICollectionReusableView {
         
         if displayer.hasSocialMediaNames == true {
             socialMediaCollectionViewController.view.isHidden = false
-            socialMediaCollectionViewController.displayer = displayer.socialMediaViewModel
+            socialMediaCollectionViewController.displayer = displayer.socialMediaDisplayer
         } else {
             socialMediaCollectionViewController.view.isHidden = true
         }
@@ -155,8 +155,7 @@ class UserHeader: UICollectionReusableView {
             guard let score = score else { return }
             self?.likePercentageView.showLikeViewAnimation(percentage: score)
             }).disposed(by: disposeBag)
-        
-        
+            
     }
     
     required init?(coder aDecoder: NSCoder) {

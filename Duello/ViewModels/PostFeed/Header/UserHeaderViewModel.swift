@@ -15,32 +15,30 @@ class UserHeaderViewModel: UserHeaderDisplayer {
     var user: BehaviorRelay<UserModel?> = BehaviorRelay<UserModel?>(value: nil)
     
     //MARK: - ChildViewModels
-    var socialMediaViewModel: SocialMediaDisplayer = SocialMediaViewModel(isDarkMode: true)
-
-    //MARK: - Variables
-    var imageUrl: String?
-    var userName: String?
-    var hasSocialMediaNames = false
+    var socialMediaDisplayer: SocialMediaDisplayer = SocialMediaViewModel(isDarkMode: true)
     
     //MARK: - Bindables
     var isLoading: BehaviorRelay<Bool> = BehaviorRelay<Bool>(value: false)
     var imageTapped: PublishRelay<Void> = PublishRelay<Void>()
-    var cleanUser: PublishRelay<Void> = PublishRelay<Void>()
-    var score: BehaviorRelay<Double?> = BehaviorRelay<Double?>(value: nil)
     var reload: PublishRelay<Void> = PublishRelay()
+    var score: BehaviorRelay<Double?> = BehaviorRelay<Double?>(value: nil)
 
+    //MARK: - Getters
+    var imageUrl: String? {
+        return user.value?.imageUrl.value?.toStringValue()
+    }
+    
+    var userName: String? {
+        return user.value?.userName.value?.toStringValue()
+    }
+    
+    var hasSocialMediaNames: Bool {
+        return user.value?.addedSocialMediaName ?? false
+    }
+    
     //MARK: - Setup
     init() {
         setupBindablesFromOwnProperties()
-    }
-    
-    //MARK: - Methods
-    func reset() {
-        isLoading.accept(false)
-        score.accept(nil)
-        imageUrl = nil
-        userName = nil
-        hasSocialMediaNames = false
     }
     
     //MARK: - Reactive
@@ -50,16 +48,11 @@ class UserHeaderViewModel: UserHeaderDisplayer {
         
         user.asObservable().subscribe(onNext: { [weak self] (user) in
             self?.isLoading.accept(false)
-            self?.imageUrl = user?.imageUrl.value?.toStringValue()
-            self?.userName = user?.userName.value?.toStringValue()
-            self?.hasSocialMediaNames = user?.addedSocialMediaName ?? false
-            self?.socialMediaViewModel.user.accept(user)
+            self?.socialMediaDisplayer.user.accept(user)
             self?.score.accept(user?.score)
-            self?.cleanUser.accept(())
+            self?.socialMediaDisplayer.cleanCache.accept(())
             self?.reload.accept(())
         }).disposed(by: disposeBag)
-        
-        cleanUser.asObservable().bind(to: socialMediaViewModel.cleanCache).disposed(by: disposeBag)
 
     }
 

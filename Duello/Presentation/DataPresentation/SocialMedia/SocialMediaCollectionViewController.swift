@@ -95,8 +95,10 @@ class SocialMediaCollectionViewController: UICollectionViewController, UICollect
     var disposeBag = DisposeBag()
 
     func setupBindablesFromDisplayer() {
+        
         displayer?.reloadData.asObservable().subscribe(onNext: { [weak self] (_) in
             self?.collectionView.reloadData()
+            self?.collectionView.setContentOffset(.init(x: -STANDARDSPACING, y: 0), animated: false)
         }).disposed(by: disposeBag)
         
     }

@@ -21,7 +21,10 @@ class VideoPostViewModel: PostViewModel, VideoPlayerDisplayer {
     //MARK: - Bindables
     private var apiDownloadingTask: Observable<(String?, UIImage?)>?
     
-    private var remoteVideoUrl: BehaviorRelay<String?> = BehaviorRelay(value: nil)
+    private var therealremoteVideoUrl: BehaviorRelay<String?> = BehaviorRelay(value: nil)
+    var remoteVideoUrl: String? {
+        return therealremoteVideoUrl.value
+    } //developing
     var remoteThumbnailUrlString: BehaviorRelay<String?> = BehaviorRelay(value: nil)
     
     var localVideoUrl: BehaviorRelay<URL?> = BehaviorRelay(value: nil)
@@ -44,7 +47,7 @@ class VideoPostViewModel: PostViewModel, VideoPlayerDisplayer {
         
         switch post {
         case let post as LocalVideoPostModel:
-            self.remoteVideoUrl.accept(post.getVideoUrl())
+            self.therealremoteVideoUrl.accept(post.getVideoUrl())
             self.remoteThumbnailUrlString.accept(post.getThumbnailUrl())
         case let post as ApiVideoPostModel:
             self.apiDownloadingTask = post.downloadVideoUrlAndThumbnail()
@@ -100,10 +103,11 @@ class VideoPostViewModel: PostViewModel, VideoPlayerDisplayer {
                 return true
             }.bind(to: shouldPlayVideo).disposed(by: disposeBag)
         
-        Observable.combineLatest(shouldDownload, remoteVideoUrl) { (shouldDownload, remoteUrl) -> (Bool, String?) in
+        Observable.combineLatest(shouldDownload, therealremoteVideoUrl) { (shouldDownload, remoteUrl) -> (Bool, String?) in
             return (shouldDownload, remoteUrl)
             }.subscribe(onNext: { (shouldDownload, remoteUrl) in
-                guard let remoteUrl = remoteUrl else { return }
+                guard let remoteUrl = remoteUrl else {
+                    return }
                 if shouldDownload {
                     VideoCacheManager.shared.downloadVideo(stringUrl: remoteUrl, completionHandler: { [weak self] (result) in
                         switch result {
@@ -119,7 +123,7 @@ class VideoPostViewModel: PostViewModel, VideoPlayerDisplayer {
             }).disposed(by: disposeBag)
         
         apiDownloadingTask?.subscribe(onNext: { [weak self] (instagramVideoUrl, thumbnailImage) in
-            self?.remoteVideoUrl.accept(instagramVideoUrl)
+            self?.therealremoteVideoUrl.accept(instagramVideoUrl)
             self?.localThumbnailImage.accept(thumbnailImage)
         }).disposed(by: disposeBag)
         

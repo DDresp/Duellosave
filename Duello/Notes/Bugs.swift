@@ -10,14 +10,10 @@
 
 //hide instagram post// or show that its disabled if the post isn't available from instagram anymore
 
-//take a look at the breaking constraints
-
 //fix video loading, creating the asset for the thumbnail takes too much time
 
-//Flickering after reload, take more time!
-
-//Showing the wrong image sometimes after reload for a short time
+//setting the wrong user socialMediaItems location after reload for a short time
 
 //Sometimes the count doenst work right as the footer is still loading
+//--> breaking if you upload posts and then without refreshing, delete some post
 
-//Delete is breaking contraints

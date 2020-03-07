@@ -38,8 +38,7 @@ class VideoCacheManager {
     }
     
     func downloadVideo(stringUrl: String, completionHandler: @escaping (Result<URL>) -> Void) {
-        //Todo: ATTENTION
-        return()
+
         let file = directoryForVideo(stringUrl: stringUrl, baseUrl: cacheDirectoryUrl)
         guard !fileManager.fileExists(atPath: file.path) else {
             completionHandler(Result.success(file))

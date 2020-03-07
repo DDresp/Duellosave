@@ -13,6 +13,7 @@ class UploadLocalVideoPostViewModel: UploadPostViewModel<LocalVideoPost>, Upload
     
     //MARK: - Variables
     var type: MediaType = .localVideo
+    var remoteVideoUrl: String? = nil //developing
     
     //MARK: - Bindables
     let localVideoUrl: BehaviorRelay<URL?> = BehaviorRelay(value: nil)
