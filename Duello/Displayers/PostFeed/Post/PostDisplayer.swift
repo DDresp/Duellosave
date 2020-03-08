@@ -30,8 +30,8 @@ protocol PostDisplayer {
     var doubleTapped: PublishSubject<Void> { get }
     var likeBlurViewTapped: PublishSubject<Void> { get }
     var showLikeView: BehaviorRelay<Bool> { get }
-    var didEndDisplaying: PublishRelay<Void> { get }
-    var viewDidDisappear: PublishRelay<Void> { get }
+    
+    var didDisappear: PublishRelay<Void> { get }
     var willBeDisplayed: PublishRelay<Void> { get }
     var didExpand: BehaviorRelay<Bool> { get }
     var tappedEllipsis: PublishRelay<Void> { get }

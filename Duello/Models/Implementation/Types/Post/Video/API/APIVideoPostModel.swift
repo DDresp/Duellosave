@@ -9,5 +9,5 @@
 import RxSwift
 
 protocol ApiVideoPostModel: VideoPostModel {
-    func downloadVideoUrlAndThumbnail() -> Observable<(String?, UIImage?)>
+    func downloadVideoUrlAndThumbnail() -> Observable<(URL?, URL?)>
 }

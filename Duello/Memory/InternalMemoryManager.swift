@@ -14,6 +14,7 @@ class InternalMemoryManager {
     static let shared = InternalMemoryManager()
     private init(){}
     
+    //MARK: - Save Snapshots for Pagination
     private var snapshots = [String: DocumentSnapshot]()
     
     func memorize(snapshot: DocumentSnapshot, with path: String) {

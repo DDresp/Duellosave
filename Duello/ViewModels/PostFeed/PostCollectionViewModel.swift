@@ -12,7 +12,6 @@ import Firebase
 
 class PostCollectionViewModel: PostCollectionDisplayer {
     
-    
     //MARK: - ChildViewModels
     private var postDisplayers = [PostDisplayer]()
     
@@ -28,14 +27,13 @@ class PostCollectionViewModel: PostCollectionDisplayer {
     var showActionSheet: PublishRelay<ActionSheet> = PublishRelay<ActionSheet>()
    
     var didEndDisplayingCell: PublishRelay<Int> = PublishRelay()
-    var viewDidDisappear: PublishRelay<Void> = PublishRelay() //CHECK
+    var willDisplayCell: PublishRelay<Int> = PublishRelay()
+    var didDisappear: PublishRelay<Void> = PublishRelay()
     
     var startPlayingVideo: PublishRelay<Int> = PublishRelay()
-    var willDisplayCell: PublishRelay<Int> = PublishRelay()
     
     var refreshChanged: PublishSubject<Void> = PublishSubject()
-    var restart: PublishRelay<Void> = PublishRelay()
-    var reloadSection: PublishRelay<Void> = PublishRelay()
+    var restartData: PublishRelay<Void> = PublishRelay()
     var reloadData: PublishRelay<Void> = PublishRelay()
     var updateLayout: PublishRelay<Void> = PublishRelay()
     
@@ -69,28 +67,17 @@ class PostCollectionViewModel: PostCollectionDisplayer {
     }
     
     //MARK: - Methods
-    private func reset() {
-        totalPostsCount = 0
-        postDisplayers = [PostDisplayer]()
-    }
-    
-//    func start(with loadedPosts: [UserPost], totalPostsCount: Int) {
-//        reset()
-//        restart.accept(())
-//        update(with: loadedPosts, totalPostsCount: totalPostsCount)
-//
-//    }
-    
     func update(with loadedPosts: [UserPost], totalPostsCount: Int?, fromStart: Bool) {
         
         if fromStart {
-            reset()
-            restart.accept(())
+            self.totalPostsCount = 0
+            postDisplayers = [PostDisplayer]()
         }
         
         if let count = totalPostsCount {
             self.totalPostsCount = count
         }
+        
         let startIndex = numberOfPostDisplayers
         let endIndex = loadedPosts.count - 1
         guard startIndex <= endIndex else { return self.totalPostsCount = loadedPosts.count }
@@ -99,7 +86,7 @@ class PostCollectionViewModel: PostCollectionDisplayer {
         configurePostDisplayers(with: newPosts)
         
         if fromStart {
-            reloadSection.accept(())
+            restartData.accept(())
         } else {
             reloadData.accept(())
         }
@@ -135,14 +122,15 @@ class PostCollectionViewModel: PostCollectionDisplayer {
         for postDisplayer in newPostDisplayers {
             configurePostDisplayer(for: postDisplayer)
         }
-        postDisplayers.append(contentsOf: newPostDisplayers)
         
-//        reloadSection.accept(())
+        postDisplayers.append(contentsOf: newPostDisplayers)
+    
     }
     
     //Configuration of ChildPostViewModels
     private func configurePostDisplayer(for postDisplayer: PostDisplayer) {
         
+        postDisplayer.showActionSheet.asObservable().bind(to: showActionSheet).disposed(by: disposeBag)
         postDisplayer.socialMediaDisplayer.showAdditionalLinkAlert.bind(to: showAdditionalLinkAlert).disposed(by: disposeBag)
         postDisplayer.socialMediaDisplayer.selectedLink.bind(to: loadLink).disposed(by: disposeBag)
         
@@ -151,10 +139,6 @@ class PostCollectionViewModel: PostCollectionDisplayer {
         }.map({ (_) -> Void in
             return ()
         }) .bind(to: updateLayout).disposed(by: disposeBag)
-        
-        postDisplayer.showActionSheet.asObservable().bind(to: showActionSheet).disposed(by: disposeBag)
-        
-        viewDidDisappear.asObservable().bind(to: postDisplayer.viewDidDisappear).disposed(by: disposeBag)
         
         //Specific: HomeViewModel
         postDisplayer.deleteMe.asObservable()
@@ -166,12 +150,14 @@ class PostCollectionViewModel: PostCollectionDisplayer {
             }.bind(to: deleteItem).disposed(by: disposeBag)
         //
         
+        didDisappear.asObservable().bind(to: postDisplayer.didDisappear).disposed(by: disposeBag)
+        
         didEndDisplayingCell.asObservable()
             .filter { (index) -> Bool in
                 return postDisplayer.index == index }
             .map { (_) -> Void in
                 return ()
-            }.bind(to: postDisplayer.didEndDisplaying).disposed(by: disposeBag)
+            }.bind(to: postDisplayer.didDisappear).disposed(by: disposeBag)
         
         willDisplayCell.asObservable()
             .filter { (index) -> Bool in
@@ -210,6 +196,7 @@ class PostCollectionViewModel: PostCollectionDisplayer {
     private var disposeBag = DisposeBag()
     
     private func setupBindablesFromOwnProperties() {
+        
         prefetchingIndexPaths.asObservable().subscribe(onNext: { [weak self] (indexPaths) in
             guard let self = self else { return }
             if indexPaths.contains(where: self.shouldPaginate) {

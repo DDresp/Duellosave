@@ -37,8 +37,7 @@ class PostViewModel: PostDisplayer {
     var showActionSheet: PublishRelay<ActionSheet> = PublishRelay<ActionSheet>()
     
     //from Parent
-    var didEndDisplaying: PublishRelay<Void> = PublishRelay()
-    var viewDidDisappear: PublishRelay<Void> = PublishRelay()
+    var didDisappear: PublishRelay<Void> = PublishRelay()
     var willBeDisplayed: PublishRelay<Void> = PublishRelay()
     
     //to Parent
@@ -81,6 +80,7 @@ class PostViewModel: PostDisplayer {
     let disposeBag = DisposeBag()
     
     private func setupBindablesFromOwnProperties() {
+        
         tappedEllipsis.asObservable().share().asObservable().map { [weak self] (_) -> ActionSheet? in
             return self?.actionSheet
             }
@@ -91,9 +91,10 @@ class PostViewModel: PostDisplayer {
             return !showLikeView
             }.bind(to: showLikeView).disposed(by: disposeBag)
         
-        Observable.merge([viewDidDisappear.asObservable(), didEndDisplaying.asObservable()]).map { (_) -> Bool in
+        didDisappear.map { (_) -> Bool in
             return false
             }.bind(to: showLikeView).disposed(by: disposeBag)
+
     }
     
 }

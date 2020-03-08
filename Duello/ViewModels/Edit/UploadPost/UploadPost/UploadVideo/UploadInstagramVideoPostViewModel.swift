@@ -14,12 +14,11 @@ class UploadInstagramVideoPostViewModel: UploadPostViewModel<InstagramVideoPost>
     //MARK: - Variables
     var type: MediaType = .instagramVideo
     let apiLink: String
-    var remoteVideoUrl: String? = nil //developing
     
     //MARK: - Bindables
-    let localVideoUrl: BehaviorRelay<URL?> = BehaviorRelay(value: nil)
-    let remoteThumbnailUrlString: BehaviorRelay<String?> = BehaviorRelay(value: nil)
-    let localThumbnailImage: BehaviorRelay<UIImage?> = BehaviorRelay(value: nil)
+    let videoUrl: BehaviorRelay<URL?> = BehaviorRelay(value: nil)
+    let thumbnailUrl: BehaviorRelay<URL?> = BehaviorRelay(value: nil)
+    let thumbnailImage: BehaviorRelay<UIImage?> = BehaviorRelay(value: nil)
     var tappedSoundIcon: PublishRelay<Void> = PublishRelay()
     var tappedVideo: PublishRelay<Void> = PublishRelay()
     var isMuted: BehaviorRelay<Bool> = BehaviorRelay(value: true)
@@ -28,8 +27,8 @@ class UploadInstagramVideoPostViewModel: UploadPostViewModel<InstagramVideoPost>
     
     //MARK: - Setup
     init(rawPost: RawInstagramVideoPost) {
-        self.localVideoUrl.accept(rawPost.videoURL)
-        self.localThumbnailImage.accept(rawPost.thumbnailImage)
+        self.videoUrl.accept(rawPost.videoURL)
+        self.thumbnailUrl.accept(rawPost.thumbnailUrl)
         self.apiLink = rawPost.apiLink
         super.init()
         setupBasicBindables()

@@ -78,20 +78,20 @@ class PostCollectionView: UICollectionView {
     
     private func setupBindablesFromDisplayer() {
         
-        postCollectionDisplayer.reloadSection.subscribe(onNext: { [weak self] (_) in
+        postCollectionDisplayer.restartData.subscribe(onNext: { [weak self] (_) in
+            
+            self?.setContentOffset(.zero, animated: false)
+            self?.feedDelegate.clearCache()
+            
             if (self?.refreshControl?.isRefreshing == true) {
                 self?.refreshControl?.endRefreshing()
             }
+            
             self?.reloadSections(IndexSet(integer: 0))
         }).disposed(by: disposeBag)
         
         postCollectionDisplayer.reloadData.subscribe(onNext: { [weak self] (_) in
             self?.reloadData()
-        }).disposed(by: disposeBag)
-        
-        postCollectionDisplayer.restart.subscribe(onNext: { [weak self] (_) in
-            self?.setContentOffset(.zero, animated: false)
-            self?.feedDelegate.clearCache()
         }).disposed(by: disposeBag)
         
         postCollectionDisplayer.updateLayout.subscribe(onNext: { [weak self] () in

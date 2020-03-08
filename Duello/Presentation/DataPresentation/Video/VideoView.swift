@@ -74,9 +74,10 @@ class VideoView: UIView {
     lazy var playBackSlider: CustomSlider = {
        let slider = CustomSlider()
         slider.backgroundColor = .clear
+        slider.setThumbImage(UIImage(), for: .normal)
         slider.minimumValue = 0
         slider.isContinuous = true
-        slider.minimumTrackTintColor = DARKGRAYCOLOR
+        slider.minimumTrackTintColor = .gray
         slider.addTarget(self, action: #selector(sliderChanged), for: .valueChanged)
         slider.addTarget(self, action: #selector(sliderEnded), for: .touchUpInside)
         return slider
@@ -126,15 +127,11 @@ class VideoView: UIView {
     
     //MARK: - Methods
     private func startVideo() {
-        //guard let url = displayer?.localVideoUrl.value else { return }
-        //Developing
-//        playerItem = AVPlayerItem(url: url)
-        guard let urlString = displayer?.remoteVideoUrl else { return }
-        let remoteTestUrl = URL(string: urlString)
+
+        guard let url = displayer?.getVideoUrl() else { return }
         
-        playerItem = AVPlayerItem(url: remoteTestUrl!)
+        playerItem = AVPlayerItem(url: url)
         
-        //
         let duration = self.playerItem?.asset.duration
 
         let seconds = CMTimeGetSeconds(duration ?? CMTimeMake(value: 0, timescale: 0))
@@ -183,7 +180,7 @@ class VideoView: UIView {
         
         let isMuted = displayer.isMuted.share(replay: 2, scope: .whileConnected)
         
-        isMuted.asObservable().map { (isMuted) -> UIImage? in
+        isMuted.map { (isMuted) -> UIImage? in
             if isMuted {
                 return UIImage(named: "soundoffIcon")?.withRenderingMode(.alwaysTemplate)
             } else {
@@ -193,7 +190,7 @@ class VideoView: UIView {
                 return Observable.from(optional: image)
             }.bind(to: soundIcon.rx.image).disposed(by: disposeBag)
         
-        isMuted.asObservable().subscribe(onNext: { [weak self] (isMuted) in
+        isMuted.subscribe(onNext: { [weak self] (isMuted) in
             if isMuted {
                 self?.player.isMuted = true
             } else {
@@ -201,7 +198,7 @@ class VideoView: UIView {
             }
         }).disposed(by: disposeBag)
         
-        displayer.shouldPlayVideo.asObservable().subscribe(onNext: { [weak self] (shouldPlayVideo) in
+        displayer.shouldPlayVideo.subscribe(onNext: { [weak self] (shouldPlayVideo) in
             if shouldPlayVideo {
                 self?.startVideo()
             } else {

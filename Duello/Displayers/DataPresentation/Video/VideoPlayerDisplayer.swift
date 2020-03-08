@@ -12,16 +12,14 @@ import RxCocoa
 protocol VideoPlayerDisplayer {
     
     //MARK: - Bindables
-    var remoteVideoUrl: String? { get } //Developing
-    var localVideoUrl: BehaviorRelay<URL?> { get }
-    var localThumbnailImage: BehaviorRelay<UIImage?> { get }
-    var remoteThumbnailUrlString: BehaviorRelay<String?> { get }
+    var videoUrl: BehaviorRelay<URL?> { get }
+    var thumbnailUrl: BehaviorRelay<URL?> { get }
+    var thumbnailImage: BehaviorRelay<UIImage?> { get }
 
     //Observable from View
     var tappedSoundIcon: PublishRelay<Void> { get }
     var tappedVideo: PublishRelay<Void> { get }
-    
-    //Settings
+
     var isMuted: BehaviorRelay<Bool> { get }
     
     var shouldPlayVideo: BehaviorRelay<Bool> { get }
@@ -30,4 +28,19 @@ protocol VideoPlayerDisplayer {
     //MARK: - Reactive
     var disposeBag: DisposeBag { get }
     
+}
+
+extension VideoPlayerDisplayer {
+    //MARK: - Getters
+    func getVideoUrl() -> URL? {
+        return videoUrl.value
+    }
+    
+    func getThumbnailImage() -> UIImage? {
+        return thumbnailImage.value
+    }
+    
+    func getThumbnailUrl() -> URL? {
+        return thumbnailUrl.value
+    }
 }

@@ -17,21 +17,23 @@ protocol PostCollectionDisplayer {
     //MARK: - Bindables
     var prefetchingIndexPaths: PublishRelay<[IndexPath]> { get }
     var requestNextPosts: PublishRelay<Void> { get }
+    
+    //Specific: HomeViewModel
     var deleteItem: PublishRelay<String> { get }
+    //
     
     var showActionSheet: PublishRelay<ActionSheet> { get }
-    var didEndDisplayingCell: PublishRelay<Int> { get }
-    var willDisplayCell: PublishRelay<Int> { get }
-    var viewDidDisappear: PublishRelay<Void> { get }
-    
-    var refreshChanged: PublishSubject<Void> { get }
-    var restart: PublishRelay<Void> { get }
-    var reloadSection: PublishRelay<Void> { get }
-    var reloadData: PublishRelay<Void> { get }
-    var updateLayout: PublishRelay<Void> { get }
-    
     var loadLink: PublishRelay<String?> { get }
     var showAdditionalLinkAlert: PublishRelay<String> { get }
+    
+    var didDisappear: PublishRelay<Void> { get }
+    var didEndDisplayingCell: PublishRelay<Int> { get }
+    var willDisplayCell: PublishRelay<Int> { get }
+    
+    var refreshChanged: PublishSubject<Void> { get }
+    var restartData: PublishRelay<Void> { get }
+    var reloadData: PublishRelay<Void> { get }
+    var updateLayout: PublishRelay<Void> { get }
     
     //MARK: - Getters
     var numberOfPostDisplayers: Int { get }
@@ -40,7 +42,6 @@ protocol PostCollectionDisplayer {
     func getPostDisplayer(at index: Int) -> PostDisplayer?
     
     //MARK: - Methods
-//    func start(with userPosts: [UserPost], totalPostsCount: Int)
     func update(with userPosts: [UserPost], totalPostsCount: Int?, fromStart: Bool)
     
 }

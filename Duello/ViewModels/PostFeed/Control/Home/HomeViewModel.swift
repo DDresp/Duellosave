@@ -173,7 +173,7 @@ class HomeViewModel: FeedDisplayer {
             
         }).disposed(by: disposeBag)
         
-        viewDidDisappear.asObservable().bind(to: postCollectionDisplayer.viewDidDisappear).disposed(by: disposeBag)
+        viewDidDisappear.asObservable().bind(to: postCollectionDisplayer.didDisappear).disposed(by: disposeBag)
     }
     
     private func setupBindablesToCoordinator() {

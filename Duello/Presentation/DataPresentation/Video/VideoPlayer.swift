@@ -126,12 +126,12 @@ class VideoPlayer: UIView  {
 
         }).disposed(by: disposeBag)
         
-        displayer?.localThumbnailImage.subscribe(onNext: { [weak self] (thumbnailImage) in
+        displayer?.thumbnailImage.subscribe(onNext: { [weak self] (thumbnailImage) in
             self?.thumbnailImageView.image = thumbnailImage
         }).disposed(by: disposeBag)
         
-        displayer?.remoteThumbnailUrlString.subscribe(onNext: { [weak self] (thumbnailUrl) in
-            guard let urlString = thumbnailUrl, let url = URL(string: urlString) else { return }
+        displayer?.thumbnailUrl.subscribe(onNext: { [weak self] (thumbnailUrl) in
+            guard let url = thumbnailUrl else { return }
             self?.thumbnailImageView.sd_setImage(with: url)
         }).disposed(by: disposeBag)
         

@@ -13,12 +13,11 @@ class UploadLocalVideoPostViewModel: UploadPostViewModel<LocalVideoPost>, Upload
     
     //MARK: - Variables
     var type: MediaType = .localVideo
-    var remoteVideoUrl: String? = nil //developing
     
     //MARK: - Bindables
-    let localVideoUrl: BehaviorRelay<URL?> = BehaviorRelay(value: nil)
-    let localThumbnailImage: BehaviorRelay<UIImage?> = BehaviorRelay(value: nil)
-    let remoteThumbnailUrlString: BehaviorRelay<String?> = BehaviorRelay(value: nil)
+    let videoUrl: BehaviorRelay<URL?> = BehaviorRelay(value: nil)
+    let thumbnailUrl: BehaviorRelay<URL?> = BehaviorRelay(value: nil)
+    let thumbnailImage: BehaviorRelay<UIImage?> = BehaviorRelay(value: nil)
     var tappedVideo: PublishRelay<Void> = PublishRelay()
     var tappedSoundIcon: PublishRelay<Void> = PublishRelay()
     var isMuted: BehaviorRelay<Bool> = BehaviorRelay(value: true)
@@ -27,8 +26,8 @@ class UploadLocalVideoPostViewModel: UploadPostViewModel<LocalVideoPost>, Upload
     
     //MARK: - Setup
     init(rawPost: RawVideoPost) {
-        self.localVideoUrl.accept(rawPost.videoUrl)
-        self.localThumbnailImage.accept(rawPost.thumbnailImage)
+        self.videoUrl.accept(rawPost.videoUrl)
+        self.thumbnailImage.accept(rawPost.thumbnailImage)
         super.init()
         setupBasicBindables()
     }
@@ -46,8 +45,8 @@ class UploadLocalVideoPostViewModel: UploadPostViewModel<LocalVideoPost>, Upload
         super.saveData()
         if !dataIsValid() { return }
         
-        guard let videoUrl = localVideoUrl.value else { return }
-        guard let image = localThumbnailImage.value else { return }
+        guard let videoUrl = videoUrl.value else { return }
+        guard let image = thumbnailImage.value else { return }
         isLoading.accept(true)
         
         StoringService.shared.storeVideoAndThumbnail(image: image, videoUrl: videoUrl).flatMapLatest { [weak self] (urlStrings) -> Observable<PostModel?> in

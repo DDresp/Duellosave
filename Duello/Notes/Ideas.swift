@@ -7,3 +7,5 @@
 //
 
 //Direct to Instagram when the user wants to upload a link, so that he can do it faster and more comfortable
+
+//start video automatically in duello mode

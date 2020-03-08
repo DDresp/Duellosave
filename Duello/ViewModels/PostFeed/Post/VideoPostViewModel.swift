@@ -19,16 +19,11 @@ class VideoPostViewModel: PostViewModel, VideoPlayerDisplayer {
     }
     
     //MARK: - Bindables
-    private var apiDownloadingTask: Observable<(String?, UIImage?)>?
-    
-    private var therealremoteVideoUrl: BehaviorRelay<String?> = BehaviorRelay(value: nil)
-    var remoteVideoUrl: String? {
-        return therealremoteVideoUrl.value
-    } //developing
-    var remoteThumbnailUrlString: BehaviorRelay<String?> = BehaviorRelay(value: nil)
-    
-    var localVideoUrl: BehaviorRelay<URL?> = BehaviorRelay(value: nil)
-    var localThumbnailImage: BehaviorRelay<UIImage?> = BehaviorRelay(value: nil)
+    private var apiDownloadingTask: Observable<(URL?, URL?)>?
+
+    var videoUrl: BehaviorRelay<URL?> = BehaviorRelay(value: nil)
+    var thumbnailUrl: BehaviorRelay<URL?> = BehaviorRelay(value: nil)
+    var thumbnailImage: BehaviorRelay<UIImage?> = BehaviorRelay(value: nil)
     
     var playVideoRequested: BehaviorRelay<Bool> = BehaviorRelay<Bool>(value: false)
     var removeVideo: BehaviorRelay<Bool> = BehaviorRelay<Bool>(value: false)
@@ -47,8 +42,10 @@ class VideoPostViewModel: PostViewModel, VideoPlayerDisplayer {
         
         switch post {
         case let post as LocalVideoPostModel:
-            self.therealremoteVideoUrl.accept(post.getVideoUrl())
-            self.remoteThumbnailUrlString.accept(post.getThumbnailUrl())
+            if let url1 = URL(string: post.getVideoUrlString()), let url2 = URL(string: post.getThumbnailUrlString()) {
+                videoUrl.accept(url1)
+                thumbnailUrl.accept(url2)
+            }
         case let post as ApiVideoPostModel:
             self.apiDownloadingTask = post.downloadVideoUrlAndThumbnail()
         default:
@@ -57,6 +54,7 @@ class VideoPostViewModel: PostViewModel, VideoPlayerDisplayer {
         super.init(user: user, post: post, index: index)
         setupUIBindables()
         setupBindablesFromOwnProperties()
+        
     }
     
     //MARK: - Reactive
@@ -75,11 +73,11 @@ class VideoPostViewModel: PostViewModel, VideoPlayerDisplayer {
             return true
             }.bind(to: shouldDownload).disposed(by: disposeBag)
         
-        let willDisappear = Observable.of(didEndDisplaying, viewDidDisappear).merge().asObservable().share(replay: 2, scope: .whileConnected)
-        willDisappear.map { (_) -> Bool in
+        didDisappear.map { (_) -> Bool in
             return false
             }.bind(to: playVideoRequested).disposed(by: disposeBag)
-        willDisappear.map { (_) -> Bool in
+        
+        didDisappear.map { (_) -> Bool in
             return false
             }.bind(to: shouldDownload).disposed(by: disposeBag)
         
@@ -95,36 +93,15 @@ class VideoPostViewModel: PostViewModel, VideoPlayerDisplayer {
             return !playVideoRequested
             }.bind(to: showThumbnailImage).disposed(by: disposeBag)
         
-        Observable.combineLatest(playVideoRequested, localVideoUrl) { (playVideoRequested, videoUrl) -> (Bool, URL?) in
-            return (playVideoRequested, videoUrl)
-            }.filter { (playVideoRequested, videoUrl) -> Bool in
-                return playVideoRequested && videoUrl != nil
-            }.map { (_) -> Bool in
-                return true
+        Observable.combineLatest(playVideoRequested, videoUrl).asObservable().filter { (playVideo, videoUrl) -> Bool in
+            return playVideo && (videoUrl != nil)
+        }.map { (_) -> Bool in
+            return true
             }.bind(to: shouldPlayVideo).disposed(by: disposeBag)
         
-        Observable.combineLatest(shouldDownload, therealremoteVideoUrl) { (shouldDownload, remoteUrl) -> (Bool, String?) in
-            return (shouldDownload, remoteUrl)
-            }.subscribe(onNext: { (shouldDownload, remoteUrl) in
-                guard let remoteUrl = remoteUrl else {
-                    return }
-                if shouldDownload {
-                    VideoCacheManager.shared.downloadVideo(stringUrl: remoteUrl, completionHandler: { [weak self] (result) in
-                        switch result {
-                        case .success(let url):
-                            self?.localVideoUrl.accept(url)
-                        case .failure(_):
-                            ()
-                        }
-                    })
-                } else {
-                    VideoCacheManager.shared.cancelVideoDownload(stringUrl: remoteUrl)
-                }
-            }).disposed(by: disposeBag)
-        
-        apiDownloadingTask?.subscribe(onNext: { [weak self] (instagramVideoUrl, thumbnailImage) in
-            self?.therealremoteVideoUrl.accept(instagramVideoUrl)
-            self?.localThumbnailImage.accept(thumbnailImage)
+        apiDownloadingTask?.subscribe(onNext: { [weak self] (instagramVideoUrl, thumbnailUrl) in
+            self?.videoUrl.accept(instagramVideoUrl)
+            self?.thumbnailUrl.accept(thumbnailUrl)
         }).disposed(by: disposeBag)
         
         showLikeView.filter { (showsLikeView) -> Bool in

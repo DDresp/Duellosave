@@ -5,6 +5,8 @@
 //  Created by Darius Dresp on 3/4/20.
 //  Copyright © 2020 Darius Dresp. All rights reserved.
 //
+//
+
 
 import RxSwift
 import AVFoundation
@@ -16,34 +18,22 @@ extension InstagramService {
         
         if !hasInternetConnection() { return Observable.error(InstagramError.networkError) }
         
-        return downloadInstagramVideoURL(link: link).map({ [weak self] (videoUrl) -> RawInstagramVideoPost in
-            guard let image = self?.makeInstagramVideoThumbnail(from: videoUrl) else { throw InstagramError.failedThumbnail}
-            return RawInstagramVideoPost(videoURL: videoUrl, thumbnailImage: image, apiLink: link)
+        return downloadInstagramVideoURLandThumbnailURL(link: link).map({ (videoUrl, thumbnailUrl) -> RawInstagramVideoPost in
+            return RawInstagramVideoPost(videoURL: videoUrl, thumbnailUrl: thumbnailUrl, apiLink: link)
         })
     }
     
-    private func downloadInstagramVideoURL(link: String) -> Observable<URL> {
+    private func downloadInstagramVideoURLandThumbnailURL(link: String) -> Observable<(URL, URL)> {
         
-        return downloadDescription(link: link).map({ [weak self] (description) -> URL in
-            guard let urlString = self?.getValuesForQueryKey(key: "video_url", from: description).first else { throw InstagramError.noVideoUrl }
-            guard let url = URL(string: urlString) else { throw InstagramError.noVideoUrl}
-            return url
+        return downloadDescription(link: link).map({ [weak self] (description) -> (URL, URL) in
+            guard let videoUrlString = self?.getValuesForQueryKey(key: "video_url", from: description).first else { throw InstagramError.noVideoUrl }
+            guard let thumbnailUrlString = self?.getValuesForQueryKey(key: "thumbnail_src", from: description).first else { throw InstagramError.noThumbnail }
+            guard let videoUrl = URL(string: videoUrlString) else { throw InstagramError.noVideoUrl}
+            guard let thumbnailUrl = URL(string: thumbnailUrlString) else { throw InstagramError.noThumbnail }
+            return (videoUrl, thumbnailUrl)
+            
         })
         
-    }
-    
-    private func makeInstagramVideoThumbnail(from videoUrl: URL) -> UIImage? {
-        //Todo: ATTENTION
-        return #imageLiteral(resourceName: "image2")
-        let asset = AVAsset(url: videoUrl)
-        let imageGenerator = AVAssetImageGenerator(asset: asset)
-        do {
-            let thumbnailImage = try imageGenerator.copyCGImage(at: CMTimeMake(value: 1, timescale: 60), actualTime: nil)
-            return UIImage(cgImage: thumbnailImage)
-        } catch let error {
-            print("error \(error.localizedDescription)")
-            return nil
-        }
     }
     
 }

@@ -600,6 +600,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		140AEE332414685700258DE8 /* External */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = External;
+			sourceTree = "<group>";
+		};
+		140AEE36241477E500258DE8 /* Funeral */ = {
+			isa = PBXGroup;
+			children = (
+				1475AE4724103FF500F1D24F /* VideoCacheManager.swift */,
+			);
+			path = Funeral;
+			sourceTree = "<group>";
+		};
 		1475ADF724103EAD00F1D24F = {
 			isa = PBXGroup;
 			children = (
@@ -625,6 +640,7 @@
 		1475AE0224103EAD00F1D24F /* Duello */ = {
 			isa = PBXGroup;
 			children = (
+				140AEE36241477E500258DE8 /* Funeral */,
 				140AEE2E2411935300258DE8 /* Duello.entitlements */,
 				1475AE3E24103F2B00F1D24F /* Notes */,
 				1475AE0324103EAD00F1D24F /* AppDelegate.swift */,
@@ -676,6 +692,7 @@
 		1475AE3424103ED700F1D24F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				140AEE332414685700258DE8 /* External */,
 				1475B09124105EBF00F1D24F /* Constants */,
 				1475B09024105EB800F1D24F /* Extensions */,
 				1475B08F24105EAF00F1D24F /* Enums */,
@@ -772,7 +789,6 @@
 			isa = PBXGroup;
 			children = (
 				1475AE4524103FD700F1D24F /* InternalMemoryManager.swift */,
-				1475AE4724103FF500F1D24F /* VideoCacheManager.swift */,
 			);
 			path = Memory;
 			sourceTree = "<group>";

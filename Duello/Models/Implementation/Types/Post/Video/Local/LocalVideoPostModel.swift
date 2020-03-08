@@ -14,11 +14,11 @@ protocol LocalVideoPostModel: VideoPostModel {
 
 extension LocalVideoPostModel {
     
-    func getVideoUrl() -> String {
+    func getVideoUrlString() -> String {
         return videoUrl.value?.toStringValue() ?? ""
     }
     
-    func getThumbnailUrl() -> String {
+    func getThumbnailUrlString() -> String {
         return thumbNailUrl.value?.toStringValue() ?? ""
     }
     

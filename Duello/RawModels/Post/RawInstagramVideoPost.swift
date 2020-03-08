@@ -10,6 +10,6 @@ import UIKit
 
 struct RawInstagramVideoPost: RawInstagramPostType {
     var videoURL: URL
-    var thumbnailImage: UIImage
+    var thumbnailUrl: URL
     var apiLink: String
 }

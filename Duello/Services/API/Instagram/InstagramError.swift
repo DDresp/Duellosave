@@ -13,10 +13,10 @@ enum InstagramError: DuelloError {
     case badLink
     case unknown(description: String)
     case networkError
-    case noVideoUrl
     case noImageUrl
+    case noVideoUrl
+    case noThumbnail
     case noId
-    case failedThumbnail
     case failedRequest
     
     var errorHeader: String {
@@ -26,11 +26,11 @@ enum InstagramError: DuelloError {
         case .badLink: return "Bad Link"
         case .networkError: return "Network Error"
         case .unknown: return "Error"
-        case .noVideoUrl: return "Video not found"
         case .noImageUrl: return "Image not found"
+        case .noVideoUrl: return "Video not found"
+        case .noThumbnail: return "No Thumbnail"
         case .noId: return "Id not found"
         case .failedRequest: return "Link Failed"
-        case .failedThumbnail: return "No Thumbnail"
         }
         
     }
@@ -38,14 +38,15 @@ enum InstagramError: DuelloError {
     var errorMessage: String {
         
         switch self {
+            
         case .badLink: return "Please check if the provided link is correct"
         case .networkError: return "Please check your internet connection"
         case .unknown(let msg): return msg
-        case .noVideoUrl: return "Your instagram post contains no video"
         case .noImageUrl: return "Your Instagram post contains no image"
+        case .noVideoUrl: return "Your instagram post contains no video"
+        case .noThumbnail: return "Your Instagram post contains no thumbnail"
         case .noId: return "Your instagram post seems to contain no id"
         case .failedRequest: return "The link you provided didn't work. (If the instagram account associated with the link is private, the link won't work)"
-        case .failedThumbnail: return "The Thumbnail creation failed, please try again"
             
         }
     }
