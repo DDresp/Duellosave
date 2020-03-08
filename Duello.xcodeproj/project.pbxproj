@@ -250,7 +250,7 @@
 		1475B0AE24105FE300F1D24F /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475B0AD24105FE300F1D24F /* Result.swift */; };
 		1475B0B024105FFC00F1D24F /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475B0AF24105FFC00F1D24F /* Alert.swift */; };
 		1475B0B22410600800F1D24F /* ActionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475B0B12410600800F1D24F /* ActionSheet.swift */; };
-		1475B0BC2410605D00F1D24F /* CustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475B0BB2410605D00F1D24F /* CustomSlider.swift */; };
+		1475B0BC2410605D00F1D24F /* PlaySlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475B0BB2410605D00F1D24F /* PlaySlider.swift */; };
 		1475B0BE2410606C00F1D24F /* ProfileImageSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475B0BD2410606B00F1D24F /* ProfileImageSuccessView.swift */; };
 		1475B0C02410607B00F1D24F /* SquashedHorizontalStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475B0BF2410607B00F1D24F /* SquashedHorizontalStackView.swift */; };
 		1475B0C22410608A00F1D24F /* DarkSquaredButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475B0C12410608A00F1D24F /* DarkSquaredButton.swift */; };
@@ -542,7 +542,7 @@
 		1475B0AD24105FE300F1D24F /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		1475B0AF24105FFC00F1D24F /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		1475B0B12410600800F1D24F /* ActionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionSheet.swift; sourceTree = "<group>"; };
-		1475B0BB2410605D00F1D24F /* CustomSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSlider.swift; sourceTree = "<group>"; };
+		1475B0BB2410605D00F1D24F /* PlaySlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaySlider.swift; sourceTree = "<group>"; };
 		1475B0BD2410606B00F1D24F /* ProfileImageSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageSuccessView.swift; sourceTree = "<group>"; };
 		1475B0BF2410607B00F1D24F /* SquashedHorizontalStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquashedHorizontalStackView.swift; sourceTree = "<group>"; };
 		1475B0C12410608A00F1D24F /* DarkSquaredButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkSquaredButton.swift; sourceTree = "<group>"; };
@@ -2336,7 +2336,7 @@
 		1475B0BA2410604F00F1D24F /* Slider */ = {
 			isa = PBXGroup;
 			children = (
-				1475B0BB2410605D00F1D24F /* CustomSlider.swift */,
+				1475B0BB2410605D00F1D24F /* PlaySlider.swift */,
 			);
 			path = Slider;
 			sourceTree = "<group>";
@@ -2657,7 +2657,7 @@
 				1475B06924105CF300F1D24F /* UploadPostTitleCell.swift in Sources */,
 				1475B07824105D8000F1D24F /* AuthenticationView.swift in Sources */,
 				1475B0C8241060B400F1D24F /* InputLabel.swift in Sources */,
-				1475B0BC2410605D00F1D24F /* CustomSlider.swift in Sources */,
+				1475B0BC2410605D00F1D24F /* PlaySlider.swift in Sources */,
 				1475B02624105A8900F1D24F /* SocialMediaCollectionViewController.swift in Sources */,
 				1475AE4824103FF500F1D24F /* VideoCacheManager.swift in Sources */,
 				1475AE832410438200F1D24F /* FetchingService_User.swift in Sources */,

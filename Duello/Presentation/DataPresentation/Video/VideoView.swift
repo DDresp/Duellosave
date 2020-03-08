@@ -23,7 +23,6 @@ class VideoView: UIView {
             self.setupBindablesToDisplayer()
             
         }
-        
     }
     
     //MARK: - Variables
@@ -71,19 +70,28 @@ class VideoView: UIView {
         return view
     }()
     
-    lazy var playBackSlider: CustomSlider = {
-       let slider = CustomSlider()
-        slider.backgroundColor = .clear
-        slider.setThumbImage(UIImage(), for: .normal)
-        slider.minimumValue = 0
-        slider.isContinuous = true
-        slider.minimumTrackTintColor = .gray
+    lazy var playBackSlider: PlaySlider = {
+       let slider = PlaySlider()
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(sliderTapped))
+        slider.addGestureRecognizer(tapGestureRecognizer)
         slider.addTarget(self, action: #selector(sliderChanged), for: .valueChanged)
         slider.addTarget(self, action: #selector(sliderEnded), for: .touchUpInside)
         return slider
     }()
-    
+
     //MARK: - Interactions
+    @objc func sliderTapped(gestureRecognizer: UIGestureRecognizer) {
+        
+        let pointTapped: CGPoint = gestureRecognizer.location(in: self)
+        
+        let positionOfSlider: CGPoint = playBackSlider.frame.origin
+        let widthOfSlider: CGFloat = playBackSlider.frame.size.width
+        let newValue = ((pointTapped.x - positionOfSlider.x) * CGFloat(playBackSlider.maximumValue) / widthOfSlider)
+        playBackSlider.setValue(Float(newValue), animated: false)
+        
+        sliderEnded(playBackSlider)
+    }
+    
     @objc func sliderEnded(_ playBackSlider: UISlider) {
         let floatedSeconds = Float64(playBackSlider.value)
         let timeScale = player.currentItem?.asset.duration.timescale ?? 1
@@ -121,7 +129,7 @@ class VideoView: UIView {
         soundIcon.centerInSuperview()
         
         controlsContainerView.addSubview(playBackSlider)
-        playBackSlider.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: -5, bottom: 0, right: -5), size: .init(width: 0, height: 30))
+        playBackSlider.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 0), size: .init(width: 0, height: 10)) //developing
         
     }
     
@@ -131,13 +139,15 @@ class VideoView: UIView {
         guard let url = displayer?.getVideoUrl() else { return }
         
         playerItem = AVPlayerItem(url: url)
-        
+    
         let duration = self.playerItem?.asset.duration
 
         let seconds = CMTimeGetSeconds(duration ?? CMTimeMake(value: 0, timescale: 0))
         let floatseconds = Float(seconds)
         
         playBackSlider.maximumValue = floatseconds
+        playBackSlider.progressView.setProgress(0, animated: false)
+        
         player = AVQueuePlayer(playerItem: self.playerItem)
         let interval = CMTime(seconds: 0.05, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
         self.player.addPeriodicTimeObserver(forInterval: interval, queue: DispatchQueue.main, using: { [weak self] (time) in
@@ -145,11 +155,13 @@ class VideoView: UIView {
             if self.player.rate == 0 {
                 return
             }
+            
             if self.player.currentItem?.status == .readyToPlay {
-                let time = CMTimeGetSeconds(self.player.currentTime())
-                self.player.currentTime()
-                self.playBackSlider.setValue(Float(time), animated: false)
+                let time = Float(CMTimeGetSeconds(self.player.currentTime()))
+                let timeRatio = time/floatseconds
+                self.playBackSlider.progressView.setProgress(timeRatio, animated: false)
             }
+            
         })
         player.isMuted = displayer?.isMuted.value ?? true
         playerLooper = AVPlayerLooper(player: player, templateItem: playerItem!)
