@@ -24,7 +24,7 @@ class VideoView: UIView {
             
         }
     }
-    
+
     //MARK: - Variables
     var playerLooper: AVPlayerLooper?
     var player: AVQueuePlayer = AVQueuePlayer()

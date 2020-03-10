@@ -58,6 +58,7 @@ class HomeViewModel: FeedDisplayer {
     var showAlert: PublishRelay<Alert> = PublishRelay<Alert>()
     var showLoading: BehaviorRelay<Bool> = BehaviorRelay<Bool>(value: false)
     
+    var viewDidAppear: PublishRelay<Void> = PublishRelay()
     var viewDidDisappear: PublishRelay<Void> = PublishRelay()
     
     //MARK: - Setup
@@ -173,10 +174,16 @@ class HomeViewModel: FeedDisplayer {
             
         }).disposed(by: disposeBag)
         
-        viewDidDisappear.asObservable().bind(to: postCollectionDisplayer.didDisappear).disposed(by: disposeBag)
+        //Fixing
+        viewDidAppear.bind(to: postCollectionDisplayer.didAppear).disposed(by: disposeBag)
+        viewDidDisappear.bind(to: postCollectionDisplayer.didDisappear).disposed(by: disposeBag)
+        
+        guard let userHeader = userHeaderDisplayer else { return }
+        viewDidAppear.bind(to: userHeader.didAppear).disposed(by: disposeBag)
     }
     
     private func setupBindablesToCoordinator() {
+        
         guard let coordinator = coordinator else { return }
         
         logoutTapped.asObservable().do(onNext: { (_) in
@@ -194,9 +201,10 @@ class HomeViewModel: FeedDisplayer {
     
     private func setupBindablesFromChildViewModels() {
         
+        //Fixing
         userHeaderDisplayer?.socialMediaDisplayer.selectedLink.asObservable().bind(to: loadLink).disposed(by: disposeBag)
         userHeaderDisplayer?.socialMediaDisplayer.showAdditionalLinkAlert.asObservable().bind(to: showAdditionalLinkAlert).disposed(by: disposeBag)
-        
+
         postCollectionDisplayer.loadLink.bind(to: loadLink).disposed(by: disposeBag)
         postCollectionDisplayer.showAdditionalLinkAlert.bind(to: showAdditionalLinkAlert).disposed(by: disposeBag)
         postCollectionDisplayer.requestNextPosts.asObservable().subscribe(onNext: { [weak self] (_) in
@@ -207,4 +215,7 @@ class HomeViewModel: FeedDisplayer {
         postCollectionDisplayer.refreshChanged.bind(to: restart).disposed(by: disposeBag)
     }
     
+    deinit {
+        print("debug: deinit HomeViewModel")
+    }
 }

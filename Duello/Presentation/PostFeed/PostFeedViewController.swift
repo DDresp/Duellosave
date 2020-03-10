@@ -32,6 +32,11 @@ class PostFeedViewController: ViewController {
     var progressHud: JGProgressHUD?
     
     //MARK: - Delegation
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        displayer.viewDidAppear.accept(())
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         displayer.viewDidDisappear.accept(())
@@ -113,5 +118,6 @@ class PostFeedViewController: ViewController {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
 }
 

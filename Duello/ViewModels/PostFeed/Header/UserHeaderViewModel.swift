@@ -17,11 +17,16 @@ class UserHeaderViewModel: UserHeaderDisplayer {
     //MARK: - ChildViewModels
     var socialMediaDisplayer: SocialMediaDisplayer = SocialMediaViewModel(isDarkMode: true)
     
+    //MARK: - Variables
+    var score: Double?
+    
     //MARK: - Bindables
     var isLoading: BehaviorRelay<Bool> = BehaviorRelay<Bool>(value: false)
     var imageTapped: PublishRelay<Void> = PublishRelay<Void>()
     var reload: PublishRelay<Void> = PublishRelay()
-    var score: BehaviorRelay<Double?> = BehaviorRelay<Double?>(value: nil)
+//    var score: BehaviorRelay<Double?> = BehaviorRelay<Double?>(value: nil)
+    var animateScore: PublishRelay<Void> = PublishRelay() //developing
+    var didAppear: PublishRelay<Void> = PublishRelay()
 
     //MARK: - Getters
     var imageUrl: String? {
@@ -46,14 +51,25 @@ class UserHeaderViewModel: UserHeaderDisplayer {
     
     private func setupBindablesFromOwnProperties() {
         
+        //Developing
+//        animateScore.subscribe(onNext: { (_) in
+//            print("debug: should animate score")
+//        }).disposed(by: disposeBag)
+//
         user.asObservable().subscribe(onNext: { [weak self] (user) in
             self?.isLoading.accept(false)
             self?.socialMediaDisplayer.user.accept(user)
-            self?.score.accept(user?.score)
+//            self?.score.accept(user?.score)
+            self?.score = user?.score //Developing
             self?.socialMediaDisplayer.cleanCache.accept(())
             self?.reload.accept(())
         }).disposed(by: disposeBag)
-
+        
+        didAppear.bind(to: animateScore).disposed(by: disposeBag)
+    }
+    
+    deinit {
+        print("debug: deinit userheaderviewmodel")
     }
 
 }

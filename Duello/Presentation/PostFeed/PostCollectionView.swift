@@ -88,6 +88,9 @@ class PostCollectionView: UICollectionView {
             }
             
             self?.reloadSections(IndexSet(integer: 0))
+            self?.layoutIfNeeded()
+            self?.headerDisplayer?.animateScore.accept(())
+            
         }).disposed(by: disposeBag)
         
         postCollectionDisplayer.reloadData.subscribe(onNext: { [weak self] (_) in
@@ -110,4 +113,7 @@ class PostCollectionView: UICollectionView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    deinit {
+        print("debug: deinit postcollectionview")
+    }
 }

@@ -18,15 +18,15 @@ class PostCollectionViewDelegate: NSObject, UICollectionViewDelegate, UICollecti
     var postsDisplayer: PostCollectionDisplayer { return displayer.postCollectionDisplayer }
     
     //MARK: - Variables
-    let collectionView: UICollectionView
+    weak var collectionView: UICollectionView?
     
     var squishedSizes = [Int: CGSize]()
     var expandedSizes = [Int: CGSize]()
     
-    private lazy var profileHeader = UserHeader(frame: .init(x: 0, y: 0, width: collectionView.frame.width, height: 1000))
-    private lazy var singleImageCell = SingleImagePostCell(frame: .init(x: 0, y: 0, width: collectionView.frame.width, height: 1000))
-    private lazy var imagesCell = ImagesPostCell(frame: .init(x: 0, y: 0, width: collectionView.frame.width, height: 1000))
-    private lazy var videoCell = VideoPostCell(frame: .init(x: 0, y: 0, width: collectionView.frame.width, height: 1000))
+    private lazy var profileHeader = UserHeader(frame: .init(x: 0, y: 0, width: frameWidth, height: 1000))
+    private lazy var singleImageCell = SingleImagePostCell(frame: .init(x: 0, y: 0, width: frameWidth, height: 1000))
+    private lazy var imagesCell = ImagesPostCell(frame: .init(x: 0, y: 0, width: frameWidth, height: 1000))
+    private lazy var videoCell = VideoPostCell(frame: .init(x: 0, y: 0, width: frameWidth, height: 1000))
     
     //MARK: - Setup
     init(displayer: FeedDisplayer, collectionView: UICollectionView) {
@@ -65,7 +65,6 @@ class PostCollectionViewDelegate: NSObject, UICollectionViewDelegate, UICollecti
         }
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         postsDisplayer.didEndDisplayingCell.accept(indexPath.row)
     }
@@ -74,9 +73,14 @@ class PostCollectionViewDelegate: NSObject, UICollectionViewDelegate, UICollecti
         postsDisplayer.willDisplayCell.accept(indexPath.row)
     }
     
+    //MARK: - Getters
+    private lazy var frameWidth: CGFloat = {
+        guard let collectionView = collectionView else { return 0 }
+        return collectionView.frame.width
+    }()
+    
     
     //MARK: - Methods
-    
     func clearCache() {
         self.squishedSizes = [Int: CGSize]()
         self.expandedSizes = [Int: CGSize]()
@@ -104,16 +108,16 @@ class PostCollectionViewDelegate: NSObject, UICollectionViewDelegate, UICollecti
             print("displayer not known in cell sizing")
         }
         
-        let size = cell.systemLayoutSizeFitting(.init(width: collectionView.frame.width, height: 1000))
-        return .init(width: collectionView.frame.width, height: size.height)
+        let size = cell.systemLayoutSizeFitting(.init(width: frameWidth, height: 1000))
+        return .init(width: frameWidth, height: size.height)
     }
     
     private func estimateHeaderSize(for displayer: UserHeaderDisplayer) -> CGSize {
         
         profileHeader.displayer = displayer
         profileHeader.fit()
-        let size = profileHeader.systemLayoutSizeFitting(.init(width: collectionView.frame.width, height: 1000))
-        return .init(width: collectionView.frame.width, height: size.height)
+        let size = profileHeader.systemLayoutSizeFitting(.init(width: frameWidth, height: 1000))
+        return .init(width: frameWidth, height: size.height)
         
     }
     

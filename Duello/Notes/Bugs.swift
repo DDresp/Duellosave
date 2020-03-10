@@ -8,12 +8,13 @@
 
 //Network error --> Crash of the app, fatal error
 
+//Fix animation (almost working, but sometimes animates from beginning)
+
+//new Bug: Pagination doesnt work anymore
+
 //hide instagram post// or show that its disabled if the post isn't available from instagram anymore
+//--> disbaled attribute --> retry or reactivate ??
+//--> first approach to reactivate --> but possible problem is that it might be falsely claimed to be not working --> too much reactivations needeed, bad user experience
 
-//fix video loading, creating the asset for the thumbnail takes too much time
 
-//setting the wrong user socialMediaItems location after reload for a short time
-
-//Sometimes the count doenst work right as the footer is still loading
-//--> breaking if you upload posts and then without refreshing, delete some post
-
+//storing isntagram api fetch values????

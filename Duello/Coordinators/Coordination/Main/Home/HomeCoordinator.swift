@@ -48,6 +48,10 @@ class HomeCoordinator: HomeCoordinatorType {
         }).disposed(by: disposeBag)
     }
     
+    deinit {
+        print("debug: deinit HomeCoordinator")
+    }
+    
 }
 
 //MARK: - Extension: UpdateUser

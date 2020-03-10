@@ -151,14 +151,26 @@ class UserHeader: UICollectionReusableView {
     
     private func setupBindablesFromDisplayer() {
         
-        displayer?.score.subscribe(onNext: { [weak self] (score) in
-            guard let score = score else { return }
+        //Developing
+        
+        displayer?.animateScore.subscribe(onNext: { [weak self] (_) in
+            guard let score = self?.displayer?.score else { return }
             self?.likePercentageView.showLikeViewAnimation(percentage: score)
-            }).disposed(by: disposeBag)
+            print("debug: animate score")
+        }).disposed(by: disposeBag)
+        
+//        displayer?.score.subscribe(onNext: { [weak self] (score) in
+//            guard let score = score else { return }
+//            self?.likePercentageView.showLikeViewAnimation(percentage: score)
+//            }).disposed(by: disposeBag)
             
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit {
+        print("debug: deinit header")
     }
 }

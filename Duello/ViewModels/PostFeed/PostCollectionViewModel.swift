@@ -26,6 +26,7 @@ class PostCollectionViewModel: PostCollectionDisplayer {
     var showAdditionalLinkAlert: PublishRelay<String> = PublishRelay<String>()
     var showActionSheet: PublishRelay<ActionSheet> = PublishRelay<ActionSheet>()
    
+    var didAppear: PublishRelay<Void> = PublishRelay()
     var didEndDisplayingCell: PublishRelay<Int> = PublishRelay()
     var willDisplayCell: PublishRelay<Int> = PublishRelay()
     var didDisappear: PublishRelay<Void> = PublishRelay()
@@ -72,6 +73,7 @@ class PostCollectionViewModel: PostCollectionDisplayer {
         if fromStart {
             self.totalPostsCount = 0
             postDisplayers = [PostDisplayer]()
+            disposeBag = DisposeBag()
         }
         
         if let count = totalPostsCount {
@@ -130,16 +132,18 @@ class PostCollectionViewModel: PostCollectionDisplayer {
     //Configuration of ChildPostViewModels
     private func configurePostDisplayer(for postDisplayer: PostDisplayer) {
         
+        //Fixing the Deinitialisation after the reload//refresher
+        
         postDisplayer.showActionSheet.asObservable().bind(to: showActionSheet).disposed(by: disposeBag)
         postDisplayer.socialMediaDisplayer.showAdditionalLinkAlert.bind(to: showAdditionalLinkAlert).disposed(by: disposeBag)
         postDisplayer.socialMediaDisplayer.selectedLink.bind(to: loadLink).disposed(by: disposeBag)
-        
+
         postDisplayer.didExpand.filter { (didExpand) -> Bool in
             return didExpand
         }.map({ (_) -> Void in
             return ()
         }) .bind(to: updateLayout).disposed(by: disposeBag)
-        
+
         //Specific: HomeViewModel
         postDisplayer.deleteMe.asObservable()
             .map { [weak self] (index) -> String in
@@ -148,24 +152,24 @@ class PostCollectionViewModel: PostCollectionDisplayer {
             }.filter { (postId) -> Bool in
                 return postId.count > 0
             }.bind(to: deleteItem).disposed(by: disposeBag)
-        //
-        
+       //
+
         didDisappear.asObservable().bind(to: postDisplayer.didDisappear).disposed(by: disposeBag)
-        
+
         didEndDisplayingCell.asObservable()
             .filter { (index) -> Bool in
                 return postDisplayer.index == index }
             .map { (_) -> Void in
                 return ()
             }.bind(to: postDisplayer.didDisappear).disposed(by: disposeBag)
-        
+
         willDisplayCell.asObservable()
             .filter { (index) -> Bool in
                 return postDisplayer.index == index }
             .map{ (_) -> Void in
                 return ()
             }.bind(to: postDisplayer.willBeDisplayed).disposed(by: disposeBag)
-        
+
         if let viewModel = postDisplayer as? VideoPostViewModel {
             addConfigurationForVideoPostViewModel(for: viewModel)
         }
@@ -206,4 +210,7 @@ class PostCollectionViewModel: PostCollectionDisplayer {
         
     }
     
+    deinit {
+        print("debug: deinit PostCollectionViewModel")
+    }
 }

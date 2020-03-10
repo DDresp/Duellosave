@@ -97,4 +97,8 @@ class PostViewModel: PostDisplayer {
 
     }
     
+    deinit {
+        print("debug: Deinit POSTVIEWMODEL")
+    }
+    
 }

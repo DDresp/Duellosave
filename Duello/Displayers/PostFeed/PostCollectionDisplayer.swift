@@ -26,6 +26,7 @@ protocol PostCollectionDisplayer {
     var loadLink: PublishRelay<String?> { get }
     var showAdditionalLinkAlert: PublishRelay<String> { get }
     
+    var didAppear: PublishRelay<Void> { get }
     var didDisappear: PublishRelay<Void> { get }
     var didEndDisplayingCell: PublishRelay<Int> { get }
     var willDisplayCell: PublishRelay<Int> { get }
