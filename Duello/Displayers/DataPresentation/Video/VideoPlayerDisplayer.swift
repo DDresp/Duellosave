@@ -29,7 +29,7 @@ protocol VideoPlayerDisplayer {
 //    var playVideo: BehaviorRelay<Bool> { get }
 //    var flipThumbnailImage: BehaviorRelay<Bool> { get }
     var playVideoRequested: BehaviorRelay<Bool> { get }
-    var playVideo: PublishRelay<Bool> { get }
+//    var playVideo: PublishRelay<Bool> { get }
     var startVideo: PublishRelay<AVAsset> { get }
 //    var showThumbnailImage: BehaviorRelay<Bool> { get }
     
