@@ -14,6 +14,7 @@ class PostCollectionViewPrefetchingDatasource: NSObject, UICollectionViewDataSou
     //MARK: - Displayer
     let displayer: FeedDisplayer
     
+    //MARK: - Child Displayers
     var postsDisplayer: PostCollectionDisplayer {
         return displayer.postCollectionDisplayer
     }

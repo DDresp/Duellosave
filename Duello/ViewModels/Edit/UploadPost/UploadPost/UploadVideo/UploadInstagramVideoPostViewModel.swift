@@ -36,7 +36,7 @@ class UploadInstagramVideoPostViewModel: UploadPostViewModel<InstagramVideoPost>
         self.thumbnailUrl.accept(rawPost.thumbnailUrl)
         self.apiLink = rawPost.apiLink
         super.init()
-        setupBasicBindables()
+        setupVideoPlayerBindables()
     }
     
     //MARK: - Methods

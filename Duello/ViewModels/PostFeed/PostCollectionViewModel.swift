@@ -27,16 +27,18 @@ class PostCollectionViewModel: PostCollectionDisplayer {
     var showActionSheet: PublishRelay<ActionSheet> = PublishRelay<ActionSheet>()
    
     var didAppear: PublishRelay<Void> = PublishRelay()
-    var didEndDisplayingCell: PublishRelay<Int> = PublishRelay()
     var willDisplayCell: PublishRelay<Int> = PublishRelay()
     var didDisappear: PublishRelay<Void> = PublishRelay()
+    var didEndDisplayingCell: PublishRelay<Int> = PublishRelay()
     
-    var startPlayingVideo: PublishRelay<Int> = PublishRelay()
+    var requestedPlayingVideo: PublishRelay<Int> = PublishRelay()
     
     var refreshChanged: PublishSubject<Void> = PublishSubject()
     var restartData: PublishRelay<Void> = PublishRelay()
     var reloadData: PublishRelay<Void> = PublishRelay()
     var updateLayout: PublishRelay<Void> = PublishRelay()
+    
+    var videosAreMuted: BehaviorRelay<Bool> = BehaviorRelay(value: true)
     
     //Specific: HomeViewModel
     var deleteItem: PublishRelay<String> = PublishRelay<String>()
@@ -179,7 +181,14 @@ class PostCollectionViewModel: PostCollectionDisplayer {
     
     private func addConfigurationForVideoPostViewModel(for viewModel: VideoPostViewModel) {
         
-        //Developing
+        //If the sound on/of property changes for one cell, then it should also change for all other cells in the feed
+        viewModel.tappedSoundIcon.withLatestFrom(videosAreMuted).map { (isMuted) -> Bool in
+            return !isMuted
+            }.bind(to: videosAreMuted).disposed(by: disposeBag)
+        
+        videosAreMuted.bind(to: viewModel.isMuted).disposed(by: disposeBag)
+        
+        //If one cell plays a video, no other cells should play a video
         viewModel.playVideoRequested.map { (playVideoRequested) -> Int? in
             if playVideoRequested {
                 return viewModel.index
@@ -188,15 +197,16 @@ class PostCollectionViewModel: PostCollectionDisplayer {
             }
             }.flatMap { (index) -> Observable<Int> in
                 return Observable.from(optional: index)
-            }.bind(to: startPlayingVideo).disposed(by: disposeBag)
+            }.bind(to: requestedPlayingVideo).disposed(by: disposeBag)
 
-        startPlayingVideo.filter { (index) -> Bool in
-            let startedPlayingDifferentViewModel = index != viewModel.index
+        requestedPlayingVideo.filter { (index) -> Bool in
             let requestedPlayingViewModel = viewModel.playVideoRequested.value == true
-            return startedPlayingDifferentViewModel && requestedPlayingViewModel
+            let requestedPlayingDifferentViewModel = index != viewModel.index
+            return requestedPlayingViewModel && requestedPlayingDifferentViewModel
             }.map({ (_) -> Bool in
                 return false
             }).bind(to: viewModel.playVideoRequested).disposed(by: disposeBag)
+        
         
     }
     

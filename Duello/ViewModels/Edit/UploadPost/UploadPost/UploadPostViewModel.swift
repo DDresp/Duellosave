@@ -30,7 +30,7 @@ class UploadPostViewModel<T: PostModel>: UploadPostDisplayer {
     var progressHudMessage: String = "Uploading Post"
     
     //MARK: - Bindables
-    var willDisappear: PublishRelay<Void> = PublishRelay()
+    var didDisappear: PublishRelay<Void> = PublishRelay()
     var submitTapped: PublishSubject<Void> = PublishSubject<Void>()
     var alert: BehaviorRelay<Alert?> = BehaviorRelay<Alert?>(value: nil)
     var isLoading = BehaviorRelay(value: false)

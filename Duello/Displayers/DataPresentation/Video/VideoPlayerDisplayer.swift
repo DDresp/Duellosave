@@ -21,6 +21,7 @@ protocol VideoPlayerDisplayer: class {
     var playVideoRequested: BehaviorRelay<Bool> { get }
     var isMuted: BehaviorRelay<Bool> { get }
     var startVideo: PublishRelay<AVAsset> { get }
+    var didDisappear: PublishRelay<Void> { get }
 
     //Observable from View
     var tappedSoundIcon: PublishRelay<Void> { get }
@@ -66,7 +67,12 @@ extension VideoPlayerDisplayer {
     }
     
     //MARK: - Reactive
-    func setupBasicVideoBindables() {
+    func setupVideoPlayerBindables() {
+        
+        didDisappear.map { (_) -> Bool in
+            return false
+            }.bind(to: playVideoRequested).disposed(by: disposeBag)
+        
         tappedVideo.withLatestFrom(playVideoRequested).map { (playVideoRequested) -> Bool in
             return !playVideoRequested
             }.bind(to: playVideoRequested).disposed(by: disposeBag)

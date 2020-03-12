@@ -11,7 +11,7 @@ import RxCocoa
 
 protocol UploadImagesPostDisplayer: UploadPostDisplayer {
 
-    //MARK: - ChildDisplayers
+    //MARK: - Child Displayers
     var imagesSliderDisplayer: ImagesSliderDisplayer { get }
     
 }

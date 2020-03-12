@@ -11,7 +11,7 @@ import RxCocoa
 
 protocol FeedDisplayer {
     
-    //MARK: - ChildDisplayers
+    //MARK: - Child Displayers
     var userHeaderDisplayer: UserHeaderDisplayer? { get }
     var postCollectionDisplayer: PostCollectionDisplayer { get }
     

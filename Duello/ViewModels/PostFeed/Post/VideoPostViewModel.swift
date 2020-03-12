@@ -52,12 +52,8 @@ class VideoPostViewModel: PostViewModel, VideoPlayerDisplayer {
     
     //MARK: - Reactive
     private func setupBindables() {
-        setupBasicVideoBindables()
+        setupVideoPlayerBindables()
         
-        didDisappear.map { (_) -> Bool in
-            return false
-            }.bind(to: playVideoRequested).disposed(by: disposeBag)
-    
         apiDownloadingTask?.subscribe(onNext: { [weak self] (instagramVideoUrl, thumbnailUrl) in
             self?.videoUrl.accept(instagramVideoUrl)
             self?.thumbnailUrl.accept(thumbnailUrl)

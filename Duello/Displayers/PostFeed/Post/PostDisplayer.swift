@@ -11,7 +11,7 @@ import RxCocoa
 
 protocol PostDisplayer {
     
-    //MARK: - ChildDisplayers
+    //MARK: - Child Displayers
     var socialMediaDisplayer: SocialMediaDisplayer { get }
     
     //MARK: - Variables

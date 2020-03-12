@@ -14,7 +14,7 @@ class LoginTextFieldsStackView: UIStackView, UITextFieldDelegate {
     //MARK: - Displayer
     var displayer: AuthenticationDisplayer!
     
-    //MARK: - ChildDisplayers
+    //MARK: - Child Displayers
     var emailLoginDisplayer: EmailLoginDisplayer {
         return displayer.emailLoginDisplayer
     }

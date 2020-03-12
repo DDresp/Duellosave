@@ -33,7 +33,7 @@ class UploadLocalVideoPostViewModel: UploadPostViewModel<LocalVideoPost>, Upload
         self.videoUrl.accept(rawPost.videoUrl)
         self.thumbnailImage.accept(rawPost.thumbnailImage)
         super.init()
-        setupBasicBindables()
+        setupVideoPlayerBindables()
     }
     
     //MARK: - Methods

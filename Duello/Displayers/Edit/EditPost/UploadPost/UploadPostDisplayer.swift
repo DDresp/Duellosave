@@ -11,12 +11,12 @@ import RxCocoa
 
 protocol UploadPostDisplayer: class, UploadDisplayer {
     
-    //MARK: - ChildDisplayers
+    //MARK: - Child Displayers
     var titleDisplayer: UploadPostTitleDisplayer { get }
     var descriptionDisplayer: UploadPostDescriptionDisplayer { get }
     
     //MARK: - Bindables
     var submitTapped: PublishSubject<Void> { get }
-    var willDisappear: PublishRelay<Void> { get }
+    var didDisappear: PublishRelay<Void> { get }
     
 }

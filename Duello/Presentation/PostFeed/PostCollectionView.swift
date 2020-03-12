@@ -13,7 +13,7 @@ class PostCollectionView: UICollectionView {
     //MARK: - Displayer
     let displayer: FeedDisplayer
     
-    //MARK: - ChildDisplayer
+    //MARK: - Child Displayers
     var headerDisplayer: UserHeaderDisplayer? {
         return displayer.userHeaderDisplayer
     }

@@ -74,8 +74,6 @@ class VideoView: UIView {
        let slider = PlaySlider()
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(sliderTapped))
         slider.addGestureRecognizer(tapGestureRecognizer)
-        slider.addTarget(self, action: #selector(sliderChanged), for: .valueChanged)
-        slider.addTarget(self, action: #selector(sliderEnded), for: .touchUpInside)
         return slider
     }()
 
@@ -86,22 +84,11 @@ class VideoView: UIView {
         let positionOfSlider: CGPoint = playBackSlider.frame.origin
         let widthOfSlider: CGFloat = playBackSlider.frame.size.width
         let newValue = ((pointTapped.x - positionOfSlider.x) * CGFloat(playBackSlider.maximumValue) / widthOfSlider)
-//        playBackSlider.setValue(Float(newValue), animated: false)
-        playBackSlider.changeProgress(progress: Float(newValue), animated: false)
-        sliderEnded(playBackSlider)
-        
-    }
-    
-    @objc func sliderEnded(_ playBackSlider: UISlider) {
-        let floatedSeconds = Float64(playBackSlider.value)
+        let floatedSeconds = Float64(newValue)
         let timeScale = player.currentItem?.asset.duration.timescale ?? 1
         let targetTime = CMTimeMakeWithSeconds(floatedSeconds, preferredTimescale: timeScale)
         player.seek(to: targetTime, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
-        player.play()
-    }
-    
-    @objc func sliderChanged(_ playBackSlider: UISlider, event: UIEvent) {
-        player.pause()
+        
     }
     
     //MARK: - Layout

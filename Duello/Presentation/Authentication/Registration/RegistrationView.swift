@@ -14,7 +14,7 @@ class RegistrationView: UIView {
     //MARK: - Displayers
     var displayer: AuthenticationDisplayer!
     
-    //MARK: - ChildDisplayers
+    //MARK: - Child Displayers
     var registrationDisplayer: RegistrationDisplayer {
         return displayer.registrationDisplayer
     }

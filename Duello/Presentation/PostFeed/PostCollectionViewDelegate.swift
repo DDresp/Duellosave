@@ -14,6 +14,7 @@ class PostCollectionViewDelegate: NSObject, UICollectionViewDelegate, UICollecti
     //MARK: - Displayer
     let displayer: FeedDisplayer
 
+    //MARK: - Child Displayers
     var profileDisplayer: UserHeaderDisplayer? { return displayer.userHeaderDisplayer }
     var postsDisplayer: PostCollectionDisplayer { return displayer.postCollectionDisplayer }
     

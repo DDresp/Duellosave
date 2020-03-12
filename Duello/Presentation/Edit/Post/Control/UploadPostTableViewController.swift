@@ -84,9 +84,9 @@ class UploadPostTableViewController<T: UploadPostDisplayer>: UploadTableViewCont
         view.endEditing(true)
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        displayer?.willDisappear.accept(())
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        displayer?.didDisappear.accept(())
     }
     
     //MARK: - Methods

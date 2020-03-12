@@ -105,28 +105,7 @@ class VideoPlayer: UIView  {
     }
     
     private func setupBindablesFromDisplayer() {
-        
-        //        displayer?.showThumbnailImage.subscribe(onNext: { [weak self ] (showThumbnail) in
-        //
-        //            UIView.animate(withDuration: 0.7, delay: 0, options: [AnimationOptions.allowUserInteraction], animations: {
-        //                self?.thumbnailImageView.isHidden = !showThumbnail
-        //
-        //                if !showThumbnail {
-        //                    self?.videoView.isHidden = false
-        //                    self?.videoView.alpha = 100
-        //                } else {
-        //                    self?.videoView.isHidden = true
-        //                }
-        //
-        //            }, completion: { (_) in
-        //                if showThumbnail {
-        //                    self?.videoView.alpha = 0
-        //                }
-        //            })
-        ////            self?.videoView.isHidden = showThumbnail
-        //
-        //        }).disposed(by: disposeBag)
-        
+    
         displayer?.playVideoRequested.subscribe(onNext: { [weak self ] (playVideoRequested) in
             
             UIView.animate(withDuration: 0.7, delay: 0, options: [AnimationOptions.allowUserInteraction], animations: {
@@ -144,7 +123,6 @@ class VideoPlayer: UIView  {
                     self?.videoView.alpha = 0
                 }
             })
-            //            self?.videoView.isHidden = showThumbnail
             
         }).disposed(by: disposeBag)
         

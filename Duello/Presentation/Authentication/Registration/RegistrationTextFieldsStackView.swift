@@ -14,7 +14,7 @@ class RegistrationTextFieldsStackView: UIStackView, UITextFieldDelegate {
     //MARK: - Displayer
     var displayer: AuthenticationDisplayer!
     
-    //MARK: - ChildDisplayers
+    //MARK: - Child Displayers
     var registrationDisplayer: RegistrationDisplayer {
         return displayer.registrationDisplayer
     }

@@ -14,7 +14,7 @@ protocol UserHeaderDisplayer {
     //MARK: - Model
     var user: BehaviorRelay<UserModel?> { get }
     
-    //MARK: - ChildDisplayers
+    //MARK: - Child Displayers
     var socialMediaDisplayer: SocialMediaDisplayer { get }
     
     //MARK: - Variable
