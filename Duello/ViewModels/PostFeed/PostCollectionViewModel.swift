@@ -74,6 +74,7 @@ class PostCollectionViewModel: PostCollectionDisplayer {
             self.totalPostsCount = 0
             postDisplayers = [PostDisplayer]()
             disposeBag = DisposeBag()
+            setupBindablesFromOwnProperties()
         }
         
         if let count = totalPostsCount {
@@ -178,8 +179,9 @@ class PostCollectionViewModel: PostCollectionDisplayer {
     
     private func addConfigurationForVideoPostViewModel(for viewModel: VideoPostViewModel) {
         
-        viewModel.playVideoRequested.asObservable().map { (playVideo) -> Int? in
-            if playVideo {
+        //Developing
+        viewModel.playVideoRequested.map { (playVideoRequested) -> Int? in
+            if playVideoRequested {
                 return viewModel.index
             } else {
                 return nil
@@ -187,9 +189,11 @@ class PostCollectionViewModel: PostCollectionDisplayer {
             }.flatMap { (index) -> Observable<Int> in
                 return Observable.from(optional: index)
             }.bind(to: startPlayingVideo).disposed(by: disposeBag)
-        
-        startPlayingVideo.asObservable().filter { (index) -> Bool in
-            return index != viewModel.index
+
+        startPlayingVideo.filter { (index) -> Bool in
+            let startedPlayingDifferentViewModel = index != viewModel.index
+            let requestedPlayingViewModel = viewModel.playVideoRequested.value == true
+            return startedPlayingDifferentViewModel && requestedPlayingViewModel
             }.map({ (_) -> Bool in
                 return false
             }).bind(to: viewModel.playVideoRequested).disposed(by: disposeBag)

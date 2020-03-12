@@ -83,13 +83,13 @@ class VideoView: UIView {
     @objc func sliderTapped(gestureRecognizer: UIGestureRecognizer) {
         
         let pointTapped: CGPoint = gestureRecognizer.location(in: self)
-        
         let positionOfSlider: CGPoint = playBackSlider.frame.origin
         let widthOfSlider: CGFloat = playBackSlider.frame.size.width
         let newValue = ((pointTapped.x - positionOfSlider.x) * CGFloat(playBackSlider.maximumValue) / widthOfSlider)
-        playBackSlider.setValue(Float(newValue), animated: false)
-        
+//        playBackSlider.setValue(Float(newValue), animated: false)
+        playBackSlider.changeProgress(progress: Float(newValue), animated: false)
         sliderEnded(playBackSlider)
+        
     }
     
     @objc func sliderEnded(_ playBackSlider: UISlider) {
@@ -134,35 +134,32 @@ class VideoView: UIView {
     }
     
     //MARK: - Methods
-    private func startVideo() {
-
-        guard let url = displayer?.getVideoUrl() else { return }
-        
-        playerItem = AVPlayerItem(url: url)
     
+    private func startVideo(asset: AVAsset) {
+        
+        playerItem = AVPlayerItem(asset: asset)
+        
         let duration = self.playerItem?.asset.duration
-
         let seconds = CMTimeGetSeconds(duration ?? CMTimeMake(value: 0, timescale: 0))
         let floatseconds = Float(seconds)
         
         playBackSlider.maximumValue = floatseconds
-        playBackSlider.progressView.setProgress(0, animated: false)
-        
+        playBackSlider.changeProgress(progress: 0, animated: false)
         player = AVQueuePlayer(playerItem: self.playerItem)
+        
         let interval = CMTime(seconds: 0.05, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
         self.player.addPeriodicTimeObserver(forInterval: interval, queue: DispatchQueue.main, using: { [weak self] (time) in
             guard let self = self else { return }
             if self.player.rate == 0 {
                 return
             }
-            
             if self.player.currentItem?.status == .readyToPlay {
                 let time = Float(CMTimeGetSeconds(self.player.currentTime()))
                 let timeRatio = time/floatseconds
-                self.playBackSlider.progressView.setProgress(timeRatio, animated: false)
+                self.playBackSlider.changeProgress(progress: timeRatio, animated: false)
             }
-            
         })
+        
         player.isMuted = displayer?.isMuted.value ?? true
         playerLooper = AVPlayerLooper(player: player, templateItem: playerItem!)
         playerLayer.player = player
@@ -170,11 +167,11 @@ class VideoView: UIView {
         player.play()
         activityIndicatorView.stopAnimating()
     }
-    
+
     private func stopVideo() {
-        player.seek(to: CMTime.zero)
-        playBackSlider.value = 0
         player.pause()
+        player.seek(to: CMTime.zero)
+        playBackSlider.changeProgress(progress: 0, animated: false)
     }
     
     //MARK: - Reactive
@@ -210,13 +207,17 @@ class VideoView: UIView {
             }
         }).disposed(by: disposeBag)
         
-        displayer.shouldPlayVideo.subscribe(onNext: { [weak self] (shouldPlayVideo) in
-            if shouldPlayVideo {
-                self?.startVideo()
-            } else {
-                self?.stopVideo()
+        displayer.playVideoRequested.filter { (playVideoRequested) -> Bool in
+            return !playVideoRequested
+        }.subscribe(onNext: { [weak self] (_) in
+            self?.stopVideo()
+            }).disposed(by: disposeBag)
+        
+        displayer.startVideo.subscribe(onNext: { (asset) in
+            DispatchQueue.main.async {
+                self.startVideo(asset: asset)
             }
-        }).disposed(by: disposeBag)
+            }).disposed(by: disposeBag)
         
     }
     

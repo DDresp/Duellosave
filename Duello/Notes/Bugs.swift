@@ -10,11 +10,9 @@
 
 //Fix animation (almost working, but sometimes animates from beginning)
 
-//new Bug: Pagination doesnt work anymore
-
 //hide instagram post// or show that its disabled if the post isn't available from instagram anymore
 //--> disbaled attribute --> retry or reactivate ??
 //--> first approach to reactivate --> but possible problem is that it might be falsely claimed to be not working --> too much reactivations needeed, bad user experience
 
 
-//storing isntagram api fetch values????
+//if mute is changed for one viewmodel than its changed for the whole postfeed

@@ -8,8 +8,12 @@
 
 import RxSwift
 import RxCocoa
+import AVFoundation
 
 protocol VideoPlayerDisplayer {
+    
+    //MARK: - Variables
+//    var loadedVideo: Bool { get set }
     
     //MARK: - Bindables
     var videoUrl: BehaviorRelay<URL?> { get }
@@ -22,8 +26,12 @@ protocol VideoPlayerDisplayer {
 
     var isMuted: BehaviorRelay<Bool> { get }
     
-    var shouldPlayVideo: BehaviorRelay<Bool> { get }
-    var showThumbnailImage: BehaviorRelay<Bool> { get }
+//    var playVideo: BehaviorRelay<Bool> { get }
+//    var flipThumbnailImage: BehaviorRelay<Bool> { get }
+    var playVideoRequested: BehaviorRelay<Bool> { get }
+    var playVideo: PublishRelay<Bool> { get }
+    var startVideo: PublishRelay<AVAsset> { get }
+//    var showThumbnailImage: BehaviorRelay<Bool> { get }
     
     //MARK: - Reactive
     var disposeBag: DisposeBag { get }
@@ -43,4 +51,5 @@ extension VideoPlayerDisplayer {
     func getThumbnailUrl() -> URL? {
         return thumbnailUrl.value
     }
+    
 }

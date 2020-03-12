@@ -10,7 +10,12 @@ import UIKit
 
 class PlaySlider: UISlider {
     
-    let progressView = UIProgressView(progressViewStyle: .default)
+    func changeProgress(progress: Float, animated: Bool) {
+        setValue(progress, animated: false)
+        progressView.setProgress(progress, animated: animated)
+    }
+    
+    private let progressView = UIProgressView(progressViewStyle: .default)
     
     override init (frame: CGRect) {
          super.init(frame: frame)

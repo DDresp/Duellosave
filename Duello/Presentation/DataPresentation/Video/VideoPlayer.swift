@@ -101,29 +101,51 @@ class VideoPlayer: UIView  {
         guard let displayer = displayer else { return }
         oneTapGesture.rx.event.map { (_) -> Void in
             return ()
-            }.bind(to: displayer.tappedVideo).disposed(by: disposeBag)
+        }.bind(to: displayer.tappedVideo).disposed(by: disposeBag)
     }
     
     private func setupBindablesFromDisplayer() {
         
-        displayer?.showThumbnailImage.subscribe(onNext: { [weak self ] (showThumbnail) in
+        //        displayer?.showThumbnailImage.subscribe(onNext: { [weak self ] (showThumbnail) in
+        //
+        //            UIView.animate(withDuration: 0.7, delay: 0, options: [AnimationOptions.allowUserInteraction], animations: {
+        //                self?.thumbnailImageView.isHidden = !showThumbnail
+        //
+        //                if !showThumbnail {
+        //                    self?.videoView.isHidden = false
+        //                    self?.videoView.alpha = 100
+        //                } else {
+        //                    self?.videoView.isHidden = true
+        //                }
+        //
+        //            }, completion: { (_) in
+        //                if showThumbnail {
+        //                    self?.videoView.alpha = 0
+        //                }
+        //            })
+        ////            self?.videoView.isHidden = showThumbnail
+        //
+        //        }).disposed(by: disposeBag)
+        
+        displayer?.playVideoRequested.subscribe(onNext: { [weak self ] (playVideoRequested) in
             
             UIView.animate(withDuration: 0.7, delay: 0, options: [AnimationOptions.allowUserInteraction], animations: {
-                self?.thumbnailImageView.isHidden = !showThumbnail
-
-                if !showThumbnail {
+                self?.thumbnailImageView.isHidden = playVideoRequested
+                
+                if playVideoRequested {
                     self?.videoView.isHidden = false
                     self?.videoView.alpha = 100
                 } else {
                     self?.videoView.isHidden = true
                 }
-
+                
             }, completion: { (_) in
-                if showThumbnail {
+                if !playVideoRequested {
                     self?.videoView.alpha = 0
                 }
             })
-
+            //            self?.videoView.isHidden = showThumbnail
+            
         }).disposed(by: disposeBag)
         
         displayer?.thumbnailImage.subscribe(onNext: { [weak self] (thumbnailImage) in

@@ -8,12 +8,14 @@
 
 import RxSwift
 import RxCocoa
+import AVFoundation
 
 class UploadInstagramVideoPostViewModel: UploadPostViewModel<InstagramVideoPost>, UploadVideoPostDisplayer {
     
     //MARK: - Variables
     var type: MediaType = .instagramVideo
     let apiLink: String
+    var loadedVideo: Bool = false //Developing
     
     //MARK: - Bindables
     let videoUrl: BehaviorRelay<URL?> = BehaviorRelay(value: nil)
@@ -22,9 +24,13 @@ class UploadInstagramVideoPostViewModel: UploadPostViewModel<InstagramVideoPost>
     var tappedSoundIcon: PublishRelay<Void> = PublishRelay()
     var tappedVideo: PublishRelay<Void> = PublishRelay()
     var isMuted: BehaviorRelay<Bool> = BehaviorRelay(value: true)
-    var shouldPlayVideo: BehaviorRelay<Bool> = BehaviorRelay(value: true)
-    var showThumbnailImage: BehaviorRelay<Bool> = BehaviorRelay(value: false)
-    
+    //    var playVideo: BehaviorRelay<Bool> = BehaviorRelay(value: true)
+    //    var flipThumbnailImage: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+    var playVideo: PublishRelay<Bool> = PublishRelay()
+    //    var showThumbnailImage: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+    var startVideo: PublishRelay<AVAsset> = PublishRelay()
+    var playVideoRequested: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+
     //MARK: - Setup
     init(rawPost: RawInstagramVideoPost) {
         self.videoUrl.accept(rawPost.videoURL)

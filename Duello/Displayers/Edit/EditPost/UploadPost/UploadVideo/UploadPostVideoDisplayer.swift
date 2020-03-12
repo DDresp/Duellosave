@@ -6,6 +6,7 @@
 //  Copyright © 2020 Darius Dresp. All rights reserved.
 //
 
+//ATTENTION
 protocol UploadVideoPostDisplayer: UploadPostDisplayer, VideoPlayerDisplayer {}
 
 extension UploadVideoPostDisplayer {
@@ -17,17 +18,17 @@ extension UploadVideoPostDisplayer {
             return !wasMuted
             }.bind(to: isMuted).disposed(by: disposeBag)
         
-        tappedVideo.withLatestFrom(shouldPlayVideo).map { (shouldPlayVideo) -> Bool in
+        tappedVideo.withLatestFrom(playVideo).map { (shouldPlayVideo) -> Bool in
             return !shouldPlayVideo
-            }.bind(to: shouldPlayVideo).disposed(by: disposeBag)
+            }.bind(to: playVideo).disposed(by: disposeBag)
         
-        shouldPlayVideo.map { (shouldPlayVideo) -> Bool in
-            return !shouldPlayVideo
-            }.bind(to: showThumbnailImage).disposed(by: disposeBag)
+//        playVideo.map { (shouldPlayVideo) -> Bool in
+//            return !shouldPlayVideo
+//            }.bind(to: showThumbnailImage).disposed(by: disposeBag)
         
         willDisappear.map { (_) -> Bool in
             return false
-            }.bind(to: shouldPlayVideo).disposed(by: disposeBag)
+            }.bind(to: playVideo).disposed(by: disposeBag)
     }
     
 }

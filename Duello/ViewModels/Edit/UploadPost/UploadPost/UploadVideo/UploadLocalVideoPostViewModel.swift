@@ -8,11 +8,13 @@
 
 import RxSwift
 import RxCocoa
+import AVFoundation
 
 class UploadLocalVideoPostViewModel: UploadPostViewModel<LocalVideoPost>, UploadVideoPostDisplayer {
     
     //MARK: - Variables
     var type: MediaType = .localVideo
+    var loadedVideo: Bool = false //developing
     
     //MARK: - Bindables
     let videoUrl: BehaviorRelay<URL?> = BehaviorRelay(value: nil)
@@ -21,8 +23,12 @@ class UploadLocalVideoPostViewModel: UploadPostViewModel<LocalVideoPost>, Upload
     var tappedVideo: PublishRelay<Void> = PublishRelay()
     var tappedSoundIcon: PublishRelay<Void> = PublishRelay()
     var isMuted: BehaviorRelay<Bool> = BehaviorRelay(value: true)
-    var showThumbnailImage: BehaviorRelay<Bool> = BehaviorRelay(value: false)
-    var shouldPlayVideo: BehaviorRelay<Bool> = BehaviorRelay(value: true)
+//    var flipThumbnailImage: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+    //    var playVideo: BehaviorRelay<Bool> = BehaviorRelay(value: true)
+    var playVideoRequested: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+    var startVideo: PublishRelay<AVAsset> = PublishRelay()
+    var playVideo: PublishRelay<Bool> = PublishRelay()
+//    var showThumbnailImage: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     
     //MARK: - Setup
     init(rawPost: RawVideoPost) {
