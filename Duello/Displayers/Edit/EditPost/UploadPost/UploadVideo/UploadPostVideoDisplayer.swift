@@ -13,10 +13,10 @@ extension UploadVideoPostDisplayer {
     
     //MARK: - Reactive
     func setupBasicBindables() {
-    
-        tappedSoundIcon.withLatestFrom(isMuted).map { (wasMuted) -> Bool in
-            return !wasMuted
-            }.bind(to: isMuted).disposed(by: disposeBag)
+        setupBasicVideoBindables()
+//        tappedSoundIcon.withLatestFrom(isMuted).map { (wasMuted) -> Bool in
+//            return !wasMuted
+//            }.bind(to: isMuted).disposed(by: disposeBag)
         
 //        tappedVideo.withLatestFrom(playVideo).map { (shouldPlayVideo) -> Bool in
 //            return !shouldPlayVideo
@@ -26,9 +26,10 @@ extension UploadVideoPostDisplayer {
 //            return !shouldPlayVideo
 //            }.bind(to: showThumbnailImage).disposed(by: disposeBag)
         
-//        willDisappear.map { (_) -> Bool in
-//            return false
-//            }.bind(to: playVideo).disposed(by: disposeBag)
+        willDisappear.map { (_) -> Bool in
+            return false
+            }.bind(to: playVideoRequested).disposed(by: disposeBag)
+        
     }
     
 }

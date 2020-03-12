@@ -14,22 +14,20 @@ class UploadLocalVideoPostViewModel: UploadPostViewModel<LocalVideoPost>, Upload
     
     //MARK: - Variables
     var type: MediaType = .localVideo
-    var loadedVideo: Bool = false //developing
     
     //MARK: - Bindables
     let videoUrl: BehaviorRelay<URL?> = BehaviorRelay(value: nil)
+    let videoAsset: BehaviorRelay<AVAsset?> = BehaviorRelay(value: nil)
     let thumbnailUrl: BehaviorRelay<URL?> = BehaviorRelay(value: nil)
     let thumbnailImage: BehaviorRelay<UIImage?> = BehaviorRelay(value: nil)
-    var tappedVideo: PublishRelay<Void> = PublishRelay()
-    var tappedSoundIcon: PublishRelay<Void> = PublishRelay()
-    var isMuted: BehaviorRelay<Bool> = BehaviorRelay(value: true)
-//    var flipThumbnailImage: BehaviorRelay<Bool> = BehaviorRelay(value: false)
-    //    var playVideo: BehaviorRelay<Bool> = BehaviorRelay(value: true)
-    var playVideoRequested: BehaviorRelay<Bool> = BehaviorRelay(value: false)
-    var startVideo: PublishRelay<AVAsset> = PublishRelay()
-    var playVideo: PublishRelay<Bool> = PublishRelay()
-//    var showThumbnailImage: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     
+    let playVideoRequested: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+    let startVideo: PublishRelay<AVAsset> = PublishRelay()
+    let isMuted: BehaviorRelay<Bool> = BehaviorRelay(value: true)
+    
+    let tappedVideo: PublishRelay<Void> = PublishRelay()
+    let tappedSoundIcon: PublishRelay<Void> = PublishRelay()
+
     //MARK: - Setup
     init(rawPost: RawVideoPost) {
         self.videoUrl.accept(rawPost.videoUrl)

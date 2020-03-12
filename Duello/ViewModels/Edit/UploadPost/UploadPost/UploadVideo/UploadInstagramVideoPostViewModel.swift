@@ -15,21 +15,20 @@ class UploadInstagramVideoPostViewModel: UploadPostViewModel<InstagramVideoPost>
     //MARK: - Variables
     var type: MediaType = .instagramVideo
     let apiLink: String
-    var loadedVideo: Bool = false //Developing
     
     //MARK: - Bindables
     let videoUrl: BehaviorRelay<URL?> = BehaviorRelay(value: nil)
+    let videoAsset: BehaviorRelay<AVAsset?> = BehaviorRelay(value: nil)
     let thumbnailUrl: BehaviorRelay<URL?> = BehaviorRelay(value: nil)
     let thumbnailImage: BehaviorRelay<UIImage?> = BehaviorRelay(value: nil)
-    var tappedSoundIcon: PublishRelay<Void> = PublishRelay()
-    var tappedVideo: PublishRelay<Void> = PublishRelay()
-    var isMuted: BehaviorRelay<Bool> = BehaviorRelay(value: true)
-    //    var playVideo: BehaviorRelay<Bool> = BehaviorRelay(value: true)
-    //    var flipThumbnailImage: BehaviorRelay<Bool> = BehaviorRelay(value: false)
-    var playVideo: PublishRelay<Bool> = PublishRelay()
-    //    var showThumbnailImage: BehaviorRelay<Bool> = BehaviorRelay(value: false)
-    var startVideo: PublishRelay<AVAsset> = PublishRelay()
-    var playVideoRequested: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+    
+    let playVideoRequested: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+    let startVideo: PublishRelay<AVAsset> = PublishRelay()
+    let isMuted: BehaviorRelay<Bool> = BehaviorRelay(value: true)
+    
+    let tappedVideo: PublishRelay<Void> = PublishRelay()
+    let tappedSoundIcon: PublishRelay<Void> = PublishRelay()
+
 
     //MARK: - Setup
     init(rawPost: RawInstagramVideoPost) {
