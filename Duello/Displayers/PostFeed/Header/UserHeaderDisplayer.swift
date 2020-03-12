@@ -18,16 +18,14 @@ protocol UserHeaderDisplayer {
     var socialMediaDisplayer: SocialMediaDisplayer { get }
     
     //MARK: - Variable
-    var score: Double? { get set } //Developing
+    var score: Double? { get set }
     
     //MARK: - Bindables
-//    var score: BehaviorRelay<Double?> { get }
     var isLoading: BehaviorRelay<Bool> { get }
     var imageTapped: PublishRelay<Void> { get }
     var reload: PublishRelay<Void> { get }
-    var animateScore: PublishRelay<Void> { get } //developing
-    var didAppear: PublishRelay<Void> { get } //Fixing Animation
-    
+    var animateScore: PublishRelay<Void> { get } 
+    var didAppear: PublishRelay<Void> { get }
     //MARK: - Getters
     var imageUrl: String? { get }
     var userName: String? { get }

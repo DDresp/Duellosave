@@ -149,28 +149,19 @@ class UserHeader: UICollectionReusableView {
         profileImageButton.rx.tap.bind(to: displayer.imageTapped).disposed(by: disposeBag)
     }
     
+    
+    
     private func setupBindablesFromDisplayer() {
-        
-        //Developing
         
         displayer?.animateScore.subscribe(onNext: { [weak self] (_) in
             guard let score = self?.displayer?.score else { return }
             self?.likePercentageView.showLikeViewAnimation(percentage: score)
-            print("debug: animate score")
         }).disposed(by: disposeBag)
-        
-//        displayer?.score.subscribe(onNext: { [weak self] (score) in
-//            guard let score = score else { return }
-//            self?.likePercentageView.showLikeViewAnimation(percentage: score)
-//            }).disposed(by: disposeBag)
-            
+
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    deinit {
-        print("debug: deinit header")
-    }
+
 }

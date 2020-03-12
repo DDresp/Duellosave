@@ -21,8 +21,12 @@ protocol FeedDisplayer {
     var showActionSheet: PublishRelay<ActionSheet> { get }
     var showAlert: PublishRelay<Alert> { get }
     var showLoading: BehaviorRelay<Bool> { get }
-    var viewDidDisappear: PublishRelay<Void> { get }
-    var viewDidAppear: PublishRelay<Void> { get }
+//    var viewDidDisappear: PublishRelay<Void> { get }
+    var viewIsAppeared: BehaviorRelay<Bool> { get }
+//    var viewDidAppear: PublishRelay<Void> { get }
+    var didStart: BehaviorRelay<Bool> { get }
+    
+    func startFetching() -> ()
 
 }
 

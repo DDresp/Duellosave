@@ -116,7 +116,7 @@ class VideoView: UIView {
         soundIcon.centerInSuperview()
         
         controlsContainerView.addSubview(playBackSlider)
-        playBackSlider.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 0), size: .init(width: 0, height: 10)) //developing
+        playBackSlider.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 0), size: .init(width: 0, height: 10))
         
     }
     

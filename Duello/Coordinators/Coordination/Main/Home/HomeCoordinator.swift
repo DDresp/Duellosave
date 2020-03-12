@@ -27,6 +27,7 @@ class HomeCoordinator: HomeCoordinatorType {
     
     //MARK: - Setup
     init() {
+        print("debug: initing Coordinator")
         let homeController = HomeController(viewModel: viewModel)
         presentedController = homeController
         let navController = UINavigationController(rootViewController: presentedController)
@@ -46,10 +47,6 @@ class HomeCoordinator: HomeCoordinatorType {
         requestedSettings.asObservable().subscribe(onNext: { [weak self] (_) in
             self?.goToUpdateUser()
         }).disposed(by: disposeBag)
-    }
-    
-    deinit {
-        print("debug: deinit HomeCoordinator")
     }
     
 }

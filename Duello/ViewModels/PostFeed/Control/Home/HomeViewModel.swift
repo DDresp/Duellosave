@@ -45,6 +45,8 @@ class HomeViewModel: FeedDisplayer {
     
     //MARK: - Bindables
     var restart: PublishRelay<Void> = PublishRelay<Void>()
+//    var didStart: PublishRelay<Void> = PublishRelay<Void>()
+    var didStart: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     
     //HomeViewModel Specific
     var deletePost: PublishRelay<String> = PublishRelay<String>()
@@ -58,13 +60,12 @@ class HomeViewModel: FeedDisplayer {
     var showAlert: PublishRelay<Alert> = PublishRelay<Alert>()
     var showLoading: BehaviorRelay<Bool> = BehaviorRelay<Bool>(value: false)
     
-    var viewDidAppear: PublishRelay<Void> = PublishRelay()
-    var viewDidDisappear: PublishRelay<Void> = PublishRelay()
+    var viewIsAppeared: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+
     
     //MARK: - Setup
     init() {
         setupBindables()
-        startFetching()
     }
     
     //MARK: - Networking
@@ -148,6 +149,10 @@ class HomeViewModel: FeedDisplayer {
             self?.startFetching()
         }).disposed(by: disposeBag)
         
+        restart.map { (_) -> Bool in
+            return false
+            }.bind(to: didStart).disposed(by: disposeBag)
+        
         deletePost.asObservable().subscribe(onNext: { [weak self] (postId) in
             self?.deletePost(for: postId)
         }).disposed(by: disposeBag)
@@ -174,12 +179,39 @@ class HomeViewModel: FeedDisplayer {
             
         }).disposed(by: disposeBag)
         
-        //Fixing
-        viewDidAppear.bind(to: postCollectionDisplayer.didAppear).disposed(by: disposeBag)
-        viewDidDisappear.bind(to: postCollectionDisplayer.didDisappear).disposed(by: disposeBag)
+        viewIsAppeared.bind(to: postCollectionDisplayer.isAppeared).disposed(by: disposeBag)
+//        viewIsAppeared.filter { (isAppearing) -> Bool in
+//            return isAppearing
+//        }.map { (_) -> Void in
+//            return ()
+//            }.bind(to: postCollectionDisplayer.didAppear).disposed(by: disposeBag)
+//        viewDidAppear.bind(to: postCollectionDisplayer.didAppear).disposed(by: disposeBag)
+//        viewDidDisappear.bind(to: postCollectionDisplayer.didDisappear).disposed(by: disposeBag)
+        
+//        viewIsAppeared.filter { (isAppearing) -> Bool in
+//            return !isAppearing
+//        }.map { (_) -> Void in
+//            return ()
+//            }.bind(to: postCollectionDisplayer.didDisappear).disposed(by: disposeBag)
+        
+
         
         guard let userHeader = userHeaderDisplayer else { return }
-        viewDidAppear.bind(to: userHeader.didAppear).disposed(by: disposeBag)
+//        didStart.bind(to: userHeader.animateScore).disposed(by: disposeBag)
+//        viewDidAppear.bind(to: userHeader.didAppear).disposed(by: disposeBag)
+        
+        Observable.combineLatest(didStart, viewIsAppeared).filter { (started, appeared) -> Bool in
+            print("debug: started = \(started) AND appeared = \(appeared)")
+            return started && appeared
+        }.map { (_, _) -> Void in
+            return ()
+            }.bind(to: userHeader.animateScore).disposed(by: disposeBag)
+        
+//        viewIsAppeared.filter { (isAppearing) -> Bool in
+//            return isAppearing
+//        }.map { (_) -> Void in
+//            return ()
+//            }.bind(to: userHeader.didAppear).disposed(by: disposeBag)
     }
     
     private func setupBindablesToCoordinator() {
@@ -213,9 +245,5 @@ class HomeViewModel: FeedDisplayer {
         postCollectionDisplayer.showActionSheet.bind(to: showActionSheet).disposed(by: disposeBag)
         postCollectionDisplayer.deleteItem.bind(to: deletePost).disposed(by: disposeBag)
         postCollectionDisplayer.refreshChanged.bind(to: restart).disposed(by: disposeBag)
-    }
-    
-    deinit {
-        print("debug: deinit HomeViewModel")
     }
 }

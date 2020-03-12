@@ -34,19 +34,22 @@ class PostFeedViewController: ViewController {
     //MARK: - Delegation
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        displayer.viewDidAppear.accept(())
+//        displayer.viewDidAppear.accept(())
+        displayer.viewIsAppeared.accept(true)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        displayer.viewDidDisappear.accept(())
+//        displayer.viewDidDisappear.accept(())
+        displayer.viewIsAppeared.accept(false)
     }
     
     //MARK: - Methods
     private func open(urlString: String?) {
         guard let link = urlString else { return }
         guard let url = URL(string: link) else { return }
-        displayer.viewDidDisappear.accept(())
+//        displayer.viewDidDisappear.accept(())
+        displayer.viewIsAppeared.accept(false)
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     

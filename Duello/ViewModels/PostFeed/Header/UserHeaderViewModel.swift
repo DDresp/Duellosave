@@ -24,8 +24,7 @@ class UserHeaderViewModel: UserHeaderDisplayer {
     var isLoading: BehaviorRelay<Bool> = BehaviorRelay<Bool>(value: false)
     var imageTapped: PublishRelay<Void> = PublishRelay<Void>()
     var reload: PublishRelay<Void> = PublishRelay()
-//    var score: BehaviorRelay<Double?> = BehaviorRelay<Double?>(value: nil)
-    var animateScore: PublishRelay<Void> = PublishRelay() //developing
+    var animateScore: PublishRelay<Void> = PublishRelay()
     var didAppear: PublishRelay<Void> = PublishRelay()
 
     //MARK: - Getters
@@ -51,25 +50,15 @@ class UserHeaderViewModel: UserHeaderDisplayer {
     
     private func setupBindablesFromOwnProperties() {
         
-        //Developing
-//        animateScore.subscribe(onNext: { (_) in
-//            print("debug: should animate score")
-//        }).disposed(by: disposeBag)
-//
         user.asObservable().subscribe(onNext: { [weak self] (user) in
             self?.isLoading.accept(false)
             self?.socialMediaDisplayer.user.accept(user)
-//            self?.score.accept(user?.score)
-            self?.score = user?.score //Developing
+            self?.score = user?.score
             self?.socialMediaDisplayer.cleanCache.accept(())
             self?.reload.accept(())
         }).disposed(by: disposeBag)
         
-        didAppear.bind(to: animateScore).disposed(by: disposeBag)
+//        didAppear.bind(to: animateScore).disposed(by: disposeBag)
     }
     
-    deinit {
-        print("debug: deinit userheaderviewmodel")
-    }
-
 }

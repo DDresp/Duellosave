@@ -42,9 +42,9 @@ class PostCollectionView: UICollectionView {
         super.init(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         backgroundColor = VERYLIGHTGRAYCOLOR
         setup()
-        
         setupBindablesToDisplayer()
         setupBindablesFromDisplayer()
+        displayer.startFetching()
     }
     
     private func setup() {
@@ -79,7 +79,7 @@ class PostCollectionView: UICollectionView {
     private func setupBindablesFromDisplayer() {
         
         postCollectionDisplayer.restartData.subscribe(onNext: { [weak self] (_) in
-            
+        
             self?.setContentOffset(.zero, animated: false)
             self?.feedDelegate.clearCache()
             
@@ -88,8 +88,9 @@ class PostCollectionView: UICollectionView {
             }
             
             self?.reloadSections(IndexSet(integer: 0))
-            self?.layoutIfNeeded()
-            self?.headerDisplayer?.animateScore.accept(())
+            self?.layoutIfNeeded() //developing
+            self?.displayer.didStart.accept(true)
+//            self?.headerDisplayer?.animateScore.accept(())
             
         }).disposed(by: disposeBag)
         
@@ -112,8 +113,5 @@ class PostCollectionView: UICollectionView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    deinit {
-        print("debug: deinit postcollectionview")
-    }
+
 }

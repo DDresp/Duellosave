@@ -96,9 +96,5 @@ class PostViewModel: PostDisplayer {
             }.bind(to: showLikeView).disposed(by: disposeBag)
 
     }
-    
-    deinit {
-        print("debug: Deinit POSTVIEWMODEL")
-    }
-    
+
 }

@@ -96,8 +96,4 @@ class SocialMediaViewModel: SocialMediaDisplayer {
         
     }
     
-    deinit {
-        print("debug: deinit SocialMediaViewModel")
-    }
-    
 }

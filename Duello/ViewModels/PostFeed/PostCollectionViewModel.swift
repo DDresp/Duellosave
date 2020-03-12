@@ -26,9 +26,10 @@ class PostCollectionViewModel: PostCollectionDisplayer {
     var showAdditionalLinkAlert: PublishRelay<String> = PublishRelay<String>()
     var showActionSheet: PublishRelay<ActionSheet> = PublishRelay<ActionSheet>()
    
-    var didAppear: PublishRelay<Void> = PublishRelay()
+    var isAppeared: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+//    var didAppear: PublishRelay<Void> = PublishRelay()
     var willDisplayCell: PublishRelay<Int> = PublishRelay()
-    var didDisappear: PublishRelay<Void> = PublishRelay()
+//    var didDisappear: PublishRelay<Void> = PublishRelay()
     var didEndDisplayingCell: PublishRelay<Int> = PublishRelay()
     
     var requestedPlayingVideo: PublishRelay<Int> = PublishRelay()
@@ -135,8 +136,6 @@ class PostCollectionViewModel: PostCollectionDisplayer {
     //Configuration of ChildPostViewModels
     private func configurePostDisplayer(for postDisplayer: PostDisplayer) {
         
-        //Fixing the Deinitialisation after the reload//refresher
-        
         postDisplayer.showActionSheet.asObservable().bind(to: showActionSheet).disposed(by: disposeBag)
         postDisplayer.socialMediaDisplayer.showAdditionalLinkAlert.bind(to: showAdditionalLinkAlert).disposed(by: disposeBag)
         postDisplayer.socialMediaDisplayer.selectedLink.bind(to: loadLink).disposed(by: disposeBag)
@@ -157,7 +156,12 @@ class PostCollectionViewModel: PostCollectionDisplayer {
             }.bind(to: deleteItem).disposed(by: disposeBag)
        //
 
-        didDisappear.asObservable().bind(to: postDisplayer.didDisappear).disposed(by: disposeBag)
+        isAppeared.filter { (appeared) -> Bool in
+            return !appeared
+        }.map { (_) -> () in
+            return ()
+            }.bind(to: postDisplayer.didDisappear).disposed(by: disposeBag)
+//        didDisappear.asObservable().bind(to: postDisplayer.didDisappear).disposed(by: disposeBag)
 
         didEndDisplayingCell.asObservable()
             .filter { (index) -> Bool in
@@ -224,7 +228,4 @@ class PostCollectionViewModel: PostCollectionDisplayer {
         
     }
     
-    deinit {
-        print("debug: deinit PostCollectionViewModel")
-    }
 }

@@ -269,7 +269,8 @@
 		1475B0DC2410614E00F1D24F /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475B0DB2410614E00F1D24F /* TabBarController.swift */; };
 		1475B0DE2410615B00F1D24F /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475B0DD2410615B00F1D24F /* TableViewController.swift */; };
 		1475B0E02410FCCA00F1D24F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1475B0DF2410FCC900F1D24F /* GoogleService-Info.plist */; };
-		1C5707D15BF61217689CAE4C /* Pods_Duello.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91AB3EF2B11BD4500C628FB7 /* Pods_Duello.framework */; };
+		14ED672B241A87550047C085 /* Pods_Duello.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14ED672A241A87550047C085 /* Pods_Duello.framework */; };
+		14ED672C241A87550047C085 /* Pods_Duello.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 14ED672A241A87550047C085 /* Pods_Duello.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		31B463332357120C1AF23077 /* Pods_DuelloTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D5796413F5C4B1F7C6AF771 /* Pods_DuelloTests.framework */; };
 		60C39CA555B0784C7DCDC43F /* Pods_DuelloUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8867BCBC9104212BB400EDCA /* Pods_DuelloUITests.framework */; };
 /* End PBXBuildFile section */
@@ -290,6 +291,20 @@
 			remoteInfo = Duello;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		14ED672D241A87550047C085 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				14ED672C241A87550047C085 /* Pods_Duello.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		140AEE2E2411935300258DE8 /* Duello.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Duello.entitlements; sourceTree = "<group>"; };
@@ -561,6 +576,7 @@
 		1475B0DB2410614E00F1D24F /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		1475B0DD2410615B00F1D24F /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		1475B0DF2410FCC900F1D24F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		14ED672A241A87550047C085 /* Pods_Duello.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_Duello.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AB5A1CDF25F48DD3230412A /* Pods-DuelloUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DuelloUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DuelloUITests/Pods-DuelloUITests.release.xcconfig"; sourceTree = "<group>"; };
 		277CFB3CB5A75C5514FA82BD /* Pods-DuelloTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DuelloTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DuelloTests/Pods-DuelloTests.debug.xcconfig"; sourceTree = "<group>"; };
 		3D5796413F5C4B1F7C6AF771 /* Pods_DuelloTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DuelloTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -577,7 +593,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1C5707D15BF61217689CAE4C /* Pods_Duello.framework in Frameworks */,
+				14ED672B241A87550047C085 /* Pods_Duello.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2357,6 +2373,7 @@
 		CBAF9F3B2671D82090CEFDD4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				14ED672A241A87550047C085 /* Pods_Duello.framework */,
 				91AB3EF2B11BD4500C628FB7 /* Pods_Duello.framework */,
 				3D5796413F5C4B1F7C6AF771 /* Pods_DuelloTests.framework */,
 				8867BCBC9104212BB400EDCA /* Pods_DuelloUITests.framework */,
@@ -2377,6 +2394,7 @@
 				1475ADFE24103EAD00F1D24F /* Resources */,
 				AD317FF5C63B0605135B3432 /* [CP] Embed Pods Frameworks */,
 				5CE60B20FF367B8DCB8292EE /* [CP] Copy Pods Resources */,
+				14ED672D241A87550047C085 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
