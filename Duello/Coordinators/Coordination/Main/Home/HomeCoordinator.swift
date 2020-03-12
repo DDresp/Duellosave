@@ -27,7 +27,6 @@ class HomeCoordinator: HomeCoordinatorType {
     
     //MARK: - Setup
     init() {
-        print("debug: initing Coordinator")
         let homeController = HomeController(viewModel: viewModel)
         presentedController = homeController
         let navController = UINavigationController(rootViewController: presentedController)

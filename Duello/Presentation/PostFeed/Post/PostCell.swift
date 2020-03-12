@@ -191,9 +191,10 @@ class PostCell<T: PostDisplayer>: UICollectionViewCell {
         return gestureRecognizer
     }()
     
-    let doubleTapGesture: UITapGestureRecognizer = {
+    lazy var doubleTapGesture: UITapGestureRecognizer = {
         let gestureRecognizer = UITapGestureRecognizer()
         gestureRecognizer.numberOfTapsRequired = 2
+        gestureRecognizer.require(toFail: oneTapGesture)
         return gestureRecognizer
     }()
     
@@ -326,6 +327,7 @@ class PostCell<T: PostDisplayer>: UICollectionViewCell {
         }.bind(to: displayer.doubleTapped).disposed(by: disposeBag)
         
         oneTapGesture.rx.event.filter { [weak self] (_) -> Bool in
+            //shouldn't interrupt current animation
             if self?.likePercentageView.isAnimating == true {
                 return false
             } else {

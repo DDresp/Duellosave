@@ -180,38 +180,15 @@ class HomeViewModel: FeedDisplayer {
         }).disposed(by: disposeBag)
         
         viewIsAppeared.bind(to: postCollectionDisplayer.isAppeared).disposed(by: disposeBag)
-//        viewIsAppeared.filter { (isAppearing) -> Bool in
-//            return isAppearing
-//        }.map { (_) -> Void in
-//            return ()
-//            }.bind(to: postCollectionDisplayer.didAppear).disposed(by: disposeBag)
-//        viewDidAppear.bind(to: postCollectionDisplayer.didAppear).disposed(by: disposeBag)
-//        viewDidDisappear.bind(to: postCollectionDisplayer.didDisappear).disposed(by: disposeBag)
-        
-//        viewIsAppeared.filter { (isAppearing) -> Bool in
-//            return !isAppearing
-//        }.map { (_) -> Void in
-//            return ()
-//            }.bind(to: postCollectionDisplayer.didDisappear).disposed(by: disposeBag)
-        
 
-        
         guard let userHeader = userHeaderDisplayer else { return }
-//        didStart.bind(to: userHeader.animateScore).disposed(by: disposeBag)
-//        viewDidAppear.bind(to: userHeader.didAppear).disposed(by: disposeBag)
-        
+
         Observable.combineLatest(didStart, viewIsAppeared).filter { (started, appeared) -> Bool in
-            print("debug: started = \(started) AND appeared = \(appeared)")
             return started && appeared
         }.map { (_, _) -> Void in
             return ()
             }.bind(to: userHeader.animateScore).disposed(by: disposeBag)
-        
-//        viewIsAppeared.filter { (isAppearing) -> Bool in
-//            return isAppearing
-//        }.map { (_) -> Void in
-//            return ()
-//            }.bind(to: userHeader.didAppear).disposed(by: disposeBag)
+
     }
     
     private func setupBindablesToCoordinator() {
