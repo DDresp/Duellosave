@@ -151,12 +151,12 @@ class HomeViewModel: FeedDisplayer {
     
     private func setupBindablesToChildViewModels() {
         
-        user.asObservable().subscribe(onNext: { [weak self] (user) in
+        user.subscribe(onNext: { [weak self] (user) in
             guard let user = user else { return }
             self?.userHeaderDisplayer?.user.accept(user)
         }).disposed(by: disposeBag)
         
-        posts.asObservable().subscribe(onNext: { [weak self] (posts) in
+        posts.subscribe(onNext: { [weak self] (posts) in
             guard let _ = posts else { return }
             guard let userPosts = self?.userPosts else { return }
             
@@ -200,8 +200,8 @@ class HomeViewModel: FeedDisplayer {
     
     private func setupBindablesFromChildViewModels() {
         
-        userHeaderDisplayer?.socialMediaDisplayer.selectedLink.asObservable().bind(to: loadLink).disposed(by: disposeBag)
-        userHeaderDisplayer?.socialMediaDisplayer.showAdditionalLinkAlert.asObservable().bind(to: showAdditionalLinkAlert).disposed(by: disposeBag)
+        userHeaderDisplayer?.socialMediaDisplayer.selectedLink.bind(to: loadLink).disposed(by: disposeBag)
+        userHeaderDisplayer?.socialMediaDisplayer.showAdditionalLinkAlert.bind(to: showAdditionalLinkAlert).disposed(by: disposeBag)
 
         postCollectionDisplayer.deleteItem.bind(to: deletePost).disposed(by: disposeBag)
         

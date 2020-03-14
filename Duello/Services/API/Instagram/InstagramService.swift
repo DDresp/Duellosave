@@ -27,6 +27,7 @@ class InstagramService: NetworkService {
             
             Alamofire.request(url).responseJSON(completionHandler: { (response) in
                 if response.result.isFailure {
+                    print("debug: FAIL")
                     return observer.onError(InstagramError.failedRequest)
                 }
                 

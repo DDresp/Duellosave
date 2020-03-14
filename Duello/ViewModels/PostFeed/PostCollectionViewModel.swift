@@ -143,7 +143,7 @@ class PostCollectionViewModel: PostCollectionDisplayer {
     //Configuration of ChildPostViewModels
     private func configurePostDisplayer(for postDisplayer: PostDisplayer) {
         
-        postDisplayer.showActionSheet.asObservable().bind(to: showActionSheet).disposed(by: disposeBag)
+        postDisplayer.showActionSheet.bind(to: showActionSheet).disposed(by: disposeBag)
         postDisplayer.socialMediaDisplayer.showAdditionalLinkAlert.bind(to: showAdditionalLinkAlert).disposed(by: disposeBag)
         postDisplayer.socialMediaDisplayer.selectedLink.bind(to: loadLink).disposed(by: disposeBag)
 
