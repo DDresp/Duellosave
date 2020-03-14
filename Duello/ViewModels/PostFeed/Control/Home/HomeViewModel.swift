@@ -39,14 +39,13 @@ class HomeViewModel: FeedDisplayer {
         }
     }
     
-    var isStartingFetching = true
+    var restarted = true
     var lastFetchedPost: PostModel?
     var isFetchingNextPosts: Bool = false
     
     //MARK: - Bindables
     var restart: PublishRelay<Void> = PublishRelay<Void>()
-//    var didStart: PublishRelay<Void> = PublishRelay<Void>()
-    var didStart: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+    var finishedStart: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     
     //HomeViewModel Specific
     var deletePost: PublishRelay<String> = PublishRelay<String>()
@@ -73,8 +72,7 @@ class HomeViewModel: FeedDisplayer {
         
         guard let uid = Auth.auth().currentUser?.uid else { return }
         
-        isStartingFetching = true
-        self.userHeaderDisplayer?.isLoading.accept(true)
+        restarted = true
         
         FetchingService.shared.fetchUser(for: uid)
             .flatMapLatest { [weak self] (user) -> Observable<(RawUserPostsFootprint, [PostModel])> in
@@ -94,12 +92,11 @@ class HomeViewModel: FeedDisplayer {
                 user?.score = userFootPrint.score
                 self?.user.accept(user)
                 self?.posts.accept(posts)
-                }, onError: { [weak self] (err) in
-                    self?.userHeaderDisplayer?.isLoading.accept(false)
-            }).disposed(by: self.disposeBag)
+                }).disposed(by: self.disposeBag)
     }
     
-    private func fetchNextPosts() {
+    func fetchNextPosts() {
+        
         guard let uid = Auth.auth().currentUser?.uid, let lastPostId = posts.value?.last?.id, !isFetchingNextPosts else { return }
         isFetchingNextPosts = true
         FetchingService.shared.fetchUserPosts(for: uid, at: lastPostId, limit: 10).asObservable().subscribe(onNext: { [weak self] (newPosts) in
@@ -134,9 +131,10 @@ class HomeViewModel: FeedDisplayer {
     }
     
     //MARK: - Reactive
-    private var disposeBag = DisposeBag()
+    var disposeBag = DisposeBag()
     
     private func setupBindables() {
+        setupBasicBindables()
         setupBindablesToCoordinator()
         setupBindablesFromOwnProperties()
         setupBindablesFromChildViewModels()
@@ -144,14 +142,6 @@ class HomeViewModel: FeedDisplayer {
     }
     
     private func setupBindablesFromOwnProperties() {
-        
-        restart.asObservable().subscribe(onNext: { [weak self] (_) in
-            self?.startFetching()
-        }).disposed(by: disposeBag)
-        
-        restart.map { (_) -> Bool in
-            return false
-            }.bind(to: didStart).disposed(by: disposeBag)
         
         deletePost.asObservable().subscribe(onNext: { [weak self] (postId) in
             self?.deletePost(for: postId)
@@ -170,9 +160,9 @@ class HomeViewModel: FeedDisplayer {
             guard let _ = posts else { return }
             guard let userPosts = self?.userPosts else { return }
             
-            if self?.isStartingFetching == true, let postsCount = self?.numberOfPosts {
+            if self?.restarted == true, let postsCount = self?.numberOfPosts {
                 self?.postCollectionDisplayer.update(with: userPosts, totalPostsCount: postsCount, fromStart: true)
-                self?.isStartingFetching = false
+                self?.restarted = false
             } else {
                 self?.postCollectionDisplayer.update(with: userPosts, totalPostsCount: self?.numberOfPosts, fromStart: false)
             }
@@ -183,7 +173,7 @@ class HomeViewModel: FeedDisplayer {
 
         guard let userHeader = userHeaderDisplayer else { return }
 
-        Observable.combineLatest(didStart, viewIsAppeared).filter { (started, appeared) -> Bool in
+        Observable.combineLatest(finishedStart, viewIsAppeared).filter { (started, appeared) -> Bool in
             return started && appeared
         }.map { (_, _) -> Void in
             return ()
@@ -210,17 +200,10 @@ class HomeViewModel: FeedDisplayer {
     
     private func setupBindablesFromChildViewModels() {
         
-        //Fixing
         userHeaderDisplayer?.socialMediaDisplayer.selectedLink.asObservable().bind(to: loadLink).disposed(by: disposeBag)
         userHeaderDisplayer?.socialMediaDisplayer.showAdditionalLinkAlert.asObservable().bind(to: showAdditionalLinkAlert).disposed(by: disposeBag)
 
-        postCollectionDisplayer.loadLink.bind(to: loadLink).disposed(by: disposeBag)
-        postCollectionDisplayer.showAdditionalLinkAlert.bind(to: showAdditionalLinkAlert).disposed(by: disposeBag)
-        postCollectionDisplayer.requestNextPosts.asObservable().subscribe(onNext: { [weak self] (_) in
-            self?.fetchNextPosts()
-        }).disposed(by: disposeBag)
-        postCollectionDisplayer.showActionSheet.bind(to: showActionSheet).disposed(by: disposeBag)
         postCollectionDisplayer.deleteItem.bind(to: deletePost).disposed(by: disposeBag)
-        postCollectionDisplayer.refreshChanged.bind(to: restart).disposed(by: disposeBag)
+        
     }
 }

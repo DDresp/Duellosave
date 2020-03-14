@@ -21,11 +21,10 @@ class UserHeaderViewModel: UserHeaderDisplayer {
     var score: Double?
     
     //MARK: - Bindables
-    var isLoading: BehaviorRelay<Bool> = BehaviorRelay<Bool>(value: false)
     var imageTapped: PublishRelay<Void> = PublishRelay<Void>()
     var reload: PublishRelay<Void> = PublishRelay()
     var animateScore: PublishRelay<Void> = PublishRelay()
-    var didAppear: PublishRelay<Void> = PublishRelay()
+//    var didAppear: PublishRelay<Void> = PublishRelay()
 
     //MARK: - Getters
     var imageUrl: String? {
@@ -51,7 +50,6 @@ class UserHeaderViewModel: UserHeaderDisplayer {
     private func setupBindablesFromOwnProperties() {
         
         user.asObservable().subscribe(onNext: { [weak self] (user) in
-            self?.isLoading.accept(false)
             self?.socialMediaDisplayer.user.accept(user)
             self?.score = user?.score
             self?.socialMediaDisplayer.cleanCache.accept(())

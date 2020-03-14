@@ -87,10 +87,9 @@ class PostCollectionView: UICollectionView {
                 self?.refreshControl?.endRefreshing()
             }
             
-            self?.reloadSections(IndexSet(integer: 0))
-            self?.layoutIfNeeded() //developing
-            self?.displayer.didStart.accept(true)
-//            self?.headerDisplayer?.animateScore.accept(())
+            self?.reloadData()
+            self?.layoutIfNeeded()
+            self?.displayer.finishedStart.accept(true)
             
         }).disposed(by: disposeBag)
         

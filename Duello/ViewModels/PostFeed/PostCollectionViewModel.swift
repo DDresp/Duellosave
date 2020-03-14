@@ -27,9 +27,8 @@ class PostCollectionViewModel: PostCollectionDisplayer {
     var showActionSheet: PublishRelay<ActionSheet> = PublishRelay<ActionSheet>()
    
     var isAppeared: BehaviorRelay<Bool> = BehaviorRelay(value: false)
-//    var didAppear: PublishRelay<Void> = PublishRelay()
+
     var willDisplayCell: PublishRelay<Int> = PublishRelay()
-//    var didDisappear: PublishRelay<Void> = PublishRelay()
     var didEndDisplayingCell: PublishRelay<Int> = PublishRelay()
     
     var requestedPlayingVideo: PublishRelay<Int> = PublishRelay()
@@ -86,10 +85,18 @@ class PostCollectionViewModel: PostCollectionDisplayer {
         
         let startIndex = numberOfPostDisplayers
         let endIndex = loadedPosts.count - 1
-        guard startIndex <= endIndex else { return self.totalPostsCount = loadedPosts.count }
         
-        let newPosts = Array(loadedPosts[startIndex...endIndex])
-        configurePostDisplayers(with: newPosts)
+        if startIndex <= endIndex  {
+            let newPosts = Array(loadedPosts[startIndex...endIndex])
+            configurePostDisplayers(with: newPosts)
+        } else {
+            self.totalPostsCount = loadedPosts.count
+        }
+        
+//        guard startIndex <= endIndex else { return self.totalPostsCount = loadedPosts.count }
+        
+//        let newPosts = Array(loadedPosts[startIndex...endIndex])
+//        configurePostDisplayers(with: newPosts)
         
         if fromStart {
             restartData.accept(())

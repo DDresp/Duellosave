@@ -21,11 +21,10 @@ protocol UserHeaderDisplayer {
     var score: Double? { get set }
     
     //MARK: - Bindables
-    var isLoading: BehaviorRelay<Bool> { get }
     var imageTapped: PublishRelay<Void> { get }
     var reload: PublishRelay<Void> { get }
     var animateScore: PublishRelay<Void> { get } 
-    var didAppear: PublishRelay<Void> { get }
+
     //MARK: - Getters
     var imageUrl: String? { get }
     var userName: String? { get }

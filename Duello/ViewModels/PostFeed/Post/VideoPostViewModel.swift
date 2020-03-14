@@ -57,7 +57,7 @@ class VideoPostViewModel: PostViewModel, VideoPlayerDisplayer {
         apiDownloadingTask?.subscribe(onNext: { [weak self] (instagramVideoUrl, thumbnailUrl) in
             self?.videoUrl.accept(instagramVideoUrl)
             self?.thumbnailUrl.accept(thumbnailUrl)
-        }).disposed(by: disposeBag)
+            }).disposed(by: disposeBag)
         
         showLikeView.filter { (showsLikeView) -> Bool in
             return showsLikeView

@@ -269,6 +269,7 @@
 		1475B0DC2410614E00F1D24F /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475B0DB2410614E00F1D24F /* TabBarController.swift */; };
 		1475B0DE2410615B00F1D24F /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475B0DD2410615B00F1D24F /* TableViewController.swift */; };
 		1475B0E02410FCCA00F1D24F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1475B0DF2410FCC900F1D24F /* GoogleService-Info.plist */; };
+		14BDEC06241B004000228763 /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BDEC05241B004000228763 /* FeedViewModel.swift */; };
 		14ED672B241A87550047C085 /* Pods_Duello.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14ED672A241A87550047C085 /* Pods_Duello.framework */; };
 		14ED672C241A87550047C085 /* Pods_Duello.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 14ED672A241A87550047C085 /* Pods_Duello.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		31B463332357120C1AF23077 /* Pods_DuelloTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D5796413F5C4B1F7C6AF771 /* Pods_DuelloTests.framework */; };
@@ -576,6 +577,7 @@
 		1475B0DB2410614E00F1D24F /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		1475B0DD2410615B00F1D24F /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		1475B0DF2410FCC900F1D24F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		14BDEC05241B004000228763 /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
 		14ED672A241A87550047C085 /* Pods_Duello.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_Duello.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AB5A1CDF25F48DD3230412A /* Pods-DuelloUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DuelloUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DuelloUITests/Pods-DuelloUITests.release.xcconfig"; sourceTree = "<group>"; };
 		277CFB3CB5A75C5514FA82BD /* Pods-DuelloTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DuelloTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DuelloTests/Pods-DuelloTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1601,6 +1603,7 @@
 		1475AF802410525C00F1D24F /* Control */ = {
 			isa = PBXGroup;
 			children = (
+				14BDEC05241B004000228763 /* FeedViewModel.swift */,
 				1475AF852410529700F1D24F /* Home */,
 			);
 			path = Control;
@@ -1996,8 +1999,8 @@
 			children = (
 				140AEE312412FD0E00258DE8 /* PostFeedViewController.swift */,
 				1475B03524105B0F00F1D24F /* PostCollectionView.swift */,
-				1475B03724105B1D00F1D24F /* PostCollectionViewDelegate.swift */,
 				1475B03924105B2B00F1D24F /* PostCollectionViewDatasource.swift */,
+				1475B03724105B1D00F1D24F /* PostCollectionViewDelegate.swift */,
 				1475B03B24105B3900F1D24F /* PostCollectionViewPrefetchingDatasource.swift */,
 				1475B03F24105B5200F1D24F /* Header */,
 				1475B03E24105B4B00F1D24F /* Footer */,
@@ -2757,6 +2760,7 @@
 				1475AF2624104B6C00F1D24F /* AuthenticationPhoneLoginCoordinatorType.swift in Sources */,
 				1475AF522410507100F1D24F /* HomeUpdateUserController.swift in Sources */,
 				1475AF972410534500F1D24F /* PostingViewModel.swift in Sources */,
+				14BDEC06241B004000228763 /* FeedViewModel.swift in Sources */,
 				1475AE852410439600F1D24F /* FetchingService_Posts.swift in Sources */,
 				1475AF652410512A00F1D24F /* PostingUploadLocalImagesPostController.swift in Sources */,
 				1475B07624105D5C00F1D24F /* UploadVideoMediaPostCell.swift in Sources */,

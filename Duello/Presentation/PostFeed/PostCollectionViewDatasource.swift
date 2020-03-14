@@ -48,7 +48,6 @@ class PostCollectionViewDatasource: NSObject, UICollectionViewDataSource {
         
         guard !postsDisplayer.noPostsAvailable, let postDisplayer = postsDisplayer.getPostDisplayer(at: indexPath.item) else {
             return collectionView.dequeueReusableCell(withReuseIdentifier: emptyIdentifier, for: indexPath)
-            
         }
         
         switch postDisplayer {

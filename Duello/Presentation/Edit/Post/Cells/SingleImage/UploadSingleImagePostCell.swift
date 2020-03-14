@@ -36,6 +36,7 @@ class UploadSingleImageMediaPostCell: UITableViewCell {
     //MARK: - Views
     private let singleImageView: UIImageView = {
         let iv = UIImageView()
+        iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
         return iv
     }()
