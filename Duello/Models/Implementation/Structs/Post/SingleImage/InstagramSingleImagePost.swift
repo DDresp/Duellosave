@@ -23,6 +23,7 @@ struct InstagramSingleImagePost: InstagramSingleImagePostModel {
     var likes: PostSingleAttribute = PostSingleAttribute(attributeCase: .likes, value: nil)
     var dislikes: PostSingleAttribute = PostSingleAttribute(attributeCase: .dislikes, value: nil)
     var rate: PostSingleAttribute = PostSingleAttribute(attributeCase: .rate, value: nil)
+    var isDeactivated: PostSingleAttribute = PostSingleAttribute(attributeCase: .isDeactivated, value: false)
     
     var typeData: PostSingleAttribute = PostSingleAttribute(attributeCase: .type, value: MediaType.instagramSingleImage)
     var apiUrl: PostSingleAttribute = PostSingleAttribute(attributeCase: .apiUrl, value: nil)
@@ -38,7 +39,8 @@ struct InstagramSingleImagePost: InstagramSingleImagePostModel {
             dislikes,
             rate,
             typeData,
-            apiUrl
+            apiUrl,
+            isDeactivated
         ]
     }
     

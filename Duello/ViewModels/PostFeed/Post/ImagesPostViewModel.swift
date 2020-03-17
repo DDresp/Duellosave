@@ -47,9 +47,23 @@ class ImagesPostViewModel: PostViewModel {
     }
     
     private func setupBindablesFromOwnProperties() {
+        //        apiDownloadingTask?.flatMap { (imageUrls) in
+        //            return Observable.from(optional: imageUrls)
+        //            }.bind(to: postImageUrls).disposed(by: disposeBag)
+        
         apiDownloadingTask?.flatMap { (imageUrls) in
             return Observable.from(optional: imageUrls)
-            }.bind(to: postImageUrls).disposed(by: disposeBag)
+        }.subscribe(onNext: { [weak self] (urls) in
+            self?.postImageUrls.accept(urls)
+            self?.isDeactivated.accept(false)
+            }, onError: { [weak self] (err) in
+                if let error = err as? InstagramError, case .failedRequest = error {
+                    self?.isDeactivated.accept(true)
+                }
+        }).disposed(by: disposeBag)
+        
+//        bind(to: postImageUrls).disposed(by: disposeBag)
+
         
         postImageUrls.subscribe(onNext: { [weak self] (urls) in
             guard let urls = urls else { return }

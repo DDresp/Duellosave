@@ -22,6 +22,7 @@ struct LocalVideoPost: LocalVideoPostModel {
     var likes: PostSingleAttribute = PostSingleAttribute(attributeCase: .likes, value: nil)
     var dislikes: PostSingleAttribute = PostSingleAttribute(attributeCase: .dislikes, value: nil)
     var rate: PostSingleAttribute = PostSingleAttribute(attributeCase: .rate, value: nil)
+    var isDeactivated: PostSingleAttribute = PostSingleAttribute(attributeCase: .isDeactivated, value: false)
     
     var typeData: PostSingleAttribute = PostSingleAttribute(attributeCase: .type, value: MediaType.localVideo)
     var videoUrl: PostSingleAttribute = PostSingleAttribute(attributeCase: .videoUrl, value: nil)
@@ -39,7 +40,8 @@ struct LocalVideoPost: LocalVideoPostModel {
             rate,
             typeData,
             videoUrl,
-            thumbNailUrl
+            thumbNailUrl,
+            isDeactivated
         ]
     }
 }

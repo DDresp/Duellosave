@@ -131,7 +131,10 @@ class VideoPlayer: UIView  {
         }).disposed(by: disposeBag)
         
         displayer?.thumbnailUrl.subscribe(onNext: { [weak self] (thumbnailUrl) in
-            guard let url = thumbnailUrl else { return }
+            guard let url = thumbnailUrl else {
+                self?.isHidden = true
+                return }
+            self?.isHidden = false
             self?.thumbnailImageView.sd_setImage(with: url)
         }).disposed(by: disposeBag)
         

@@ -75,6 +75,10 @@ extension Model {
                 if let value = attribute.getValue() as? MediaType {
                     dictionary[attribute.getKey()] = value.rawValue
                 }
+            case .Bool:
+                if let value = attribute.getValue() as? Bool {
+                    dictionary[attribute.getKey()] = value ? 1 : 0
+                }
             }
         }
         
@@ -130,6 +134,12 @@ extension Model {
                         return
                         
                     }
+                }
+            case .Bool:
+                if let value = dic[attribute.getKey()] as? Int, value == 0 {
+                    attribute.setValue(of: false)
+                } else {
+                    attribute.setValue(of: true)
                 }
             }
         }

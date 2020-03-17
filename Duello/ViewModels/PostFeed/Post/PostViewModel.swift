@@ -35,13 +35,15 @@ class PostViewModel: PostDisplayer {
     //to UI
     var showLikeView: BehaviorRelay<Bool> = BehaviorRelay<Bool>(value: false)
     var showActionSheet: PublishRelay<ActionSheet> = PublishRelay<ActionSheet>()
+    var isDeactivated: BehaviorRelay<Bool>
     
     //from Parent
     var didDisappear: PublishRelay<Void> = PublishRelay()
     var willBeDisplayed: PublishRelay<Void> = PublishRelay()
     
     //to Parent
-    var deleteMe: PublishRelay<Int> = PublishRelay<Int>()
+    var deleteMe: PublishRelay<String> = PublishRelay<String>()
+    var updateDeactivation: PublishRelay<Int> = PublishRelay<Int>()
     
     //MARK: - Setup
     init(user: UserModel, post: PostModel, index: Int) {
@@ -52,6 +54,7 @@ class PostViewModel: PostDisplayer {
         self.rate = post.getRate()
         self.description = post.getDescription()
         self.title = post.getTitle()
+        self.isDeactivated = BehaviorRelay(value: post.getIsDeactivated())
         socialMediaDisplayer.user.accept(user)
         setupBindablesFromOwnProperties()
     }
@@ -65,8 +68,8 @@ class PostViewModel: PostDisplayer {
         
         let deleteWarning = ActionWarning(title: "Warning", message: "Do you really want to delete the post?")
         let deleteAction = AlertAction(title: "Delete", actionWarning: deleteWarning) { [weak self] () in
-            guard let index = self?.index else { return }
-            self?.deleteMe.accept(index)
+            guard let postId = self?.postId else { return }
+            self?.deleteMe.accept(postId)
         }
         
         let likeViewAction = AlertAction(title: showLikeView.value ? "Dismiss Score" : "Show Score") { [weak self] () in
@@ -89,12 +92,23 @@ class PostViewModel: PostDisplayer {
         
         Observable.merge([doubleTapped, likeBlurViewTapped]).withLatestFrom(showLikeView).map { (showLikeView) -> Bool in
             return !showLikeView
-            }.bind(to: showLikeView).disposed(by: disposeBag)
+        }.bind(to: showLikeView).disposed(by: disposeBag)
         
         didDisappear.map { (_) -> Bool in
             return false
-            }.bind(to: showLikeView).disposed(by: disposeBag)
-
+        }.bind(to: showLikeView).disposed(by: disposeBag)
+        
+        //Check if the associated model already captures the deactivation state of the PostDisplayer correctly
+        isDeactivated.filter { [weak self] (isDeactivated) -> Bool in
+            return isDeactivated != self?.post.getIsDeactivated()
+        }.do(onNext: { [weak self] (isDeactivated) in
+            self?.post.isDeactivated.setValue(of: isDeactivated)
+        }).map { [weak self] (isDeactivated) -> Int in
+            self?.post.isDeactivated.setValue(of: isDeactivated)
+            return self?.index ?? 0
+        }.bind(to: updateDeactivation).disposed(by: disposeBag)
+        
+        
     }
 
 }

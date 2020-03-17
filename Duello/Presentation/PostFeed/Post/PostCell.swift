@@ -33,6 +33,7 @@ class PostCell<T: PostDisplayer>: UICollectionViewCell {
     
     //MARK: - Views
     var mediaView = UIView() //The specific PostCells will inject their media content in this cell (images, video etc)
+    private var deactivatedView = DeactivatedView()
     
     //Labels
     private let nameLabel: UILabel = {
@@ -215,6 +216,10 @@ class PostCell<T: PostDisplayer>: UICollectionViewCell {
         contentView.addSubview(mediaView)
         mediaView.anchor(top: headerStackView.bottomAnchor, leading: contentView.leadingAnchor, bottom: bottomStackView.topAnchor, trailing: contentView.trailingAnchor, padding: .init(top: 0, left: 0, bottom: STANDARDSPACING, right: 0))
         
+        //Layout Deactivated View
+        contentView.addSubview(deactivatedView)
+        deactivatedView.anchor(top: headerStackView.bottomAnchor, leading: contentView.leadingAnchor, bottom: bottomStackView.topAnchor, trailing: contentView.trailingAnchor, padding: .init(top: 0, left: 0, bottom: STANDARDSPACING, right: 0))
+        
         //Layout Interactive Views
         mediaView.addSubview(blurView)
         blurView.fillSuperview()
@@ -356,6 +361,10 @@ class PostCell<T: PostDisplayer>: UICollectionViewCell {
                 self?.blurView.isHidden = true
             }
         }).disposed(by: disposeBag)
+        
+        displayer.isDeactivated.map { (isDeactivated) -> Bool in
+            return !isDeactivated
+        }.bind(to: deactivatedView.rx.isHidden).disposed(by: disposeBag)
         
     }
     

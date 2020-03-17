@@ -41,7 +41,9 @@ class PostCollectionViewModel: PostCollectionDisplayer {
     var videosAreMuted: BehaviorRelay<Bool> = BehaviorRelay(value: true)
     
     //Specific: HomeViewModel
-    var deleteItem: PublishRelay<String> = PublishRelay<String>()
+    var deletePost: PublishRelay<String> = PublishRelay<String>()
+    var updatePost: PublishRelay<Int> = PublishRelay<Int>()
+    var deactivatePost: PublishRelay<String> = PublishRelay<String>()
     //
     
     //MARK: - Setup
@@ -154,14 +156,36 @@ class PostCollectionViewModel: PostCollectionDisplayer {
         }) .bind(to: updateLayout).disposed(by: disposeBag)
 
         //Specific: HomeViewModel
-        postDisplayer.deleteMe.asObservable()
-            .map { [weak self] (index) -> String in
-                guard let postViewModel = self?.getPostDisplayer(at: index) else { return "" }
-                return postViewModel.postId
-            }.filter { (postId) -> Bool in
-                return postId.count > 0
-            }.bind(to: deleteItem).disposed(by: disposeBag)
+        postDisplayer.deleteMe.bind(to: deletePost).disposed(by: disposeBag)
+        postDisplayer.updateDeactivation.bind(to: updatePost).disposed(by: disposeBag)
+        
+//        postDisplayer.isDeactivated.filter { (isDeactivated) -> Bool in
+//            <#code#>
+//        }
+        
+//        postDisplayer.isDeactivated.subscribe(onNext: { (isDeactivated) in
+//            let postId = postDisplayer.postId
+//
+//            }).disposed(by: disposeBag)
+        
        //
+        
+//        postDisplayer.isDeactivated
+//            .filter({ (isDeactivated) -> Bool in
+//                return isDeactivated
+//            })
+//            .map { [weak self] (index) -> String in
+//                guard let postViewModel = self?.getPostDisplayer(at: index) else { return "" }
+//                return postViewModel.postId
+//            }.filter { (postId) -> Bool in
+//                return postId.count > 0
+//            }.bind(to: deleteItem).disposed(by: disposeBag)
+        
+        postDisplayer.isDeactivated.subscribe(onNext: { (isDeactivated) in
+            if isDeactivated {
+                print("debug: here is a deactivated post")
+            }
+            }).disposed(by: disposeBag)
 
         isAppeared.filter { (appeared) -> Bool in
             return !appeared
@@ -196,7 +220,7 @@ class PostCollectionViewModel: PostCollectionDisplayer {
         viewModel.tappedSoundIcon.withLatestFrom(videosAreMuted).map { (isMuted) -> Bool in
             return !isMuted
             }.bind(to: videosAreMuted).disposed(by: disposeBag)
-        
+    
         videosAreMuted.bind(to: viewModel.isMuted).disposed(by: disposeBag)
         
         //If one cell plays a video, no other cells should play a video

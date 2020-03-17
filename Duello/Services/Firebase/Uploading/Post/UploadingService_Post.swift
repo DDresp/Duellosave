@@ -11,16 +11,16 @@ import RxSwift
 
 extension UploadingService {
     
-    func savePost(post: PostModel) -> Observable<PostModel?> {
+    func savePost(post: PostModel, postId: String? = nil) -> Observable<PostModel?> {
         guard hasInternetConnection() else { return Observable.error(UploadingError.networkError)}
-        let postId = UUID().uuidString
+        let id: String = postId ?? UUID().uuidString
         
-        return saveDatabaseModel(databaseModel: post, reference: POST_REFERENCE, id: postId)
+        return saveDatabaseModel(databaseModel: post, reference: POST_REFERENCE, id: id)
             .flatMap({ (databaseModel) -> Observable<PostModel?> in
             guard let savedPost = databaseModel as? PostModel else {
                 throw UploadingError.unknown(description: "unknown error")
             }
-            return self.saveUserPostQueryRelation(savedPost: savedPost, postId: postId)
+            return self.saveUserPostQueryRelation(savedPost: savedPost, postId: id)
         })
         
     }

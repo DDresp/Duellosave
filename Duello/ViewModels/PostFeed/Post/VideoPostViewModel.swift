@@ -54,10 +54,21 @@ class VideoPostViewModel: PostViewModel, VideoPlayerDisplayer {
     private func setupBindables() {
         setupVideoPlayerBindables()
         
+        //        apiDownloadingTask?.subscribe(onNext: { [weak self] (instagramVideoUrl, thumbnailUrl) in
+        //            self?.videoUrl.accept(instagramVideoUrl)
+        //            self?.thumbnailUrl.accept(thumbnailUrl)
+        //            }).disposed(by: disposeBag)
+        
         apiDownloadingTask?.subscribe(onNext: { [weak self] (instagramVideoUrl, thumbnailUrl) in
             self?.videoUrl.accept(instagramVideoUrl)
             self?.thumbnailUrl.accept(thumbnailUrl)
-            }).disposed(by: disposeBag)
+            self?.isDeactivated.accept(false)
+            }, onError: { [weak self ](err) in
+                if let error = err as? InstagramError, case .failedRequest = error {
+                    self?.isDeactivated.accept(true)
+                }
+        }).disposed(by: disposeBag)
+        
         
         showLikeView.filter { (showsLikeView) -> Bool in
             return showsLikeView

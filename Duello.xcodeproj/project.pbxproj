@@ -269,7 +269,9 @@
 		1475B0DC2410614E00F1D24F /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475B0DB2410614E00F1D24F /* TabBarController.swift */; };
 		1475B0DE2410615B00F1D24F /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475B0DD2410615B00F1D24F /* TableViewController.swift */; };
 		1475B0E02410FCCA00F1D24F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1475B0DF2410FCC900F1D24F /* GoogleService-Info.plist */; };
+		149BC5C2242135E000CFBBC7 /* DeactivatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149BC5C1242135E000CFBBC7 /* DeactivatedView.swift */; };
 		14BDEC06241B004000228763 /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BDEC05241B004000228763 /* FeedViewModel.swift */; };
+		14BDEC08241CBF0E00228763 /* Bool+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BDEC07241CBF0E00228763 /* Bool+Extension.swift */; };
 		14ED672B241A87550047C085 /* Pods_Duello.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14ED672A241A87550047C085 /* Pods_Duello.framework */; };
 		14ED672C241A87550047C085 /* Pods_Duello.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 14ED672A241A87550047C085 /* Pods_Duello.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		31B463332357120C1AF23077 /* Pods_DuelloTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D5796413F5C4B1F7C6AF771 /* Pods_DuelloTests.framework */; };
@@ -577,7 +579,9 @@
 		1475B0DB2410614E00F1D24F /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		1475B0DD2410615B00F1D24F /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		1475B0DF2410FCC900F1D24F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		149BC5C1242135E000CFBBC7 /* DeactivatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeactivatedView.swift; sourceTree = "<group>"; };
 		14BDEC05241B004000228763 /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
+		14BDEC07241CBF0E00228763 /* Bool+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+Extension.swift"; sourceTree = "<group>"; };
 		14ED672A241A87550047C085 /* Pods_Duello.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_Duello.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AB5A1CDF25F48DD3230412A /* Pods-DuelloUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DuelloUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DuelloUITests/Pods-DuelloUITests.release.xcconfig"; sourceTree = "<group>"; };
 		277CFB3CB5A75C5514FA82BD /* Pods-DuelloTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DuelloTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DuelloTests/Pods-DuelloTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -618,13 +622,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		140AEE332414685700258DE8 /* External */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = External;
-			sourceTree = "<group>";
-		};
 		140AEE36241477E500258DE8 /* Funeral */ = {
 			isa = PBXGroup;
 			children = (
@@ -710,7 +707,6 @@
 		1475AE3424103ED700F1D24F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				140AEE332414685700258DE8 /* External */,
 				1475B09124105EBF00F1D24F /* Constants */,
 				1475B09024105EB800F1D24F /* Extensions */,
 				1475B08F24105EAF00F1D24F /* Enums */,
@@ -2284,6 +2280,7 @@
 				1475B09924105F4600F1D24F /* Double+Extension.swift */,
 				1475B09B24105F5700F1D24F /* Int+Extension.swift */,
 				1475B09D24105F6800F1D24F /* Dictionary+Extension.swift */,
+				14BDEC07241CBF0E00228763 /* Bool+Extension.swift */,
 			);
 			path = Swift_Extensions;
 			sourceTree = "<group>";
@@ -2348,6 +2345,7 @@
 			isa = PBXGroup;
 			children = (
 				1475B0BD2410606B00F1D24F /* ProfileImageSuccessView.swift */,
+				149BC5C1242135E000CFBBC7 /* DeactivatedView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2730,6 +2728,7 @@
 				1475AE9B2410452200F1D24F /* RawUserPostsFootprint.swift in Sources */,
 				1475AE7C2410433700F1D24F /* FetchingService.swift in Sources */,
 				1475AEA22410456200F1D24F /* RawImagesPost.swift in Sources */,
+				14BDEC08241CBF0E00228763 /* Bool+Extension.swift in Sources */,
 				1475AEAB241045C400F1D24F /* RawPostType.swift in Sources */,
 				1475AF842410528A00F1D24F /* PostCollectionViewModel.swift in Sources */,
 				1475AFDE241057D600F1D24F /* VideoPlayerDisplayer.swift in Sources */,
@@ -2829,6 +2828,7 @@
 				1475B0A224105F8400F1D24F /* UIViewController+Exentsion.swift in Sources */,
 				1475AF4524104CE500F1D24F /* AuthenticationUserUploadCoordinator.swift in Sources */,
 				1475AF692410514D00F1D24F /* PostingUploadLocalVideoPostController.swift in Sources */,
+				149BC5C2242135E000CFBBC7 /* DeactivatedView.swift in Sources */,
 				1475AE8B241043F000F1D24F /* AuthenticationService.swift in Sources */,
 				1475AF542410509B00F1D24F /* PostingController.swift in Sources */,
 				1475B0D42410610F00F1D24F /* SmallProfileImageView.swift in Sources */,

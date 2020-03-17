@@ -49,6 +49,7 @@ class HomeViewModel: FeedDisplayer {
     
     //HomeViewModel Specific
     var deletePost: PublishRelay<String> = PublishRelay<String>()
+    var updatePost: PublishRelay<Int> = PublishRelay<Int>()
     var settingsTapped: PublishSubject<Void> = PublishSubject<Void>()
     var logoutTapped: PublishSubject<Void> = PublishSubject<Void>()
     //
@@ -130,6 +131,16 @@ class HomeViewModel: FeedDisplayer {
             }).disposed(by: disposeBag)
     }
     
+    private func updatePost(at index: Int) {
+//        showLoading.accept(true)
+        guard let posts = posts.value else { return }
+        let post = posts[index]
+        UploadingService.shared.savePost(post: post, postId: post.getId()).subscribe(onNext: { (_) in
+            print("debug: seem to have updated")
+            }).disposed(by: disposeBag)
+
+    }
+    
     //MARK: - Reactive
     var disposeBag = DisposeBag()
     
@@ -143,8 +154,12 @@ class HomeViewModel: FeedDisplayer {
     
     private func setupBindablesFromOwnProperties() {
         
-        deletePost.asObservable().subscribe(onNext: { [weak self] (postId) in
+        deletePost.subscribe(onNext: { [weak self] (postId) in
             self?.deletePost(for: postId)
+        }).disposed(by: disposeBag)
+        
+        updatePost.subscribe(onNext: { [weak self] (index) in
+            self?.updatePost(at: index)
         }).disposed(by: disposeBag)
         
     }
@@ -203,7 +218,8 @@ class HomeViewModel: FeedDisplayer {
         userHeaderDisplayer?.socialMediaDisplayer.selectedLink.bind(to: loadLink).disposed(by: disposeBag)
         userHeaderDisplayer?.socialMediaDisplayer.showAdditionalLinkAlert.bind(to: showAdditionalLinkAlert).disposed(by: disposeBag)
 
-        postCollectionDisplayer.deleteItem.bind(to: deletePost).disposed(by: disposeBag)
+        postCollectionDisplayer.deletePost.bind(to: deletePost).disposed(by: disposeBag)
+        postCollectionDisplayer.updatePost.bind(to: updatePost).disposed(by: disposeBag)
         
     }
 }

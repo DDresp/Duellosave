@@ -15,5 +15,6 @@ enum EntryType {
     case String
     case Double
     case MediaType
+    case Bool
     
 }

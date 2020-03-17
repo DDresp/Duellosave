@@ -20,6 +20,7 @@ protocol PostModel: Model {
     var dislikes: PostSingleAttribute { get set }
     var rate: PostSingleAttribute{ get set }
     var typeData: PostSingleAttribute { get set }
+    var isDeactivated: PostSingleAttribute { get set }
 
 }
 
@@ -34,6 +35,7 @@ extension PostModel {
     func getLikes() -> Double { return Double(likes.value?.toStringValue() ?? "0") ?? 0 }
     func getDislikes() -> Double { return Double(dislikes.value?.toStringValue() ?? "0") ?? 0 }
     func getRate() -> Double { return Double(rate.value?.toStringValue() ?? "0") ?? 0 }
+    func getIsDeactivated() -> Bool { return isDeactivated.value?.toStringValue() == "0" ? false : true }
     
     func getQueryAttributes() -> [SingleAttribute]? {
         return [rate, dislikes, likes, creationDate]

@@ -79,7 +79,10 @@ class ImagesSlider: UIView {
         }).disposed(by: disposeBag)
         
         displayer?.imageUrls.subscribe(onNext: { [weak self] (urls) in
-            guard let urls = urls else { return }
+            guard let urls = urls else {
+                self?.isHidden = true
+                return }
+            self?.isHidden = false
             self?.pageControl.numberOfPages = urls.count
         }).disposed(by: disposeBag)
     }

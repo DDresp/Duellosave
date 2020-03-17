@@ -37,9 +37,15 @@ class SingleImagePostViewModel: PostViewModel {
     
     //MARK: - Reactive
     func setupBindablesFromOwnProperties() {
+        
         apiDownloadingTask?.subscribe(onNext: { [weak self] (url) in
             self?.imageUrl.accept(url)
-        }).disposed(by: disposeBag)
+            self?.isDeactivated.accept(false)
+        }, onError: { [weak self] (err) in
+            if let error = err as? InstagramError, case .failedRequest = error {
+                self?.isDeactivated.accept(true)
+            }
+            }).disposed(by: disposeBag)
     }
     
 }

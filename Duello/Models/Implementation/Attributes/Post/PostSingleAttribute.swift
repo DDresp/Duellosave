@@ -46,6 +46,7 @@ enum PostSingleAttributeCase: SingleAttributeCase {
     case thumbNailUrl
     case type
     case apiUrl
+    case isDeactivated
     
     var entryType: EntryType {
         switch self {
@@ -57,6 +58,8 @@ enum PostSingleAttributeCase: SingleAttributeCase {
             return .Double
         case .type:
             return .MediaType
+        case .isDeactivated:
+            return .Bool
         }
     }
     
@@ -81,6 +84,7 @@ enum PostSingleAttributeCase: SingleAttributeCase {
         case .videoUrl: return "videoUrl"
         case .thumbNailUrl: return "thumbNailUrl"
         case .apiUrl: return "apiLink"
+        case .isDeactivated: return "isDeactivated"
             
         }
     }

@@ -25,7 +25,9 @@ protocol PostDisplayer {
     var postId: String { get }
 
     //MARK: - Bindables
-    var deleteMe: PublishRelay<Int> { get }
+    var deleteMe: PublishRelay<String> { get }
+    var isDeactivated: BehaviorRelay<Bool> { get }
+    var updateDeactivation: PublishRelay<Int> { get }
     var showActionSheet: PublishRelay<ActionSheet> { get }
     var doubleTapped: PublishSubject<Void> { get }
     var likeBlurViewTapped: PublishSubject<Void> { get }
