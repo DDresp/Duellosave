@@ -9,9 +9,9 @@
 import Firebase
 import FirebaseFirestore
 
-class InternalMemoryManager {
+class MemoryManager {
     
-    static let shared = InternalMemoryManager()
+    static let shared = MemoryManager()
     private init(){}
     
     //MARK: - Save Snapshots for Pagination
