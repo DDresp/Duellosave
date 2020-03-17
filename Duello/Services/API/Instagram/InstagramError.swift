@@ -17,7 +17,7 @@ enum InstagramError: DuelloError {
     case noVideoUrl
     case noThumbnail
     case noId
-    case failedRequest
+    case deactive
     
     var errorHeader: String {
         
@@ -30,7 +30,7 @@ enum InstagramError: DuelloError {
         case .noVideoUrl: return "Video not found"
         case .noThumbnail: return "No Thumbnail"
         case .noId: return "Id not found"
-        case .failedRequest: return "Link Failed"
+        case .deactive: return "Link Failed"
         }
         
     }
@@ -46,7 +46,7 @@ enum InstagramError: DuelloError {
         case .noVideoUrl: return "Your instagram post contains no video"
         case .noThumbnail: return "Your Instagram post contains no thumbnail"
         case .noId: return "Your instagram post seems to contain no id"
-        case .failedRequest: return "The link you provided didn't work. (If the instagram account associated with the link is private, the link won't work)"
+        case .deactive: return "The link you provided didn't work. (If the instagram account associated with the link is private, the link won't work)"
             
         }
     }

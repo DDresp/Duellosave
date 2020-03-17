@@ -42,7 +42,7 @@ class SingleImagePostViewModel: PostViewModel {
             self?.imageUrl.accept(url)
             self?.isDeactivated.accept(false)
         }, onError: { [weak self] (err) in
-            if let error = err as? InstagramError, case .failedRequest = error {
+            if let error = err as? InstagramError, case .deactive = error {
                 self?.isDeactivated.accept(true)
             }
             }).disposed(by: disposeBag)

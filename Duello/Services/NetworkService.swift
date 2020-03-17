@@ -18,7 +18,7 @@ extension NetworkService {
     }
     
     func checkInternetConnection<T>(type: T.Type) -> Observable<T>? {
-        if hasInternetConnection() { return nil}
+        if hasInternetConnection() { return nil }
         return Observable.error(UploadingError.networkError)
     }
 }

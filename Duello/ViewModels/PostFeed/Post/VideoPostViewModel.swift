@@ -64,7 +64,7 @@ class VideoPostViewModel: PostViewModel, VideoPlayerDisplayer {
             self?.thumbnailUrl.accept(thumbnailUrl)
             self?.isDeactivated.accept(false)
             }, onError: { [weak self ](err) in
-                if let error = err as? InstagramError, case .failedRequest = error {
+                if let error = err as? InstagramError, case .deactive = error {
                     self?.isDeactivated.accept(true)
                 }
         }).disposed(by: disposeBag)

@@ -24,11 +24,9 @@ class InstagramService: NetworkService {
                 return Disposables.create()
             }
             
-            
             Alamofire.request(url).responseJSON(completionHandler: { (response) in
                 if response.result.isFailure {
-                    print("debug: FAIL")
-                    return observer.onError(InstagramError.failedRequest)
+                    return observer.onError(InstagramError.deactive)
                 }
                 
                 if let result = response.result.value as? [String: Any] {

@@ -13,7 +13,7 @@ class DeactivatedView: UIView {
     var label: UILabel = {
         let label = UILabel()
         label.backgroundColor = .clear
-        label.text = "Post is Deactived"
+        label.text = "Post is Deactivated"
         label.font = UIFont.boldCustomFont(size: LARGEFONTSIZE)
         label.textColor = VERYLIGHTGRAYCOLOR
         label.translatesAutoresizingMaskIntoConstraints = false

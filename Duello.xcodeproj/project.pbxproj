@@ -18,7 +18,7 @@
 		1475AE2624103EAF00F1D24F /* DuelloUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AE2524103EAF00F1D24F /* DuelloUITests.swift */; };
 		1475AE4024103F8A00F1D24F /* Architecture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AE3F24103F8A00F1D24F /* Architecture.swift */; };
 		1475AE4424103FA500F1D24F /* Bugs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AE4324103FA500F1D24F /* Bugs.swift */; };
-		1475AE4624103FD700F1D24F /* InternalMemoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AE4524103FD700F1D24F /* InternalMemoryManager.swift */; };
+		1475AE4624103FD700F1D24F /* MemoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AE4524103FD700F1D24F /* MemoryManager.swift */; };
 		1475AE4824103FF500F1D24F /* VideoCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AE4724103FF500F1D24F /* VideoCacheManager.swift */; };
 		1475AE4A2410400F00F1D24F /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AE492410400F00F1D24F /* NetworkService.swift */; };
 		1475AE4C2410401800F1D24F /* DuelloError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AE4B2410401800F1D24F /* DuelloError.swift */; };
@@ -328,7 +328,7 @@
 		1475AE2724103EAF00F1D24F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1475AE3F24103F8A00F1D24F /* Architecture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Architecture.swift; sourceTree = "<group>"; };
 		1475AE4324103FA500F1D24F /* Bugs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bugs.swift; sourceTree = "<group>"; };
-		1475AE4524103FD700F1D24F /* InternalMemoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternalMemoryManager.swift; sourceTree = "<group>"; };
+		1475AE4524103FD700F1D24F /* MemoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryManager.swift; sourceTree = "<group>"; };
 		1475AE4724103FF500F1D24F /* VideoCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCacheManager.swift; sourceTree = "<group>"; };
 		1475AE492410400F00F1D24F /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		1475AE4B2410401800F1D24F /* DuelloError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuelloError.swift; sourceTree = "<group>"; };
@@ -802,7 +802,7 @@
 		1475AE3D24103F2400F1D24F /* Memory */ = {
 			isa = PBXGroup;
 			children = (
-				1475AE4524103FD700F1D24F /* InternalMemoryManager.swift */,
+				1475AE4524103FD700F1D24F /* MemoryManager.swift */,
 			);
 			path = Memory;
 			sourceTree = "<group>";
@@ -2681,7 +2681,7 @@
 				1475AE4824103FF500F1D24F /* VideoCacheManager.swift in Sources */,
 				1475AE832410438200F1D24F /* FetchingService_User.swift in Sources */,
 				1475B05D24105C9500F1D24F /* UploadUserHeaderCell.swift in Sources */,
-				1475AE4624103FD700F1D24F /* InternalMemoryManager.swift in Sources */,
+				1475AE4624103FD700F1D24F /* MemoryManager.swift in Sources */,
 				1475AF87241052AA00F1D24F /* HomeViewModel.swift in Sources */,
 				1475AE0824103EAD00F1D24F /* ViewController.swift in Sources */,
 				1475AFC52410551500F1D24F /* EmailLoginViewModel.swift in Sources */,

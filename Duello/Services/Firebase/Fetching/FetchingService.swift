@@ -42,7 +42,7 @@ class FetchingService: NetworkService {
             
             var query = reference.order(by: orderKey, descending: true)
             
-            if let id = startId, let document = InternalMemoryManager.shared.retrieveSnapshot(from: reference.document(id).path) {
+            if let id = startId, let document = MemoryManager.shared.retrieveSnapshot(from: reference.document(id).path) {
                 query = query.start(afterDocument: document)
             }
             
@@ -61,7 +61,7 @@ class FetchingService: NetworkService {
                 
                 if let lastDocument = documents.last {
                     let lastId = lastDocument.documentID
-                    InternalMemoryManager.shared.memorize(snapshot: lastDocument, with: reference.document(lastId).path)
+                    MemoryManager.shared.memorize(snapshot: lastDocument, with: reference.document(lastId).path)
                 }
                 
                 observer.onNext(ids)
