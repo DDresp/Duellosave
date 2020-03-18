@@ -105,8 +105,9 @@ class VideoPlayer: UIView  {
     }
     
     private func setupBindablesFromDisplayer() {
-    
-        displayer?.playVideoRequested.subscribe(onNext: { [weak self ] (playVideoRequested) in
+        guard let displayer = displayer else { return }
+        
+        displayer.playVideoRequested.subscribe(onNext: { [weak self ] (playVideoRequested) in
             
             UIView.animate(withDuration: 0.7, delay: 0, options: [AnimationOptions.allowUserInteraction], animations: {
                 self?.thumbnailImageView.isHidden = playVideoRequested
@@ -126,22 +127,22 @@ class VideoPlayer: UIView  {
             
         }).disposed(by: disposeBag)
         
-        displayer?.thumbnailImage.subscribe(onNext: { [weak self] (thumbnailImage) in
+        displayer.thumbnailImage.subscribe(onNext: { [weak self] (thumbnailImage) in
             self?.thumbnailImageView.image = thumbnailImage
         }).disposed(by: disposeBag)
         
-        displayer?.thumbnailUrl.subscribe(onNext: { [weak self] (thumbnailUrl) in
-            guard let url = thumbnailUrl else {
-                self?.isHidden = true
-                return }
-            self?.isHidden = false
+        displayer.thumbnailUrl.subscribe(onNext: { [weak self] (thumbnailUrl) in
+            guard let url = thumbnailUrl else { return }
             self?.thumbnailImageView.sd_setImage(with: url)
         }).disposed(by: disposeBag)
+        
+        Observable.combineLatest(displayer.thumbnailImage, displayer.thumbnailUrl).map { (image, url) -> Bool in
+            return image == nil && url == nil
+            }.bind(to: rx.isHidden).disposed(by: disposeBag)
         
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }

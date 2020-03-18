@@ -26,7 +26,7 @@ class HomeViewModel: FeedDisplayer {
     }
     //MARK: - ChildViewModels
     var userHeaderDisplayer: UserHeaderDisplayer? = UserHeaderViewModel()
-    var postCollectionDisplayer: PostCollectionDisplayer = PostCollectionViewModel()
+    var postListDisplayer: PostListDisplayer = PostListViewModel()
     
     //MARK: - Variables
     var numberOfPosts: Int?
@@ -44,9 +44,7 @@ class HomeViewModel: FeedDisplayer {
     var isFetchingNextPosts: Bool = false
     
     //MARK: - Bindables
-    var restart: PublishRelay<Void> = PublishRelay<Void>()
-    var finishedStart: BehaviorRelay<Bool> = BehaviorRelay(value: false)
-    
+
     //HomeViewModel Specific
     var deletePost: PublishRelay<String> = PublishRelay<String>()
     var updatePost: PublishRelay<Int> = PublishRelay<Int>()
@@ -118,7 +116,7 @@ class HomeViewModel: FeedDisplayer {
                 guard let self = self else { return }
                 self.showLoading.accept(false)
                 self.deletedPost = true
-                self.restart.accept(())
+                self.postListDisplayer.restart.accept(())
                 }, onError: { [weak self] (err) in
                     switch err {
                     case RxError.timeout: self?.showAlert.accept(Alert(alertMessage: "The Post will be deleted as soon as the internet connection works properly again.", alertHeader: "Network Error"))
@@ -132,11 +130,10 @@ class HomeViewModel: FeedDisplayer {
     }
     
     private func updatePost(at index: Int) {
-//        showLoading.accept(true)
         guard let posts = posts.value else { return }
         let post = posts[index]
         UploadingService.shared.savePost(post: post, postId: post.getId()).subscribe(onNext: { (_) in
-            print("debug: seem to have updated")
+            //Updated Post
             }).disposed(by: disposeBag)
 
     }
@@ -176,19 +173,19 @@ class HomeViewModel: FeedDisplayer {
             guard let userPosts = self?.userPosts else { return }
             
             if self?.restarted == true, let postsCount = self?.numberOfPosts {
-                self?.postCollectionDisplayer.update(with: userPosts, totalPostsCount: postsCount, fromStart: true)
+                self?.postListDisplayer.update(with: userPosts, totalPostsCount: postsCount, fromStart: true)
                 self?.restarted = false
             } else {
-                self?.postCollectionDisplayer.update(with: userPosts, totalPostsCount: self?.numberOfPosts, fromStart: false)
+                self?.postListDisplayer.update(with: userPosts, totalPostsCount: self?.numberOfPosts, fromStart: false)
             }
             
         }).disposed(by: disposeBag)
         
-        viewIsAppeared.bind(to: postCollectionDisplayer.isAppeared).disposed(by: disposeBag)
+        viewIsAppeared.bind(to: postListDisplayer.isAppeared).disposed(by: disposeBag)
 
         guard let userHeader = userHeaderDisplayer else { return }
 
-        Observable.combineLatest(finishedStart, viewIsAppeared).filter { (started, appeared) -> Bool in
+        Observable.combineLatest(postListDisplayer.finishedStart, viewIsAppeared).filter { (started, appeared) -> Bool in
             return started && appeared
         }.map { (_, _) -> Void in
             return ()
@@ -218,8 +215,9 @@ class HomeViewModel: FeedDisplayer {
         userHeaderDisplayer?.socialMediaDisplayer.selectedLink.bind(to: loadLink).disposed(by: disposeBag)
         userHeaderDisplayer?.socialMediaDisplayer.showAdditionalLinkAlert.bind(to: showAdditionalLinkAlert).disposed(by: disposeBag)
 
-        postCollectionDisplayer.deletePost.bind(to: deletePost).disposed(by: disposeBag)
-        postCollectionDisplayer.updatePost.bind(to: updatePost).disposed(by: disposeBag)
+        postListDisplayer.deletePost.bind(to: deletePost).disposed(by: disposeBag)
+        postListDisplayer.updatePost.bind(to: updatePost).disposed(by: disposeBag)
         
     }
+    
 }

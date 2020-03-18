@@ -33,5 +33,4 @@ class ImagesPostCell: PostCell<ImagesPostViewModel> {
         super.configure()
         imagesSlider.displayer = displayer?.imagesSliderDisplayer
     }
-    
 }

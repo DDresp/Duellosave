@@ -68,23 +68,25 @@ class ImagesSlider: UIView {
     private var disposeBag = DisposeBag()
     
     private func setupBindablesFromDisplayer() {
+        guard let displayer = displayer else { return }
         
-        displayer?.selectedImageIndex.asObservable().subscribe(onNext: { [weak self] (index) in
+        displayer.selectedImageIndex.asObservable().subscribe(onNext: { [weak self] (index) in
             self?.pageControl.currentPage = index
         }).disposed(by: disposeBag)
         
-        displayer?.images.subscribe(onNext: { [weak self] (images) in
+        displayer.images.subscribe(onNext: { [weak self] (images) in
             guard let images = images else { return }
             self?.pageControl.numberOfPages = images.count
         }).disposed(by: disposeBag)
         
-        displayer?.imageUrls.subscribe(onNext: { [weak self] (urls) in
-            guard let urls = urls else {
-                self?.isHidden = true
-                return }
-            self?.isHidden = false
+        displayer.imageUrls.subscribe(onNext: { [weak self] (urls) in
+            guard let urls = urls else { return }
             self?.pageControl.numberOfPages = urls.count
         }).disposed(by: disposeBag)
+        
+        Observable.combineLatest(displayer.images, displayer.imageUrls).map { (images, urls) -> Bool in
+            return images == nil && urls == nil
+            }.bind(to: rx.isHidden).disposed(by: disposeBag)
     }
     
     required init?(coder aDecoder: NSCoder) {

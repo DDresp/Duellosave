@@ -18,8 +18,8 @@ class PostCollectionView: UICollectionView {
         return displayer.userHeaderDisplayer
     }
     
-    var postCollectionDisplayer: PostCollectionDisplayer  {
-        return displayer.postCollectionDisplayer
+    var postListDisplayer: PostListDisplayer  {
+        return displayer.postListDisplayer
     }
 
     //MARK: - Variables
@@ -60,7 +60,7 @@ class PostCollectionView: UICollectionView {
         register(SingleImagePostCell.self, forCellWithReuseIdentifier: singleImageIdentifier)
         register(ImagesPostCell.self, forCellWithReuseIdentifier: imagesIdentifier)
         register(VideoPostCell.self, forCellWithReuseIdentifier: videoIdentifier)
-        register(EmptyCell.self, forCellWithReuseIdentifier: emptyIdentifier)
+        register(EmptyCell.self, forCellWithReuseIdentifier: emptyIdentifier) //Specific to Home??
         register(FooterLoadingCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: footerIdentifier)
         
         if displayer.hasProfileHeader {
@@ -73,12 +73,12 @@ class PostCollectionView: UICollectionView {
     private let disposeBag = DisposeBag()
     
     private func setupBindablesToDisplayer() {
-        refreshControl?.rx.controlEvent(.valueChanged).bind(to: postCollectionDisplayer.refreshChanged).disposed(by: disposeBag)
+        refreshControl?.rx.controlEvent(.valueChanged).bind(to: postListDisplayer.refreshChanged).disposed(by: disposeBag)
     }
     
     private func setupBindablesFromDisplayer() {
         
-        postCollectionDisplayer.restartData.subscribe(onNext: { [weak self] (_) in
+        postListDisplayer.restartData.subscribe(onNext: { [weak self] (_) in
         
             self?.setContentOffset(.zero, animated: false)
             self?.feedDelegate.clearCache()
@@ -89,15 +89,15 @@ class PostCollectionView: UICollectionView {
             
             self?.reloadData()
             self?.layoutIfNeeded()
-            self?.displayer.finishedStart.accept(true)
+            self?.postListDisplayer.finishedStart.accept(true)
             
         }).disposed(by: disposeBag)
         
-        postCollectionDisplayer.reloadData.subscribe(onNext: { [weak self] (_) in
+        postListDisplayer.reloadData.subscribe(onNext: { [weak self] (_) in
             self?.reloadData()
         }).disposed(by: disposeBag)
         
-        postCollectionDisplayer.updateLayout.subscribe(onNext: { [weak self] () in
+        postListDisplayer.updateLayout.subscribe(onNext: { [weak self] () in
             self?.performBatchUpdates({})
         }).disposed(by: disposeBag)
         

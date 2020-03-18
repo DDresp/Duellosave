@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 import Firebase
 
-class PostListViewModel: PostCollectionDisplayer {
+class PostListViewModel: PostListDisplayer {
     
     //MARK: - ChildViewModels
     private var postDisplayers = [PostDisplayer]()

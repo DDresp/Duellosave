@@ -24,7 +24,6 @@ class UserHeaderViewModel: UserHeaderDisplayer {
     var imageTapped: PublishRelay<Void> = PublishRelay<Void>()
     var reload: PublishRelay<Void> = PublishRelay()
     var animateScore: PublishRelay<Void> = PublishRelay()
-//    var didAppear: PublishRelay<Void> = PublishRelay()
 
     //MARK: - Getters
     var imageUrl: String? {
@@ -56,7 +55,6 @@ class UserHeaderViewModel: UserHeaderDisplayer {
             self?.reload.accept(())
         }).disposed(by: disposeBag)
         
-//        didAppear.bind(to: animateScore).disposed(by: disposeBag)
     }
     
 }

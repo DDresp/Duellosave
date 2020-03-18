@@ -52,5 +52,4 @@ class SingleImagePostCell: PostCell<SingleImagePostViewModel> {
             
         }).disposed(by: disposeBag)
     }
-    
 }

@@ -98,7 +98,7 @@ class PostViewModel: PostDisplayer {
             return false
         }.bind(to: showLikeView).disposed(by: disposeBag)
         
-        //Check if the associated model already captures the deactivation state of the PostDisplayer correctly
+        //Checks if the associated model already captures the deactivation state of the PostDisplayer correctly
         isDeactivated.filter { [weak self] (isDeactivated) -> Bool in
             return isDeactivated != self?.post.getIsDeactivated()
         }.do(onNext: { [weak self] (isDeactivated) in

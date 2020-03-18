@@ -47,10 +47,7 @@ class ImagesPostViewModel: PostViewModel {
     }
     
     private func setupBindablesFromOwnProperties() {
-        //        apiDownloadingTask?.flatMap { (imageUrls) in
-        //            return Observable.from(optional: imageUrls)
-        //            }.bind(to: postImageUrls).disposed(by: disposeBag)
-        
+
         apiDownloadingTask?.flatMap { (imageUrls) in
             return Observable.from(optional: imageUrls)
         }.subscribe(onNext: { [weak self] (urls) in
@@ -62,13 +59,9 @@ class ImagesPostViewModel: PostViewModel {
                 }
         }).disposed(by: disposeBag)
         
-//        bind(to: postImageUrls).disposed(by: disposeBag)
-
-        
         postImageUrls.subscribe(onNext: { [weak self] (urls) in
             guard let urls = urls else { return }
             self?.imagesSliderDisplayer.imageUrls.accept(urls)
         }).disposed(by: disposeBag)
     }
-    
 }

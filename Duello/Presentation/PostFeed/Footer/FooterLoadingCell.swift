@@ -11,7 +11,7 @@ import UIKit
 class FooterLoadingCell: UICollectionReusableView {
     
     //MARK: - Displayer
-    var displayer: PostCollectionDisplayer? {
+    var displayer: PostListDisplayer? {
         
         didSet {
             

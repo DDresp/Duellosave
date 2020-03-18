@@ -53,12 +53,7 @@ class VideoPostViewModel: PostViewModel, VideoPlayerDisplayer {
     //MARK: - Reactive
     private func setupBindables() {
         setupVideoPlayerBindables()
-        
-        //        apiDownloadingTask?.subscribe(onNext: { [weak self] (instagramVideoUrl, thumbnailUrl) in
-        //            self?.videoUrl.accept(instagramVideoUrl)
-        //            self?.thumbnailUrl.accept(thumbnailUrl)
-        //            }).disposed(by: disposeBag)
-        
+
         apiDownloadingTask?.subscribe(onNext: { [weak self] (instagramVideoUrl, thumbnailUrl) in
             self?.videoUrl.accept(instagramVideoUrl)
             self?.thumbnailUrl.accept(thumbnailUrl)
@@ -69,12 +64,10 @@ class VideoPostViewModel: PostViewModel, VideoPlayerDisplayer {
                 }
         }).disposed(by: disposeBag)
         
-        
         showLikeView.filter { (showsLikeView) -> Bool in
             return showsLikeView
             }.map { (showsLikeView) -> Bool in
                 return false
             }.bind(to: playVideoRequested).disposed(by: disposeBag)
     }
-    
 }

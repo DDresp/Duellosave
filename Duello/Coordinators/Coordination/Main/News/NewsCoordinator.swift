@@ -6,4 +6,36 @@
 //  Copyright © 2020 Darius Dresp. All rights reserved.
 //
 
-import Foundation
+import RxCocoa
+import RxSwift
+
+class NewsCoordinator: HomeCoordinatorType {
+    
+    //Temporary
+    var loggedOut: PublishSubject<Void> = PublishSubject()
+    var requestedSettings: PublishSubject<Void> = PublishSubject()
+    
+
+    //MARK: - ViewModels
+    lazy var viewModel: HomeViewModel = {
+        let homeViewModel = HomeViewModel()
+        homeViewModel.coordinator = self
+        return homeViewModel
+    }()
+    
+    //MARK: - Setup
+    init() {
+        let newsController = NewsController(viewModel: viewModel)
+        newsController.view.backgroundColor = .orange
+        presentedController = newsController
+        let navController = UINavigationController(rootViewController: presentedController)
+        navController.tabBarItem.title = "News"
+        navigationController = navController
+    }
+    
+    //MARK: - Controllers
+    var navigationController: UINavigationController?
+    var presentedController: UIViewController!
+    
+    
+}

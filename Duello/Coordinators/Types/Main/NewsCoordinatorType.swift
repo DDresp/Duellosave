@@ -6,4 +6,5 @@
 //  Copyright © 2020 Darius Dresp. All rights reserved.
 //
 
-import Foundation
+
+protocol NewsCoordinatorType: RootCoordinatorType {}

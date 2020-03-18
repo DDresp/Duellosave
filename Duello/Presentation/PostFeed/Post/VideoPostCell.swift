@@ -34,5 +34,4 @@ class VideoPostCell: PostCell<VideoPostViewModel> {
         super.configure()
         videoPlayer.displayer = displayer
     }
-
 }

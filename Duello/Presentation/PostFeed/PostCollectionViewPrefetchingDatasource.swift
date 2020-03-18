@@ -15,8 +15,8 @@ class PostCollectionViewPrefetchingDatasource: NSObject, UICollectionViewDataSou
     let displayer: FeedDisplayer
     
     //MARK: - Child Displayers
-    var postsDisplayer: PostCollectionDisplayer {
-        return displayer.postCollectionDisplayer
+    var postListDisplayer: PostListDisplayer {
+        return displayer.postListDisplayer
     }
     
     //MARK: - Setup
@@ -27,7 +27,7 @@ class PostCollectionViewPrefetchingDatasource: NSObject, UICollectionViewDataSou
     
     //MARK: - Datasource
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
-        postsDisplayer.prefetchingIndexPaths.accept(indexPaths)
+        postListDisplayer.prefetchingIndexPaths.accept(indexPaths)
     }
     
 }
