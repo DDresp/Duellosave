@@ -44,7 +44,7 @@ class PostCollectionView: UICollectionView {
         setup()
         setupBindablesToDisplayer()
         setupBindablesFromDisplayer()
-        postListDisplayer.restart.accept(())
+        displayer.restart.accept(())
     }
     
     private func setup() {
@@ -73,12 +73,12 @@ class PostCollectionView: UICollectionView {
     private let disposeBag = DisposeBag()
     
     private func setupBindablesToDisplayer() {
-        refreshControl?.rx.controlEvent(.valueChanged).bind(to: postListDisplayer.refreshChanged).disposed(by: disposeBag)
+        refreshControl?.rx.controlEvent(.valueChanged).bind(to: displayer.refreshChanged).disposed(by: disposeBag)
     }
     
     private func setupBindablesFromDisplayer() {
         
-        postListDisplayer.restartData.subscribe(onNext: { [weak self] (_) in
+        postListDisplayer.restart.subscribe(onNext: { [weak self] (_) in
         
             self?.setContentOffset(.zero, animated: false)
             self?.feedDelegate.clearCache()
@@ -89,11 +89,11 @@ class PostCollectionView: UICollectionView {
             
             self?.reloadData()
             self?.layoutIfNeeded()
-            self?.postListDisplayer.finishedStart.accept(true)
+            self?.displayer.finishedStart.accept(true)
             
         }).disposed(by: disposeBag)
         
-        postListDisplayer.reloadData.subscribe(onNext: { [weak self] (_) in
+        postListDisplayer.reload.subscribe(onNext: { [weak self] (_) in
             self?.reloadData()
         }).disposed(by: disposeBag)
         

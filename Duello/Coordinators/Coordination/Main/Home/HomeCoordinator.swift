@@ -72,7 +72,7 @@ extension HomeCoordinator {
         }).disposed(by: disposeBag)
         
         homeUpdateUserCoordinator?.didSetUser.asObservable().subscribe(onNext: { [weak self] (user) in
-            self?.viewModel.homeCollectionViewModel.postListDisplayer.restart.accept(())
+            self?.viewModel.homeCollectionViewModel.restart.accept(())
             self?.homeUpdateUserCoordinator?.presentedController?.dismiss(animated: true, completion: nil)
             self?.homeUpdateUserCoordinator = nil
         }).disposed(by: disposeBag)

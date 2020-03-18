@@ -24,6 +24,10 @@ protocol PostCollectionDisplayer: class {
     
     var isAppeared: BehaviorRelay<Bool> { get }
     
+    var restart: PublishRelay<Void> { get }
+    var refreshChanged: PublishSubject<Void> { get }
+    var finishedStart: BehaviorRelay<Bool> { get }
+    
     //MARK: - Reactive
     var disposeBag: DisposeBag { get set }
 
@@ -35,6 +39,14 @@ extension PostCollectionDisplayer {
     
     //MARK: - Reactive
     func setupBasicBindables() {
+        
+        restart.map { (_) -> Bool in
+            return false
+            }.bind(to: finishedStart).disposed(by: disposeBag)
+        
+        refreshChanged.bind(to: restart).disposed(by: disposeBag)
+        
+        isAppeared.bind(to: postListDisplayer.isAppeared).disposed(by: disposeBag)
         
         postListDisplayer.loadLink.bind(to: loadLink).disposed(by: disposeBag)
         postListDisplayer.showAdditionalLinkAlert.bind(to: showAdditionalLinkAlert).disposed(by: disposeBag)

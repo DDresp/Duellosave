@@ -10,10 +10,7 @@ import RxSwift
 import RxCocoa
 
 protocol PostListDisplayer: class {
-    
-    //MARK: - Definitions
-    typealias UserPost = (UserModel, PostModel)
-    
+
     //MARK: - Bindables
     var prefetchingIndexPaths: PublishRelay<[IndexPath]> { get }
     var requestNextPosts: PublishRelay<Void> { get }
@@ -31,13 +28,12 @@ protocol PostListDisplayer: class {
     var didEndDisplayingCell: PublishRelay<Int> { get }
     var willDisplayCell: PublishRelay<Int> { get }
     
-    var refreshChanged: PublishSubject<Void> { get }
-    var restartData: PublishRelay<Void> { get }
-    var reloadData: PublishRelay<Void> { get }
+    var restart: PublishRelay<Void> { get }
+    var reload: PublishRelay<Void> { get }
     var updateLayout: PublishRelay<Void> { get }
     
-    var finishedStart: BehaviorRelay<Bool> { get }
-    var restart: PublishRelay<Void> { get }
+//    var finishedStart: BehaviorRelay<Bool> { get }
+//    var restart: PublishRelay<Void> { get }
     
     //MARK: - Getters
     var numberOfPostDisplayers: Int { get }
@@ -57,11 +53,11 @@ extension PostListDisplayer {
     
     func setupBasicBindables() {
         
-        restart.map { (_) -> Bool in
-            return false
-            }.bind(to: finishedStart).disposed(by: disposeBag)
-        
-         refreshChanged.bind(to: restart).disposed(by: disposeBag)
+//        restart.map { (_) -> Bool in
+//            return false
+//            }.bind(to: finishedStart).disposed(by: disposeBag)
+//        
+//         refreshChanged.bind(to: restart).disposed(by: disposeBag)
         
     }
 }

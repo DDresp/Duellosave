@@ -11,7 +11,7 @@ import RxSwift
 
 extension FetchingService {
     
-    func fetchUserPosts(for uid: String, at postId: String?, limit: Int) -> Observable<[PostModel]> {
+    func fetchPosts(for uid: String, at postId: String?, limit: Int) -> Observable<[PostModel]> {
         let reference = USER_POST_REFERENCE.document(uid).collection("posts")
         let orderKey = "creationDate"
         
@@ -26,7 +26,7 @@ extension FetchingService {
         }
     }
     
-    func fetchUserPostsFootprint(for uid: String) -> Observable<RawUserPostsFootprint> {
+    func fetchUserFootprint(for uid: String) -> Observable<RawUserPostsFootprint> {
         return fetchDic(for: USER_POST_REFERENCE, id: uid).map { (data) -> RawUserPostsFootprint in
             //default values
             guard let data = data else { return RawUserPostsFootprint(numberOfPosts: 0, score: 0.5) }

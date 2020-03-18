@@ -275,6 +275,8 @@
 		149BC5CA242209AE00CFBBC7 /* NewsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149BC5C9242209AE00CFBBC7 /* NewsController.swift */; };
 		149BC5CC2422165800CFBBC7 /* PostCollectionDisplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149BC5CB2422165800CFBBC7 /* PostCollectionDisplayer.swift */; };
 		149BC5CE24222F4A00CFBBC7 /* HomePostCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149BC5CD24222F4A00CFBBC7 /* HomePostCollectionViewModel.swift */; };
+		149BC5D124223C9500CFBBC7 /* PostCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149BC5D024223C9500CFBBC7 /* PostCollectionViewModel.swift */; };
+		149BC5D4242245FA00CFBBC7 /* UserPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149BC5D3242245FA00CFBBC7 /* UserPost.swift */; };
 		14BDEC08241CBF0E00228763 /* Bool+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BDEC07241CBF0E00228763 /* Bool+Extension.swift */; };
 		14ED672B241A87550047C085 /* Pods_Duello.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14ED672A241A87550047C085 /* Pods_Duello.framework */; };
 		14ED672C241A87550047C085 /* Pods_Duello.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 14ED672A241A87550047C085 /* Pods_Duello.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -589,6 +591,8 @@
 		149BC5C9242209AE00CFBBC7 /* NewsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsController.swift; sourceTree = "<group>"; };
 		149BC5CB2422165800CFBBC7 /* PostCollectionDisplayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCollectionDisplayer.swift; sourceTree = "<group>"; };
 		149BC5CD24222F4A00CFBBC7 /* HomePostCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePostCollectionViewModel.swift; sourceTree = "<group>"; };
+		149BC5D024223C9500CFBBC7 /* PostCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCollectionViewModel.swift; sourceTree = "<group>"; };
+		149BC5D3242245FA00CFBBC7 /* UserPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPost.swift; sourceTree = "<group>"; };
 		14BDEC07241CBF0E00228763 /* Bool+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+Extension.swift"; sourceTree = "<group>"; };
 		14ED672A241A87550047C085 /* Pods_Duello.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_Duello.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AB5A1CDF25F48DD3230412A /* Pods-DuelloUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DuelloUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DuelloUITests/Pods-DuelloUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -1086,6 +1090,7 @@
 		1475AEC52410471400F1D24F /* Structs */ = {
 			isa = PBXGroup;
 			children = (
+				149BC5D2242245EC00CFBBC7 /* UserPost */,
 				1475AEF82410494100F1D24F /* User */,
 				1475AEF72410493C00F1D24F /* Post */,
 			);
@@ -2350,8 +2355,17 @@
 		149BC5CF24223BBF00CFBBC7 /* Generic */ = {
 			isa = PBXGroup;
 			children = (
+				149BC5D024223C9500CFBBC7 /* PostCollectionViewModel.swift */,
 			);
 			path = Generic;
+			sourceTree = "<group>";
+		};
+		149BC5D2242245EC00CFBBC7 /* UserPost */ = {
+			isa = PBXGroup;
+			children = (
+				149BC5D3242245FA00CFBBC7 /* UserPost.swift */,
+			);
+			path = UserPost;
 			sourceTree = "<group>";
 		};
 		AAB327F880C324E4589AB40F /* Pods */ = {
@@ -2834,6 +2848,7 @@
 				1475B00E241059B800F1D24F /* AuthenticationDisplayer.swift in Sources */,
 				1475B02E24105ABE00F1D24F /* ImagesPageViewController.swift in Sources */,
 				1475AFBD241054A300F1D24F /* UploadInstagramVideoPostViewModel.swift in Sources */,
+				149BC5D4242245FA00CFBBC7 /* UserPost.swift in Sources */,
 				1475AFD8241057B000F1D24F /* SocialMediaDisplayer.swift in Sources */,
 				1475B014241059E400F1D24F /* GoogleLoginDisplayer.swift in Sources */,
 				1475B09E24105F6800F1D24F /* Dictionary+Extension.swift in Sources */,
@@ -2901,6 +2916,7 @@
 				1475AFC92410552D00F1D24F /* GoogleLoginViewModel.swift in Sources */,
 				1475AFE52410582300F1D24F /* FeedMasterDisplayer.swift in Sources */,
 				1475B09C24105F5700F1D24F /* Int+Extension.swift in Sources */,
+				149BC5D124223C9500CFBBC7 /* PostCollectionViewModel.swift in Sources */,
 				1475B0DE2410615B00F1D24F /* TableViewController.swift in Sources */,
 				1475AF89241052CC00F1D24F /* UserHeaderViewModel.swift in Sources */,
 				1475AEFA2410494F00F1D24F /* User.swift in Sources */,

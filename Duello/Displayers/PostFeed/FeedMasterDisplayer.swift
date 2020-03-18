@@ -12,7 +12,7 @@ import RxCocoa
 protocol FeedMasterDisplayer: class {
     
     //MARK: - Child Displayers
-    var postCollectionDisplayer: PostCollectionDisplayer { get }
+//    var postCollectionDisplayer: PostCollectionDisplayer { get }
     
     //MARK: - Bindables
     var loadLink: PublishRelay<String?> { get }
@@ -24,21 +24,23 @@ protocol FeedMasterDisplayer: class {
     var isAppeared: BehaviorRelay<Bool> { get }
     
     //MARK: - Reactive
-    var disposeBag: DisposeBag { get set }
+//    var disposeBag: DisposeBag { get set }
 
 }
 
-extension FeedMasterDisplayer {
+//extension FeedMasterDisplayer {
     
     //MARK: - Reactive
-    func setupBasicBindables() {
-        
-        postCollectionDisplayer.loadLink.bind(to: loadLink).disposed(by: disposeBag)
-        postCollectionDisplayer.showAdditionalLinkAlert.bind(to: showAdditionalLinkAlert).disposed(by: disposeBag)
-        postCollectionDisplayer.showActionSheet.bind(to: showActionSheet).disposed(by: disposeBag)
-        
-    }
-}
+//    func setupBasicBindables() {
+//
+//        isAppeared.bind(to: postCollectionDisplayer.isAppeared).disposed(by: disposeBag)
+//
+//        postCollectionDisplayer.loadLink.bind(to: loadLink).disposed(by: disposeBag)
+//        postCollectionDisplayer.showAdditionalLinkAlert.bind(to: showAdditionalLinkAlert).disposed(by: disposeBag)
+//        postCollectionDisplayer.showActionSheet.bind(to: showActionSheet).disposed(by: disposeBag)
+//
+//    }
+//}
 
 //protocol FeedMasterDisplayer: class {
 //

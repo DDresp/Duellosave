@@ -26,10 +26,6 @@ class HomeViewModel: FeedMasterDisplayer {
     var homeCollectionViewModel: HomePostCollectionViewModel {
         return postCollectionDisplayer as! HomePostCollectionViewModel
     }
-
-    //MARK: - Variables
-    var lastFetchedPost: PostModel?
-    var isFetchingNextPosts: Bool = false
     
     //MARK: - Bindables
     var settingsTapped: PublishSubject<Void> = PublishSubject<Void>()
@@ -58,9 +54,9 @@ class HomeViewModel: FeedMasterDisplayer {
         FetchingService.shared.fetchUser(for: uid)
             .flatMapLatest { [weak self] (user) -> Observable<(RawUserPostsFootprint, [PostModel])> in
                 self?.homeCollectionViewModel.user.accept(user)
-                let userFootPrint = FetchingService.shared.fetchUserPostsFootprint(for: uid)
-                let userPosts = FetchingService.shared.fetchUserPosts(for: uid, at: nil, limit: 10)
-                return Observable.zip(userFootPrint, userPosts) }
+                let userFootPrint = FetchingService.shared.fetchUserFootprint(for: uid)
+                let posts = FetchingService.shared.fetchPosts(for: uid, at: nil, limit: 10)
+                return Observable.zip(userFootPrint, posts) }
             .subscribe(onNext: { [weak self] (userFootPrint, posts) in
                 if self?.homeCollectionViewModel.deletedPost == true {
                     guard let currentNumberOfPosts = self?.homeCollectionViewModel.totalNumberOfPosts else { return }
@@ -78,11 +74,11 @@ class HomeViewModel: FeedMasterDisplayer {
     
     func fetchNextPosts() {
         
-        guard let uid = Auth.auth().currentUser?.uid, let lastPostId = homeCollectionViewModel.posts.value?.last?.id, !isFetchingNextPosts else { return }
-        isFetchingNextPosts = true
-        FetchingService.shared.fetchUserPosts(for: uid, at: lastPostId, limit: 10).asObservable().subscribe(onNext: { [weak self] (newPosts) in
+        guard let uid = Auth.auth().currentUser?.uid, let lastPostId = homeCollectionViewModel.posts.value?.last?.id, !homeCollectionViewModel.isFetchingNextPosts else { return }
+        homeCollectionViewModel.isFetchingNextPosts = true
+        FetchingService.shared.fetchPosts(for: uid, at: lastPostId, limit: 10).asObservable().subscribe(onNext: { [weak self] (newPosts) in
             
-            self?.isFetchingNextPosts = false
+            self?.homeCollectionViewModel.isFetchingNextPosts = false
             var posts = self?.homeCollectionViewModel.posts.value
             posts?.append(contentsOf: newPosts)
             self?.homeCollectionViewModel.posts.accept(posts)
@@ -98,7 +94,7 @@ class HomeViewModel: FeedMasterDisplayer {
                 guard let self = self else { return }
                 self.showLoading.accept(false)
                 self.homeCollectionViewModel.deletedPost = true
-                self.homeCollectionViewModel.postListDisplayer.restart.accept(())
+                self.homeCollectionViewModel.restart.accept(())
                 }, onError: { [weak self] (err) in
                     switch err {
                     case RxError.timeout: self?.showAlert.accept(Alert(alertMessage: "The Post will be deleted as soon as the internet connection works properly again.", alertHeader: "Network Error"))
@@ -125,10 +121,21 @@ class HomeViewModel: FeedMasterDisplayer {
     var disposeBag = DisposeBag()
     
     private func setupBindables() {
-        setupBasicBindables()
+        setupBindablesFromViewModel()
+        setupBindablesToViewModel()
         setupBindablesToCoordinator()
         setupBindablesFromOwnProperties()
-        setupBindablesToChildViewModels()
+    }
+    
+    private func setupBindablesFromViewModel() {
+        postCollectionDisplayer.loadLink.bind(to: loadLink).disposed(by: disposeBag)
+        postCollectionDisplayer.showAdditionalLinkAlert.bind(to: showAdditionalLinkAlert).disposed(by: disposeBag)
+        postCollectionDisplayer.showActionSheet.bind(to: showActionSheet).disposed(by: disposeBag)
+        
+    }
+    
+    private func setupBindablesToViewModel() {
+        isAppeared.bind(to: postCollectionDisplayer.isAppeared).disposed(by: disposeBag)
     }
     
     private func setupBindablesFromOwnProperties() {
@@ -149,12 +156,6 @@ class HomeViewModel: FeedMasterDisplayer {
             self?.fetchNextPosts()
             }).disposed(by: disposeBag)
         
-    }
-    
-    private func setupBindablesToChildViewModels() {
-    
-        isAppeared.bind(to: postCollectionDisplayer.isAppeared).disposed(by: disposeBag)
-
     }
     
     private func setupBindablesToCoordinator() {

@@ -10,9 +10,9 @@ import RxSwift
 import RxCocoa
 
 
+
 class HomePostCollectionViewModel: PostCollectionDisplayer {
     
-    typealias UserPost = (UserModel, PostModel)
     
     //MARK: - Models
     var user: BehaviorRelay<UserModel?> = BehaviorRelay<UserModel?>(value: nil)
@@ -38,10 +38,12 @@ class HomePostCollectionViewModel: PostCollectionDisplayer {
     var userPosts: [UserPost] {
         guard let user = user.value, let posts = posts.value else { return [UserPost]() }
         return posts.map { (post) -> UserPost in
-            return (user, post)
+            return UserPost(user: user, post: post)
         }
     }
-    
+
+    var lastFetchedPost: PostModel?
+    var isFetchingNextPosts: Bool = false
     var restarted = true
     
     //MARK: - Bindables
@@ -59,6 +61,10 @@ class HomePostCollectionViewModel: PostCollectionDisplayer {
     var deletePost: PublishRelay<String> = PublishRelay<String>()
     var updatePost: PublishRelay<Int> = PublishRelay<Int>()
     
+    var restart: PublishRelay<Void> = PublishRelay<Void>()
+    var refreshChanged: PublishSubject<Void> = PublishSubject()
+    var finishedStart: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+    
     //MARK: - Setup
     init() {
         setupBindables()
@@ -71,6 +77,7 @@ class HomePostCollectionViewModel: PostCollectionDisplayer {
         setupBasicBindables()
         setupBindablesFromChildViewModels()
         setupBindablesToChildViewModels()
+        setupBindablesFromOwnProperties()
     }
     
     private func setupBindablesToChildViewModels() {
@@ -92,10 +99,8 @@ class HomePostCollectionViewModel: PostCollectionDisplayer {
             }
             
         }).disposed(by: disposeBag)
-        
-        isAppeared.bind(to: postListDisplayer.isAppeared).disposed(by: disposeBag)
 
-        Observable.combineLatest(postListDisplayer.finishedStart, isAppeared).filter { (started, appeared) -> Bool in
+        Observable.combineLatest(finishedStart, isAppeared).filter { (started, appeared) -> Bool in
             return started && appeared
         }.map { (_, _) -> Void in
             return ()
@@ -110,9 +115,12 @@ class HomePostCollectionViewModel: PostCollectionDisplayer {
 
         postListViewModel.deletePost.bind(to: deletePost).disposed(by: disposeBag)
         postListViewModel.updatePost.bind(to: updatePost).disposed(by: disposeBag)
-        postListViewModel.restart.bind(to: startFetching).disposed(by: disposeBag)
         postListViewModel.requestNextPosts.bind(to: fetchNext).disposed(by: disposeBag)
         
+    }
+    
+    private func setupBindablesFromOwnProperties() {
+        restart.bind(to: startFetching).disposed(by: disposeBag)
     }
     
 }

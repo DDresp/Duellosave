@@ -33,13 +33,13 @@ class HomePostListViewModel: PostListDisplayer {
     
     var requestedPlayingVideo: PublishRelay<Int> = PublishRelay()
     
-    var refreshChanged: PublishSubject<Void> = PublishSubject()
-    var restartData: PublishRelay<Void> = PublishRelay()
-    var reloadData: PublishRelay<Void> = PublishRelay()
+//    var refreshChanged: PublishSubject<Void> = PublishSubject()
+    var restart: PublishRelay<Void> = PublishRelay()
+    var reload: PublishRelay<Void> = PublishRelay()
     var updateLayout: PublishRelay<Void> = PublishRelay()
     
-    var restart: PublishRelay<Void> = PublishRelay<Void>()
-    var finishedStart: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+//    var restart: PublishRelay<Void> = PublishRelay<Void>()
+//    var finishedStart: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     
     var videosAreMuted: BehaviorRelay<Bool> = BehaviorRelay(value: true)
     
@@ -99,9 +99,9 @@ class HomePostListViewModel: PostListDisplayer {
         }
         
         if fromStart {
-            restartData.accept(())
+            restart.accept(())
         } else {
-            reloadData.accept(())
+            reload.accept(())
         }
     }
     
@@ -112,8 +112,8 @@ class HomePostListViewModel: PostListDisplayer {
         var newPostDisplayers = [PostDisplayer]()
         
         for (index, userPost) in userPosts.enumerated() {
-            let user = userPost.0
-            let post = userPost.1
+            let user = userPost.user
+            let post = userPost.post
             
             var viewModel: PostDisplayer?
             let modelIndex = startIndex + index
