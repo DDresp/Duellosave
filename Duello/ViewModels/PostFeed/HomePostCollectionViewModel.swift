@@ -10,8 +10,7 @@ import RxSwift
 import RxCocoa
 
 
-class HomeCollectionViewModel: PostCollectionDisplayer {
-    
+class HomePostCollectionViewModel: PostCollectionDisplayer {
     
     typealias UserPost = (UserModel, PostModel)
     
@@ -19,12 +18,21 @@ class HomeCollectionViewModel: PostCollectionDisplayer {
     var user: BehaviorRelay<UserModel?> = BehaviorRelay<UserModel?>(value: nil)
     var posts: BehaviorRelay<[PostModel]?> = BehaviorRelay<[PostModel]?>(value: nil)
     
-    //MARK: - ChildViewModels
+    //MARK: - Child Displayers
     var userHeaderDisplayer: UserHeaderDisplayer? = UserHeaderViewModel()
-    var postListDisplayer: PostListDisplayer = PostListViewModel()
+    var postListDisplayer: PostListDisplayer = HomePostListViewModel()
+    
+    //MARK: - Child ViewModels
+    var userHeaderViewModel: UserHeaderViewModel {
+        return userHeaderDisplayer as! UserHeaderViewModel
+    }
+    
+    var postListViewModel: HomePostListViewModel {
+        return postListDisplayer as! HomePostListViewModel
+    }
     
     //MARK: - Variables
-    var numberOfPosts: Int?
+    var totalNumberOfPosts: Int?
     var deletedPost = false //firebase cloud functions arent' fast enough to update the post count
     
     var userPosts: [UserPost] {
@@ -76,36 +84,34 @@ class HomeCollectionViewModel: PostCollectionDisplayer {
             guard let _ = posts else { return }
             guard let userPosts = self?.userPosts else { return }
             
-            if self?.restarted == true, let postsCount = self?.numberOfPosts {
+            if self?.restarted == true, let postsCount = self?.totalNumberOfPosts {
                 self?.postListDisplayer.update(with: userPosts, totalPostsCount: postsCount, fromStart: true)
                 self?.restarted = false
             } else {
-                self?.postListDisplayer.update(with: userPosts, totalPostsCount: self?.numberOfPosts, fromStart: false)
+                self?.postListDisplayer.update(with: userPosts, totalPostsCount: self?.totalNumberOfPosts, fromStart: false)
             }
             
         }).disposed(by: disposeBag)
         
         isAppeared.bind(to: postListDisplayer.isAppeared).disposed(by: disposeBag)
 
-        guard let userHeader = userHeaderDisplayer else { return }
-
         Observable.combineLatest(postListDisplayer.finishedStart, isAppeared).filter { (started, appeared) -> Bool in
             return started && appeared
         }.map { (_, _) -> Void in
             return ()
-            }.bind(to: userHeader.animateScore).disposed(by: disposeBag)
+            }.bind(to: userHeaderViewModel.animateScore).disposed(by: disposeBag)
 
     }
     
     private func setupBindablesFromChildViewModels() {
         
-        userHeaderDisplayer?.socialMediaDisplayer.selectedLink.bind(to: loadLink).disposed(by: disposeBag)
-        userHeaderDisplayer?.socialMediaDisplayer.showAdditionalLinkAlert.bind(to: showAdditionalLinkAlert).disposed(by: disposeBag)
+        userHeaderViewModel.socialMediaDisplayer.selectedLink.bind(to: loadLink).disposed(by: disposeBag)
+        userHeaderViewModel.socialMediaDisplayer.showAdditionalLinkAlert.bind(to: showAdditionalLinkAlert).disposed(by: disposeBag)
 
-        postListDisplayer.deletePost.bind(to: deletePost).disposed(by: disposeBag)
-        postListDisplayer.updatePost.bind(to: updatePost).disposed(by: disposeBag)
-        postListDisplayer.restart.bind(to: startFetching).disposed(by: disposeBag)
-        postListDisplayer.requestNextPosts.bind(to: fetchNext).disposed(by: disposeBag)
+        postListViewModel.deletePost.bind(to: deletePost).disposed(by: disposeBag)
+        postListViewModel.updatePost.bind(to: updatePost).disposed(by: disposeBag)
+        postListViewModel.restart.bind(to: startFetching).disposed(by: disposeBag)
+        postListViewModel.requestNextPosts.bind(to: fetchNext).disposed(by: disposeBag)
         
     }
     

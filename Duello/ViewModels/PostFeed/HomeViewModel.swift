@@ -20,11 +20,11 @@ class HomeViewModel: FeedMasterDisplayer {
     }
     
     //MARK: - Child Displayers
-    var postCollectionDisplayer: PostCollectionDisplayer = HomeCollectionViewModel()
+    var postCollectionDisplayer: PostCollectionDisplayer = HomePostCollectionViewModel()
 
     //MARK: - Child ViewModels
-    var homeCollectionViewModel: HomeCollectionViewModel {
-        return postCollectionDisplayer as! HomeCollectionViewModel
+    var homeCollectionViewModel: HomePostCollectionViewModel {
+        return postCollectionDisplayer as! HomePostCollectionViewModel
     }
 
     //MARK: - Variables
@@ -41,7 +41,7 @@ class HomeViewModel: FeedMasterDisplayer {
     var showAlert: PublishRelay<Alert> = PublishRelay<Alert>()
     var showLoading: BehaviorRelay<Bool> = BehaviorRelay<Bool>(value: false)
     
-    var viewIsAppeared: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+    var isAppeared: BehaviorRelay<Bool> = BehaviorRelay(value: false)
 
     //MARK: - Setup
     init() {
@@ -63,11 +63,11 @@ class HomeViewModel: FeedMasterDisplayer {
                 return Observable.zip(userFootPrint, userPosts) }
             .subscribe(onNext: { [weak self] (userFootPrint, posts) in
                 if self?.homeCollectionViewModel.deletedPost == true {
-                    guard let currentNumberOfPosts = self?.homeCollectionViewModel.numberOfPosts else { return }
-                    self?.homeCollectionViewModel.numberOfPosts = currentNumberOfPosts - 1
+                    guard let currentNumberOfPosts = self?.homeCollectionViewModel.totalNumberOfPosts else { return }
+                    self?.homeCollectionViewModel.totalNumberOfPosts = currentNumberOfPosts - 1
                     self?.homeCollectionViewModel.deletedPost = false
                 } else {
-                    self?.homeCollectionViewModel.numberOfPosts = userFootPrint.numberOfPosts
+                    self?.homeCollectionViewModel.totalNumberOfPosts = userFootPrint.numberOfPosts
                 }
                 var user = self?.homeCollectionViewModel.user.value
                 user?.score = userFootPrint.score
@@ -109,6 +109,7 @@ class HomeViewModel: FeedMasterDisplayer {
                     }
                     self?.showLoading.accept(false)
             }).disposed(by: disposeBag)
+        
     }
     
     private func updatePost(at index: Int) {
@@ -152,7 +153,7 @@ class HomeViewModel: FeedMasterDisplayer {
     
     private func setupBindablesToChildViewModels() {
     
-        viewIsAppeared.bind(to: postCollectionDisplayer.isAppeared).disposed(by: disposeBag)
+        isAppeared.bind(to: postCollectionDisplayer.isAppeared).disposed(by: disposeBag)
 
     }
     

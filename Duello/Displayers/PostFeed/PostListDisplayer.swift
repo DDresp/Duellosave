@@ -19,8 +19,8 @@ protocol PostListDisplayer: class {
     var requestNextPosts: PublishRelay<Void> { get }
     
     //Specific: HomeViewModel
-    var deletePost: PublishRelay<String> { get }
-    var updatePost: PublishRelay<Int> { get }
+//    var deletePost: PublishRelay<String> { get }
+//    var updatePost: PublishRelay<Int> { get }
     //
     
     var showActionSheet: PublishRelay<ActionSheet> { get }

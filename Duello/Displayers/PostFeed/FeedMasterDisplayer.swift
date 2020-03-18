@@ -21,11 +21,7 @@ protocol FeedMasterDisplayer: class {
     var showAlert: PublishRelay<Alert> { get }
     var showLoading: BehaviorRelay<Bool> { get }
     
-    var viewIsAppeared: BehaviorRelay<Bool> { get }
-    
-//    //MARK: - Methods
-//    func startFetching() -> ()
-//    func fetchNextPosts() -> ()
+    var isAppeared: BehaviorRelay<Bool> { get }
     
     //MARK: - Reactive
     var disposeBag: DisposeBag { get set }
@@ -37,12 +33,6 @@ extension FeedMasterDisplayer {
     //MARK: - Reactive
     func setupBasicBindables() {
         
-//        postListDisplayer.restart.subscribe(onNext: { [weak self] (_) in
-//            self?.startFetching()
-//        }).disposed(by: disposeBag)
-//        postListDisplayer.requestNextPosts.asObservable().subscribe(onNext: { [weak self] (_) in
-//            self?.fetchNextPosts()
-//        }).disposed(by: disposeBag)
         postCollectionDisplayer.loadLink.bind(to: loadLink).disposed(by: disposeBag)
         postCollectionDisplayer.showAdditionalLinkAlert.bind(to: showAdditionalLinkAlert).disposed(by: disposeBag)
         postCollectionDisplayer.showActionSheet.bind(to: showActionSheet).disposed(by: disposeBag)
