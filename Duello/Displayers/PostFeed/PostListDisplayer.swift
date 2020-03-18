@@ -9,7 +9,7 @@
 import RxSwift
 import RxCocoa
 
-protocol PostCollectionDisplayer {
+protocol PostListDisplayer: class {
     
     //MARK: - Definitions
     typealias UserPost = (UserModel, PostModel)
@@ -27,8 +27,6 @@ protocol PostCollectionDisplayer {
     var loadLink: PublishRelay<String?> { get }
     var showAdditionalLinkAlert: PublishRelay<String> { get }
     
-//    var didAppear: PublishRelay<Void> { get }
-//    var didDisappear: PublishRelay<Void> { get }
     var isAppeared: BehaviorRelay<Bool> { get }
     var didEndDisplayingCell: PublishRelay<Int> { get }
     var willDisplayCell: PublishRelay<Int> { get }
@@ -37,6 +35,9 @@ protocol PostCollectionDisplayer {
     var restartData: PublishRelay<Void> { get }
     var reloadData: PublishRelay<Void> { get }
     var updateLayout: PublishRelay<Void> { get }
+    
+    var finishedStart: BehaviorRelay<Bool> { get }
+    var restart: PublishRelay<Void> { get }
     
     //MARK: - Getters
     var numberOfPostDisplayers: Int { get }
@@ -47,4 +48,20 @@ protocol PostCollectionDisplayer {
     //MARK: - Methods
     func update(with userPosts: [UserPost], totalPostsCount: Int?, fromStart: Bool)
     
+    //MARK: - Reactive
+    var disposeBag: DisposeBag { get set }
+    
+}
+
+extension PostListDisplayer {
+    
+    func setupBasicBindables() {
+        
+        restart.map { (_) -> Bool in
+            return false
+            }.bind(to: finishedStart).disposed(by: disposeBag)
+        
+         refreshChanged.bind(to: restart).disposed(by: disposeBag)
+        
+    }
 }

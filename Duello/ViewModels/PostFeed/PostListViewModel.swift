@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 import Firebase
 
-class PostCollectionViewModel: PostCollectionDisplayer {
+class PostListViewModel: PostCollectionDisplayer {
     
     //MARK: - ChildViewModels
     private var postDisplayers = [PostDisplayer]()
@@ -37,6 +37,9 @@ class PostCollectionViewModel: PostCollectionDisplayer {
     var restartData: PublishRelay<Void> = PublishRelay()
     var reloadData: PublishRelay<Void> = PublishRelay()
     var updateLayout: PublishRelay<Void> = PublishRelay()
+    
+    var restart: PublishRelay<Void> = PublishRelay<Void>()
+    var finishedStart: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     
     var videosAreMuted: BehaviorRelay<Bool> = BehaviorRelay(value: true)
     
@@ -94,11 +97,6 @@ class PostCollectionViewModel: PostCollectionDisplayer {
         } else {
             self.totalPostsCount = loadedPosts.count
         }
-        
-//        guard startIndex <= endIndex else { return self.totalPostsCount = loadedPosts.count }
-        
-//        let newPosts = Array(loadedPosts[startIndex...endIndex])
-//        configurePostDisplayers(with: newPosts)
         
         if fromStart {
             restartData.accept(())
@@ -158,41 +156,12 @@ class PostCollectionViewModel: PostCollectionDisplayer {
         //Specific: HomeViewModel
         postDisplayer.deleteMe.bind(to: deletePost).disposed(by: disposeBag)
         postDisplayer.updateDeactivation.bind(to: updatePost).disposed(by: disposeBag)
-        
-//        postDisplayer.isDeactivated.filter { (isDeactivated) -> Bool in
-//            <#code#>
-//        }
-        
-//        postDisplayer.isDeactivated.subscribe(onNext: { (isDeactivated) in
-//            let postId = postDisplayer.postId
-//
-//            }).disposed(by: disposeBag)
-        
-       //
-        
-//        postDisplayer.isDeactivated
-//            .filter({ (isDeactivated) -> Bool in
-//                return isDeactivated
-//            })
-//            .map { [weak self] (index) -> String in
-//                guard let postViewModel = self?.getPostDisplayer(at: index) else { return "" }
-//                return postViewModel.postId
-//            }.filter { (postId) -> Bool in
-//                return postId.count > 0
-//            }.bind(to: deleteItem).disposed(by: disposeBag)
-        
-        postDisplayer.isDeactivated.subscribe(onNext: { (isDeactivated) in
-            if isDeactivated {
-                print("debug: here is a deactivated post")
-            }
-            }).disposed(by: disposeBag)
 
         isAppeared.filter { (appeared) -> Bool in
             return !appeared
         }.map { (_) -> () in
             return ()
             }.bind(to: postDisplayer.didDisappear).disposed(by: disposeBag)
-//        didDisappear.asObservable().bind(to: postDisplayer.didDisappear).disposed(by: disposeBag)
 
         didEndDisplayingCell.asObservable()
             .filter { (index) -> Bool in
@@ -246,9 +215,10 @@ class PostCollectionViewModel: PostCollectionDisplayer {
     }
     
     //MARK: - Reactive
-    private var disposeBag = DisposeBag()
+    var disposeBag = DisposeBag()
     
     private func setupBindablesFromOwnProperties() {
+        setupBasicBindables()
         
         prefetchingIndexPaths.asObservable().subscribe(onNext: { [weak self] (indexPaths) in
             guard let self = self else { return }
