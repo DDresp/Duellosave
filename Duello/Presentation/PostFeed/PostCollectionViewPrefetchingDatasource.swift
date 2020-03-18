@@ -12,7 +12,7 @@ import Firebase
 class PostCollectionViewPrefetchingDatasource: NSObject, UICollectionViewDataSourcePrefetching {
     
     //MARK: - Displayer
-    let displayer: FeedDisplayer
+    let displayer: PostCollectionDisplayer
     
     //MARK: - Child Displayers
     var postListDisplayer: PostListDisplayer {
@@ -20,7 +20,7 @@ class PostCollectionViewPrefetchingDatasource: NSObject, UICollectionViewDataSou
     }
     
     //MARK: - Setup
-    init(displayer: FeedDisplayer) {
+    init(displayer: PostCollectionDisplayer) {
         self.displayer = displayer
         super.init()
     }

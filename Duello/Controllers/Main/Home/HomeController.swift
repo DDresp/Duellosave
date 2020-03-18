@@ -41,7 +41,7 @@ class HomeController: PostFeedViewController {
     let settingsButton = UIBarButtonItem(title: "settings", style: .plain, target: nil, action: nil)
     
     lazy var collectionView: PostCollectionView = {
-        let collectionView = PostCollectionView(displayer: viewModel)
+        let collectionView = PostCollectionView(displayer: viewModel.homeCollectionViewModel)
         return collectionView
     }()
     

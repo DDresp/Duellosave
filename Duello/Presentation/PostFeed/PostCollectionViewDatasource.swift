@@ -12,7 +12,7 @@ import Firebase
 class PostCollectionViewDatasource: NSObject, UICollectionViewDataSource {
     
     //MARK: - Displayer
-    let displayer: FeedDisplayer
+    let displayer: PostCollectionDisplayer
     
     //MARK: - Child Displayers
     var profileDisplayer: UserHeaderDisplayer? { return displayer.userHeaderDisplayer }
@@ -27,7 +27,7 @@ class PostCollectionViewDatasource: NSObject, UICollectionViewDataSource {
     let emptyIdentifier: String
     
     //MARK: - Setup
-    init(singleImageIdentifier: String, imagesIdentifier: String, videoIdentifier: String, headerIdentifier: String, footerIdentifier: String, emptyIdentifier: String, displayer: FeedDisplayer) {
+    init(singleImageIdentifier: String, imagesIdentifier: String, videoIdentifier: String, headerIdentifier: String, footerIdentifier: String, emptyIdentifier: String, displayer: PostCollectionDisplayer) {
         self.singleImageIdentifier = singleImageIdentifier
         self.imagesIdentifier = imagesIdentifier
         self.videoIdentifier = videoIdentifier

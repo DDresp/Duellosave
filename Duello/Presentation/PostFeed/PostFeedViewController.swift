@@ -13,10 +13,10 @@ import JGProgressHUD
 class PostFeedViewController: ViewController {
     
     //MARK: - Displayer
-    let displayer: FeedDisplayer
+    let displayer: FeedMasterDisplayer
     
     //MARK: - Setup
-    init(displayer: FeedDisplayer) {
+    init(displayer: FeedMasterDisplayer) {
         self.displayer = displayer
         super.init(nibName: nil, bundle: nil)
     }

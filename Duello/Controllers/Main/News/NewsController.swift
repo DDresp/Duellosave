@@ -34,7 +34,7 @@ class NewsController: PostFeedViewController {
     
     //MARK: - Views
     lazy var collectionView: PostCollectionView = {
-        let collectionView = PostCollectionView(displayer: viewModel)
+        let collectionView = PostCollectionView(displayer: viewModel.homeCollectionViewModel)
         return collectionView
     }()
     

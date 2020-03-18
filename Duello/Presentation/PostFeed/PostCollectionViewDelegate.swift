@@ -12,7 +12,7 @@ import RxCocoa
 class PostCollectionViewDelegate: NSObject, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     //MARK: - Displayer
-    let displayer: FeedDisplayer
+    let displayer: PostCollectionDisplayer
 
     //MARK: - Child Displayers
     var profileDisplayer: UserHeaderDisplayer? { return displayer.userHeaderDisplayer }
@@ -30,7 +30,7 @@ class PostCollectionViewDelegate: NSObject, UICollectionViewDelegate, UICollecti
     private lazy var videoCell = VideoPostCell(frame: .init(x: 0, y: 0, width: frameWidth, height: 1000))
     
     //MARK: - Setup
-    init(displayer: FeedDisplayer, collectionView: UICollectionView) {
+    init(displayer: PostCollectionDisplayer, collectionView: UICollectionView) {
         self.displayer = displayer
         self.collectionView = collectionView
         super.init()

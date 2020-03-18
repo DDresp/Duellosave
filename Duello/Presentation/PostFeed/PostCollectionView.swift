@@ -11,7 +11,7 @@ import RxSwift
 class PostCollectionView: UICollectionView {
     
     //MARK: - Displayer
-    let displayer: FeedDisplayer
+    let displayer: PostCollectionDisplayer
     
     //MARK: - Child Displayers
     var headerDisplayer: UserHeaderDisplayer? {
@@ -37,14 +37,14 @@ class PostCollectionView: UICollectionView {
     private let refreshController = UIRefreshControl()
     
     //MARK: - Setup
-    init(displayer: FeedDisplayer) {
+    init(displayer: PostCollectionDisplayer) {
         self.displayer = displayer
         super.init(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         backgroundColor = VERYLIGHTGRAYCOLOR
         setup()
         setupBindablesToDisplayer()
         setupBindablesFromDisplayer()
-        displayer.startFetching()
+        postListDisplayer.restart.accept(())
     }
     
     private func setup() {

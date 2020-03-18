@@ -10,13 +10,7 @@ import RxSwift
 import RxCocoa
 import Firebase
 
-class HomeViewModel: FeedDisplayer {
-    
-    typealias UserPost = (UserModel, PostModel)
-    
-    //MARK: - Models
-    var user: BehaviorRelay<UserModel?> = BehaviorRelay<UserModel?>(value: nil)
-    var posts: BehaviorRelay<[PostModel]?> = BehaviorRelay<[PostModel]?>(value: nil)
+class HomeViewModel: FeedMasterDisplayer {
     
     //MARK: - Coordinator
     weak var coordinator: HomeCoordinatorType? {
@@ -24,33 +18,22 @@ class HomeViewModel: FeedDisplayer {
             setupBindablesToCoordinator()
         }
     }
-    //MARK: - ChildViewModels
-    var userHeaderDisplayer: UserHeaderDisplayer? = UserHeaderViewModel()
-    var postListDisplayer: PostListDisplayer = PostListViewModel()
     
-    //MARK: - Variables
-    var numberOfPosts: Int?
-    var deletedPost = false //firebase cloud functions arent' fast enough to update the post count
-    
-    var userPosts: [UserPost] {
-        guard let user = user.value, let posts = posts.value else { return [UserPost]() }
-        return posts.map { (post) -> UserPost in
-            return (user, post)
-        }
+    //MARK: - Child Displayers
+    var postCollectionDisplayer: PostCollectionDisplayer = HomeCollectionViewModel()
+
+    //MARK: - Child ViewModels
+    var homeCollectionViewModel: HomeCollectionViewModel {
+        return postCollectionDisplayer as! HomeCollectionViewModel
     }
-    
-    var restarted = true
+
+    //MARK: - Variables
     var lastFetchedPost: PostModel?
     var isFetchingNextPosts: Bool = false
     
     //MARK: - Bindables
-
-    //HomeViewModel Specific
-    var deletePost: PublishRelay<String> = PublishRelay<String>()
-    var updatePost: PublishRelay<Int> = PublishRelay<Int>()
     var settingsTapped: PublishSubject<Void> = PublishSubject<Void>()
     var logoutTapped: PublishSubject<Void> = PublishSubject<Void>()
-    //
     
     var loadLink: PublishRelay<String?> = PublishRelay<String?>()
     var showAdditionalLinkAlert: PublishRelay<String> = PublishRelay<String>()
@@ -60,7 +43,6 @@ class HomeViewModel: FeedDisplayer {
     
     var viewIsAppeared: BehaviorRelay<Bool> = BehaviorRelay(value: false)
 
-    
     //MARK: - Setup
     init() {
         setupBindables()
@@ -71,39 +53,39 @@ class HomeViewModel: FeedDisplayer {
         
         guard let uid = Auth.auth().currentUser?.uid else { return }
         
-        restarted = true
+        homeCollectionViewModel.restarted = true
         
         FetchingService.shared.fetchUser(for: uid)
             .flatMapLatest { [weak self] (user) -> Observable<(RawUserPostsFootprint, [PostModel])> in
-                self?.user.accept(user)
+                self?.homeCollectionViewModel.user.accept(user)
                 let userFootPrint = FetchingService.shared.fetchUserPostsFootprint(for: uid)
                 let userPosts = FetchingService.shared.fetchUserPosts(for: uid, at: nil, limit: 10)
                 return Observable.zip(userFootPrint, userPosts) }
             .subscribe(onNext: { [weak self] (userFootPrint, posts) in
-                if self?.deletedPost == true {
-                    guard let currentNumberOfPosts = self?.numberOfPosts else { return }
-                    self?.numberOfPosts = currentNumberOfPosts - 1
-                    self?.deletedPost = false
+                if self?.homeCollectionViewModel.deletedPost == true {
+                    guard let currentNumberOfPosts = self?.homeCollectionViewModel.numberOfPosts else { return }
+                    self?.homeCollectionViewModel.numberOfPosts = currentNumberOfPosts - 1
+                    self?.homeCollectionViewModel.deletedPost = false
                 } else {
-                    self?.numberOfPosts = userFootPrint.numberOfPosts
+                    self?.homeCollectionViewModel.numberOfPosts = userFootPrint.numberOfPosts
                 }
-                var user = self?.user.value
+                var user = self?.homeCollectionViewModel.user.value
                 user?.score = userFootPrint.score
-                self?.user.accept(user)
-                self?.posts.accept(posts)
+                self?.homeCollectionViewModel.user.accept(user)
+                self?.homeCollectionViewModel.posts.accept(posts)
                 }).disposed(by: self.disposeBag)
     }
     
     func fetchNextPosts() {
         
-        guard let uid = Auth.auth().currentUser?.uid, let lastPostId = posts.value?.last?.id, !isFetchingNextPosts else { return }
+        guard let uid = Auth.auth().currentUser?.uid, let lastPostId = homeCollectionViewModel.posts.value?.last?.id, !isFetchingNextPosts else { return }
         isFetchingNextPosts = true
         FetchingService.shared.fetchUserPosts(for: uid, at: lastPostId, limit: 10).asObservable().subscribe(onNext: { [weak self] (newPosts) in
             
             self?.isFetchingNextPosts = false
-            var posts = self?.posts.value
+            var posts = self?.homeCollectionViewModel.posts.value
             posts?.append(contentsOf: newPosts)
-            self?.posts.accept(posts)
+            self?.homeCollectionViewModel.posts.accept(posts)
         }).disposed(by: self.disposeBag)
         
     }
@@ -115,8 +97,8 @@ class HomeViewModel: FeedDisplayer {
             .subscribe(onNext: { [weak self] (_) in
                 guard let self = self else { return }
                 self.showLoading.accept(false)
-                self.deletedPost = true
-                self.postListDisplayer.restart.accept(())
+                self.homeCollectionViewModel.deletedPost = true
+                self.homeCollectionViewModel.postListDisplayer.restart.accept(())
                 }, onError: { [weak self] (err) in
                     switch err {
                     case RxError.timeout: self?.showAlert.accept(Alert(alertMessage: "The Post will be deleted as soon as the internet connection works properly again.", alertHeader: "Network Error"))
@@ -130,7 +112,7 @@ class HomeViewModel: FeedDisplayer {
     }
     
     private func updatePost(at index: Int) {
-        guard let posts = posts.value else { return }
+        guard let posts = homeCollectionViewModel.posts.value else { return }
         let post = posts[index]
         UploadingService.shared.savePost(post: post, postId: post.getId()).subscribe(onNext: { (_) in
             //Updated Post
@@ -145,51 +127,32 @@ class HomeViewModel: FeedDisplayer {
         setupBasicBindables()
         setupBindablesToCoordinator()
         setupBindablesFromOwnProperties()
-        setupBindablesFromChildViewModels()
         setupBindablesToChildViewModels()
     }
     
     private func setupBindablesFromOwnProperties() {
         
-        deletePost.subscribe(onNext: { [weak self] (postId) in
+        homeCollectionViewModel.deletePost.subscribe(onNext: { [weak self] (postId) in
             self?.deletePost(for: postId)
         }).disposed(by: disposeBag)
         
-        updatePost.subscribe(onNext: { [weak self] (index) in
+        homeCollectionViewModel.updatePost.subscribe(onNext: { [weak self] (index) in
             self?.updatePost(at: index)
         }).disposed(by: disposeBag)
+        
+        homeCollectionViewModel.startFetching.subscribe(onNext: { [weak self] (_) in
+            self?.startFetching()
+            }).disposed(by: disposeBag)
+        
+        homeCollectionViewModel.fetchNext.subscribe(onNext: { [weak self] (_) in
+            self?.fetchNextPosts()
+            }).disposed(by: disposeBag)
         
     }
     
     private func setupBindablesToChildViewModels() {
-        
-        user.subscribe(onNext: { [weak self] (user) in
-            guard let user = user else { return }
-            self?.userHeaderDisplayer?.user.accept(user)
-        }).disposed(by: disposeBag)
-        
-        posts.subscribe(onNext: { [weak self] (posts) in
-            guard let _ = posts else { return }
-            guard let userPosts = self?.userPosts else { return }
-            
-            if self?.restarted == true, let postsCount = self?.numberOfPosts {
-                self?.postListDisplayer.update(with: userPosts, totalPostsCount: postsCount, fromStart: true)
-                self?.restarted = false
-            } else {
-                self?.postListDisplayer.update(with: userPosts, totalPostsCount: self?.numberOfPosts, fromStart: false)
-            }
-            
-        }).disposed(by: disposeBag)
-        
-        viewIsAppeared.bind(to: postListDisplayer.isAppeared).disposed(by: disposeBag)
-
-        guard let userHeader = userHeaderDisplayer else { return }
-
-        Observable.combineLatest(postListDisplayer.finishedStart, viewIsAppeared).filter { (started, appeared) -> Bool in
-            return started && appeared
-        }.map { (_, _) -> Void in
-            return ()
-            }.bind(to: userHeader.animateScore).disposed(by: disposeBag)
+    
+        viewIsAppeared.bind(to: postCollectionDisplayer.isAppeared).disposed(by: disposeBag)
 
     }
     
@@ -197,7 +160,7 @@ class HomeViewModel: FeedDisplayer {
         
         guard let coordinator = coordinator else { return }
         
-        logoutTapped.asObservable().do(onNext: { (_) in
+        logoutTapped.do(onNext: { (_) in
             do {
                 try Auth.auth().signOut()
             } catch let err {
@@ -205,18 +168,8 @@ class HomeViewModel: FeedDisplayer {
             }
         }).bind(to: coordinator.loggedOut).disposed(by: disposeBag)
         
-        settingsTapped.asObservable().bind(to: coordinator.requestedSettings).disposed(by: disposeBag)
-        userHeaderDisplayer?.imageTapped.asObservable().bind(to: coordinator.requestedSettings).disposed(by: disposeBag)
-        
-    }
-    
-    private func setupBindablesFromChildViewModels() {
-        
-        userHeaderDisplayer?.socialMediaDisplayer.selectedLink.bind(to: loadLink).disposed(by: disposeBag)
-        userHeaderDisplayer?.socialMediaDisplayer.showAdditionalLinkAlert.bind(to: showAdditionalLinkAlert).disposed(by: disposeBag)
-
-        postListDisplayer.deletePost.bind(to: deletePost).disposed(by: disposeBag)
-        postListDisplayer.updatePost.bind(to: updatePost).disposed(by: disposeBag)
+        settingsTapped.bind(to: coordinator.requestedSettings).disposed(by: disposeBag)
+        homeCollectionViewModel.userHeaderDisplayer?.imageTapped.asObservable().bind(to: coordinator.requestedSettings).disposed(by: disposeBag)
         
     }
     
