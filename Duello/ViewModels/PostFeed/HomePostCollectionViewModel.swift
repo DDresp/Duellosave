@@ -13,7 +13,6 @@ import RxCocoa
 
 class HomePostCollectionViewModel: PostCollectionDisplayer {
     
-    
     //MARK: - Models
     var user: BehaviorRelay<UserModel?> = BehaviorRelay<UserModel?>(value: nil)
     var posts: BehaviorRelay<[PostModel]?> = BehaviorRelay<[PostModel]?>(value: nil)
@@ -55,7 +54,6 @@ class HomePostCollectionViewModel: PostCollectionDisplayer {
     
     var isAppeared: BehaviorRelay<Bool> = BehaviorRelay(value: false)
 
-    //Networking
     var startFetching: PublishRelay<Void> = PublishRelay()
     var fetchNext: PublishRelay<Void> = PublishRelay()
     var deletePost: PublishRelay<String> = PublishRelay<String>()
@@ -65,9 +63,24 @@ class HomePostCollectionViewModel: PostCollectionDisplayer {
     var refreshChanged: PublishSubject<Void> = PublishSubject()
     var finishedStart: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     
+    var reloadData: PublishRelay<Void> = PublishRelay()
+    var restartData: PublishRelay<Void> = PublishRelay()
+    var updateLayout: PublishRelay<Void> = PublishRelay()
+    
+    var prefetchingIndexPaths: PublishRelay<[IndexPath]> = PublishRelay<[IndexPath]>()
+    
     //MARK: - Setup
     init() {
         setupBindables()
+    }
+    
+    //MARK: - Methods
+    private func shouldPaginate(indexPath: IndexPath) -> Bool {
+        guard let totalCount = totalNumberOfPosts else { return false }
+        guard let numberOfPosts = posts.value?.count else { return false }
+        let notAtTotalEnd = (numberOfPosts < totalCount)
+        let closeToCurrrentEnd = indexPath.row >= numberOfPosts - 4
+        return notAtTotalEnd && closeToCurrrentEnd
     }
     
     //MARK: - Reactive
@@ -115,12 +128,21 @@ class HomePostCollectionViewModel: PostCollectionDisplayer {
 
         postListViewModel.deletePost.bind(to: deletePost).disposed(by: disposeBag)
         postListViewModel.updatePost.bind(to: updatePost).disposed(by: disposeBag)
-        postListViewModel.requestNextPosts.bind(to: fetchNext).disposed(by: disposeBag)
-        
+        postListViewModel.restart.bind(to: restartData).disposed(by: disposeBag)
+        postListViewModel.reload.bind(to: reloadData).disposed(by: disposeBag)
+        postListViewModel.updateLayout.bind(to: updateLayout).disposed(by: disposeBag)
     }
     
     private func setupBindablesFromOwnProperties() {
         restart.bind(to: startFetching).disposed(by: disposeBag)
+        
+        prefetchingIndexPaths.subscribe(onNext: { [weak self] (indexPaths) in
+            guard let self = self else { return }
+            if indexPaths.contains(where: self.shouldPaginate) {
+                self.fetchNext.accept(())
+            }
+        }).disposed(by: disposeBag)
+        
     }
     
 }

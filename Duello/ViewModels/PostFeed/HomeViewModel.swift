@@ -69,20 +69,22 @@ class HomeViewModel: FeedMasterDisplayer {
                 user?.score = userFootPrint.score
                 self?.homeCollectionViewModel.user.accept(user)
                 self?.homeCollectionViewModel.posts.accept(posts)
-                }).disposed(by: self.disposeBag)
+            }).disposed(by: self.disposeBag)
     }
     
     func fetchNextPosts() {
         
         guard let uid = Auth.auth().currentUser?.uid, let lastPostId = homeCollectionViewModel.posts.value?.last?.id, !homeCollectionViewModel.isFetchingNextPosts else { return }
         homeCollectionViewModel.isFetchingNextPosts = true
-        FetchingService.shared.fetchPosts(for: uid, at: lastPostId, limit: 10).asObservable().subscribe(onNext: { [weak self] (newPosts) in
-            
-            self?.homeCollectionViewModel.isFetchingNextPosts = false
-            var posts = self?.homeCollectionViewModel.posts.value
-            posts?.append(contentsOf: newPosts)
-            self?.homeCollectionViewModel.posts.accept(posts)
-        }).disposed(by: self.disposeBag)
+        DispatchQueue.global(qos: .background).async  {
+            FetchingService.shared.fetchPosts(for: uid, at: lastPostId, limit: 6).subscribe(onNext: { [weak self] (newPosts) in
+                var posts = self?.homeCollectionViewModel.posts.value
+                posts?.append(contentsOf: newPosts)
+                self?.homeCollectionViewModel.posts.accept(posts)
+                self?.homeCollectionViewModel.isFetchingNextPosts = false
+                
+            }).disposed(by: self.disposeBag)
+        }
         
     }
     

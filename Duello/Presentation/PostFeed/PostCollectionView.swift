@@ -78,7 +78,7 @@ class PostCollectionView: UICollectionView {
     
     private func setupBindablesFromDisplayer() {
         
-        postListDisplayer.restart.subscribe(onNext: { [weak self] (_) in
+        displayer.restartData.subscribe(onNext: { [weak self] (_) in
         
             self?.setContentOffset(.zero, animated: false)
             self?.feedDelegate.clearCache()
@@ -93,18 +93,17 @@ class PostCollectionView: UICollectionView {
             
         }).disposed(by: disposeBag)
         
-        postListDisplayer.reload.subscribe(onNext: { [weak self] (_) in
-            self?.reloadData()
+        displayer.reloadData.subscribe(onNext: { [weak self] (_) in
+            DispatchQueue.main.async {
+                guard let self = self else { return }
+                //DEVELOPING needs IMPROVEMENT
+                let indexPaths = Array(self.displayer.postListDisplayer.numberOfPostDisplayers-6...self.displayer.postListDisplayer.numberOfPostDisplayers-1).map { IndexPath(item: $0, section: 0) }
+                self.insertItems(at: indexPaths)
+            }
         }).disposed(by: disposeBag)
         
-        postListDisplayer.updateLayout.subscribe(onNext: { [weak self] () in
+        displayer.updateLayout.subscribe(onNext: { [weak self] () in
             self?.performBatchUpdates({})
-        }).disposed(by: disposeBag)
-        
-        guard let userHeaderDisplayer = headerDisplayer else { return }
-        
-        userHeaderDisplayer.reload.subscribe(onNext: { [weak self] (_) in
-            self?.collectionViewLayout.invalidateLayout()
         }).disposed(by: disposeBag)
         
     }

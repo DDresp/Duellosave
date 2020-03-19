@@ -88,7 +88,6 @@ class PostCollectionViewDelegate: NSObject, UICollectionViewDelegate, UICollecti
     }
     
     private func estimateCellSize(for displayer: PostDisplayer) -> CGSize {
-        
         var cell = UICollectionViewCell()
         
         switch displayer {

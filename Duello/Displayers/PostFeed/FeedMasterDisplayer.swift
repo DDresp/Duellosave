@@ -11,9 +11,6 @@ import RxCocoa
 
 protocol FeedMasterDisplayer: class {
     
-    //MARK: - Child Displayers
-//    var postCollectionDisplayer: PostCollectionDisplayer { get }
-    
     //MARK: - Bindables
     var loadLink: PublishRelay<String?> { get }
     var showAdditionalLinkAlert: PublishRelay<String> { get }
@@ -23,65 +20,4 @@ protocol FeedMasterDisplayer: class {
     
     var isAppeared: BehaviorRelay<Bool> { get }
     
-    //MARK: - Reactive
-//    var disposeBag: DisposeBag { get set }
-
 }
-
-//extension FeedMasterDisplayer {
-    
-    //MARK: - Reactive
-//    func setupBasicBindables() {
-//
-//        isAppeared.bind(to: postCollectionDisplayer.isAppeared).disposed(by: disposeBag)
-//
-//        postCollectionDisplayer.loadLink.bind(to: loadLink).disposed(by: disposeBag)
-//        postCollectionDisplayer.showAdditionalLinkAlert.bind(to: showAdditionalLinkAlert).disposed(by: disposeBag)
-//        postCollectionDisplayer.showActionSheet.bind(to: showActionSheet).disposed(by: disposeBag)
-//
-//    }
-//}
-
-//protocol FeedMasterDisplayer: class {
-//
-//    //MARK: - Child Displayers
-//    var userHeaderDisplayer: UserHeaderDisplayer? { get } //HomeViewModel specific
-//    var postListDisplayer: PostListDisplayer { get }
-//
-//    //MARK: - Bindables
-//    var loadLink: PublishRelay<String?> { get }
-//    var showAdditionalLinkAlert: PublishRelay<String> { get }
-//    var showActionSheet: PublishRelay<ActionSheet> { get }
-//    var showAlert: PublishRelay<Alert> { get }
-//    var showLoading: BehaviorRelay<Bool> { get }
-//
-//    var viewIsAppeared: BehaviorRelay<Bool> { get }
-//
-////    //MARK: - Methods
-////    func startFetching() -> ()
-////    func fetchNextPosts() -> ()
-//
-//    //MARK: - Reactive
-//    var disposeBag: DisposeBag { get set }
-//
-//}
-//
-//extension FeedMasterDisplayer {
-//    //MARK: - Getter
-//    var hasProfileHeader: Bool {return userHeaderDisplayer != nil }
-//
-//    //MARK: - Reactive
-//    func setupBasicBindables() {
-//
-////        postListDisplayer.restart.subscribe(onNext: { [weak self] (_) in
-////            self?.startFetching()
-////        }).disposed(by: disposeBag)
-////        postListDisplayer.requestNextPosts.asObservable().subscribe(onNext: { [weak self] (_) in
-////            self?.fetchNextPosts()
-////        }).disposed(by: disposeBag)
-//        postListDisplayer.loadLink.bind(to: loadLink).disposed(by: disposeBag)
-//        postListDisplayer.showAdditionalLinkAlert.bind(to: showAdditionalLinkAlert).disposed(by: disposeBag)
-//        postListDisplayer.showActionSheet.bind(to: showActionSheet).disposed(by: disposeBag)
-//
-//    }
-//}

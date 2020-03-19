@@ -22,7 +22,6 @@ class UserHeaderViewModel: UserHeaderDisplayer {
     
     //MARK: - Bindables
     var imageTapped: PublishRelay<Void> = PublishRelay<Void>()
-    var reload: PublishRelay<Void> = PublishRelay()
     var animateScore: PublishRelay<Void> = PublishRelay()
 
     //MARK: - Getters
@@ -52,7 +51,6 @@ class UserHeaderViewModel: UserHeaderDisplayer {
             self?.socialMediaDisplayer.user.accept(user)
             self?.score = user?.score
             self?.socialMediaDisplayer.cleanCache.accept(())
-            self?.reload.accept(())
         }).disposed(by: disposeBag)
         
     }

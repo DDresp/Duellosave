@@ -19,8 +19,8 @@ class HomePostListViewModel: PostListDisplayer {
     var totalPostsCount: Int? //number also includes posts that haven't been loaded so far!
     
     //MARK: - Bindables
-    var prefetchingIndexPaths: PublishRelay<[IndexPath]> = PublishRelay<[IndexPath]>()
-    var requestNextPosts: PublishRelay<Void> = PublishRelay<Void>()
+//    var prefetchingIndexPaths: PublishRelay<[IndexPath]> = PublishRelay<[IndexPath]>()
+//    var requestNextPosts: PublishRelay<Void> = PublishRelay<Void>()
     
     var loadLink: PublishRelay<String?> = PublishRelay<String?>()
     var showAdditionalLinkAlert: PublishRelay<String> = PublishRelay<String>()
@@ -32,14 +32,10 @@ class HomePostListViewModel: PostListDisplayer {
     var didEndDisplayingCell: PublishRelay<Int> = PublishRelay()
     
     var requestedPlayingVideo: PublishRelay<Int> = PublishRelay()
-    
-//    var refreshChanged: PublishSubject<Void> = PublishSubject()
+
     var restart: PublishRelay<Void> = PublishRelay()
     var reload: PublishRelay<Void> = PublishRelay()
     var updateLayout: PublishRelay<Void> = PublishRelay()
-    
-//    var restart: PublishRelay<Void> = PublishRelay<Void>()
-//    var finishedStart: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     
     var videosAreMuted: BehaviorRelay<Bool> = BehaviorRelay(value: true)
     
@@ -67,12 +63,12 @@ class HomePostListViewModel: PostListDisplayer {
         return postDisplayers[index]
     }
 
-    private func shouldPaginate(indexPath: IndexPath) -> Bool {
-        guard let totalCount = totalPostsCount else { return false }
-        let notAtTotalEnd = (numberOfPostDisplayers < totalCount)
-        let closeToCurrrentEnd = indexPath.row == numberOfPostDisplayers - 2
-        return notAtTotalEnd && closeToCurrrentEnd
-    }
+//    private func shouldPaginate(indexPath: IndexPath) -> Bool {
+//        guard let totalCount = totalPostsCount else { return false }
+//        let notAtTotalEnd = (numberOfPostDisplayers < totalCount)
+//        let closeToCurrrentEnd = indexPath.row == numberOfPostDisplayers - 2
+//        return notAtTotalEnd && closeToCurrrentEnd
+//    }
     
     //MARK: - Methods
     func update(with loadedPosts: [UserPost], totalPostsCount: Int?, fromStart: Bool) {
@@ -218,14 +214,13 @@ class HomePostListViewModel: PostListDisplayer {
     var disposeBag = DisposeBag()
     
     private func setupBindablesFromOwnProperties() {
-        setupBasicBindables()
         
-        prefetchingIndexPaths.asObservable().subscribe(onNext: { [weak self] (indexPaths) in
-            guard let self = self else { return }
-            if indexPaths.contains(where: self.shouldPaginate) {
-                self.requestNextPosts.accept(())
-            }
-        }).disposed(by: disposeBag)
+//        prefetchingIndexPaths.subscribe(onNext: { [weak self] (indexPaths) in
+//            guard let self = self else { return }
+//            if indexPaths.contains(where: self.shouldPaginate) {
+//                self.requestNextPosts.accept(())
+//            }
+//        }).disposed(by: disposeBag)
         
     }
     

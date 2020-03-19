@@ -22,7 +22,6 @@ protocol UserHeaderDisplayer {
     
     //MARK: - Bindables
     var imageTapped: PublishRelay<Void> { get }
-    var reload: PublishRelay<Void> { get }
     var animateScore: PublishRelay<Void> { get } 
 
     //MARK: - Getters

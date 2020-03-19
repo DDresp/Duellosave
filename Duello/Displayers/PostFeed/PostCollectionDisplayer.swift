@@ -12,7 +12,7 @@ import RxCocoa
 protocol PostCollectionDisplayer: class {
     
     //MARK: - Child Displayers
-    var userHeaderDisplayer: UserHeaderDisplayer? { get } //HomeViewModel specific
+    var userHeaderDisplayer: UserHeaderDisplayer? { get }
     var postListDisplayer: PostListDisplayer { get }
     
     //MARK: - Bindables
@@ -28,6 +28,12 @@ protocol PostCollectionDisplayer: class {
     var refreshChanged: PublishSubject<Void> { get }
     var finishedStart: BehaviorRelay<Bool> { get }
     
+    var reloadData: PublishRelay<Void> { get }
+    var restartData: PublishRelay<Void> { get }
+    var updateLayout: PublishRelay<Void> { get }
+    
+    var prefetchingIndexPaths: PublishRelay<[IndexPath]> { get }
+
     //MARK: - Reactive
     var disposeBag: DisposeBag { get set }
 

@@ -16,7 +16,6 @@ class PostCell<T: PostDisplayer>: UICollectionViewCell {
     
     //MARK: - Variables
     let randomId: String
-    var onlyForFitting: Bool = false
     
     //MARK: - Setup
     override init(frame: CGRect) {
@@ -24,11 +23,6 @@ class PostCell<T: PostDisplayer>: UICollectionViewCell {
         super.init(frame: frame)
         backgroundColor = EXTREMELIGHTGRAYCOLOR
         setupLayout()
-    }
-    
-    convenience init(frame: CGRect, onlyForSizing: Bool) {
-        self.init(frame: frame)
-        self.onlyForFitting = onlyForSizing
     }
     
     //MARK: - Views
