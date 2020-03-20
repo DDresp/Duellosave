@@ -18,7 +18,7 @@ class InstagramService: NetworkService {
     //MARK: General
     func downloadDescription(link: String) -> Observable<String> {
         return Observable.create({ [weak self] (observer) -> Disposable in
-
+            
             guard let apiLink = self?.createAPILink(for: link), let url = URL(string: apiLink) else {
                 observer.onError(InstagramError.unknown(description: "Unknown Error."))
                 return Disposables.create()
@@ -39,22 +39,39 @@ class InstagramService: NetworkService {
         })
     }
     
-    func getValuesForQueryKey(key: String, from instagramDescription: String) -> [String] {
+    func getValuesForQueryKey(key: String, from instagramDescription: String, valueIsStringEncoded: Bool = true, keyIsStringEncoded: Bool = true) -> [String] {
         
-        let queryKey = "\"\(key)\""
+        let queryKey: String
+        if keyIsStringEncoded {
+            queryKey = "\"\(key)\""
+        } else {
+            queryKey = "\(key)"
+        }
+        
         var values = [String]()
         
-        for range in instagramDescription.ranges(of: queryKey) {
-            if let startIndex = instagramDescription.range(of: "\"", options: .init(), range: range.upperBound..<instagramDescription.endIndex) {
-                if let endIndex = instagramDescription.range(of: "\"", options: .init(), range: startIndex.upperBound..<instagramDescription.endIndex) {
-                    let value = String(instagramDescription[startIndex.upperBound..<endIndex.lowerBound])
-                    values.append(value)
+        if valueIsStringEncoded {
+            for range in instagramDescription.ranges(of: queryKey) {
+                if let startIndex = instagramDescription.range(of: "\"", options: .init(), range: range.upperBound..<instagramDescription.endIndex) {
+                    if let endIndex = instagramDescription.range(of: "\"", options: .init(), range: startIndex.upperBound..<instagramDescription.endIndex) {
+                        let value = String(instagramDescription[startIndex.upperBound..<endIndex.lowerBound])
+                        values.append(value)
+                    }
                 }
             }
+        } else {
+            
+            //Developing: Check if more then expected comes here
+            for range in instagramDescription.ranges(of: queryKey) {
+                let substring = String(instagramDescription.suffix(from: range.upperBound))
+                let string = String(substring.split(separator: " ")[1]) //[0] would be "="
+                let finalString = string.dropLast().dropLast() //removes ";")
+                values.append(String(finalString))
+            }
+            
         }
         return values
     }
-    
     
     private func createAPILink(for link: String) -> String? {
         
@@ -68,5 +85,21 @@ class InstagramService: NetworkService {
             }
         }
         return instaLinkString + "?__a=1"
+    }
+    
+    func extractMediaRatio(from description: String) -> Double {
+        
+        let heights = getValuesForQueryKey(key: "height", from: description, valueIsStringEncoded: false, keyIsStringEncoded: false)
+        let widths = getValuesForQueryKey(key: "width", from: description, valueIsStringEncoded: false, keyIsStringEncoded: false)
+        
+        guard let height = heights.first else { return 1 }
+        guard let width = widths.first else { return 1 }
+
+        let doubleHeight = Double(height) ?? 1.0
+        let doubleWidth = Double(width) ?? 1.0
+        
+        let ratio = doubleHeight / doubleWidth
+        return ratio
+        
     }
 }

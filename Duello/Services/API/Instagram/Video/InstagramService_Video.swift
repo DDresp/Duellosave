@@ -18,19 +18,20 @@ extension InstagramService {
         
         if !hasInternetConnection() { return Observable.error(InstagramError.networkError) }
         
-        return downloadInstagramVideoURLandThumbnailURL(link: link).map({ (videoUrl, thumbnailUrl) -> RawInstagramVideoPost in
-            return RawInstagramVideoPost(videoURL: videoUrl, thumbnailUrl: thumbnailUrl, apiLink: link)
+        return downloadInstagramVideoURLandThumbnailURL(link: link).map({ (videoUrl, thumbnailUrl, ratio) -> RawInstagramVideoPost in
+            return RawInstagramVideoPost(videoURL: videoUrl, thumbnailUrl: thumbnailUrl, apiLink: link, mediaRatio: ratio)
         })
     }
     
-    private func downloadInstagramVideoURLandThumbnailURL(link: String) -> Observable<(URL, URL)> {
+    private func downloadInstagramVideoURLandThumbnailURL(link: String) -> Observable<(URL, URL, Double)> {
         
-        return downloadDescription(link: link).map({ [weak self] (description) -> (URL, URL) in
+        return downloadDescription(link: link).map({ [weak self] (description) -> (URL, URL, Double) in
             guard let videoUrlString = self?.getValuesForQueryKey(key: "video_url", from: description).first else { throw InstagramError.noVideoUrl }
             guard let thumbnailUrlString = self?.getValuesForQueryKey(key: "thumbnail_src", from: description).first else { throw InstagramError.noThumbnail }
             guard let videoUrl = URL(string: videoUrlString) else { throw InstagramError.noVideoUrl}
             guard let thumbnailUrl = URL(string: thumbnailUrlString) else { throw InstagramError.noThumbnail }
-            return (videoUrl, thumbnailUrl)
+            let ratio = self?.extractMediaRatio(from: description) ?? 1
+            return (videoUrl, thumbnailUrl, ratio)
             
         })
         

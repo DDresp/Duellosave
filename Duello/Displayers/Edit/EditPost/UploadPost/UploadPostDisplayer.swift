@@ -15,6 +15,9 @@ protocol UploadPostDisplayer: class, UploadDisplayer {
     var titleDisplayer: UploadPostTitleDisplayer { get }
     var descriptionDisplayer: UploadPostDescriptionDisplayer { get }
     
+    //MARK: - Variables
+    var mediaRatio: Double? { get }
+    
     //MARK: - Bindables
     var submitTapped: PublishSubject<Void> { get }
     var didDisappear: PublishRelay<Void> { get }

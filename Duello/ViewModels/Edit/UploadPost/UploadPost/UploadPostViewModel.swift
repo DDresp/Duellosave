@@ -28,6 +28,7 @@ class UploadPostViewModel<T: PostModel>: UploadPostDisplayer {
     
     //MARK: - Variables
     var progressHudMessage: String = "Uploading Post"
+    var mediaRatio: Double? = nil
     
     //MARK: - Bindables
     var didDisappear: PublishRelay<Void> = PublishRelay()

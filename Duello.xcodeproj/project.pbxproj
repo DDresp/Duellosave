@@ -1027,11 +1027,11 @@
 			children = (
 				1475AE9C2410452C00F1D24F /* Types */,
 				1475AE9D2410453D00F1D24F /* RawSingleImagePost.swift */,
-				1475AE9F2410454F00F1D24F /* RawVideoPost.swift */,
 				1475AEA12410456200F1D24F /* RawImagesPost.swift */,
-				1475AEA42410458800F1D24F /* RawInstagramVideoPost.swift */,
-				1475AEA62410459C00F1D24F /* RawInstagramImagesPost.swift */,
+				1475AE9F2410454F00F1D24F /* RawVideoPost.swift */,
 				1475AEA8241045B300F1D24F /* RawInstagramSingleImagePost.swift */,
+				1475AEA62410459C00F1D24F /* RawInstagramImagesPost.swift */,
+				1475AEA42410458800F1D24F /* RawInstagramVideoPost.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";

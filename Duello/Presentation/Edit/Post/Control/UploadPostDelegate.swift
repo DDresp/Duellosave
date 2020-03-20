@@ -64,10 +64,12 @@ class UploadPostDelegate: NSObject, UITableViewDelegate {
         }
         
         switch displayer {
-        case is UploadSingleImagePostDisplayer, is VideoPlayerDisplayer:
-            return tableView.frame.width + SINGLEIMAGEHEIGHTEXTRA
-        case is UploadImagesPostDisplayer:
-            return tableView.frame.width + IMAGESHEIGHTEXTRA
+        case let singleImageDisplayer as UploadSingleImagePostDisplayer:
+            return tableView.frame.width * CGFloat(singleImageDisplayer.mediaRatio ?? 1)
+        case let imagesDisplayer as UploadImagesPostDisplayer:
+            return tableView.frame.width * CGFloat(imagesDisplayer.mediaRatio ?? 1) + IMAGESHEIGHTEXTRA
+        case let videoDisplayer as UploadVideoPostDisplayer:
+            return tableView.frame.width * CGFloat(videoDisplayer.mediaRatio ?? 1) + SINGLEIMAGEHEIGHTEXTRA
         default:
             return UITableView.automaticDimension
         }

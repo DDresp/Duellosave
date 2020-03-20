@@ -10,4 +10,5 @@ import Foundation
 
 protocol RawInstagramPostType: RawPostType {
     var apiLink: String { get }
+    var mediaRatio: Double { get }
 }

@@ -10,5 +10,6 @@ import UIKit
 
 struct RawInstagramImagesPost: RawInstagramPostType {
     var imageUrls: [URL]
+    var mediaRatio: Double
     var apiLink: String
 }

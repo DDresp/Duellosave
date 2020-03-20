@@ -21,6 +21,7 @@ class UploadInstagramSingleImagePostViewModel: UploadPostViewModel<InstagramSing
         self.imageUrl = rawPost.singleImageUrl
         self.apiLink = rawPost.apiLink
         super.init()
+        self.mediaRatio = rawPost.mediaRatio
     }
     
     //MARK: - Methods

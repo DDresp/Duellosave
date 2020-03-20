@@ -26,6 +26,8 @@ class UploadInstagramImagesPostViewModel: UploadPostViewModel<InstagramImagesPos
         self.imagesSliderDisplayer = ImagesSliderViewModel()
         self.imagesSliderDisplayer.imageUrls.accept(imageUrls)
         super.init()
+        self.mediaRatio = rawPost.mediaRatio
+        
     }
     
     //MARK: - Methods

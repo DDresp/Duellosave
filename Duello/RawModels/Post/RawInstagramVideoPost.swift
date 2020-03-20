@@ -12,4 +12,5 @@ struct RawInstagramVideoPost: RawInstagramPostType {
     var videoURL: URL
     var thumbnailUrl: URL
     var apiLink: String
+    var mediaRatio: Double
 }
