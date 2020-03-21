@@ -25,9 +25,9 @@ class PostCollectionViewDelegate: NSObject, UICollectionViewDelegate, UICollecti
     var expandedSizes = [Int: CGSize]()
     
     private lazy var profileHeader = UserHeader(frame: .init(x: 0, y: 0, width: frameWidth, height: 1000))
-    private lazy var singleImageCell = SingleImagePostCell(frame: .init(x: 0, y: 0, width: frameWidth, height: 1000))
-    private lazy var imagesCell = ImagesPostCell(frame: .init(x: 0, y: 0, width: frameWidth, height: 1000))
-    private lazy var videoCell = VideoPostCell(frame: .init(x: 0, y: 0, width: frameWidth, height: 1000))
+//    private lazy var singleImageCell = SingleImagePostCell(frame: .init(x: 0, y: 0, width: frameWidth, height: 1000))
+//    private lazy var imagesCell = ImagesPostCell(frame: .init(x: 0, y: 0, width: frameWidth, height: 1000))
+//    private lazy var videoCell = VideoPostCell(frame: .init(x: 0, y: 0, width: frameWidth, height: 1000))
     
     //MARK: - Setup
     init(displayer: PostCollectionDisplayer, collectionView: UICollectionView) {
@@ -88,7 +88,14 @@ class PostCollectionViewDelegate: NSObject, UICollectionViewDelegate, UICollecti
     }
     
     private func estimateCellSize(for displayer: PostDisplayer) -> CGSize {
+        //Developing
+//        let height = CGFloat(displayer.mediaRatio) * frameWidth + 280
+//        return CGSize(width: frameWidth, height: height)
         var cell = UICollectionViewCell()
+        
+        var singleImageCell = SingleImagePostCell(frame: .init(x: 0, y: 0, width: frameWidth, height: 1000))
+        var imagesCell = ImagesPostCell(frame: .init(x: 0, y: 0, width: frameWidth, height: 1000))
+        var videoCell = VideoPostCell(frame: .init(x: 0, y: 0, width: frameWidth, height: 1000))
         
         switch displayer {
             

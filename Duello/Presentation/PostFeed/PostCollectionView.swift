@@ -97,6 +97,7 @@ class PostCollectionView: UICollectionView {
             DispatchQueue.main.async {
                 guard let self = self else { return }
                 //DEVELOPING needs IMPROVEMENT
+                print("debug: NOW RELOADING RELOADING RELOADING RELOADING RELOADING ")
                 let indexPaths = Array(self.displayer.postListDisplayer.numberOfPostDisplayers-6...self.displayer.postListDisplayer.numberOfPostDisplayers-1).map { IndexPath(item: $0, section: 0) }
                 self.insertItems(at: indexPaths)
             }

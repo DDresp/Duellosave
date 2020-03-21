@@ -379,4 +379,9 @@ class PostCell<T: PostDisplayer>: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        print("debug: PREPARE FOR REUUUUUUUUUUUUUU")
+        
+    }
+    
 }
