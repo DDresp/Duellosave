@@ -47,6 +47,7 @@ enum PostSingleAttributeCase: SingleAttributeCase {
     case thumbNailUrl
     case type
     case apiUrl
+    case mediaRatio
     case isDeactivated
     
     var entryType: EntryType {
@@ -55,7 +56,7 @@ enum PostSingleAttributeCase: SingleAttributeCase {
             return .String
         case .dislikes, .likes:
             return .Int
-        case .rate, .creationDate:
+        case .rate, .creationDate, .mediaRatio:
             return .Double
         case .type:
             return .MediaType
@@ -85,19 +86,20 @@ enum PostSingleAttributeCase: SingleAttributeCase {
         case .videoUrl: return "videoUrl"
         case .thumbNailUrl: return "thumbNailUrl"
         case .apiUrl: return "apiLink"
+        case .mediaRatio: return "mediaRatio"
         case .isDeactivated: return "isDeactivated"
             
         }
     }
     
-    var type: StringConvertibleType.Type {
-        switch self {
-        case .uid:
-            return String.self
-        default:
-            return Double.self
-        }
-    }
+//    var type: StringConvertibleType.Type {
+//        switch self {
+//        case .uid:
+//            return String.self
+//        default:
+//            return Double.self
+//        }
+//    }
 }
 
 

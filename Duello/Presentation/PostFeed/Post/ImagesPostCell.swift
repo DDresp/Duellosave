@@ -12,11 +12,8 @@ import RxCocoa
 class ImagesPostCell: PostCell<ImagesPostViewModel> {
     
     //MARK: - Views
-    
     private lazy var imagesSlider: ImagesSlider = {
         let slider = ImagesSlider()
-        slider.translatesAutoresizingMaskIntoConstraints = false
-        slider.heightAnchor.constraint(equalToConstant: frame.width + 25).isActive = true
         slider.addGestureRecognizer(doubleTapGesture)
         return slider
     }()

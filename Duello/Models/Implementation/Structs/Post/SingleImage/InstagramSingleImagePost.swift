@@ -23,6 +23,7 @@ struct InstagramSingleImagePost: InstagramSingleImagePostModel {
     var likes: PostSingleAttribute = PostSingleAttribute(attributeCase: .likes, value: nil)
     var dislikes: PostSingleAttribute = PostSingleAttribute(attributeCase: .dislikes, value: nil)
     var rate: PostSingleAttribute = PostSingleAttribute(attributeCase: .rate, value: nil)
+    var mediaRatio: PostSingleAttribute = PostSingleAttribute(attributeCase: .mediaRatio, value: nil)
     var isDeactivated: PostSingleAttribute = PostSingleAttribute(attributeCase: .isDeactivated, value: false)
     
     var typeData: PostSingleAttribute = PostSingleAttribute(attributeCase: .type, value: MediaType.instagramSingleImage)
@@ -40,6 +41,7 @@ struct InstagramSingleImagePost: InstagramSingleImagePostModel {
             rate,
             typeData,
             apiUrl,
+            mediaRatio,
             isDeactivated
         ]
     }
@@ -50,7 +52,7 @@ struct InstagramSingleImagePost: InstagramSingleImagePostModel {
         guard let apiUrlString = apiUrl.value?.toStringValue() else {
             return Observable.empty()
         }
-        return InstagramService.shared.downloadInstagramImagesPost(from: apiUrlString).map({ (rawInstagramImagesPost) -> URL? in
+        return InstagramService.shared.downloadInstagramImagesPost(from: apiUrlString).map({ (rawInstagramImagesPost) -> (URL?) in
             if let post = rawInstagramImagesPost as? RawInstagramSingleImagePost {
                 return post.singleImageUrl
             } else {

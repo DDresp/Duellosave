@@ -24,6 +24,7 @@ class PostViewModel: PostDisplayer {
     var rate: Double
     var title: String
     var description: String
+    var mediaRatio: Double
     
     //MARK: - Bindables
     //from UI
@@ -54,6 +55,7 @@ class PostViewModel: PostDisplayer {
         self.rate = post.getRate()
         self.description = post.getDescription()
         self.title = post.getTitle()
+        self.mediaRatio = post.getMediaRatio()
         self.isDeactivated = BehaviorRelay(value: post.getIsDeactivated())
         socialMediaDisplayer.user.accept(user)
         setupBindablesFromOwnProperties()

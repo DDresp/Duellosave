@@ -62,17 +62,17 @@ class UploadPostDelegate: NSObject, UITableViewDelegate {
         guard indexPath.section == mediaCellSection else {
             return UITableView.automaticDimension
         }
-        
-        switch displayer {
-        case let singleImageDisplayer as UploadSingleImagePostDisplayer:
-            return tableView.frame.width * CGFloat(singleImageDisplayer.mediaRatio ?? 1)
-        case let imagesDisplayer as UploadImagesPostDisplayer:
-            return tableView.frame.width * CGFloat(imagesDisplayer.mediaRatio ?? 1) + IMAGESHEIGHTEXTRA
-        case let videoDisplayer as UploadVideoPostDisplayer:
-            return tableView.frame.width * CGFloat(videoDisplayer.mediaRatio ?? 1) + SINGLEIMAGEHEIGHTEXTRA
-        default:
-            return UITableView.automaticDimension
-        }
+        return tableView.frame.width * CGFloat(displayer.mediaRatio ?? 1)
+//        switch displayer {
+//        case let singleImageDisplayer as UploadSingleImagePostDisplayer:
+//            return tableView.frame.width * CGFloat(singleImageDisplayer.mediaRatio ?? 1)
+//        case let imagesDisplayer as UploadImagesPostDisplayer:
+//            return tableView.frame.width * CGFloat(imagesDisplayer.mediaRatio ?? 1)
+//        case let videoDisplayer as UploadVideoPostDisplayer:
+//            return tableView.frame.width * CGFloat(videoDisplayer.mediaRatio ?? 1)
+//        default:
+//            return UITableView.automaticDimension
+//        }
     
     }
     

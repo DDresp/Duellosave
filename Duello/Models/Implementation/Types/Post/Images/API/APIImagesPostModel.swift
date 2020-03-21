@@ -9,5 +9,5 @@
 import RxSwift
 
 protocol ApiImagesPostModel: ImagesPostModel {
-    func downloadImageUrls() -> Observable<[URL]?>
+    func downloadImageUrls() -> Observable<([URL]?)>
 }

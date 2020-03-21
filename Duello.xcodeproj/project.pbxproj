@@ -1058,8 +1058,8 @@
 		1475AEB42410463B00F1D24F /* Implementation */ = {
 			isa = PBXGroup;
 			children = (
-				1475AEC72410472600F1D24F /* Attributes */,
 				1475AEC62410471E00F1D24F /* Types */,
+				1475AEC72410472600F1D24F /* Attributes */,
 				1475AEC52410471400F1D24F /* Structs */,
 			);
 			path = Implementation;

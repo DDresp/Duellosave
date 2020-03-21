@@ -16,6 +16,7 @@ class PostCell<T: PostDisplayer>: UICollectionViewCell {
     
     //MARK: - Variables
     let randomId: String
+    var mediaViewHeightConstraint: NSLayoutConstraint?
     
     //MARK: - Setup
     override init(frame: CGRect) {
@@ -210,6 +211,9 @@ class PostCell<T: PostDisplayer>: UICollectionViewCell {
         contentView.addSubview(mediaView)
         mediaView.anchor(top: headerStackView.bottomAnchor, leading: contentView.leadingAnchor, bottom: bottomStackView.topAnchor, trailing: contentView.trailingAnchor, padding: .init(top: 0, left: 0, bottom: STANDARDSPACING, right: 0))
         
+        mediaViewHeightConstraint = mediaView.heightAnchor.constraint(equalToConstant: frame.width)
+        mediaViewHeightConstraint?.isActive = true
+        
         //Layout Deactivated View
         contentView.addSubview(deactivatedView)
         deactivatedView.anchor(top: headerStackView.bottomAnchor, leading: contentView.leadingAnchor, bottom: bottomStackView.topAnchor, trailing: contentView.trailingAnchor, padding: .init(top: 0, left: 0, bottom: STANDARDSPACING, right: 0))
@@ -225,17 +229,20 @@ class PostCell<T: PostDisplayer>: UICollectionViewCell {
     }
     
     //MARK: - Methods
+    
     func fit() {
         guard let displayer = displayer else { return }
         
         setupText(displayer: displayer)
         layoutSocialMedia(displayer: displayer)
         updateExpansion(displayer: displayer)
+        updateMediaHeight(displayer: displayer)
         layoutIfNeeded()
         
     }
     
     func configure() {
+
         disposeBag = DisposeBag()
         guard let displayer = self.displayer else { return }
         
@@ -244,6 +251,7 @@ class PostCell<T: PostDisplayer>: UICollectionViewCell {
         setupSocialMedia(displayer: displayer)
         setupLikeView(displayer: displayer)
         updateExpansion(displayer: displayer)
+        updateMediaHeight(displayer: displayer)
         layoutIfNeeded()
         
         setupBindablesToDisplayer()
@@ -302,6 +310,11 @@ class PostCell<T: PostDisplayer>: UICollectionViewCell {
             }
         }
         
+    }
+    
+    private func updateMediaHeight(displayer: T) {
+        let mediaRatio = displayer.mediaRatio
+        mediaViewHeightConstraint?.constant = frame.width * CGFloat(mediaRatio)
     }
     
     //MARK: - Reactive

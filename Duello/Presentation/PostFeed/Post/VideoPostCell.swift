@@ -15,8 +15,6 @@ class VideoPostCell: PostCell<VideoPostViewModel> {
     //MARK: - Views
     lazy var videoPlayer: VideoPlayer = {
         let player = VideoPlayer()
-        player.translatesAutoresizingMaskIntoConstraints = false
-        player.heightAnchor.constraint(equalToConstant: frame.width).isActive = true
         player.addGestureRecognizer(doubleTapGesture)
         player.oneTapGesture.require(toFail: doubleTapGesture)
         return player

@@ -66,6 +66,7 @@ class UploadPostViewModel<T: PostModel>: UploadPostDisplayer {
         uploadPost.dislikes.value = dislikes
         let rate: Double = Double(likes)/Double(likes + dislikes)
         uploadPost.rate.value = rate
+        uploadPost.mediaRatio.value = mediaRatio ?? 1
         uploadPost.uid.value = Auth.auth().currentUser?.uid
     }
     

@@ -23,6 +23,7 @@ protocol PostDisplayer {
     var title: String { get }
     var description: String { get }
     var postId: String { get }
+    var mediaRatio: Double { get }
 
     //MARK: - Bindables
     var deleteMe: PublishRelay<String> { get }

@@ -22,6 +22,7 @@ struct LocalSingleImagePost: LocalSingleImagePostModel {
     var likes: PostSingleAttribute = PostSingleAttribute(attributeCase: .likes, value: nil)
     var dislikes: PostSingleAttribute = PostSingleAttribute(attributeCase: .dislikes, value: nil)
     var rate: PostSingleAttribute = PostSingleAttribute(attributeCase: .rate, value: nil)
+    var mediaRatio: PostSingleAttribute = PostSingleAttribute(attributeCase: .mediaRatio, value: nil)
     var isDeactivated: PostSingleAttribute = PostSingleAttribute(attributeCase: .isDeactivated, value: false)
     
     var typeData: PostSingleAttribute = PostSingleAttribute(attributeCase: .type, value: MediaType.localSingleImage)
@@ -39,6 +40,7 @@ struct LocalSingleImagePost: LocalSingleImagePostModel {
             rate,
             typeData,
             imageUrl,
+            mediaRatio,
             isDeactivated
         ]
     }

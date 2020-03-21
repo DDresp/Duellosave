@@ -27,24 +27,9 @@ class SingleImagePostCell: PostCell<SingleImagePostViewModel> {
         imageView.clipsToBounds = true
         imageView.backgroundColor = VERYLIGHTGRAYCOLOR
         imageView.isUserInteractionEnabled = true
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-//        imageView.heightAnchor.constraint(equalToConstant: frame.width).isActive = true
         imageView.addGestureRecognizer(doubleTapGesture)
         return imageView
     }()
-    
-    //Developing Developing
-    override func fit() {
-        super.fit()
-        singleImageView.heightAnchor.constraint(equalToConstant: 800).isActive = true
-        layoutIfNeeded()
-    }
-    
-    override func configure() {
-        super.configure()
-        singleImageView.heightAnchor.constraint(equalToConstant: 800).isActive = true
-        layoutIfNeeded()
-    }
     
     //MARK: - Reactive
     

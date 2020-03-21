@@ -12,9 +12,6 @@ import RxCocoa
 protocol PostListDisplayer: class {
     
     //MARK: - Bindables
-//    var prefetchingIndexPaths: PublishRelay<[IndexPath]> { get }
-//    var requestNextPosts: PublishRelay<Void> { get }
-    
     var showActionSheet: PublishRelay<ActionSheet> { get }
     var loadLink: PublishRelay<String?> { get }
     var showAdditionalLinkAlert: PublishRelay<String> { get }
