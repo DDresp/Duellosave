@@ -5,7 +5,6 @@
 //  Created by Darius Dresp on 3/4/20.
 //  Copyright © 2020 Darius Dresp. All rights reserved.
 //
-
 import RxSwift
 import RxCocoa
 
@@ -25,9 +24,9 @@ class PostCollectionViewDelegate: NSObject, UICollectionViewDelegate, UICollecti
     var expandedSizes = [Int: CGSize]()
     
     private lazy var profileHeader = UserHeader(frame: .init(x: 0, y: 0, width: frameWidth, height: 1000))
-//    private lazy var singleImageCell = SingleImagePostCell(frame: .init(x: 0, y: 0, width: frameWidth, height: 1000))
-//    private lazy var imagesCell = ImagesPostCell(frame: .init(x: 0, y: 0, width: frameWidth, height: 1000))
-//    private lazy var videoCell = VideoPostCell(frame: .init(x: 0, y: 0, width: frameWidth, height: 1000))
+    private lazy var singleImageCell = SingleImagePostCell(frame: .init(x: 0, y: 0, width: frameWidth, height: 1000))
+    private lazy var imagesCell = ImagesPostCell(frame: .init(x: 0, y: 0, width: frameWidth, height: 1000))
+    private lazy var videoCell = VideoPostCell(frame: .init(x: 0, y: 0, width: frameWidth, height: 1000))
     
     //MARK: - Setup
     init(displayer: PostCollectionDisplayer, collectionView: UICollectionView) {
@@ -49,10 +48,10 @@ class PostCollectionViewDelegate: NSObject, UICollectionViewDelegate, UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
+
         guard !postListDisplayer.noPostsAvailable else { return .init(width: collectionView.frame.width, height: 300)}
         guard let postDisplayer = postListDisplayer.getPostDisplayer(at: indexPath.item) else { return .init(width: 0, height: 0) }
-        
+
         if postDisplayer.didExpand.value {
             if let size = expandedSizes[indexPath.item] { return size }
             let newSize = estimateCellSize(for: postDisplayer)
@@ -88,17 +87,11 @@ class PostCollectionViewDelegate: NSObject, UICollectionViewDelegate, UICollecti
     }
     
     private func estimateCellSize(for displayer: PostDisplayer) -> CGSize {
-        //Developing
-//        let height = CGFloat(displayer.mediaRatio) * frameWidth + 280
-//        return CGSize(width: frameWidth, height: height)
+        
         var cell = UICollectionViewCell()
         
-        var singleImageCell = SingleImagePostCell(frame: .init(x: 0, y: 0, width: frameWidth, height: 1000))
-        var imagesCell = ImagesPostCell(frame: .init(x: 0, y: 0, width: frameWidth, height: 1000))
-        var videoCell = VideoPostCell(frame: .init(x: 0, y: 0, width: frameWidth, height: 1000))
-        
         switch displayer {
-            
+
         case let displayer as SingleImagePostViewModel:
             singleImageCell.displayer = displayer
             singleImageCell.fit()
@@ -114,7 +107,7 @@ class PostCollectionViewDelegate: NSObject, UICollectionViewDelegate, UICollecti
         default:
             print("displayer not known in cell sizing")
         }
-        
+
         let size = cell.systemLayoutSizeFitting(.init(width: frameWidth, height: 1000))
         return .init(width: frameWidth, height: size.height)
     }
