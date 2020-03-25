@@ -9,8 +9,6 @@
 import RxSwift
 import RxCocoa
 
-
-
 class HomePostCollectionViewModel: PostCollectionDisplayer {
     
     //MARK: - Models
