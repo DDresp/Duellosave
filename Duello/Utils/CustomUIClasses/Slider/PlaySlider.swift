@@ -37,7 +37,7 @@ class PlaySlider: UISlider {
         progressView.backgroundColor = .clear
         progressView.isUserInteractionEnabled = false
         progressView.progress = 0.0
-        progressView.progressTintColor = .gray
+        progressView.progressTintColor = LIGHTBLUECOLOR
         progressView.trackTintColor = DARKGRAYCOLOR
         
         addSubview(progressView)

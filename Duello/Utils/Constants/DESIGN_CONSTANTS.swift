@@ -33,6 +33,7 @@ let FACEBOOKBLUECOLOR = UIColor.hexStringToUIColor(hex: "3D5B97")
 let GREENCOLOR = UIColor.hexStringToUIColor(hex: "2BFEC3")
 let PURPLECOLOR = UIColor.hexStringToUIColor(hex: "E31BAA")
 let LINKCOLOR = UIColor.hexStringToUIColor(hex: "3D5B97")
+let LIGHTBLUECOLOR = UIColor.hexStringToUIColor(hex: "1e90ff")
 let NAVBARCANCELCOLOR = UIColor.red
 let NAVBARCOLOR = DARKGRAYCOLOR
 let PLACEHOLDERCOLOR = UIColor(red: 0, green: 0, blue: 0.0980392, alpha: 0.22)
@@ -43,6 +44,3 @@ let STANDARDSPACING: CGFloat = 14
 //ETC
 let LIGHTALPHA: CGFloat = 0.15
 
-////POST
-//let IMAGESHEIGHTEXTRA: CGFloat = 25
-//let SINGLEIMAGEHEIGHTEXTRA: CGFloat = 15

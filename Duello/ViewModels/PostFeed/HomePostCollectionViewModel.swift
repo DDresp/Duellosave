@@ -63,11 +63,11 @@ class HomePostCollectionViewModel: PostCollectionDisplayer {
     var refreshChanged: PublishSubject<Void> = PublishSubject()
     var finishedStart: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     
-    var reloadData: PublishRelay<Void> = PublishRelay()
+    var reloadData: PublishRelay<(Int, Int)> = PublishRelay()
     var restartData: PublishRelay<Void> = PublishRelay()
     var updateLayout: PublishRelay<Void> = PublishRelay()
     
-    var prefetchingIndexPaths: PublishRelay<[IndexPath]> = PublishRelay<[IndexPath]>()
+    var requestDataForIndexPath: PublishRelay<[IndexPath]> = PublishRelay<[IndexPath]>()
     
     //MARK: - Setup
     init() {
@@ -131,12 +131,15 @@ class HomePostCollectionViewModel: PostCollectionDisplayer {
         postListViewModel.restart.bind(to: restartData).disposed(by: disposeBag)
         postListViewModel.reload.bind(to: reloadData).disposed(by: disposeBag)
         postListViewModel.updateLayout.bind(to: updateLayout).disposed(by: disposeBag)
+        postListViewModel.willDisplayCell.map { (index) -> [IndexPath] in
+            return [IndexPath(item: index, section: 0)]
+            }.bind(to: requestDataForIndexPath).disposed(by: disposeBag)
     }
     
     private func setupBindablesFromOwnProperties() {
         restart.bind(to: startFetching).disposed(by: disposeBag)
         
-        prefetchingIndexPaths.subscribe(onNext: { [weak self] (indexPaths) in
+        requestDataForIndexPath.subscribe(onNext: { [weak self] (indexPaths) in
             guard let self = self else { return }
             if indexPaths.contains(where: self.shouldPaginate) {
                 self.fetchNext.accept(())

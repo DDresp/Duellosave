@@ -113,12 +113,10 @@ class PostCollectionViewDelegate: NSObject, UICollectionViewDelegate, UICollecti
     }
     
     private func estimateHeaderSize(for displayer: UserHeaderDisplayer) -> CGSize {
-        
         profileHeader.displayer = displayer
         profileHeader.fit()
         let size = profileHeader.systemLayoutSizeFitting(.init(width: frameWidth, height: 1000))
         return .init(width: frameWidth, height: size.height)
-        
     }
     
 }

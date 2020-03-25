@@ -28,11 +28,11 @@ protocol PostCollectionDisplayer: class {
     var refreshChanged: PublishSubject<Void> { get }
     var finishedStart: BehaviorRelay<Bool> { get }
     
-    var reloadData: PublishRelay<Void> { get }
+    var reloadData: PublishRelay<(Int, Int)> { get }
     var restartData: PublishRelay<Void> { get }
     var updateLayout: PublishRelay<Void> { get }
     
-    var prefetchingIndexPaths: PublishRelay<[IndexPath]> { get }
+    var requestDataForIndexPath: PublishRelay<[IndexPath]> { get }
 
     //MARK: - Reactive
     var disposeBag: DisposeBag { get set }

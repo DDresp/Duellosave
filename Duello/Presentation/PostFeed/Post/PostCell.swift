@@ -379,27 +379,9 @@ class PostCell<T: PostDisplayer>: UICollectionViewCell {
         }.bind(to: deactivatedView.rx.isHidden).disposed(by: disposeBag)
 
     }
-    
-//    override func layoutSubviews() {
-//        super.layoutSubviews()
-//        contentView.frame = bounds
-//    }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-//    override func prepareForReuse() {
-//        super.prepareForReuse()
-////        coreView = nil
-//        for subview in contentView.subviews {
-//            subview.removeFromSuperview()
-//        }
-//    }
-//    override func prepareForReuse() {
-//
-//        print("debug: PREPARE FOR REUUUUUUUUUUUUUU")
-//
-//    }
-
+    
 }

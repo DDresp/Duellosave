@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         //Navigation UI
         UINavigationBar.appearance().tintColor = NAVBARCANCELCOLOR
+        UINavigationBar.appearance().barTintColor = EXTREMELIGHTGRAYCOLOR
         let attributes = [NSAttributedString.Key.font : NAVIGATIONBARBUTTONFONT]
         UINavigationBar.appearance().titleTextAttributes = attributes // Title fonts
         UIBarButtonItem.appearance().setTitleTextAttributes(attributes, for: .normal) // Bar Button fonts

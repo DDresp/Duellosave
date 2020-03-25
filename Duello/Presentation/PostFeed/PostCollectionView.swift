@@ -93,12 +93,10 @@ class PostCollectionView: UICollectionView {
             
         }).disposed(by: disposeBag)
         
-        displayer.reloadData.subscribe(onNext: { [weak self] (_) in
+        displayer.reloadData.subscribe(onNext: { [weak self] (startIndex, endIndex) in
             DispatchQueue.main.async {
                 guard let self = self else { return }
-                //DEVELOPING needs IMPROVEMENT
-                print("debug: NOW RELOADING RELOADING RELOADING RELOADING RELOADING ")
-                let indexPaths = Array(self.displayer.postListDisplayer.numberOfPostDisplayers-6...self.displayer.postListDisplayer.numberOfPostDisplayers-1).map { IndexPath(item: $0, section: 0) }
+                let indexPaths = Array(startIndex...endIndex).map { IndexPath(item: $0, section: 0) }
                 self.insertItems(at: indexPaths)
             }
         }).disposed(by: disposeBag)

@@ -22,7 +22,7 @@ class PostCollectionViewPrefetchingDatasource: NSObject, UICollectionViewDataSou
     
     //MARK: - Datasource
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
-        displayer.prefetchingIndexPaths.accept(indexPaths)
+        displayer.requestDataForIndexPath.accept(indexPaths)
     }
     
 }

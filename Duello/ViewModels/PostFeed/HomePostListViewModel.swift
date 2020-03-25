@@ -19,9 +19,7 @@ class HomePostListViewModel: PostListDisplayer {
     var totalPostsCount: Int? //number also includes posts that haven't been loaded so far!
     
     //MARK: - Bindables
-//    var prefetchingIndexPaths: PublishRelay<[IndexPath]> = PublishRelay<[IndexPath]>()
-//    var requestNextPosts: PublishRelay<Void> = PublishRelay<Void>()
-    
+
     var loadLink: PublishRelay<String?> = PublishRelay<String?>()
     var showAdditionalLinkAlert: PublishRelay<String> = PublishRelay<String>()
     var showActionSheet: PublishRelay<ActionSheet> = PublishRelay<ActionSheet>()
@@ -34,7 +32,7 @@ class HomePostListViewModel: PostListDisplayer {
     var requestedPlayingVideo: PublishRelay<Int> = PublishRelay()
 
     var restart: PublishRelay<Void> = PublishRelay()
-    var reload: PublishRelay<Void> = PublishRelay()
+    var reload: PublishRelay<(Int, Int)> = PublishRelay()
     var updateLayout: PublishRelay<Void> = PublishRelay()
     
     var videosAreMuted: BehaviorRelay<Bool> = BehaviorRelay(value: true)
@@ -44,11 +42,6 @@ class HomePostListViewModel: PostListDisplayer {
     var updatePost: PublishRelay<Int> = PublishRelay<Int>()
     var deactivatePost: PublishRelay<String> = PublishRelay<String>()
     //
-    
-    //MARK: - Setup
-    init() {
-        setupBindablesFromOwnProperties()
-    }
     
     //MARK: - Getters
     var numberOfPostDisplayers: Int { return postDisplayers.count }
@@ -62,13 +55,6 @@ class HomePostListViewModel: PostListDisplayer {
         guard index < numberOfPostDisplayers else { return nil }
         return postDisplayers[index]
     }
-
-//    private func shouldPaginate(indexPath: IndexPath) -> Bool {
-//        guard let totalCount = totalPostsCount else { return false }
-//        let notAtTotalEnd = (numberOfPostDisplayers < totalCount)
-//        let closeToCurrrentEnd = indexPath.row == numberOfPostDisplayers - 2
-//        return notAtTotalEnd && closeToCurrrentEnd
-//    }
     
     //MARK: - Methods
     func update(with loadedPosts: [UserPost], totalPostsCount: Int?, fromStart: Bool) {
@@ -77,7 +63,6 @@ class HomePostListViewModel: PostListDisplayer {
             self.totalPostsCount = 0
             postDisplayers = [PostDisplayer]()
             disposeBag = DisposeBag()
-            setupBindablesFromOwnProperties()
         }
         
         if let count = totalPostsCount {
@@ -97,7 +82,7 @@ class HomePostListViewModel: PostListDisplayer {
         if fromStart {
             restart.accept(())
         } else {
-            reload.accept(())
+            reload.accept((startIndex, endIndex))
         }
     }
     
@@ -213,15 +198,5 @@ class HomePostListViewModel: PostListDisplayer {
     //MARK: - Reactive
     var disposeBag = DisposeBag()
     
-    private func setupBindablesFromOwnProperties() {
-        
-//        prefetchingIndexPaths.subscribe(onNext: { [weak self] (indexPaths) in
-//            guard let self = self else { return }
-//            if indexPaths.contains(where: self.shouldPaginate) {
-//                self.requestNextPosts.accept(())
-//            }
-//        }).disposed(by: disposeBag)
-        
-    }
     
 }
