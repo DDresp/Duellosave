@@ -9,8 +9,8 @@
 import Foundation
 
 struct RawUserPostsFootprint {
-    
+
     var numberOfPosts: Int
     var score: Double
-    
+
 }
