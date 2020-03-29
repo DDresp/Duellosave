@@ -11,6 +11,10 @@ import RxCocoa
 
 protocol PostCollectionDisplayer: class {
     
+    //MARK: - Models
+    var user: BehaviorRelay<UserModel?> { get }
+    var posts: BehaviorRelay<[PostModel]?> { get }
+//    
     //MARK: - Child Displayers
     var userHeaderDisplayer: UserHeaderDisplayer? { get }
     var postListDisplayer: PostListDisplayer { get }
@@ -32,6 +36,9 @@ protocol PostCollectionDisplayer: class {
     var restartData: PublishRelay<Void> { get }
     var updateLayout: PublishRelay<Void> { get }
     
+    var finished: Bool { get set }
+//    var hasNoPosts: Bool { get set }
+    
     var requestDataForIndexPath: PublishRelay<[IndexPath]> { get }
 
     //MARK: - Reactive
@@ -41,7 +48,8 @@ protocol PostCollectionDisplayer: class {
 
 extension PostCollectionDisplayer {
     //MARK: - Getter
-    var hasProfileHeader: Bool {return userHeaderDisplayer != nil }
+    var hasProfileHeader: Bool { return userHeaderDisplayer != nil }
+    var hasNoPosts: Bool { return posts.value?.count == 0 }
     
     //MARK: - Reactive
     func setupBasicBindables() {
@@ -49,7 +57,6 @@ extension PostCollectionDisplayer {
         restart.map { (_) -> Bool in
             return false
             }.bind(to: finishedStart).disposed(by: disposeBag)
-        
         refreshChanged.bind(to: restart).disposed(by: disposeBag)
         
         isAppeared.bind(to: postListDisplayer.isAppeared).disposed(by: disposeBag)

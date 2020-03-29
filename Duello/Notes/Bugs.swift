@@ -9,3 +9,5 @@
 //Work on lacking feed
 
 //Work on more reliable pagination
+
+//Failed Instagram Request also just when server fails because of the network connection

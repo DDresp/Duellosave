@@ -10,10 +10,24 @@ import UIKit
 
 class EmptyCell: UICollectionViewCell {
     
+    //MARK: - Displayer
+    var displayer: PostCollectionDisplayer? {
+        
+        didSet {
+            
+            if displayer?.hasNoPosts == true {
+                isHidden = false
+            } else {
+                isHidden = true
+            }
+        }
+    }
+    
     //MARK: - Setup
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupLayout()
+        isHidden = true
     }
     
     //MARK: - Views

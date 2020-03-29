@@ -49,7 +49,7 @@ class PostCollectionViewDelegate: NSObject, UICollectionViewDelegate, UICollecti
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
-        guard !postListDisplayer.noPostsAvailable else { return .init(width: collectionView.frame.width, height: 300)}
+        guard !displayer.hasNoPosts else { return .init(width: collectionView.frame.width, height: 300)}
         guard let postDisplayer = postListDisplayer.getPostDisplayer(at: indexPath.item) else { return .init(width: 0, height: 0) }
 
         if postDisplayer.didExpand.value {

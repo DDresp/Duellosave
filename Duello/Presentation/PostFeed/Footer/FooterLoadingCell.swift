@@ -11,19 +11,21 @@ import UIKit
 class FooterLoadingCell: UICollectionReusableView {
     
     //MARK: - Displayer
-    var displayer: PostListDisplayer? {
+    var displayer: PostCollectionDisplayer? {
         
         didSet {
             
-            if displayer?.noPostsAvailable == true {
+            if displayer?.hasNoPosts == true {
                 activityIndicator.stopAnimating()
-            } else if displayer?.loadedAllPosts == true {
+                endView.isHidden = true
+            }   else if displayer?.finished == true {
                 activityIndicator.stopAnimating()
                 endView.isHidden = false
             } else {
                 activityIndicator.startAnimating()
                 endView.isHidden = true
             }
+            
         }
     }
     

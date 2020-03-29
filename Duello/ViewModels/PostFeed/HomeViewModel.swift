@@ -38,6 +38,7 @@ class HomeViewModel: FeedMasterDisplayer {
     var showLoading: BehaviorRelay<Bool> = BehaviorRelay<Bool>(value: false)
     
     var isAppeared: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+    var isFetchingNextPosts: Bool = false //Developing
 
     //MARK: - Setup
     init() {
@@ -45,6 +46,7 @@ class HomeViewModel: FeedMasterDisplayer {
     }
     
     //MARK: - Networking
+    let fetchLimit: Int = 6
     func startFetching() {
         
         guard let uid = Auth.auth().currentUser?.uid else { return }
@@ -53,35 +55,44 @@ class HomeViewModel: FeedMasterDisplayer {
         
         FetchingService.shared.fetchUser(for: uid)
             .flatMapLatest { [weak self] (user) -> Observable<(RawUserPostsFootprint, [PostModel])> in
-                self?.homeCollectionViewModel.user.accept(user)
+                guard let self = self else { return Observable.empty() }
+                self.homeCollectionViewModel.user.accept(user)
                 let userFootPrint = FetchingService.shared.fetchUserFootprint(for: uid)
-                let posts = FetchingService.shared.fetchPosts(for: uid, at: nil, limit: 10)
+                let posts = FetchingService.shared.fetchPosts(for: uid, at: nil, limit: self.fetchLimit)
                 return Observable.zip(userFootPrint, posts) }
             .subscribe(onNext: { [weak self] (userFootPrint, posts) in
-                if self?.homeCollectionViewModel.deletedPost == true {
-                    guard let currentNumberOfPosts = self?.homeCollectionViewModel.totalNumberOfPosts else { return }
-                    self?.homeCollectionViewModel.totalNumberOfPosts = currentNumberOfPosts - 1
-                    self?.homeCollectionViewModel.deletedPost = false
-                } else {
-                    self?.homeCollectionViewModel.totalNumberOfPosts = userFootPrint.numberOfPosts
-                }
+                
+            //developing
+                self?.paginationEnded = posts.count < (self?.fetchLimit ?? 0)
+                self?.postCollectionDisplayer.finished = self?.paginationEnded ?? false //Developing
+                print("debug: posts count = \(posts.count)")
+                
                 var user = self?.homeCollectionViewModel.user.value
                 user?.score = userFootPrint.score
                 self?.homeCollectionViewModel.user.accept(user)
                 self?.homeCollectionViewModel.posts.accept(posts)
+                
             }).disposed(by: self.disposeBag)
     }
     
+    var paginationEnded = false
     func fetchNextPosts() {
         
-        guard let uid = Auth.auth().currentUser?.uid, let lastPostId = homeCollectionViewModel.posts.value?.last?.id, !homeCollectionViewModel.isFetchingNextPosts else { return }
-        homeCollectionViewModel.isFetchingNextPosts = true
+        guard let uid = Auth.auth().currentUser?.uid, let lastPostId = homeCollectionViewModel.posts.value?.last?.id, !isFetchingNextPosts, !paginationEnded else { return }
+
+        isFetchingNextPosts = true
+        
         DispatchQueue.global(qos: .background).async  {
-            FetchingService.shared.fetchPosts(for: uid, at: lastPostId, limit: 6).subscribe(onNext: { [weak self] (newPosts) in
+            FetchingService.shared.fetchPosts(for: uid, at: lastPostId, limit: self.fetchLimit).subscribe(onNext: { [weak self] (newPosts) in
+                
+                self?.paginationEnded = newPosts.count < (self?.fetchLimit ?? 0)
+                self?.postCollectionDisplayer.finished = self?.paginationEnded ?? false //Developing
+                
                 var posts = self?.homeCollectionViewModel.posts.value
                 posts?.append(contentsOf: newPosts)
                 self?.homeCollectionViewModel.posts.accept(posts)
-                self?.homeCollectionViewModel.isFetchingNextPosts = false
+                
+                self?.isFetchingNextPosts = false
                 
             }).disposed(by: self.disposeBag)
         }
@@ -95,7 +106,6 @@ class HomeViewModel: FeedMasterDisplayer {
             .subscribe(onNext: { [weak self] (_) in
                 guard let self = self else { return }
                 self.showLoading.accept(false)
-                self.homeCollectionViewModel.deletedPost = true
                 self.homeCollectionViewModel.restart.accept(())
                 }, onError: { [weak self] (err) in
                     switch err {
@@ -178,3 +188,177 @@ class HomeViewModel: FeedMasterDisplayer {
     }
     
 }
+
+
+//class HomeViewModel: FeedMasterDisplayer {
+//
+//    //MARK: - Coordinator
+//    weak var coordinator: HomeCoordinatorType? {
+//        didSet {
+//            setupBindablesToCoordinator()
+//        }
+//    }
+//
+//    //MARK: - Child Displayers
+//    var postCollectionDisplayer: PostCollectionDisplayer = HomePostCollectionViewModel()
+//
+//    //MARK: - Child ViewModels
+//    var homeCollectionViewModel: HomePostCollectionViewModel {
+//        return postCollectionDisplayer as! HomePostCollectionViewModel
+//    }
+//
+//    //MARK: - Bindables
+//    var settingsTapped: PublishSubject<Void> = PublishSubject<Void>()
+//    var logoutTapped: PublishSubject<Void> = PublishSubject<Void>()
+//
+//    var loadLink: PublishRelay<String?> = PublishRelay<String?>()
+//    var showAdditionalLinkAlert: PublishRelay<String> = PublishRelay<String>()
+//    var showActionSheet: PublishRelay<ActionSheet> = PublishRelay<ActionSheet>()
+//    var showAlert: PublishRelay<Alert> = PublishRelay<Alert>()
+//    var showLoading: BehaviorRelay<Bool> = BehaviorRelay<Bool>(value: false)
+//
+//    var isAppeared: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+//    var isFetchingNextPosts: Bool = false //Developing
+//
+//    //MARK: - Setup
+//    init() {
+//        setupBindables()
+//    }
+//
+//    //MARK: - Networking
+//    func startFetching() {
+//
+//        guard let uid = Auth.auth().currentUser?.uid else { return }
+//
+//        homeCollectionViewModel.restarted = true
+//
+//        FetchingService.shared.fetchUser(for: uid)
+//            .flatMapLatest { [weak self] (user) -> Observable<(RawUserPostsFootprint, [PostModel])> in
+//                self?.homeCollectionViewModel.user.accept(user)
+//                let userFootPrint = FetchingService.shared.fetchUserFootprint(for: uid)
+//                let posts = FetchingService.shared.fetchPosts(for: uid, at: nil, limit: 10)
+//                return Observable.zip(userFootPrint, posts) }
+//            .subscribe(onNext: { [weak self] (userFootPrint, posts) in
+//                if self?.homeCollectionViewModel.deletedPost == true {
+//                    guard let currentNumberOfPosts = self?.homeCollectionViewModel.totalNumberOfPosts else { return }
+//                    self?.homeCollectionViewModel.totalNumberOfPosts = currentNumberOfPosts - 1
+//                    self?.homeCollectionViewModel.deletedPost = false
+//                } else {
+//                    self?.homeCollectionViewModel.totalNumberOfPosts = userFootPrint.numberOfPosts
+//                }
+//                var user = self?.homeCollectionViewModel.user.value
+//                user?.score = userFootPrint.score
+//                self?.homeCollectionViewModel.user.accept(user)
+//                self?.homeCollectionViewModel.posts.accept(posts)
+//            }).disposed(by: self.disposeBag)
+//    }
+//
+//
+//    func fetchNextPosts() {
+//        guard let uid = Auth.auth().currentUser?.uid, let lastPostId = homeCollectionViewModel.posts.value?.last?.id, !isFetchingNextPosts else { return }
+//        //        guard let uid = Auth.auth().currentUser?.uid, let lastPostId = homeCollectionViewModel.posts.value?.last?.id, !homeCollectionViewModel.isFetchingNextPosts else { return }
+//        //        homeCollectionViewModel.isFetchingNextPosts = true
+//        isFetchingNextPosts = true
+//        DispatchQueue.global(qos: .background).async  {
+//            FetchingService.shared.fetchPosts(for: uid, at: lastPostId, limit: 6).subscribe(onNext: { [weak self] (newPosts) in
+//                var posts = self?.homeCollectionViewModel.posts.value
+//                posts?.append(contentsOf: newPosts)
+//                self?.homeCollectionViewModel.posts.accept(posts)
+//                //                self?.homeCollectionViewModel.isFetchingNextPosts = false
+//                self?.isFetchingNextPosts = false
+//
+//            }).disposed(by: self.disposeBag)
+//        }
+//
+//    }
+//
+//    private func deletePost(for id: String) {
+//        showLoading.accept(true)
+//
+//        DeletingService.shared.deletePost(for: id).asObservable().timeout(10, other: Observable.error(RxError.timeout), scheduler: MainScheduler.instance)
+//            .subscribe(onNext: { [weak self] (_) in
+//                guard let self = self else { return }
+//                self.showLoading.accept(false)
+//                self.homeCollectionViewModel.deletedPost = true
+//                self.homeCollectionViewModel.restart.accept(())
+//                }, onError: { [weak self] (err) in
+//                    switch err {
+//                    case RxError.timeout: self?.showAlert.accept(Alert(alertMessage: "The Post will be deleted as soon as the internet connection works properly again.", alertHeader: "Network Error"))
+//                    default:
+//                        guard let error = err as? DeletingError else {
+//                            return }
+//                        self?.showAlert.accept(Alert(alertMessage: error.errorMessage, alertHeader: error.errorHeader))
+//                    }
+//                    self?.showLoading.accept(false)
+//            }).disposed(by: disposeBag)
+//
+//    }
+//
+//    private func updatePost(at index: Int) {
+//        guard let posts = homeCollectionViewModel.posts.value else { return }
+//        let post = posts[index]
+//        UploadingService.shared.savePost(post: post, postId: post.getId()).subscribe(onNext: { (_) in
+//            //Updated Post
+//            }).disposed(by: disposeBag)
+//
+//    }
+//
+//    //MARK: - Reactive
+//    var disposeBag = DisposeBag()
+//
+//    private func setupBindables() {
+//        setupBindablesFromViewModel()
+//        setupBindablesToViewModel()
+//        setupBindablesToCoordinator()
+//        setupBindablesFromOwnProperties()
+//    }
+//
+//    private func setupBindablesFromViewModel() {
+//        postCollectionDisplayer.loadLink.bind(to: loadLink).disposed(by: disposeBag)
+//        postCollectionDisplayer.showAdditionalLinkAlert.bind(to: showAdditionalLinkAlert).disposed(by: disposeBag)
+//        postCollectionDisplayer.showActionSheet.bind(to: showActionSheet).disposed(by: disposeBag)
+//
+//    }
+//
+//    private func setupBindablesToViewModel() {
+//        isAppeared.bind(to: postCollectionDisplayer.isAppeared).disposed(by: disposeBag)
+//    }
+//
+//    private func setupBindablesFromOwnProperties() {
+//
+//        homeCollectionViewModel.deletePost.subscribe(onNext: { [weak self] (postId) in
+//            self?.deletePost(for: postId)
+//        }).disposed(by: disposeBag)
+//
+//        homeCollectionViewModel.updatePost.subscribe(onNext: { [weak self] (index) in
+//            self?.updatePost(at: index)
+//        }).disposed(by: disposeBag)
+//
+//        homeCollectionViewModel.startFetching.subscribe(onNext: { [weak self] (_) in
+//            self?.startFetching()
+//            }).disposed(by: disposeBag)
+//
+//        homeCollectionViewModel.fetchNext.subscribe(onNext: { [weak self] (_) in
+//            self?.fetchNextPosts()
+//            }).disposed(by: disposeBag)
+//
+//    }
+//
+//    private func setupBindablesToCoordinator() {
+//
+//        guard let coordinator = coordinator else { return }
+//
+//        logoutTapped.do(onNext: { (_) in
+//            do {
+//                try Auth.auth().signOut()
+//            } catch let err {
+//                print("failed to logout the user", err)
+//            }
+//        }).bind(to: coordinator.loggedOut).disposed(by: disposeBag)
+//
+//        settingsTapped.bind(to: coordinator.requestedSettings).disposed(by: disposeBag)
+//        homeCollectionViewModel.userHeaderDisplayer?.imageTapped.asObservable().bind(to: coordinator.requestedSettings).disposed(by: disposeBag)
+//
+//    }
+//
+//}

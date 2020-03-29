@@ -40,14 +40,16 @@ class PostCollectionViewDatasource: NSObject, UICollectionViewDataSource {
     
     //MARK: - Datasource
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard !postsDisplayer.noPostsAvailable else { return 1 }
+        guard !displayer.hasNoPosts else { return 1 }
         return postsDisplayer.numberOfPostDisplayers
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        guard !postsDisplayer.noPostsAvailable, let postDisplayer = postsDisplayer.getPostDisplayer(at: indexPath.item) else {
-            return collectionView.dequeueReusableCell(withReuseIdentifier: emptyIdentifier, for: indexPath)
+        guard !displayer.hasNoPosts, let postDisplayer = postsDisplayer.getPostDisplayer(at: indexPath.item) else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: emptyIdentifier, for: indexPath) as! EmptyCell
+            cell.displayer = displayer
+            return cell
         }
         
         switch postDisplayer {
@@ -82,7 +84,7 @@ class PostCollectionViewDatasource: NSObject, UICollectionViewDataSource {
             return cell
         } else if kind == UICollectionView.elementKindSectionFooter {
             let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: footerIdentifier, for: indexPath) as! FooterLoadingCell
-            cell.displayer = postsDisplayer
+            cell.displayer = displayer
             return cell
         }
         return UICollectionReusableView()

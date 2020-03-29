@@ -22,12 +22,13 @@ protocol PostListDisplayer: class {
     
     //MARK: - Getters
     var numberOfPostDisplayers: Int { get }
-    var loadedAllPosts: Bool { get }
-    var noPostsAvailable: Bool { get }
+//    var loadedAllPosts: Bool { get }
+//    var loadedAllPostsTest: Bool { get }
+//    var noPostsAvailable: Bool { get }
     func getPostDisplayer(at index: Int) -> PostDisplayer?
     
     //MARK: - Methods
-    func update(with userPosts: [UserPost], totalPostsCount: Int?, fromStart: Bool)
+    func update(with userPosts: [UserPost], fromStart: Bool)
     
     //MARK: - Reactive
     var disposeBag: DisposeBag { get set }
