@@ -110,7 +110,6 @@ class PostViewModel: PostDisplayer {
             return self?.index ?? 0
         }.bind(to: updateDeactivation).disposed(by: disposeBag)
         
-        
     }
-
+    
 }

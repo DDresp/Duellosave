@@ -15,22 +15,10 @@ extension UploadingService {
         guard hasInternetConnection() else { return Observable.error(UploadingError.networkError)}
         let id: String = postId ?? UUID().uuidString
         
-        return saveDatabaseModel(databaseModel: post, reference: POST_REFERENCE, id: id)
-            .flatMap({ (databaseModel) -> Observable<PostModel?> in
-            guard let savedPost = databaseModel as? PostModel else {
-                throw UploadingError.unknown(description: "unknown error")
-            }
-            return self.saveUserPostQueryRelation(savedPost: savedPost, postId: id)
-        })
-        
+        return saveDatabaseModel(databaseModel: post, reference: POST_REFERENCE, id: id).map { (post) -> PostModel in
+            guard let savedPost = post as? PostModel else { throw UploadingError.unknown(description: "unknown error")}
+            return savedPost
+        }
     }
-    
-    private func saveUserPostQueryRelation(savedPost: PostModel, postId: String) -> Observable<PostModel?> {
-        guard let uid = Auth.auth().currentUser?.uid else { return Observable.error(UploadingError.userNotLoggedIn)}
-        
-        return saveQueryRelation(databaseModel: savedPost, reference: USER_POST_REFERENCE, fromId: uid, collectionName: "posts", toId: postId)
-            .map({ (success) -> PostModel? in
-            return success ? savedPost : nil
-        })}
     
 }

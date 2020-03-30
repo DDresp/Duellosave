@@ -48,7 +48,6 @@
 		1475AE922410446500F1D24F /* AuthenticationService_Registration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AE912410446500F1D24F /* AuthenticationService_Registration.swift */; };
 		1475AE942410449000F1D24F /* AuthenticationService_Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AE932410449000F1D24F /* AuthenticationService_Login.swift */; };
 		1475AE96241044A600F1D24F /* AuthenticationService_ForgotPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AE95241044A600F1D24F /* AuthenticationService_ForgotPassword.swift */; };
-		1475AE9B2410452200F1D24F /* RawUserPostsFootprint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AE9A2410452200F1D24F /* RawUserPostsFootprint.swift */; };
 		1475AE9E2410453D00F1D24F /* RawSingleImagePost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AE9D2410453D00F1D24F /* RawSingleImagePost.swift */; };
 		1475AEA02410454F00F1D24F /* RawVideoPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AE9F2410454F00F1D24F /* RawVideoPost.swift */; };
 		1475AEA22410456200F1D24F /* RawImagesPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AEA12410456200F1D24F /* RawImagesPost.swift */; };
@@ -274,7 +273,6 @@
 		149BC5CA242209AE00CFBBC7 /* NewsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149BC5C9242209AE00CFBBC7 /* NewsController.swift */; };
 		149BC5CC2422165800CFBBC7 /* PostCollectionDisplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149BC5CB2422165800CFBBC7 /* PostCollectionDisplayer.swift */; };
 		149BC5CE24222F4A00CFBBC7 /* HomePostCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149BC5CD24222F4A00CFBBC7 /* HomePostCollectionViewModel.swift */; };
-		149BC5D124223C9500CFBBC7 /* PostCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149BC5D024223C9500CFBBC7 /* PostCollectionViewModel.swift */; };
 		149BC5D4242245FA00CFBBC7 /* UserPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149BC5D3242245FA00CFBBC7 /* UserPost.swift */; };
 		14BDEC08241CBF0E00228763 /* Bool+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BDEC07241CBF0E00228763 /* Bool+Extension.swift */; };
 		14ED672B241A87550047C085 /* Pods_Duello.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14ED672A241A87550047C085 /* Pods_Duello.framework */; };
@@ -363,7 +361,6 @@
 		1475AE912410446500F1D24F /* AuthenticationService_Registration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService_Registration.swift; sourceTree = "<group>"; };
 		1475AE932410449000F1D24F /* AuthenticationService_Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService_Login.swift; sourceTree = "<group>"; };
 		1475AE95241044A600F1D24F /* AuthenticationService_ForgotPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService_ForgotPassword.swift; sourceTree = "<group>"; };
-		1475AE9A2410452200F1D24F /* RawUserPostsFootprint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawUserPostsFootprint.swift; sourceTree = "<group>"; };
 		1475AE9D2410453D00F1D24F /* RawSingleImagePost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawSingleImagePost.swift; sourceTree = "<group>"; };
 		1475AE9F2410454F00F1D24F /* RawVideoPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawVideoPost.swift; sourceTree = "<group>"; };
 		1475AEA12410456200F1D24F /* RawImagesPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawImagesPost.swift; sourceTree = "<group>"; };
@@ -589,7 +586,6 @@
 		149BC5C9242209AE00CFBBC7 /* NewsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsController.swift; sourceTree = "<group>"; };
 		149BC5CB2422165800CFBBC7 /* PostCollectionDisplayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCollectionDisplayer.swift; sourceTree = "<group>"; };
 		149BC5CD24222F4A00CFBBC7 /* HomePostCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePostCollectionViewModel.swift; sourceTree = "<group>"; };
-		149BC5D024223C9500CFBBC7 /* PostCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCollectionViewModel.swift; sourceTree = "<group>"; };
 		149BC5D3242245FA00CFBBC7 /* UserPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPost.swift; sourceTree = "<group>"; };
 		14BDEC07241CBF0E00228763 /* Bool+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+Extension.swift"; sourceTree = "<group>"; };
 		14ED672A241A87550047C085 /* Pods_Duello.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_Duello.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1006,7 +1002,6 @@
 		1475AE97241044E900F1D24F /* User */ = {
 			isa = PBXGroup;
 			children = (
-				1475AE9A2410452200F1D24F /* RawUserPostsFootprint.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -1567,7 +1562,6 @@
 		1475AF76241051F200F1D24F /* PostFeed */ = {
 			isa = PBXGroup;
 			children = (
-				149BC5CF24223BBF00CFBBC7 /* Generic */,
 				1475AF86241052AA00F1D24F /* HomeViewModel.swift */,
 				149BC5CD24222F4A00CFBBC7 /* HomePostCollectionViewModel.swift */,
 				1475AF832410528A00F1D24F /* HomePostListViewModel.swift */,
@@ -2341,14 +2335,6 @@
 			path = News;
 			sourceTree = "<group>";
 		};
-		149BC5CF24223BBF00CFBBC7 /* Generic */ = {
-			isa = PBXGroup;
-			children = (
-				149BC5D024223C9500CFBBC7 /* PostCollectionViewModel.swift */,
-			);
-			path = Generic;
-			sourceTree = "<group>";
-		};
 		149BC5D2242245EC00CFBBC7 /* UserPost */ = {
 			isa = PBXGroup;
 			children = (
@@ -2735,7 +2721,6 @@
 				1475AE4C2410401800F1D24F /* DuelloError.swift in Sources */,
 				1475B03424105AF400F1D24F /* VideoView.swift in Sources */,
 				1475AFB72410547B00F1D24F /* UploadLocalImagesPostViewModel.swift in Sources */,
-				1475AE9B2410452200F1D24F /* RawUserPostsFootprint.swift in Sources */,
 				1475AE7C2410433700F1D24F /* FetchingService.swift in Sources */,
 				1475AEA22410456200F1D24F /* RawImagesPost.swift in Sources */,
 				14BDEC08241CBF0E00228763 /* Bool+Extension.swift in Sources */,
@@ -2913,7 +2898,6 @@
 				1475AFC92410552D00F1D24F /* GoogleLoginViewModel.swift in Sources */,
 				1475AFE52410582300F1D24F /* FeedMasterDisplayer.swift in Sources */,
 				1475B09C24105F5700F1D24F /* Int+Extension.swift in Sources */,
-				149BC5D124223C9500CFBBC7 /* PostCollectionViewModel.swift in Sources */,
 				1475B0DE2410615B00F1D24F /* TableViewController.swift in Sources */,
 				1475AF89241052CC00F1D24F /* UserHeaderViewModel.swift in Sources */,
 				1475AEFA2410494F00F1D24F /* User.swift in Sources */,

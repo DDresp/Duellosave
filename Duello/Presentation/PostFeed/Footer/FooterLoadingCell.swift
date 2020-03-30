@@ -71,20 +71,6 @@ class FooterLoadingCell: UICollectionReusableView {
             }
             }).disposed(by: disposeBag)
         
-//        if displayer?.hasNoPosts == true {
-//            print("debug: hasNoPosts")
-//            activityIndicator.stopAnimating()
-//            endView.isHidden = true
-//        }   else if displayer?.loadedAll == true {
-//            print("debug: loadedAll")
-//            activityIndicator.stopAnimating()
-//            endView.isHidden = false
-//        } else {
-//            print("debug: none")
-//            activityIndicator.startAnimating()
-//            endView.isHidden = true
-//        }
-        
     }
     
     required init?(coder aDecoder: NSCoder) {

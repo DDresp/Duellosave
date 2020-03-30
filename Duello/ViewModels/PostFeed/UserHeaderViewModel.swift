@@ -46,13 +46,11 @@ class UserHeaderViewModel: UserHeaderDisplayer {
     private let disposeBag = DisposeBag()
     
     private func setupBindablesFromOwnProperties() {
-        
         user.asObservable().subscribe(onNext: { [weak self] (user) in
             self?.socialMediaDisplayer.user.accept(user)
             self?.score = user?.score
             self?.socialMediaDisplayer.cleanCache.accept(())
         }).disposed(by: disposeBag)
-        
     }
     
 }

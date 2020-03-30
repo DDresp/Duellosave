@@ -39,8 +39,8 @@ extension PostModel {
     func getMediaRatio() -> Double { return Double(mediaRatio.value?.toStringValue() ?? "1") ?? 1}
     func getIsDeactivated() -> Bool { return isDeactivated.value?.toStringValue() == "0" ? false : true }
     
-    func getQueryAttributes() -> [SingleAttribute]? {
-        return [rate, dislikes, likes, creationDate]
-    }
-    
+//    func getQueryAttributes() -> [SingleAttribute]? {
+//        return [rate, dislikes, likes, creationDate]
+//    }
+//    
 }

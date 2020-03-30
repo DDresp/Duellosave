@@ -36,29 +36,4 @@ class UploadingService: NetworkService {
             
         })
     }
-    
-    func saveQueryRelation(databaseModel: Model, reference: CollectionReference, fromId: String , collectionName: String ,toId: String) -> Observable<Bool> {
-        
-        guard let docData = databaseModel.getUploadQueryKeys() else {
-            return Observable.error(UploadingError.unknown(description: "unknown error"))
-        }
-        
-        return Observable.create({(observer) -> Disposable in
-            
-            let ref = reference.document(fromId).collection(collectionName).document(toId)
-            
-            ref.setData(docData, completion: { (err) in
-                if let err = err {
-                    observer.onError(UploadingError(error: err))
-                    return
-                }
-                
-                observer.onNext(true)
-                observer.onCompleted()
-            })
-            
-            return Disposables.create()
-        })
-    }
-    
 }

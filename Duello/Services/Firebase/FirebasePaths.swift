@@ -11,5 +11,4 @@ import FirebaseFirestore
 
 let USERS_REFERENCE = Firestore.firestore().collection("users")
 let POST_REFERENCE = Firestore.firestore().collection("posts")
-let USER_POST_REFERENCE = Firestore.firestore().collection("user-post")
 

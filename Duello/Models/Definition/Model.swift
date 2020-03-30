@@ -12,7 +12,6 @@ protocol Model {
     
     var id: String? { get set }
     
-    func getQueryAttributes() -> [SingleAttribute]?
     func getMapAttributes() -> [MapAttribute]?
     func getSingleAttributes() -> [SingleAttribute]
 
@@ -21,10 +20,6 @@ protocol Model {
 extension Model {
     
     func getMapAttributes() -> [MapAttribute]? {
-        return nil
-    }
-    
-    func getQueryAttributes() -> [SingleAttribute]? {
         return nil
     }
     
@@ -48,12 +43,7 @@ extension Model {
         
         return dictionary
     }
-    
-    func getUploadQueryKeys() -> [String: Any]? {
-        guard let allQueryAttributes = getQueryAttributes() else { return nil }
-        return makeDictionary(attributes: allQueryAttributes)
-    }
-    
+
     private func makeDictionary(attributes: [SingleAttribute]) -> [String: Any] {
         var dictionary = [String: Any]()
         for attribute in attributes {
@@ -91,10 +81,8 @@ extension Model {
 extension Model {
     
     mutating func configure(with dic: [String: Any], id: String?) {
-        
         self.id = id
         configure(with: dic)
-        
     }
     
     func configure(with dic: [String: Any]) {
