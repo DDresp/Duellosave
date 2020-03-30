@@ -43,7 +43,6 @@
 		1475AE832410438200F1D24F /* FetchingService_User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AE822410438200F1D24F /* FetchingService_User.swift */; };
 		1475AE852410439600F1D24F /* FetchingService_Posts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AE842410439600F1D24F /* FetchingService_Posts.swift */; };
 		1475AE87241043AC00F1D24F /* FetchingService_UserFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AE86241043AB00F1D24F /* FetchingService_UserFeed.swift */; };
-		1475AE89241043CA00F1D24F /* FetchingService_Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AE88241043CA00F1D24F /* FetchingService_Post.swift */; };
 		1475AE8B241043F000F1D24F /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AE8A241043F000F1D24F /* AuthenticationService.swift */; };
 		1475AE8D2410440400F1D24F /* AuthenticationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AE8C2410440300F1D24F /* AuthenticationError.swift */; };
 		1475AE922410446500F1D24F /* AuthenticationService_Registration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AE912410446500F1D24F /* AuthenticationService_Registration.swift */; };
@@ -359,7 +358,6 @@
 		1475AE822410438200F1D24F /* FetchingService_User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchingService_User.swift; sourceTree = "<group>"; };
 		1475AE842410439600F1D24F /* FetchingService_Posts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchingService_Posts.swift; sourceTree = "<group>"; };
 		1475AE86241043AB00F1D24F /* FetchingService_UserFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchingService_UserFeed.swift; sourceTree = "<group>"; };
-		1475AE88241043CA00F1D24F /* FetchingService_Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchingService_Post.swift; sourceTree = "<group>"; };
 		1475AE8A241043F000F1D24F /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
 		1475AE8C2410440300F1D24F /* AuthenticationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationError.swift; sourceTree = "<group>"; };
 		1475AE912410446500F1D24F /* AuthenticationService_Registration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService_Registration.swift; sourceTree = "<group>"; };
@@ -914,8 +912,7 @@
 			children = (
 				1475AE7B2410433700F1D24F /* FetchingService.swift */,
 				1475AE802410435200F1D24F /* User */,
-				1475AE812410435800F1D24F /* Feed */,
-				1475AE7F2410434A00F1D24F /* Post */,
+				1475AE812410435800F1D24F /* Posts */,
 				1475AE7D2410434300F1D24F /* FetchingError.swift */,
 			);
 			path = Fetching;
@@ -965,14 +962,6 @@
 			path = User;
 			sourceTree = "<group>";
 		};
-		1475AE7F2410434A00F1D24F /* Post */ = {
-			isa = PBXGroup;
-			children = (
-				1475AE88241043CA00F1D24F /* FetchingService_Post.swift */,
-			);
-			path = Post;
-			sourceTree = "<group>";
-		};
 		1475AE802410435200F1D24F /* User */ = {
 			isa = PBXGroup;
 			children = (
@@ -981,13 +970,13 @@
 			path = User;
 			sourceTree = "<group>";
 		};
-		1475AE812410435800F1D24F /* Feed */ = {
+		1475AE812410435800F1D24F /* Posts */ = {
 			isa = PBXGroup;
 			children = (
 				1475AE842410439600F1D24F /* FetchingService_Posts.swift */,
-				1475AE86241043AB00F1D24F /* FetchingService_UserFeed.swift */,
+				149BC5D524323F0600CFBBC7 /* FromUser */,
 			);
-			path = Feed;
+			path = Posts;
 			sourceTree = "<group>";
 		};
 		1475AE8E2410440A00F1D24F /* Registration */ = {
@@ -2368,6 +2357,14 @@
 			path = UserPost;
 			sourceTree = "<group>";
 		};
+		149BC5D524323F0600CFBBC7 /* FromUser */ = {
+			isa = PBXGroup;
+			children = (
+				1475AE86241043AB00F1D24F /* FetchingService_UserFeed.swift */,
+			);
+			path = FromUser;
+			sourceTree = "<group>";
+		};
 		AAB327F880C324E4589AB40F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -2924,7 +2921,6 @@
 				1475AFE32410580E00F1D24F /* PostListDisplayer.swift in Sources */,
 				1475B0A024105F7700F1D24F /* UIFont+Extension.swift in Sources */,
 				1475B03A24105B2B00F1D24F /* PostCollectionViewDatasource.swift in Sources */,
-				1475AE89241043CA00F1D24F /* FetchingService_Post.swift in Sources */,
 				1475B05F24105CA100F1D24F /* UploadUserTableViewCell.swift in Sources */,
 				1475AF3024104BD300F1D24F /* HomeCoordinator.swift in Sources */,
 				1475AF03241049B800F1D24F /* LocalImagesPost.swift in Sources */,

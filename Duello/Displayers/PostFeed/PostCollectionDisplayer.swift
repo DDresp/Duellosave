@@ -20,6 +20,7 @@ protocol PostCollectionDisplayer: class {
     var postListDisplayer: PostListDisplayer { get }
     
     //MARK: - Bindables
+    var finished: BehaviorRelay<Bool> { get }
     var loadLink: PublishRelay<String?> { get }
     var showAdditionalLinkAlert: PublishRelay<String> { get }
     var showActionSheet: PublishRelay<ActionSheet> { get }
@@ -36,7 +37,7 @@ protocol PostCollectionDisplayer: class {
     var restartData: PublishRelay<Void> { get }
     var updateLayout: PublishRelay<Void> { get }
     
-    var finished: Bool { get set }
+//    var loadedAll: Bool { get set }
 //    var hasNoPosts: Bool { get set }
     
     var requestDataForIndexPath: PublishRelay<[IndexPath]> { get }

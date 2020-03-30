@@ -6,7 +6,8 @@
 //  Copyright © 2020 Darius Dresp. All rights reserved.
 //
 
-import UIKit
+import RxSwift
+import RxCocoa
 
 class FooterLoadingCell: UICollectionReusableView {
     
@@ -14,18 +15,8 @@ class FooterLoadingCell: UICollectionReusableView {
     var displayer: PostCollectionDisplayer? {
         
         didSet {
-            
-            if displayer?.hasNoPosts == true {
-                activityIndicator.stopAnimating()
-                endView.isHidden = true
-            }   else if displayer?.finished == true {
-                activityIndicator.stopAnimating()
-                endView.isHidden = false
-            } else {
-                activityIndicator.startAnimating()
-                endView.isHidden = true
-            }
-            
+            disposeBag = DisposeBag()
+            setupBindablesFromDisplayer()
         }
     }
     
@@ -62,6 +53,37 @@ class FooterLoadingCell: UICollectionReusableView {
         
         addSubview(endView)
         endView.fillSuperview()
+        
+    }
+    
+    //MARK: - Reactive
+    private var disposeBag = DisposeBag()
+    
+    private func setupBindablesFromDisplayer() {
+        
+        displayer?.finished.subscribe(onNext: { [weak self] (isFinished) in
+            if isFinished {
+                self?.activityIndicator.stopAnimating()
+                self?.endView.isHidden = false
+            } else {
+                self?.activityIndicator.startAnimating()
+                self?.endView.isHidden = true
+            }
+            }).disposed(by: disposeBag)
+        
+//        if displayer?.hasNoPosts == true {
+//            print("debug: hasNoPosts")
+//            activityIndicator.stopAnimating()
+//            endView.isHidden = true
+//        }   else if displayer?.loadedAll == true {
+//            print("debug: loadedAll")
+//            activityIndicator.stopAnimating()
+//            endView.isHidden = false
+//        } else {
+//            print("debug: none")
+//            activityIndicator.startAnimating()
+//            endView.isHidden = true
+//        }
         
     }
     

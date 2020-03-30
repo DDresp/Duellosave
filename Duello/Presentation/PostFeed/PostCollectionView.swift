@@ -96,7 +96,6 @@ class PostCollectionView: UICollectionView {
         displayer.reloadData.subscribe(onNext: { [weak self] (startIndex, endIndex) in
             DispatchQueue.main.async {
                 guard let self = self else { return }
-                print("debug: startIndex = \(startIndex) and endIndex = \(endIndex)")
                 let indexPaths = Array(startIndex...endIndex).map { IndexPath(item: $0, section: 0) }
                 self.insertItems(at: indexPaths)
             }

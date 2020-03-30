@@ -28,8 +28,11 @@ class HomePostCollectionViewModel: PostCollectionDisplayer {
         return postListDisplayer as! HomePostListViewModel
     }
     
+    //MARK: - Bindables
+    var finished: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+    
     //MARK: - Variables
-    var finished: Bool = false
+//    var loadedAll: Bool = false
     var restarted = true
     
     var userPosts: [UserPost] {
