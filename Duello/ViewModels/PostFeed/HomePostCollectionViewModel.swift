@@ -131,7 +131,9 @@ class HomePostCollectionViewModel: PostCollectionDisplayer {
     }
     
     private func setupBindablesFromOwnProperties() {
-        restart.bind(to: startFetching).disposed(by: disposeBag)
+        restart.do(onNext: { [weak self] (_) in
+            self?.restarted = true
+            }).bind(to: startFetching).disposed(by: disposeBag)
         
         requestDataForIndexPath.subscribe(onNext: { [weak self] (indexPaths) in
             guard let self = self else { return }

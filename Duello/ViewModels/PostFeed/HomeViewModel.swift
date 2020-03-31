@@ -23,6 +23,9 @@ class HomeViewModel: FeedMasterDisplayer {
     var posts = [PostModel]()
     var displayedPosts = [PostModel]()
     let fetchSteps: Int = 6
+    var lastFetchAll: Date? //important to fetch all for getting the correct score
+    let fetchingAllPause: Double = 10 //user shouldn't be able to fetch all Posts so often (too expensive)
+    var forceFetchingAll = false
     
     //MARK: - Child Displayers
     var postCollectionDisplayer: PostCollectionDisplayer = HomePostCollectionViewModel()
@@ -58,19 +61,29 @@ class HomeViewModel: FeedMasterDisplayer {
     //MARK: - Methods
     
     func start() {
-        self.fetchAllPosts()
+        self.posts = [PostModel]()
+        self.displayedPosts = [PostModel]()
+        self.loadedAllPosts.accept(false)
+        self.displayingAllPosts.accept(false)
+        
+        if let lastFetchTime = lastFetchAll, Date().timeIntervalSince(lastFetchTime) < fetchingAllPause && !forceFetchingAll {
+            fetchLimitedPosts()
+        } else {
+            forceFetchingAll = false
+            fetchAll()
+        }
+        
     }
-    
     
     func retrieveNextPosts() {
         if displayedPosts.count < posts.count {
-            setNextPosts()
+            getNextPosts()
         } else {
-            fetchNextPosts()
+            fetchLimitedPosts()
         }
     }
     
-    func setNextPosts() {
+    func getNextPosts() {
         let difference = posts.count - displayedPosts.count
         if difference <= fetchSteps {
             self.displayedPosts = self.posts
@@ -84,12 +97,10 @@ class HomeViewModel: FeedMasterDisplayer {
     }
     
     //MARK: - Networking
-    
-    func fetchAllPosts() {
+    func fetchAll() {
         
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        
-        homeCollectionViewModel.restarted = true
+        lastFetchAll = Date()
         
         FetchingService.shared.fetchUser(for: uid)
             .flatMapLatest { [weak self] (user) -> Observable<([PostModel], Double)> in
@@ -116,19 +127,18 @@ class HomeViewModel: FeedMasterDisplayer {
         }).disposed(by: disposeBag)
     }
     
-    func fetchNextPosts() {
+    func fetchLimitedPosts() {
 
-        guard let uid = Auth.auth().currentUser?.uid, let lastPostId = displayedPosts.last?.id, !isFetchingNextPosts, !loadedAllPosts.value else { return }
+        guard let uid = Auth.auth().currentUser?.uid, !isFetchingNextPosts, !loadedAllPosts.value else { return }
         
+        let lastPostId = displayedPosts.last?.id
         isFetchingNextPosts = true
-        
+    
         DispatchQueue.global(qos: .background).async  {
             FetchingService.shared.fetchUserPosts(for: uid, limit: self.fetchSteps, startId: lastPostId).subscribe(onNext: { [weak self] (posts) in
-
                 let reachedEnd = posts.count < (self?.fetchSteps ?? 0)
                 self?.loadedAllPosts.accept(reachedEnd)
                 self?.displayingAllPosts.accept(true)
-                
                 self?.posts.append(contentsOf: posts)
                 self?.displayedPosts.append(contentsOf: posts)
                 self?.homeCollectionViewModel.posts.accept(self?.displayedPosts)
@@ -145,6 +155,7 @@ class HomeViewModel: FeedMasterDisplayer {
             .subscribe(onNext: { [weak self] (_) in
                 guard let self = self else { return }
                 self.showLoading.accept(false)
+                self.forceFetchingAll = true
                 self.homeCollectionViewModel.restart.accept(())
                 }, onError: { [weak self] (err) in
                     switch err {
