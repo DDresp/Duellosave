@@ -47,7 +47,7 @@ class HomeViewModel: FeedMasterDisplayer {
     
     var isAppeared: BehaviorRelay<Bool> = BehaviorRelay(value: false)
 
-    var isFetchingNextPosts: Bool = false //Developing
+    var isFetchingNextPosts: Bool = false
     
     var displayingAllPosts: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     var loadedAllPosts: BehaviorRelay<Bool> = BehaviorRelay(value: false)
@@ -156,7 +156,7 @@ class HomeViewModel: FeedMasterDisplayer {
                 guard let self = self else { return }
                 self.showLoading.accept(false)
                 self.forceFetchingAll = true
-                self.homeCollectionViewModel.restart.accept(())
+                self.homeCollectionViewModel.needsRestart.accept(true)
                 }, onError: { [weak self] (err) in
                     switch err {
                     case RxError.timeout: self?.showAlert.accept(Alert(alertMessage: "The Post will be deleted as soon as the internet connection works properly again.", alertHeader: "Network Error"))
@@ -214,7 +214,9 @@ class HomeViewModel: FeedMasterDisplayer {
             self?.updatePost(at: index)
         }).disposed(by: disposeBag)
         
-        homeCollectionViewModel.startFetching.subscribe(onNext: { [weak self] (_) in
+        homeCollectionViewModel.needsRestart.filter { (needsRestart) -> Bool in
+            return needsRestart
+        }.subscribe(onNext: { [weak self] (_) in
             self?.start()
             }).disposed(by: disposeBag)
         

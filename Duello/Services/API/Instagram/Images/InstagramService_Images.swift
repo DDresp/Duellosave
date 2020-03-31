@@ -31,7 +31,6 @@ extension InstagramService {
     func downloadInstagramImagesPost(from link: String) -> Observable<RawInstagramPostType> {
         if !hasInternetConnection() { return Observable.error(InstagramError.networkError) }
         
-        //Developing
         return downloadInstagramImageUrls(link: link).map({ (urls, ratio) -> RawInstagramPostType in
             if urls.count > 1 {
                 return RawInstagramImagesPost(imageUrls: urls, mediaRatio: ratio, apiLink: link)

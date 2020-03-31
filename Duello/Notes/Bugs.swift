@@ -13,3 +13,5 @@
 //Failed Instagram Request also just when server fails because of the network connection
 
 //Squized first cell sometimes
+
+//safe username etc on post

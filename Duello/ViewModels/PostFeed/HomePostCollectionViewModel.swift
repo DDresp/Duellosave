@@ -29,7 +29,6 @@ class HomePostCollectionViewModel: PostCollectionDisplayer {
     }
     
     //MARK: - Variables
-    var restarted = true
     
     var userPosts: [UserPost] {
         guard let user = user.value, let posts = posts.value else { return [UserPost]() }
@@ -40,23 +39,22 @@ class HomePostCollectionViewModel: PostCollectionDisplayer {
     
     //MARK: - Bindables
     var finished: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+    var needsRestart: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     
     var loadLink: PublishRelay<String?> = PublishRelay<String?>()
     var showAdditionalLinkAlert: PublishRelay<String> = PublishRelay<String>()
     var showActionSheet: PublishRelay<ActionSheet> = PublishRelay<ActionSheet>()
     var showAlert: PublishRelay<Alert> = PublishRelay<Alert>()
     var showLoading: BehaviorRelay<Bool> = BehaviorRelay<Bool>(value: false)
-    
-    var isAppeared: BehaviorRelay<Bool> = BehaviorRelay(value: false)
 
     var startFetching: PublishRelay<Void> = PublishRelay()
     var fetchNext: PublishRelay<Void> = PublishRelay()
     var deletePost: PublishRelay<String> = PublishRelay<String>()
     var updatePost: PublishRelay<Int> = PublishRelay<Int>()
     
-    var restart: PublishRelay<Void> = PublishRelay<Void>()
+    var isAppeared: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+    var uiLoaded: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     var refreshChanged: PublishSubject<Void> = PublishSubject()
-    var finishedStart: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     
     var reloadData: PublishRelay<(Int, Int)> = PublishRelay()
     var restartData: PublishRelay<Void> = PublishRelay()
@@ -97,16 +95,16 @@ class HomePostCollectionViewModel: PostCollectionDisplayer {
             guard let _ = posts else { return }
             guard let userPosts = self?.userPosts else { return }
 
-            if self?.restarted == true {
+            if self?.needsRestart.value == true {
                 self?.postListDisplayer.update(with: userPosts, fromStart: true)
-                self?.restarted = false
+                self?.needsRestart.accept(false)
             } else {
                 self?.postListDisplayer.update(with: userPosts, fromStart: false)
             }
             
         }).disposed(by: disposeBag)
 
-        Observable.combineLatest(finishedStart, isAppeared).filter { (started, appeared) -> Bool in
+        Observable.combineLatest(uiLoaded, isAppeared).filter { (started, appeared) -> Bool in
             return started && appeared
         }.map { (_, _) -> Void in
             return ()
@@ -122,8 +120,11 @@ class HomePostCollectionViewModel: PostCollectionDisplayer {
         postListViewModel.insert.bind(to: reloadData).disposed(by: disposeBag)
         postListViewModel.updateLayout.bind(to: updateLayout).disposed(by: disposeBag)
         
+        //homeviewmodel specific
         postListViewModel.deletePost.bind(to: deletePost).disposed(by: disposeBag)
         postListViewModel.updatePost.bind(to: updatePost).disposed(by: disposeBag)
+        //
+        
         postListViewModel.restart.bind(to: restartData).disposed(by: disposeBag)
         postListViewModel.willDisplayCell.map { (index) -> [IndexPath] in
             return [IndexPath(item: index, section: 0)]
@@ -131,10 +132,7 @@ class HomePostCollectionViewModel: PostCollectionDisplayer {
     }
     
     private func setupBindablesFromOwnProperties() {
-        restart.do(onNext: { [weak self] (_) in
-            self?.restarted = true
-            }).bind(to: startFetching).disposed(by: disposeBag)
-        
+
         requestDataForIndexPath.subscribe(onNext: { [weak self] (indexPaths) in
             guard let self = self else { return }
             if indexPaths.contains(where: self.shouldPaginate) {

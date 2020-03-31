@@ -44,7 +44,7 @@ class PostCollectionView: UICollectionView {
         setup()
         setupBindablesToDisplayer()
         setupBindablesFromDisplayer()
-        displayer.restart.accept(())
+        displayer.needsRestart.accept(true)
     }
     
     private func setup() {
@@ -89,7 +89,7 @@ class PostCollectionView: UICollectionView {
             
             self?.reloadData()
             self?.layoutIfNeeded()
-            self?.displayer.finishedStart.accept(true)
+            self?.displayer.uiLoaded.accept(true)
             
         }).disposed(by: disposeBag)
         

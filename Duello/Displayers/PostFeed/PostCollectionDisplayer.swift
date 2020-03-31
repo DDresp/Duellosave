@@ -14,13 +14,15 @@ protocol PostCollectionDisplayer: class {
     //MARK: - Models
     var user: BehaviorRelay<UserModel?> { get }
     var posts: BehaviorRelay<[PostModel]?> { get }
-//    
+  
     //MARK: - Child Displayers
     var userHeaderDisplayer: UserHeaderDisplayer? { get }
     var postListDisplayer: PostListDisplayer { get }
     
     //MARK: - Bindables
     var finished: BehaviorRelay<Bool> { get }
+    var needsRestart: BehaviorRelay<Bool> { get }
+    
     var loadLink: PublishRelay<String?> { get }
     var showAdditionalLinkAlert: PublishRelay<String> { get }
     var showActionSheet: PublishRelay<ActionSheet> { get }
@@ -28,17 +30,12 @@ protocol PostCollectionDisplayer: class {
     var showLoading: BehaviorRelay<Bool> { get }
     
     var isAppeared: BehaviorRelay<Bool> { get }
-    
-    var restart: PublishRelay<Void> { get }
     var refreshChanged: PublishSubject<Void> { get }
-    var finishedStart: BehaviorRelay<Bool> { get }
+    var uiLoaded: BehaviorRelay<Bool> { get }
     
     var reloadData: PublishRelay<(Int, Int)> { get }
     var restartData: PublishRelay<Void> { get }
-    var updateLayout: PublishRelay<Void> { get }
-    
-//    var loadedAll: Bool { get set }
-//    var hasNoPosts: Bool { get set }
+    var updateLayout: PublishRelay<Void> { get  }
     
     var requestDataForIndexPath: PublishRelay<[IndexPath]> { get }
 
@@ -55,10 +52,15 @@ extension PostCollectionDisplayer {
     //MARK: - Reactive
     func setupBasicBindables() {
         
-        restart.map { (_) -> Bool in
+        needsRestart.filter { (needsRestart) -> Bool in
+            return needsRestart
+        }.map { (_) -> Bool in
             return false
-            }.bind(to: finishedStart).disposed(by: disposeBag)
-        refreshChanged.bind(to: restart).disposed(by: disposeBag)
+        }.bind(to: uiLoaded).disposed(by: disposeBag)
+        
+        refreshChanged.map { (_) -> Bool in
+            return true
+        }.bind(to: needsRestart).disposed(by: disposeBag)
         
         isAppeared.bind(to: postListDisplayer.isAppeared).disposed(by: disposeBag)
         
