@@ -82,11 +82,11 @@ class PostCollectionView: UICollectionView {
         
             self?.setContentOffset(.zero, animated: false)
             self?.feedDelegate.clearCache()
-            
+
             if (self?.refreshControl?.isRefreshing == true) {
                 self?.refreshControl?.endRefreshing()
             }
-            
+
             self?.reloadData()
             self?.layoutIfNeeded()
             self?.displayer.uiLoaded.accept(true)

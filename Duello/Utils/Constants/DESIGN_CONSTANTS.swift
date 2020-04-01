@@ -44,3 +44,7 @@ let STANDARDSPACING: CGFloat = 14
 //ETC
 let LIGHTALPHA: CGFloat = 0.15
 
+//Media
+let MAXMEDIAHEIGHTRATIO: Double = 1.3
+let MINMEDIAHEIGHTRATIO: Double = 0.9
+

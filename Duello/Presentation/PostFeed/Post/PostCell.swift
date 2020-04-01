@@ -316,9 +316,11 @@ class PostCell<T: PostDisplayer>: UICollectionViewCell {
         }
 
     }
-
+    
     private func updateMediaHeight(displayer: T) {
-        let mediaRatio = displayer.mediaRatio
+        var mediaRatio = displayer.mediaRatio
+        mediaRatio = max(mediaRatio, MINMEDIAHEIGHTRATIO)
+        mediaRatio = min(mediaRatio, MAXMEDIAHEIGHTRATIO)
         mediaViewHeightConstraint?.constant = frame.width * CGFloat(mediaRatio)
     }
 
