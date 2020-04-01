@@ -173,7 +173,7 @@ class HomeViewModel: FeedMasterDisplayer {
     private func updatePost(at index: Int) {
         guard let posts = homeCollectionViewModel.posts.value else { return }
         let post = posts[index]
-        UploadingService.shared.savePost(post: post, postId: post.getId()).subscribe(onNext: { (_) in
+        UploadingService.shared.updatePost(post: post).subscribe(onNext: { (_) in
             //Updated Post
             }).disposed(by: disposeBag)
 

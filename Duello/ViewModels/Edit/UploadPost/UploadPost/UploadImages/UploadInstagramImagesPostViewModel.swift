@@ -45,7 +45,7 @@ class UploadInstagramImagesPostViewModel: UploadPostViewModel<InstagramImagesPos
         let post = makePost()
         isLoading.accept(true)
         
-        UploadingService.shared.savePost(post: post).subscribe(onNext: { [weak self] (post) in
+        UploadingService.shared.create(post: post).subscribe(onNext: { [weak self] (post) in
             self?.isLoading.accept(false)
             self?.coordinator?.didSavePost.accept(())
             

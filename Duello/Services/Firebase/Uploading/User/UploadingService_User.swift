@@ -11,14 +11,21 @@ import Firebase
 
 extension UploadingService {
     
-    func saveUser(userProfile: UserModel) -> Observable<Model?> {
+    func saveUser(userProfile: UserModel) -> Observable<UserModel?> {
         guard hasInternetConnection() else { return Observable.error(UploadingError.networkError)}
         guard let uid = Auth.auth().currentUser?.uid else { return Observable.error(UploadingError.userNotLoggedIn)}
         
-        return saveDatabaseModel(databaseModel: userProfile, reference: USERS_REFERENCE, id: uid).map({ (databaseModel) -> Model? in
-            return databaseModel
-        })
+        let updatingsPosts = FetchingService.shared.fetchAllUserPosts(for: uid).flatMapLatest { (posts, _) -> Observable<[PostModel?]> in
+            return Observable.from(posts).flatMap { (post) -> Observable<PostModel?> in
+                post.user.model = userProfile
+                return self.updatePost(post: post)
+            }.toArray()
+        }
+        let updatingUser = saveDatabaseModel(databaseModel: userProfile, reference: USERS_REFERENCE, id: uid)
         
+        return Observable.zip(updatingsPosts, updatingUser).map { (posts, model) -> UserModel? in
+            return model as? UserModel
+        }
     }
     
 }

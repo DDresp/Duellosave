@@ -54,7 +54,7 @@ class UploadLocalImagesPostViewModel: UploadPostViewModel<LocalImagesPost>, Uplo
         
         StoringService.shared.storeImages(images: images).flatMapLatest { [weak self] (imageUrls) -> Observable<PostModel?> in
             let post = self?.makePost(imageUrls: imageUrls)
-            return UploadingService.shared.savePost(post: post ?? LocalImagesPost())
+            return UploadingService.shared.create(post: post ?? LocalImagesPost())
             }.subscribe(onNext: { [weak self] (post) in
                 self?.isLoading.accept(false)
                 self?.coordinator?.didSavePost.accept(())

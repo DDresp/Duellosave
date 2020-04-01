@@ -55,7 +55,7 @@ class UploadLocalVideoPostViewModel: UploadPostViewModel<LocalVideoPost>, Upload
         
         StoringService.shared.storeVideoAndThumbnail(image: image, videoUrl: videoUrl).flatMapLatest { [weak self] (urlStrings) -> Observable<PostModel?> in
             let post = self?.makePost(thumbnailUrl: urlStrings[0], videoUrl: urlStrings[1]) ?? LocalVideoPost()
-            return UploadingService.shared.savePost(post: post)
+            return UploadingService.shared.create(post: post)
             }.subscribe(onNext: { [weak self] (post) in
                 self?.isLoading.accept(false)
                 self?.coordinator?.didSavePost.accept(())

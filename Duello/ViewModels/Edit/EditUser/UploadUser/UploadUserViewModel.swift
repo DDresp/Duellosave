@@ -202,12 +202,11 @@ class UploadUserViewModel: UploadUserDisplayer {
     }
     
     private func uploadUserWithNewImage(for user: UserModel,_ image: UIImage) {
-        StoringService.shared.storeProfileImage(image: image).flatMapLatest { (imageUrl) -> Observable<Model?> in
+        StoringService.shared.storeProfileImage(image: image).flatMapLatest { (imageUrl) -> Observable<UserModel?> in
             user.imageUrl.value = imageUrl
             return UploadingService.shared.saveUser(userProfile: user)
             }.subscribe(onNext: { [weak self] (user) in
                 self?.isLoading.accept(false)
-                guard let user = user as? UserModel else { return }
                 self?.coordinator?.didSetUser.accept(user)
                 }, onError: { [weak self] (error) in
                     self?.isLoading.accept(false)
@@ -219,7 +218,6 @@ class UploadUserViewModel: UploadUserDisplayer {
     
     private func uploadUserWithoutNewImage(for user: UserModel) {
         UploadingService.shared.saveUser(userProfile: user).subscribe(onNext: { [weak self] (user) in
-            guard let user = user as? UserModel else { return }
             self?.isLoading.accept(false)
             self?.coordinator?.didSetUser.accept(user)
             }, onError: { [weak self] (error) in
