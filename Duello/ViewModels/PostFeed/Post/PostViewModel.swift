@@ -6,13 +6,13 @@
 //  Copyright © 2020 Darius Dresp. All rights reserved.
 //
 
+
 import RxSwift
 import RxCocoa
 
 class PostViewModel: PostDisplayer {
     
     //MARK: - Models
-    let user: UserModel
     let post: PostModel
     
     //MARK: - ChildViewModels
@@ -47,8 +47,7 @@ class PostViewModel: PostDisplayer {
     var updateDeactivation: PublishRelay<Int> = PublishRelay<Int>()
     
     //MARK: - Setup
-    init(user: UserModel, post: PostModel, index: Int) {
-        self.user = user
+    init(post: PostModel, index: Int) {
         self.post = post
         self.index = index
         self.postId = post.getId()
@@ -57,14 +56,14 @@ class PostViewModel: PostDisplayer {
         self.title = post.getTitle()
         self.mediaRatio = post.getMediaRatio()
         self.isDeactivated = BehaviorRelay(value: post.getIsDeactivated())
-        socialMediaDisplayer.user.accept(user)
+        socialMediaDisplayer.user.accept(post.getUser())
         setupBindablesFromOwnProperties()
     }
     
     //MARK: - Getters
-    var userProfileImageUrl: String { return user.imageUrl.value?.toStringValue() ?? "" }
-    var userHasSocialMediaNames: Bool { return user.addedSocialMediaName }
-    var userName: String { return user.userName.value?.toStringValue() ?? "" }
+    var userProfileImageUrl: String { return post.getUser().imageUrl.value?.toStringValue() ?? "" }
+    var userHasSocialMediaNames: Bool { return post.getUser().addedSocialMediaName }
+    var userName: String { return post.getUser().userName.value?.toStringValue() ?? "" }
     
     var actionSheet: ActionSheet {
         

@@ -68,6 +68,7 @@ class UploadPostViewModel<T: PostModel>: UploadPostDisplayer {
         uploadPost.rate.value = rate
         uploadPost.mediaRatio.value = mediaRatio ?? 1
         uploadPost.uid.value = Auth.auth().currentUser?.uid
+        
     }
     
     //MARK: - Networking

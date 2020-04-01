@@ -25,6 +25,7 @@ struct InstagramSingleImagePost: InstagramSingleImagePostModel {
     var rate: PostSingleAttribute = PostSingleAttribute(attributeCase: .rate, value: nil)
     var mediaRatio: PostSingleAttribute = PostSingleAttribute(attributeCase: .mediaRatio, value: nil)
     var isDeactivated: PostSingleAttribute = PostSingleAttribute(attributeCase: .isDeactivated, value: false)
+    var user: PostMapAttribute = PostMapAttribute(attributeCase: .user, model: User())
     
     var typeData: PostSingleAttribute = PostSingleAttribute(attributeCase: .type, value: MediaType.instagramSingleImage)
     var apiUrl: PostSingleAttribute = PostSingleAttribute(attributeCase: .apiUrl, value: nil)
@@ -44,6 +45,10 @@ struct InstagramSingleImagePost: InstagramSingleImagePostModel {
             mediaRatio,
             isDeactivated
         ]
+    }
+    
+    func getMapAttributes() -> [MapAttribute]? {
+        return [user]
     }
     
     //MARK: - Networking

@@ -22,6 +22,7 @@ protocol PostModel: Model {
     var typeData: PostSingleAttribute { get set }
     var mediaRatio: PostSingleAttribute { get set }
     var isDeactivated: PostSingleAttribute { get set }
+    var user: PostMapAttribute { get set }
 
 }
 
@@ -38,9 +39,6 @@ extension PostModel {
     func getRate() -> Double { return Double(rate.value?.toStringValue() ?? "0") ?? 0 }
     func getMediaRatio() -> Double { return Double(mediaRatio.value?.toStringValue() ?? "1") ?? 1}
     func getIsDeactivated() -> Bool { return isDeactivated.value?.toStringValue() == "0" ? false : true }
+    func getUser() -> UserModel { return user.getModel() as? User ?? User() }
     
-//    func getQueryAttributes() -> [SingleAttribute]? {
-//        return [rate, dislikes, likes, creationDate]
-//    }
-//    
 }

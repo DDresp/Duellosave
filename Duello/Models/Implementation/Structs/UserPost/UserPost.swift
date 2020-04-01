@@ -6,12 +6,12 @@
 //  Copyright © 2020 Darius Dresp. All rights reserved.
 //
 
-struct UserPost {
-    var user: UserModel
-    var post: PostModel
-    
-    init(user: UserModel, post: PostModel) {
-        self.user = user
-        self.post = post
-    }
-}
+//struct UserPost {
+//    var user: UserModel
+//    var post: PostModel
+//    
+//    init(user: UserModel, post: PostModel) {
+//        self.user = user
+//        self.post = post
+//    }
+//}

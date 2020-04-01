@@ -9,7 +9,7 @@
 //MARK: - Attribute
 class PostMapAttribute: MapAttribute {
     
-    let model: Model
+    var model: Model
     let attributeCase: PostMapAttributeCase
     
     init(attributeCase: PostMapAttributeCase, model: Model) {
@@ -31,10 +31,12 @@ class PostMapAttribute: MapAttribute {
 enum PostMapAttributeCase: MapAttributeCase {
     
     case images
+    case user
     
     var key: String {
         switch self {
         case .images: return "images"
+        case .user: return "user"
         }
     }
 }

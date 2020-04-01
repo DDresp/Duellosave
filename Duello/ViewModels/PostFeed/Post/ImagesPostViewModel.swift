@@ -25,7 +25,7 @@ class ImagesPostViewModel: PostViewModel {
     var selectedPhotoIndex: BehaviorRelay<Int> = BehaviorRelay<Int>(value: 0)
     
     //MARK: - Setup
-    init(user: UserModel, post: ImagesPostModel, index: Int) {
+    init(post: ImagesPostModel, index: Int) {
         
         switch post {
         case let post as LocalImagesPostModel:
@@ -35,8 +35,8 @@ class ImagesPostViewModel: PostViewModel {
         default:
             ()
         }
-        super.init(user: user, post: post, index: index)
-        socialMediaDisplayer.user.accept(user)
+        super.init(post: post, index: index)
+        socialMediaDisplayer.user.accept(post.getUser())
         setupBindablesFromChildViewModels()
         setupBindablesFromOwnProperties()
     }

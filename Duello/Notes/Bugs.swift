@@ -15,3 +15,10 @@
 //Squized first cell sometimes
 
 //safe username etc on post
+
+
+///GET USERMODEL GOING --> Currently: check getMapAttributes for the structs
+
+//if you change value for user, you have to update all his Posts
+
+//Double Displaying/ Pagination Bug

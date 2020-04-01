@@ -24,6 +24,7 @@ struct LocalVideoPost: LocalVideoPostModel {
     var rate: PostSingleAttribute = PostSingleAttribute(attributeCase: .rate, value: nil)
     var mediaRatio: PostSingleAttribute = PostSingleAttribute(attributeCase: .mediaRatio, value: nil)
     var isDeactivated: PostSingleAttribute = PostSingleAttribute(attributeCase: .isDeactivated, value: false)
+    var user: PostMapAttribute = PostMapAttribute(attributeCase: .user, model: User())
     
     var typeData: PostSingleAttribute = PostSingleAttribute(attributeCase: .type, value: MediaType.localVideo)
     var videoUrl: PostSingleAttribute = PostSingleAttribute(attributeCase: .videoUrl, value: nil)
@@ -45,5 +46,9 @@ struct LocalVideoPost: LocalVideoPostModel {
             mediaRatio,
             isDeactivated
         ]
+    }
+    
+    func getMapAttributes() -> [MapAttribute]? {
+        return [user]
     }
 }

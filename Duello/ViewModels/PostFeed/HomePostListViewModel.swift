@@ -5,7 +5,6 @@
 //  Created by Darius Dresp on 3/4/20.
 //  Copyright © 2020 Darius Dresp. All rights reserved.
 //
-
 import RxSwift
 import RxCocoa
 import Firebase
@@ -48,7 +47,7 @@ class HomePostListViewModel: PostListDisplayer {
     }
     
     //MARK: - Methods
-    func update(with loadedPosts: [UserPost], fromStart: Bool) {
+    func update(with loadedPosts: [PostModel], fromStart: Bool) {
         
         if fromStart {
             postDisplayers = [PostDisplayer]()
@@ -76,25 +75,23 @@ class HomePostListViewModel: PostListDisplayer {
     }
     
     //Configuration
-    private func configurePostDisplayers(with userPosts: [UserPost]) {
+    private func configurePostDisplayers(with posts: [PostModel]) {
         
         let startIndex = postDisplayers.count
         var newPostDisplayers = [PostDisplayer]()
         
-        for (index, userPost) in userPosts.enumerated() {
-            let user = userPost.user
-            let post = userPost.post
+        for (index, post) in posts.enumerated() {
             
             var viewModel: PostDisplayer?
             let modelIndex = startIndex + index
             
             switch post {
             case let model as SingleImagePostModel:
-                viewModel = SingleImagePostViewModel(user: user, post: model, index: modelIndex)
+                viewModel = SingleImagePostViewModel(post: model, index: modelIndex)
             case let model as ImagesPostModel:
-                viewModel = ImagesPostViewModel(user: user, post: model, index: modelIndex)
+                viewModel = ImagesPostViewModel(post: model, index: modelIndex)
             case let model as VideoPostModel:
-                viewModel = VideoPostViewModel(user: user, post: model, index: modelIndex)
+                viewModel = VideoPostViewModel(post: model, index: modelIndex)
             default:
                 ()
             }

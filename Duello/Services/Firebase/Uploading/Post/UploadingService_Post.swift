@@ -13,11 +13,21 @@ extension UploadingService {
     
     func savePost(post: PostModel, postId: String? = nil) -> Observable<PostModel?> {
         guard hasInternetConnection() else { return Observable.error(UploadingError.networkError)}
+        guard let uid = Auth.auth().currentUser?.uid else { return Observable.error(UploadingError.userNotLoggedIn)}
         let id: String = postId ?? UUID().uuidString
         
-        return saveDatabaseModel(databaseModel: post, reference: POST_REFERENCE, id: id).map { (post) -> PostModel in
-            guard let savedPost = post as? PostModel else { throw UploadingError.unknown(description: "unknown error")}
-            return savedPost
+        return FetchingService.shared.fetchUser(for: uid).flatMapLatest { [weak self] (user) -> Observable<PostModel?> in
+            guard let self = self else { return Observable.empty() }
+            post.user.model = user
+            return self.saveDatabaseModel(databaseModel: post, reference: POST_REFERENCE, id: id).map { (post) -> PostModel in
+                guard let savedPost = post as? PostModel else { throw UploadingError.unknown(description: "unknown error")}
+                return savedPost
+            }
+            
+            //        return saveDatabaseModel(databaseModel: post, reference: POST_REFERENCE, id: id).map { (post) -> PostModel in
+            //            guard let savedPost = post as? PostModel else { throw UploadingError.unknown(description: "unknown error")}
+            //            return savedPost
+            //        }
         }
     }
     

@@ -24,9 +24,11 @@ struct LocalSingleImagePost: LocalSingleImagePostModel {
     var rate: PostSingleAttribute = PostSingleAttribute(attributeCase: .rate, value: nil)
     var mediaRatio: PostSingleAttribute = PostSingleAttribute(attributeCase: .mediaRatio, value: nil)
     var isDeactivated: PostSingleAttribute = PostSingleAttribute(attributeCase: .isDeactivated, value: false)
+    var user: PostMapAttribute = PostMapAttribute(attributeCase: .user, model: User())
     
     var typeData: PostSingleAttribute = PostSingleAttribute(attributeCase: .type, value: MediaType.localSingleImage)
     var imageUrl: PostSingleAttribute = PostSingleAttribute(attributeCase: .imageUrl(0), value: nil)
+    
     
     //MARK: - Getters
     func getSingleAttributes() -> [SingleAttribute] {
@@ -43,6 +45,10 @@ struct LocalSingleImagePost: LocalSingleImagePostModel {
             mediaRatio,
             isDeactivated
         ]
+    }
+    
+    func getMapAttributes() -> [MapAttribute]? {
+        return [user]
     }
     
 }

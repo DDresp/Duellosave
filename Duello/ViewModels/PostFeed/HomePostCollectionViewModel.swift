@@ -5,7 +5,6 @@
 //  Created by Darius Dresp on 3/18/20.
 //  Copyright © 2020 Darius Dresp. All rights reserved.
 //
-
 import RxSwift
 import RxCocoa
 
@@ -26,15 +25,6 @@ class HomePostCollectionViewModel: PostCollectionDisplayer {
     
     var postListViewModel: HomePostListViewModel {
         return postListDisplayer as! HomePostListViewModel
-    }
-    
-    //MARK: - Variables
-    
-    var userPosts: [UserPost] {
-        guard let user = user.value, let posts = posts.value else { return [UserPost]() }
-        return posts.map { (post) -> UserPost in
-            return UserPost(user: user, post: post)
-        }
     }
     
     //MARK: - Bindables
@@ -92,14 +82,13 @@ class HomePostCollectionViewModel: PostCollectionDisplayer {
         }).disposed(by: disposeBag)
         
         posts.subscribe(onNext: { [weak self] (posts) in
-            guard let _ = posts else { return }
-            guard let userPosts = self?.userPosts else { return }
+            guard let posts = posts else { return }
 
             if self?.needsRestart.value == true {
-                self?.postListDisplayer.update(with: userPosts, fromStart: true)
+                self?.postListDisplayer.update(with: posts, fromStart: true)
                 self?.needsRestart.accept(false)
             } else {
-                self?.postListDisplayer.update(with: userPosts, fromStart: false)
+                self?.postListDisplayer.update(with: posts, fromStart: false)
             }
             
         }).disposed(by: disposeBag)

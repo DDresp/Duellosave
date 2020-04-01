@@ -33,7 +33,7 @@ class VideoPostViewModel: PostViewModel, VideoPlayerDisplayer {
     let isMuted: BehaviorRelay<Bool> = BehaviorRelay<Bool>(value: true)
     
     //MARK: - Setup
-    init(user: UserModel, post: VideoPostModel, index: Int) {
+    init(post: VideoPostModel, index: Int) {
         
         switch post {
         case let post as LocalVideoPostModel:
@@ -46,7 +46,7 @@ class VideoPostViewModel: PostViewModel, VideoPlayerDisplayer {
         default:
             ()
         }
-        super.init(user: user, post: post, index: index)
+        super.init(post: post, index: index)
         setupBindables()
     }
     

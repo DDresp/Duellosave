@@ -21,7 +21,7 @@ class SingleImagePostViewModel: PostViewModel {
     var imageUrl: BehaviorRelay<URL?> = BehaviorRelay(value: nil)
     
     //MARK: - Setup
-    init(user: UserModel, post: SingleImagePostModel, index: Int) {
+    init(post: SingleImagePostModel, index: Int) {
         
         switch post {
         case let post as LocalSingleImagePostModel:
@@ -31,7 +31,7 @@ class SingleImagePostViewModel: PostViewModel {
         default:
             ()
         }
-        super.init(user: user, post: post, index: index)
+        super.init(post: post, index: index)
         setupBindablesFromOwnProperties()
     }
     

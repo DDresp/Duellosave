@@ -24,6 +24,7 @@ struct InstagramImagesPost: InstagramImagesPostModel {
     var rate: PostSingleAttribute = PostSingleAttribute(attributeCase: .rate, value: nil)
     var mediaRatio: PostSingleAttribute = PostSingleAttribute(attributeCase: .mediaRatio, value: nil)
     var isDeactivated: PostSingleAttribute = PostSingleAttribute(attributeCase: .isDeactivated, value: false)
+    var user: PostMapAttribute = PostMapAttribute(attributeCase: .user, model: User())
     
     var typeData: PostSingleAttribute = PostSingleAttribute(attributeCase: .type, value: MediaType.instagramImages)
     var apiUrl: PostSingleAttribute = PostSingleAttribute(attributeCase: .apiUrl, value: nil)
@@ -45,6 +46,10 @@ struct InstagramImagesPost: InstagramImagesPostModel {
         ]
     }
 
+    func getMapAttributes() -> [MapAttribute]? {
+        return [user]
+    }
+    
     //MARK: - Networking
     func downloadImageUrls() -> Observable<([URL]?)> {
         guard let apiUrlString = apiUrl.value?.toStringValue() else {
