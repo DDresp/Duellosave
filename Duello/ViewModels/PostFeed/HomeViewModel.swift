@@ -22,6 +22,7 @@ class HomeViewModel: FeedMasterDisplayer {
     var user: UserModel?
     var posts = [PostModel]()
     var displayedPosts = [PostModel]()
+    
     let fetchSteps: Int = 6
     var lastFetchAll: Date? //important to fetch all for getting the correct score
     let fetchingAllPause: Double = 10 //user shouldn't be able to fetch all Posts so often (too expensive)
@@ -72,7 +73,6 @@ class HomeViewModel: FeedMasterDisplayer {
             forceFetchingAll = false
             fetchAll()
         }
-        
     }
     
     func retrieveNextPosts() {
@@ -122,6 +122,9 @@ class HomeViewModel: FeedMasterDisplayer {
             }
             
             self.loadedAllPosts.accept(true)
+            let displayingNames = self.displayedPosts.map { (post) -> String in
+                return post.getTitle()
+            }
             self.homeCollectionViewModel.posts.accept(self.displayedPosts)
             
         }).disposed(by: disposeBag)
@@ -221,6 +224,7 @@ class HomeViewModel: FeedMasterDisplayer {
             }).disposed(by: disposeBag)
         
         homeCollectionViewModel.fetchNext.subscribe(onNext: { [weak self] (_) in
+            guard (self?.posts.count ?? 0) > 0 else { return }
             self?.retrieveNextPosts()
             }).disposed(by: disposeBag)
         

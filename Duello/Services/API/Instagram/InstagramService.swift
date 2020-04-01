@@ -61,7 +61,6 @@ class InstagramService: NetworkService {
             }
         } else {
             
-            //Developing: Check if more then expected comes here
             for range in instagramDescription.ranges(of: queryKey) {
                 let substring = String(instagramDescription.suffix(from: range.upperBound))
                 let string = String(substring.split(separator: " ")[1]) //[0] would be "="
