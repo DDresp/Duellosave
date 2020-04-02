@@ -33,7 +33,7 @@ class UploadPostDelegate: NSObject, UITableViewDelegate {
     
     //MARK: - Delegation
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
+
         switch section {
         case mediaCellSection:
             return nil
