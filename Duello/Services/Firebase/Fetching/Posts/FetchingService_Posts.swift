@@ -45,12 +45,12 @@ extension FetchingService {
         var post: PostModel?
         
         switch mediaType {
-        case MediaType.localImages.rawValue: post = LocalImagesPost()
-        case MediaType.localSingleImage.rawValue: post = LocalSingleImagePost()
-        case MediaType.localVideo.rawValue: post = LocalVideoPost()
-        case MediaType.instagramVideo.rawValue: post = InstagramVideoPost()
-        case MediaType.instagramSingleImage.rawValue: post = InstagramSingleImagePost()
-        case MediaType.instagramImages.rawValue: post = InstagramImagesPost()
+        case FineMediaType.localImages.rawValue: post = LocalImagesPost()
+        case FineMediaType.localSingleImage.rawValue: post = LocalSingleImagePost()
+        case FineMediaType.localVideo.rawValue: post = LocalVideoPost()
+        case FineMediaType.instagramVideo.rawValue: post = InstagramVideoPost()
+        case FineMediaType.instagramSingleImage.rawValue: post = InstagramSingleImagePost()
+        case FineMediaType.instagramImages.rawValue: post = InstagramImagesPost()
         default:
             ()
         }

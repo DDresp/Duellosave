@@ -32,7 +32,7 @@ class UploadTableViewController<T: UploadDisplayer>: TableViewController {
     
     private func setupBindablesFromDisplayer() {
         
-        displayer?.alert.asObservable().subscribe(onNext: { [weak self] (alert) in
+        displayer?.alert.subscribe(onNext: { [weak self] (alert) in
             guard let alert = alert else { return }
             let alertController = UIAlertController(title: alert.alertHeader, message: alert.alertMessage, preferredStyle: .alert)
             let action = UIAlertAction(title: "OK", style: .default)
@@ -40,7 +40,7 @@ class UploadTableViewController<T: UploadDisplayer>: TableViewController {
             self?.present(alertController, animated: true)
         }).disposed(by: disposeBag)
         
-        displayer?.isLoading.asObservable().subscribe(onNext: { [weak self] (isLoading) in
+        displayer?.isLoading.subscribe(onNext: { [weak self] (isLoading) in
             guard let self = self else { return }
             if isLoading {
                 let progressHud = JGProgressHUD(style: .dark)

@@ -11,4 +11,4 @@ import FirebaseFirestore
 
 let USERS_REFERENCE = Firestore.firestore().collection("users")
 let POST_REFERENCE = Firestore.firestore().collection("posts")
-
+let CATEGORY_REFERENCE = Firestore.firestore().collection("categories")

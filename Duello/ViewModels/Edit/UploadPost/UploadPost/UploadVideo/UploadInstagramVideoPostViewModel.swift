@@ -13,7 +13,7 @@ import AVFoundation
 class UploadInstagramVideoPostViewModel: UploadPostViewModel<InstagramVideoPost>, UploadVideoPostDisplayer {
     
     //MARK: - Variables
-    var type: MediaType = .instagramVideo
+    var type: FineMediaType = .instagramVideo
     let apiLink: String
     
     //MARK: - Bindables

@@ -26,7 +26,7 @@ struct InstagramImagesPost: InstagramImagesPostModel {
     var isDeactivated: PostSingleAttribute = PostSingleAttribute(attributeCase: .isDeactivated, value: false)
     var user: PostMapAttribute = PostMapAttribute(attributeCase: .user, model: User())
     
-    var typeData: PostSingleAttribute = PostSingleAttribute(attributeCase: .type, value: MediaType.instagramImages)
+    var typeData: PostSingleAttribute = PostSingleAttribute(attributeCase: .type, value: FineMediaType.instagramImages)
     var apiUrl: PostSingleAttribute = PostSingleAttribute(attributeCase: .apiUrl, value: nil)
     
     //MARK: - Getters

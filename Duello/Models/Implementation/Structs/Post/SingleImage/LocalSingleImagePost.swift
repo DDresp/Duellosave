@@ -26,7 +26,7 @@ struct LocalSingleImagePost: LocalSingleImagePostModel {
     var isDeactivated: PostSingleAttribute = PostSingleAttribute(attributeCase: .isDeactivated, value: false)
     var user: PostMapAttribute = PostMapAttribute(attributeCase: .user, model: User())
     
-    var typeData: PostSingleAttribute = PostSingleAttribute(attributeCase: .type, value: MediaType.localSingleImage)
+    var typeData: PostSingleAttribute = PostSingleAttribute(attributeCase: .type, value: FineMediaType.localSingleImage)
     var imageUrl: PostSingleAttribute = PostSingleAttribute(attributeCase: .imageUrl(0), value: nil)
     
     

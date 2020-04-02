@@ -26,7 +26,7 @@ struct LocalVideoPost: LocalVideoPostModel {
     var isDeactivated: PostSingleAttribute = PostSingleAttribute(attributeCase: .isDeactivated, value: false)
     var user: PostMapAttribute = PostMapAttribute(attributeCase: .user, model: User())
     
-    var typeData: PostSingleAttribute = PostSingleAttribute(attributeCase: .type, value: MediaType.localVideo)
+    var typeData: PostSingleAttribute = PostSingleAttribute(attributeCase: .type, value: FineMediaType.localVideo)
     var videoUrl: PostSingleAttribute = PostSingleAttribute(attributeCase: .videoUrl, value: nil)
     var thumbNailUrl: PostSingleAttribute = PostSingleAttribute(attributeCase: .thumbNailUrl, value: nil)
     

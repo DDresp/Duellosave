@@ -9,7 +9,7 @@
 protocol PostModel: Model {
     
     //MARK: - Variables
-    var type: MediaType { get }
+    var type: FineMediaType { get }
     
     //MARK: - Attributes
     var uid: PostSingleAttribute { get set }

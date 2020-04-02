@@ -11,7 +11,7 @@ protocol InstagramSingleImagePostModel: ApiSingleImagePostModel {
 }
 
 extension InstagramSingleImagePostModel {
-    var type: MediaType {
+    var type: FineMediaType {
         return .instagramSingleImage
     }
 }

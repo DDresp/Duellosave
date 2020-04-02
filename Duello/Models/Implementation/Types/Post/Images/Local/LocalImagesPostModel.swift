@@ -15,7 +15,7 @@ protocol LocalImagesPostModel: ImagesPostModel
 
 extension LocalImagesPostModel {
     
-    var type: MediaType {
+    var type: FineMediaType {
         return .localImages
     }
     

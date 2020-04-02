@@ -59,7 +59,7 @@ enum PostSingleAttributeCase: SingleAttributeCase {
         case .rate, .creationDate, .mediaRatio:
             return .Double
         case .type:
-            return .MediaType
+            return .FineMediaType
         case .isDeactivated:
             return .Bool
         }

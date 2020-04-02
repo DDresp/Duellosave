@@ -61,8 +61,12 @@ extension Model {
                 if let value = attribute.getValue() as? String {
                     dictionary[attribute.getKey()] = value
                 }
-            case .MediaType:
-                if let value = attribute.getValue() as? MediaType {
+            case .FineMediaType:
+                if let value = attribute.getValue() as? FineMediaType {
+                    dictionary[attribute.getKey()] = value.rawValue
+                }
+            case .RoughMediaType:
+                if let value = attribute.getValue() as? RoughMediaType {
                     dictionary[attribute.getKey()] = value.rawValue
                 }
             case .Bool:
@@ -102,27 +106,41 @@ extension Model {
                 if let value = dic[attribute.getKey()] as? String {
                     attribute.setValue(of: value)
                 }
-            case .MediaType:
+            case .FineMediaType:
                 if let value = dic[attribute.getKey()] as? String {
                     
                     switch value {
-                    case MediaType.localSingleImage.rawValue:
-                        attribute.setValue(of: MediaType.localSingleImage)
-                    case MediaType.localImages.rawValue:
-                        attribute.setValue(of: MediaType.localImages)
-                    case MediaType.localVideo.rawValue:
-                        attribute.setValue(of: MediaType.localVideo)
-                    case MediaType.instagramVideo.rawValue:
-                        attribute.setValue(of: MediaType.instagramVideo)
-                    case MediaType.instagramSingleImage.rawValue:
-                        attribute.setValue(of: MediaType.instagramSingleImage)
-                    case MediaType.instagramImages.rawValue:
-                        attribute.setValue(of: MediaType.instagramImages)
+                    case FineMediaType.localSingleImage.rawValue:
+                        attribute.setValue(of: FineMediaType.localSingleImage)
+                    case FineMediaType.localImages.rawValue:
+                        attribute.setValue(of: FineMediaType.localImages)
+                    case FineMediaType.localVideo.rawValue:
+                        attribute.setValue(of: FineMediaType.localVideo)
+                    case FineMediaType.instagramVideo.rawValue:
+                        attribute.setValue(of: FineMediaType.instagramVideo)
+                    case FineMediaType.instagramSingleImage.rawValue:
+                        attribute.setValue(of: FineMediaType.instagramSingleImage)
+                    case FineMediaType.instagramImages.rawValue:
+                        attribute.setValue(of: FineMediaType.instagramImages)
                     default:
                         return
-                        
                     }
                 }
+            case .RoughMediaType:
+                if let value = dic[attribute.getKey()] as? String {
+                    
+                    switch value {
+                    case RoughMediaType.Video.rawValue:
+                        attribute.setValue(of: RoughMediaType.Video)
+                    case RoughMediaType.Image.rawValue:
+                        attribute.setValue(of: RoughMediaType.Image)
+                    case RoughMediaType.VideoAndImage.rawValue:
+                        attribute.setValue(of: RoughMediaType.VideoAndImage)
+                    default:
+                        return
+                    }
+                }
+                
             case .Bool:
                 if let value = dic[attribute.getKey()] as? Int, value == 0 {
                     attribute.setValue(of: false)
@@ -139,4 +157,9 @@ extension Model {
             }
         }
     }
+}
+
+//MARK: - Getters
+extension Model {
+    func getId() -> String { return id?.toStringValue() ?? "" }
 }

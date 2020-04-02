@@ -15,6 +15,7 @@ class MainCoordinator: MainCoordinatorType {
     private var newsCoordinator = NewsCoordinator()
     private var homeCoordinator = HomeCoordinator()
     private var postingCoordinator = PostingCoordinator()
+    private var categoryCoordinator = CategoryCreationCoordinator()
     
     //MARK: - Bindables
     var loggedOut = PublishSubject<Void>()
@@ -28,7 +29,8 @@ class MainCoordinator: MainCoordinatorType {
         tabBarController.viewControllers = [
             newsCoordinator.navigationController ?? UIViewController(),
             homeCoordinator.navigationController ?? UIViewController(),
-            postingCoordinator.navigationController ?? UIViewController()
+            postingCoordinator.navigationController ?? UIViewController(),
+            categoryCoordinator.navigationController ?? UIViewController()
         ]
     }
     

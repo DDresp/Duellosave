@@ -27,7 +27,7 @@ struct InstagramVideoPost: InstagramVideoPostModel {
     var isDeactivated: PostSingleAttribute = PostSingleAttribute(attributeCase: .isDeactivated, value: false)
     var user: PostMapAttribute = PostMapAttribute(attributeCase: .user, model: User())
     
-    var typeData: PostSingleAttribute = PostSingleAttribute(attributeCase: .type, value: MediaType.instagramVideo)
+    var typeData: PostSingleAttribute = PostSingleAttribute(attributeCase: .type, value: FineMediaType.instagramVideo)
     var apiUrl: PostSingleAttribute = PostSingleAttribute(attributeCase: .apiUrl, value: nil)
     
     //MARK: - Getters

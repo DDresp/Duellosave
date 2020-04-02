@@ -14,7 +14,7 @@ class UploadLocalImagesPostViewModel: UploadPostViewModel<LocalImagesPost>, Uplo
     var imagesSliderDisplayer: ImagesSliderDisplayer
     
     //MARK: - Variables
-    var type: MediaType = .localImages
+    var type: FineMediaType = .localImages
     let images: [UIImage]
     
     //MARK: - Setup

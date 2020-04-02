@@ -14,7 +14,7 @@ protocol LocalSingleImagePostModel: SingleImagePostModel {
 
 extension LocalSingleImagePostModel {
     
-    var type: MediaType {
+    var type: FineMediaType {
         return .localSingleImage
     }
     

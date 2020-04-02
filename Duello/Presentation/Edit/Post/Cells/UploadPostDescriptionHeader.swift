@@ -22,7 +22,7 @@ class UploadPostDescriptionHeader: UIView {
     override init(frame: CGRect) {
         super.init(frame: .zero)
         addSubview(overallStackView)
-        overallStackView.fillSuperview()
+        overallStackView.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: STANDARDSPACING, left: 0, bottom: 6, right: 0))
         
     }
     
