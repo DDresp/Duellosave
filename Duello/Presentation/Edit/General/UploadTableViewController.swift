@@ -32,6 +32,7 @@ class UploadTableViewController<T: UploadDisplayer>: TableViewController {
         let dummyViewHeight = CGFloat(40)
         tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: dummyViewHeight))
         tableView.contentInset = UIEdgeInsets(top: -dummyViewHeight, left: 0, bottom: 0, right: 0)
+
         
         tableView.backgroundColor = EXTREMELIGHTGRAYCOLOR
         tableView.keyboardDismissMode = .interactive

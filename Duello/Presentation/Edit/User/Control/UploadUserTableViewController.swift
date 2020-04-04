@@ -28,20 +28,12 @@ class UploadUserTableViewController<T: UploadUserDisplayer>: UploadTableViewCont
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupTableView()
         setupBindablesFromDisplayer()
         
-        navigationItem.title = "Profile Settings"
-    }
-    
-    private func setupTableView() {
-        
-        var frame = CGRect.zero
-        frame.size.height = .leastNormalMagnitude
-        tableView.tableHeaderView = UIView(frame: frame)
         tableView.dataSource = datasource
         tableView.delegate = delegate
         
+        navigationItem.title = "Profile Settings"
     }
     
     //MARK: - Views
