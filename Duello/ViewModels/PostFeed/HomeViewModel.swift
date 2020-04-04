@@ -5,6 +5,7 @@
 //  Created by Darius Dresp on 3/4/20.
 //  Copyright © 2020 Darius Dresp. All rights reserved.
 //
+
 import RxSwift
 import RxCocoa
 import Firebase
@@ -18,16 +19,6 @@ class HomeViewModel: FeedMasterDisplayer {
         }
     }
     
-    //MARK: - Models
-    var user: UserModel?
-    var posts = [PostModel]()
-    var displayedPosts = [PostModel]()
-    
-    let fetchSteps: Int = 6
-    var lastFetchAll: Date? //important to fetch all for getting the correct score
-    let fetchingAllPause: Double = 10 //user shouldn't be able to fetch all Posts so often (too expensive)
-    var forceFetchingAll = false
-    
     //MARK: - Child Displayers
     var postCollectionDisplayer: PostCollectionDisplayer = HomePostCollectionViewModel()
     
@@ -36,7 +27,18 @@ class HomeViewModel: FeedMasterDisplayer {
         return postCollectionDisplayer as! HomePostCollectionViewModel
     }
     
+    //MARK: - Variables
+    var posts = [PostModel]()
+    
+    let fetchSteps: Int = 6
+    var lastFetchAll: Date? //important to fetch all for getting the correct score
+    let fetchingAllPause: Double = 10 //user shouldn't be able to fetch all Posts so often (too expensive)
+    var forceFetchingAll = false
+    
     //MARK: - Bindables
+     var user: BehaviorRelay<UserModel?> = BehaviorRelay(value: nil)
+     var displayedPosts: BehaviorRelay<[PostModel]?> = BehaviorRelay(value: nil)
+    
     var settingsTapped: PublishSubject<Void> = PublishSubject<Void>()
     var logoutTapped: PublishSubject<Void> = PublishSubject<Void>()
     
@@ -48,11 +50,10 @@ class HomeViewModel: FeedMasterDisplayer {
     
     var isAppeared: BehaviorRelay<Bool> = BehaviorRelay(value: false)
 
-    var isFetchingNextPosts: Bool = false
+    var isFetching: Bool = false
     
     var displayingAllPosts: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     var loadedAllPosts: BehaviorRelay<Bool> = BehaviorRelay(value: false)
-    
     
     //MARK: - Setup
     init() {
@@ -62,8 +63,9 @@ class HomeViewModel: FeedMasterDisplayer {
     //MARK: - Methods
     
     func start() {
-        self.posts = [PostModel]()
-        self.displayedPosts = [PostModel]()
+        
+        posts = [PostModel]()
+        
         self.loadedAllPosts.accept(false)
         self.displayingAllPosts.accept(false)
         
@@ -76,7 +78,7 @@ class HomeViewModel: FeedMasterDisplayer {
     }
     
     func retrieveNextPosts() {
-        if displayedPosts.count < posts.count {
+        if displayingAllPosts.value == false {
             getNextPosts()
         } else {
             fetchLimitedPosts()
@@ -84,68 +86,62 @@ class HomeViewModel: FeedMasterDisplayer {
     }
     
     func getNextPosts() {
+        guard let displayedPosts = displayedPosts.value else { return }
+        
         let difference = posts.count - displayedPosts.count
         if difference <= fetchSteps {
-            self.displayedPosts = self.posts
-            self.displayingAllPosts.accept(true)
-            homeCollectionViewModel.posts.accept(self.displayedPosts)
+            self.displayedPosts.accept(posts)
         } else {
-            self.displayedPosts = Array(self.posts[..<(displayedPosts.count + fetchSteps)])
-            self.displayingAllPosts.accept(false)
-            homeCollectionViewModel.posts.accept(self.displayedPosts)
+            let displayedPosts = Array(posts[..<(displayedPosts.count + fetchSteps)])
+            self.displayedPosts.accept(displayedPosts)
         }
+        
     }
     
     //MARK: - Networking
     func fetchAll() {
         
-        guard let uid = Auth.auth().currentUser?.uid else { return }
+        guard let uid = Auth.auth().currentUser?.uid, !isFetching else { return }
         lastFetchAll = Date()
+        
+        isFetching = true
         
         FetchingService.shared.fetchUser(for: uid)
             .flatMapLatest { [weak self] (user) -> Observable<([PostModel], Double)> in
-                self?.user = user
+                self?.user.accept(user)
                 return FetchingService.shared.fetchAllUserPosts(for: uid)
         }.subscribe(onNext: { [weak self] (posts, score) in
             guard let self = self else { return }
-            self.user?.score = score
-            self.homeCollectionViewModel.user.accept(self.user)
-            
+            var user = self.user.value
+            user?.score = score
+            self.user.accept(user)
             if posts.count <= self.fetchSteps {
-                self.displayingAllPosts.accept(true)
                 self.posts = posts
-                self.displayedPosts = posts
+                self.displayedPosts.accept(self.posts)
             } else {
-                self.displayingAllPosts.accept(false)
                 self.posts = posts
-                self.displayedPosts = Array(posts[0..<self.fetchSteps])
+                let displayedPosts = Array(self.posts[0..<self.fetchSteps])
+                self.displayedPosts.accept(displayedPosts)
             }
-            
+            self.isFetching = false
             self.loadedAllPosts.accept(true)
-            let displayingNames = self.displayedPosts.map { (post) -> String in
-                return post.getTitle()
-            }
-            self.homeCollectionViewModel.posts.accept(self.displayedPosts)
-            
         }).disposed(by: disposeBag)
     }
     
     func fetchLimitedPosts() {
 
-        guard let uid = Auth.auth().currentUser?.uid, !isFetchingNextPosts, !loadedAllPosts.value else { return }
+        guard let uid = Auth.auth().currentUser?.uid, !isFetching, !loadedAllPosts.value else { return }
         
-        let lastPostId = displayedPosts.last?.id
-        isFetchingNextPosts = true
-    
+        let lastPostId = posts.last?.id
+        isFetching = true
+
         DispatchQueue.global(qos: .background).async  {
             FetchingService.shared.fetchUserPosts(for: uid, limit: self.fetchSteps, startId: lastPostId).subscribe(onNext: { [weak self] (posts) in
                 let reachedEnd = posts.count < (self?.fetchSteps ?? 0)
                 self?.loadedAllPosts.accept(reachedEnd)
-                self?.displayingAllPosts.accept(true)
                 self?.posts.append(contentsOf: posts)
-                self?.displayedPosts.append(contentsOf: posts)
-                self?.homeCollectionViewModel.posts.accept(self?.displayedPosts)
-                self?.isFetchingNextPosts = false
+                self?.displayedPosts.accept(self?.posts)
+                self?.isFetching = false
                 
             }).disposed(by: self.disposeBag)
         }
@@ -189,25 +185,12 @@ class HomeViewModel: FeedMasterDisplayer {
         setupBindablesFromViewModel()
         setupBindablesToViewModel()
         setupBindablesToCoordinator()
-        setupBindablesFromOwnProperties()
     }
     
     private func setupBindablesFromViewModel() {
         postCollectionDisplayer.loadLink.bind(to: loadLink).disposed(by: disposeBag)
         postCollectionDisplayer.showAdditionalLinkAlert.bind(to: showAdditionalLinkAlert).disposed(by: disposeBag)
         postCollectionDisplayer.showActionSheet.bind(to: showActionSheet).disposed(by: disposeBag)
-        
-    }
-    
-    private func setupBindablesToViewModel() {
-        isAppeared.bind(to: postCollectionDisplayer.isAppeared).disposed(by: disposeBag)
-    }
-    
-    private func setupBindablesFromOwnProperties() {
-        
-        Observable.combineLatest(displayingAllPosts, loadedAllPosts).map { (displayingAll, loadedAll) -> Bool in
-            return displayingAll && loadedAll
-            }.bind(to: homeCollectionViewModel.finished).disposed(by: disposeBag)
         
         homeCollectionViewModel.deletePost.subscribe(onNext: { [weak self] (postId) in
             self?.deletePost(for: postId)
@@ -230,6 +213,25 @@ class HomeViewModel: FeedMasterDisplayer {
         
     }
     
+    private func setupBindablesToViewModel() {
+        isAppeared.bind(to: postCollectionDisplayer.isAppeared).disposed(by: disposeBag)
+        
+        Observable.combineLatest(displayingAllPosts, loadedAllPosts).map { (displayingAll, loadedAll) -> Bool in
+            return displayingAll && loadedAll
+            }.bind(to: homeCollectionViewModel.finished).disposed(by: disposeBag)
+        
+        user.bind(to: homeCollectionViewModel.user).disposed(by: disposeBag)
+        
+        displayedPosts.map { [weak self] (displayedPosts) -> Bool in
+            guard let self = self else { return false }
+            return self.posts.count == (displayedPosts?.count ?? 0)
+            }.bind(to: displayingAllPosts).disposed(by: disposeBag)
+        
+        displayedPosts.bind(to: homeCollectionViewModel.posts).disposed(by: disposeBag)
+        
+        
+    }
+        
     private func setupBindablesToCoordinator() {
         
         guard let coordinator = coordinator else { return }

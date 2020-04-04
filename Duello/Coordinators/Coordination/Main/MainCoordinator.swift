@@ -14,7 +14,7 @@ class MainCoordinator: MainCoordinatorType {
     //MARK: - ChildCoordinators
     private var newsCoordinator = NewsCoordinator()
     private var homeCoordinator = HomeCoordinator()
-    private var postingCoordinator = PostingCoordinator()
+    private var exploreCoordinator = ExploreCoordinator()
     private var categoryCoordinator = CategoryCreationCoordinator()
     
     //MARK: - Bindables
@@ -27,9 +27,9 @@ class MainCoordinator: MainCoordinatorType {
     
     private func setupChildViewControllers(for tabBarController: UITabBarController) {
         tabBarController.viewControllers = [
-            newsCoordinator.navigationController ?? UIViewController(),
+            newsCoordinator.navigationController ??  UIViewController(),
+            exploreCoordinator.navigationController ?? UIViewController(),
             homeCoordinator.navigationController ?? UIViewController(),
-            postingCoordinator.navigationController ?? UIViewController(),
             categoryCoordinator.navigationController ?? UIViewController()
         ]
     }

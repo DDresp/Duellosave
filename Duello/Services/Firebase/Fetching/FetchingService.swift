@@ -16,11 +16,18 @@ class FetchingService: NetworkService {
     
     private init() {}
     
-    func fetchDocuments(for reference: CollectionReference, field: String, key: String, orderKey: String, limit: Int?, startId: String?) -> Observable<[QueryDocumentSnapshot]?> {
+    func fetchDocuments(for reference: CollectionReference, field: String?, key: String?, orderKey: String, limit: Int?, startId: String?) -> Observable<[QueryDocumentSnapshot]?> {
         return Observable.create { (observer) -> Disposable in
-            var query = reference.whereField(field, isEqualTo: key).order(by: orderKey, descending: true)
             
-            if let id = startId, let document = MemoryManager.shared.retrieveSnapshot(from: key + reference.document(id).path) {
+            var query: Query
+            
+            if let field = field, let key = key {
+                query = reference.whereField(field, isEqualTo: key).order(by: orderKey, descending: true)
+            } else {
+                query = reference.order(by: orderKey, descending: true)
+            }
+            
+            if let id = startId, let document = MemoryManager.shared.retrieveSnapshot(from: (key ?? "") + reference.document(id).path) {
                 query = query.start(afterDocument: document)
             }
             
@@ -40,7 +47,7 @@ class FetchingService: NetworkService {
                 
                 if let lastDocument = documents.last {
                     let lastId = lastDocument.documentID
-                    MemoryManager.shared.memorize(snapshot: lastDocument, with: key + reference.document(lastId).path)
+                    MemoryManager.shared.memorize(snapshot: lastDocument, with: (key ?? "") + reference.document(lastId).path)
                 }
                 
                 observer.onNext(documents)

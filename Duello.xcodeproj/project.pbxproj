@@ -296,6 +296,12 @@
 		14B671AA2438AC040083F663 /* UploadDescriptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B671A92438AC040083F663 /* UploadDescriptionViewModel.swift */; };
 		14B671AF2438B4300083F663 /* CategoryCreationUploadCategoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B671AE2438B4300083F663 /* CategoryCreationUploadCategoryController.swift */; };
 		14B671B42438C2ED0083F663 /* UploadSelectorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B671B32438C2ED0083F663 /* UploadSelectorCell.swift */; };
+		14B671B7243915DB0083F663 /* ExploreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B671B6243915DB0083F663 /* ExploreController.swift */; };
+		14B671BA243916630083F663 /* ExploreCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B671B9243916630083F663 /* ExploreCoordinator.swift */; };
+		14B671BC243916F70083F663 /* ExploreCoordinatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B671BB243916F70083F663 /* ExploreCoordinatorType.swift */; };
+		14B671BF243918650083F663 /* ExploreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B671BE243918650083F663 /* ExploreViewModel.swift */; };
+		14B671C224391C630083F663 /* FetchingService_Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B671C124391C630083F663 /* FetchingService_Categories.swift */; };
+		14B671C4243927EA0083F663 /* ExploreCategoryCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B671C3243927EA0083F663 /* ExploreCategoryCollectionViewModel.swift */; };
 		14BDEC08241CBF0E00228763 /* Bool+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BDEC07241CBF0E00228763 /* Bool+Extension.swift */; };
 		14ED672B241A87550047C085 /* Pods_Duello.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14ED672A241A87550047C085 /* Pods_Duello.framework */; };
 		14ED672C241A87550047C085 /* Pods_Duello.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 14ED672A241A87550047C085 /* Pods_Duello.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -631,6 +637,12 @@
 		14B671A92438AC040083F663 /* UploadDescriptionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadDescriptionViewModel.swift; sourceTree = "<group>"; };
 		14B671AE2438B4300083F663 /* CategoryCreationUploadCategoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCreationUploadCategoryController.swift; sourceTree = "<group>"; };
 		14B671B32438C2ED0083F663 /* UploadSelectorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadSelectorCell.swift; sourceTree = "<group>"; };
+		14B671B6243915DB0083F663 /* ExploreController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreController.swift; sourceTree = "<group>"; };
+		14B671B9243916630083F663 /* ExploreCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreCoordinator.swift; sourceTree = "<group>"; };
+		14B671BB243916F70083F663 /* ExploreCoordinatorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreCoordinatorType.swift; sourceTree = "<group>"; };
+		14B671BE243918650083F663 /* ExploreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewModel.swift; sourceTree = "<group>"; };
+		14B671C124391C630083F663 /* FetchingService_Categories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchingService_Categories.swift; sourceTree = "<group>"; };
+		14B671C3243927EA0083F663 /* ExploreCategoryCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreCategoryCollectionViewModel.swift; sourceTree = "<group>"; };
 		14BDEC07241CBF0E00228763 /* Bool+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+Extension.swift"; sourceTree = "<group>"; };
 		14ED672A241A87550047C085 /* Pods_Duello.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_Duello.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AB5A1CDF25F48DD3230412A /* Pods-DuelloUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DuelloUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DuelloUITests/Pods-DuelloUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -792,6 +804,7 @@
 		1475AE3724103EF100F1D24F /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				14B671BD243918550083F663 /* Explore */,
 				1475AF77241051FA00F1D24F /* DataPresentation */,
 				1475AF76241051F200F1D24F /* PostFeed */,
 				1475AF75241051EB00F1D24F /* Edit */,
@@ -954,6 +967,7 @@
 				1475AE7B2410433700F1D24F /* FetchingService.swift */,
 				1475AE802410435200F1D24F /* User */,
 				1475AE812410435800F1D24F /* Posts */,
+				14B671C024391C350083F663 /* Categories */,
 				1475AE7D2410434300F1D24F /* FetchingError.swift */,
 			);
 			path = Fetching;
@@ -1350,6 +1364,7 @@
 				1475AF1F24104B2200F1D24F /* HomeCoordinatorType.swift */,
 				1475AF2124104B3300F1D24F /* PostingCoordinatorType.swift */,
 				14B6717B243613170083F663 /* CategoryCreationCoordinatorType.swift */,
+				14B671BB243916F70083F663 /* ExploreCoordinatorType.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -1379,6 +1394,7 @@
 			isa = PBXGroup;
 			children = (
 				1475AF2D24104BBE00F1D24F /* MainCoordinator.swift */,
+				14B671B8243916480083F663 /* Explore */,
 				14B671742436062C0083F663 /* CategoryCreation */,
 				149BC5C32421827E00CFBBC7 /* News */,
 				1475AF2C24104BB200F1D24F /* Home */,
@@ -1466,6 +1482,7 @@
 			isa = PBXGroup;
 			children = (
 				1475AF4C2410504200F1D24F /* MainController.swift */,
+				14B671B5243915A20083F663 /* Explore */,
 				149BC5C82422099700CFBBC7 /* News */,
 				1475AF4B2410503700F1D24F /* Home */,
 				1475AF4A2410502B00F1D24F /* Posting */,
@@ -2545,6 +2562,39 @@
 			path = Selector;
 			sourceTree = "<group>";
 		};
+		14B671B5243915A20083F663 /* Explore */ = {
+			isa = PBXGroup;
+			children = (
+				14B671B6243915DB0083F663 /* ExploreController.swift */,
+			);
+			path = Explore;
+			sourceTree = "<group>";
+		};
+		14B671B8243916480083F663 /* Explore */ = {
+			isa = PBXGroup;
+			children = (
+				14B671B9243916630083F663 /* ExploreCoordinator.swift */,
+			);
+			path = Explore;
+			sourceTree = "<group>";
+		};
+		14B671BD243918550083F663 /* Explore */ = {
+			isa = PBXGroup;
+			children = (
+				14B671BE243918650083F663 /* ExploreViewModel.swift */,
+				14B671C3243927EA0083F663 /* ExploreCategoryCollectionViewModel.swift */,
+			);
+			path = Explore;
+			sourceTree = "<group>";
+		};
+		14B671C024391C350083F663 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				14B671C124391C630083F663 /* FetchingService_Categories.swift */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
 		AAB327F880C324E4589AB40F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -2906,6 +2956,7 @@
 				1475AF5C241050DC00F1D24F /* PostingUploadInstagramVideoLinkController.swift in Sources */,
 				1475AEDA241047D700F1D24F /* SingleImagePostModel.swift in Sources */,
 				1475AEB12410461700F1D24F /* RawForgotPasswordUser.swift in Sources */,
+				14B671BF243918650083F663 /* ExploreViewModel.swift in Sources */,
 				1475AFCF2410555900F1D24F /* PhoneLoginViewModel.swift in Sources */,
 				1475AF2224104B3300F1D24F /* PostingCoordinatorType.swift in Sources */,
 				1475AFBF241054CD00F1D24F /* AuthenticationViewModel.swift in Sources */,
@@ -2928,12 +2979,14 @@
 				1475AF842410528A00F1D24F /* HomePostListViewModel.swift in Sources */,
 				14B6717F2436164E0083F663 /* UploadCategoryCoordinator.swift in Sources */,
 				1475AFDE241057D600F1D24F /* VideoPlayerDisplayer.swift in Sources */,
+				14B671BA243916630083F663 /* ExploreCoordinator.swift in Sources */,
 				1475AEE02410481C00F1D24F /* APISingleImagePostModel.swift in Sources */,
 				1475AEE82410487E00F1D24F /* LocalImagesPostModel.swift in Sources */,
 				1475AF1A24104AC200F1D24F /* UploadPostCoordinatorType.swift in Sources */,
 				1475B05924105C7900F1D24F /* UploadUserDatasource.swift in Sources */,
 				1475AF1824104AA300F1D24F /* UpdateUserCoordinatorType.swift in Sources */,
 				1475B06324105CC900F1D24F /* UploadPostTableViewController.swift in Sources */,
+				14B671C4243927EA0083F663 /* ExploreCategoryCollectionViewModel.swift in Sources */,
 				14B671AA2438AC040083F663 /* UploadDescriptionViewModel.swift in Sources */,
 				1475AE5B2410416100F1D24F /* InstagramService_Video.swift in Sources */,
 				140AEE322412FD0E00258DE8 /* PostFeedViewController.swift in Sources */,
@@ -2999,6 +3052,7 @@
 				1475AF2024104B2300F1D24F /* HomeCoordinatorType.swift in Sources */,
 				1475AF8B241052DB00F1D24F /* PostViewModel.swift in Sources */,
 				1475AF3324104BFB00F1D24F /* HomeUpdateUserCoordinator.swift in Sources */,
+				14B671C224391C630083F663 /* FetchingService_Categories.swift in Sources */,
 				14B6718F24362B0A0083F663 /* UploadCategoryDisplayer.swift in Sources */,
 				1475AF7D2410523400F1D24F /* SocialMediaItemViewModel.swift in Sources */,
 				1475AE5D2410418A00F1D24F /* FirebasePaths.swift in Sources */,
@@ -3052,6 +3106,7 @@
 				1475AE96241044A600F1D24F /* AuthenticationService_ForgotPassword.swift in Sources */,
 				14B6719924362F730083F663 /* CategorySingleAttribute.swift in Sources */,
 				1475AE922410446500F1D24F /* AuthenticationService_Registration.swift in Sources */,
+				14B671B7243915DB0083F663 /* ExploreController.swift in Sources */,
 				1475AF8F241052F400F1D24F /* ImagesPostViewModel.swift in Sources */,
 				1475B04524105B9100F1D24F /* PostCell.swift in Sources */,
 				1475AFF3241058AA00F1D24F /* UploadUserHeaderDisplayer.swift in Sources */,
@@ -3069,6 +3124,7 @@
 				1475B06524105CD600F1D24F /* UploadPostDatasource.swift in Sources */,
 				1475AE0424103EAD00F1D24F /* AppDelegate.swift in Sources */,
 				14B67181243616930083F663 /* UploadCategoryCoordinatorType.swift in Sources */,
+				14B671BC243916F70083F663 /* ExploreCoordinatorType.swift in Sources */,
 				1475B07C24105D9A00F1D24F /* AuthenticationTopButtonsStackView.swift in Sources */,
 				1475B04D24105BCE00F1D24F /* EmptyCell.swift in Sources */,
 				1475AF07241049D200F1D24F /* InstagramImagesPost.swift in Sources */,

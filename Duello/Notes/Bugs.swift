@@ -22,3 +22,5 @@
 //if you change value for user, you have to update all his Posts
 
 //Double Displaying/ Pagination Bug
+
+//Scrolled up TableView in UserSettings
