@@ -29,8 +29,8 @@ class UploadCategoryCoordinator: UploadCategoryCoordinatorType {
     
     //MARK: - Methods
     func start() {
-        let uploadCategoryController = UploadCategoryController(viewModel: viewModel)
-        presentedController = UINavigationController(rootViewController: uploadCategoryController)
+        let categoryController = CategoryCreationUploadCategoryController(viewModel: viewModel)
+        presentedController = UINavigationController(rootViewController: categoryController)
         rootController.present(presentedController!, animated: true, completion: nil)
     }
     

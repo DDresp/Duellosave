@@ -38,7 +38,7 @@ class UploadCategoryDelegate: NSObject, UITableViewDelegate {
         
         switch section {
         case descriptionCellSection:
-            let header = UploadPostDescriptionHeader()
+            let header = UploadDescriptionHeader()
             header.displayer = displayer.descriptionDisplayer
             return header
         case titleCellSection:

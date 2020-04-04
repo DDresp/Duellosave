@@ -14,7 +14,8 @@
 
 // Coordinators = Control of the general workflow of the app, i.e. control of when to show which CONTROLLER
 
-// Controllers = For each workflow step in the app = one specific CONTROLLER, however the CONTROLLER can inherit // OR USE (Composition!!!????) a substantial amount from a PRESENTATOR
+// Controllers = For each workflow step in the app = one specific CONTROLLER, however the CONTROLLER can inherit
+
 // ViewModels = Control the displayed data for CONTROLLERS and PRESENTATORS
 
 // Presentators = Presentators are a way to display and control the UI, CONTROLLERS can inherit from them

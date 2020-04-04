@@ -56,22 +56,22 @@ class UploadCategoryDatasource: NSObject, UITableViewDataSource {
         switch indexPath.section {
             
         case titleCellSection:
-            let cell = tableView.dequeueReusableCell(withIdentifier: titleCellId, for: indexPath) as! UploadPostTitleCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: titleCellId, for: indexPath) as! UploadTitleCell
             cell.displayer = displayer.titleDisplayer
             return cell
             
         case descriptionCellSection:
-            let cell = tableView.dequeueReusableCell(withIdentifier: descriptionCellId, for: indexPath) as! UploadPostDescriptionCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: descriptionCellId, for: indexPath) as! UploadDescriptionCell
             cell.displayer = displayer.descriptionDisplayer
             return cell
             
         case typeCellSection:
             if indexPath.row == 0 {
-                let cell = tableView.dequeueReusableCell(withIdentifier: imagesSelectorCellId, for: indexPath) as! UploadPostImageSelectorCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: imagesSelectorCellId, for: indexPath) as! UploadImagesSelectorCell
                 cell.displayer = displayer.typeSelectorDisplayer
                 return cell
             } else {
-                let cell = tableView.dequeueReusableCell(withIdentifier: videoSelectorCellId, for: indexPath) as! UploadPostVideoSelectorCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: videoSelectorCellId, for: indexPath) as! UploadVideoSelectorCell
                 cell.displayer = displayer.typeSelectorDisplayer
                 return cell
             }

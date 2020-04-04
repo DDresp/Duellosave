@@ -9,7 +9,7 @@
 import RxCocoa
 import RxSwift
 
-class UploadPostTypeSelectorViewModel: UploadPostTypeSelectorDisplayer {
+class UploadRoughTypeSelectorViewModel: UploadRoughTypeSelectorDisplayer {
     
     //MARK: - Bindables
     var imagesIsOn: BehaviorRelay<Bool> = BehaviorRelay(value: false)

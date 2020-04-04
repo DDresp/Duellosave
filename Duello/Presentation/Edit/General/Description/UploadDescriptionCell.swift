@@ -9,10 +9,10 @@
 import RxCocoa
 import RxSwift
 
-class UploadPostDescriptionCell: UITableViewCell {
+class UploadDescriptionCell: UITableViewCell {
     
     //MARK: - Displayer
-    var displayer: UploadPostDescriptionDisplayer? {
+    var displayer: UploadDescriptionDisplayer? {
         didSet {
             setupBindablesToDisplayer()
             setupBindablesFromDisplayer()

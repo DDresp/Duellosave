@@ -9,7 +9,7 @@
 import RxSwift
 import RxCocoa
 
-protocol UploadPostTypeSelectorDisplayer {
+protocol UploadRoughTypeSelectorDisplayer {
     
     var imagesIsOn: BehaviorRelay<Bool> { get }
     var videoIsOn: BehaviorRelay<Bool> { get }

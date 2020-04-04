@@ -19,16 +19,16 @@ class UploadCategoryViewModel: UploadCategoryDisplayer {
     }
     
     //MARK: - ChildViewModels
-    var titleDisplayer: UploadPostTitleDisplayer = UploadPostTitleViewModel()
-    var descriptionDisplayer: UploadPostDescriptionDisplayer = UploadPostDescriptionViewModel()
-    var typeSelectorDisplayer: UploadPostTypeSelectorDisplayer = UploadPostTypeSelectorViewModel()
+    var titleDisplayer: UploadTitleDisplayer = UploadTitleViewModel()
+    var descriptionDisplayer: UploadDescriptionDisplayer = UploadDescriptionViewModel(maxCharacters: 1000)
+    var typeSelectorDisplayer: UploadRoughTypeSelectorDisplayer = UploadRoughTypeSelectorViewModel()
     
     //MARK: - Variables
     var progressHudMessage: String = "Uploading Category"
     
     //MARK: - Bindables
     var submitTapped: PublishSubject<Void> = PublishSubject<Void>()
-    var cancelTapped: PublishSubject<Void> = PublishSubject<Void>()
+    var cancelTapped: PublishSubject<Void>? = PublishSubject<Void>()
     var alert: BehaviorRelay<Alert?> = BehaviorRelay<Alert?>(value: nil)
     var isLoading = BehaviorRelay(value: false)
     
@@ -100,7 +100,7 @@ class UploadCategoryViewModel: UploadCategoryDisplayer {
         guard let coordinator = coordinator else {
             return
         }
-        cancelTapped.bind(to: coordinator.canceled).disposed(by: disposeBag)
+        cancelTapped?.bind(to: coordinator.canceled).disposed(by: disposeBag)
     }
     
 }

@@ -17,6 +17,9 @@ protocol UploadDisplayer {
     //MARK: - Bindables
     var alert: BehaviorRelay<Alert?> { get }
     var isLoading: BehaviorRelay<Bool> { get }
+    
+    var submitTapped: PublishSubject<Void> { get }
+    var cancelTapped: PublishSubject<Void>? { get }
 
     //MARK: - Methods
     func dataIsValid() -> Bool

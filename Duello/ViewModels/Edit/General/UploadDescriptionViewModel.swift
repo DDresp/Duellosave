@@ -1,18 +1,18 @@
 //
-//  UploadPostDescriptionViewModel.swift
+//  UploadDescriptionViewModel.swift
 //  Duello
 //
-//  Created by Darius Dresp on 3/4/20.
+//  Created by Darius Dresp on 4/4/20.
 //  Copyright © 2020 Darius Dresp. All rights reserved.
 //
 
 import RxCocoa
 import RxSwift
 
-class UploadPostDescriptionViewModel: UploadPostDescriptionDisplayer {
+class UploadDescriptionViewModel: UploadDescriptionDisplayer {
     
     //MARK: - Variables
-    var maxCharacters: Int = 1000
+    var maxCharacters: Int
     
     //MARK: - Bindables
     var rawDescription: BehaviorRelay<String?> = BehaviorRelay<String?>(value: nil)
@@ -25,7 +25,8 @@ class UploadPostDescriptionViewModel: UploadPostDescriptionDisplayer {
     var descriptionIsValid: BehaviorRelay<Bool> = BehaviorRelay<Bool>(value: false)
     
     //MARK: - Setup
-    init() {
+    init(maxCharacters: Int) {
+        self.maxCharacters = maxCharacters
         setupBindablesFromOwnProperties()
     }
     
@@ -76,3 +77,4 @@ class UploadPostDescriptionViewModel: UploadPostDescriptionDisplayer {
     }
     
 }
+

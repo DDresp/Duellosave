@@ -12,12 +12,8 @@ import RxCocoa
 protocol UploadCategoryDisplayer: class, UploadDisplayer {
     
     //MARK: - Child Displayers
-    var titleDisplayer: UploadPostTitleDisplayer { get }
-    var descriptionDisplayer: UploadPostDescriptionDisplayer { get }
-    var typeSelectorDisplayer: UploadPostTypeSelectorDisplayer { get }
-    
-    //MARK: - Bindables
-    var submitTapped: PublishSubject<Void> { get }
-    var cancelTapped: PublishSubject<Void> { get }
+    var titleDisplayer: UploadTitleDisplayer { get }
+    var descriptionDisplayer: UploadDescriptionDisplayer { get }
+    var typeSelectorDisplayer: UploadRoughTypeSelectorDisplayer { get }
     
 }

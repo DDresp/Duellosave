@@ -23,8 +23,8 @@ class UploadPostViewModel<T: PostModel>: UploadPostDisplayer {
     weak var coordinator: UploadPostCoordinatorType?
     
     //MARK: - ChildViewModels
-    var titleDisplayer: UploadPostTitleDisplayer = UploadPostTitleViewModel()
-    var descriptionDisplayer: UploadPostDescriptionDisplayer = UploadPostDescriptionViewModel()
+    var titleDisplayer: UploadTitleDisplayer = UploadTitleViewModel()
+    var descriptionDisplayer: UploadDescriptionDisplayer = UploadDescriptionViewModel(maxCharacters: 1000)
     
     //MARK: - Variables
     var progressHudMessage: String = "Uploading Post"
@@ -33,6 +33,7 @@ class UploadPostViewModel<T: PostModel>: UploadPostDisplayer {
     //MARK: - Bindables
     var didDisappear: PublishRelay<Void> = PublishRelay()
     var submitTapped: PublishSubject<Void> = PublishSubject<Void>()
+    var cancelTapped: PublishSubject<Void>? = nil //cancel not possible
     var alert: BehaviorRelay<Alert?> = BehaviorRelay<Alert?>(value: nil)
     var isLoading = BehaviorRelay(value: false)
     

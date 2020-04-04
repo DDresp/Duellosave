@@ -40,7 +40,7 @@ class UploadUserViewModel: UploadUserDisplayer {
     
     //MARK: - Bindables
     var alert: BehaviorRelay<Alert?> = BehaviorRelay<Alert?>(value: nil)
-    var cancelTapped: PublishSubject<Void> = PublishSubject<Void>()
+    var cancelTapped: PublishSubject<Void>? = PublishSubject<Void>()
     var submitTapped: PublishSubject<Void> = PublishSubject<Void>()
     var isLoading = BehaviorRelay(value: false)
     var showImagePickerView: PublishSubject<Void> = PublishSubject<Void>()
@@ -239,7 +239,7 @@ class UploadUserViewModel: UploadUserDisplayer {
             self?.saveData()
         }).disposed(by: disposeBag)
         
-        cancelTapped.asObservable().bind(to: coordinator.canceledUserUpload).disposed(by: disposeBag)
+        cancelTapped?.asObservable().bind(to: coordinator.canceledUserUpload).disposed(by: disposeBag)
     }
     
     private func setupBindablesFromHeader() {

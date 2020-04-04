@@ -9,7 +9,7 @@
 import RxCocoa
 import RxSwift
 
-class UploadPostTitleViewModel: UploadPostTitleDisplayer {
+class UploadTitleViewModel: UploadTitleDisplayer {
     
     //MARK: - Bindables
     var title: BehaviorRelay<String?> = BehaviorRelay<String?>(value: nil)

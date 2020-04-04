@@ -9,7 +9,7 @@
 import RxCocoa
 import RxSwift
 
-protocol UploadPostDescriptionDisplayer {
+protocol UploadDescriptionDisplayer {
     
     //MARK: - Variables
     var maxCharacters: Int { get }

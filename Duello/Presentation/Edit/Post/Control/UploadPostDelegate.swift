@@ -38,7 +38,7 @@ class UploadPostDelegate: NSObject, UITableViewDelegate {
         case mediaCellSection:
             return nil
         case descriptionCellSection:
-            let header = UploadPostDescriptionHeader()
+            let header = UploadDescriptionHeader()
             header.displayer = displayer.descriptionDisplayer
             return header
         case titleCellSection:

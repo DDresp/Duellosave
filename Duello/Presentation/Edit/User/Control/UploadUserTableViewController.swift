@@ -29,17 +29,13 @@ class UploadUserTableViewController<T: UploadUserDisplayer>: UploadTableViewCont
         super.viewDidLoad()
         
         setupTableView()
-        setupNavigationItems()
-        setupBindablesToDisplayer()
         setupBindablesFromDisplayer()
+        
+        navigationItem.title = "Profile Settings"
     }
     
     private func setupTableView() {
         
-        view.backgroundColor = EXTREMELIGHTGRAYCOLOR
-        tableView.tableFooterView = UIView()
-        tableView.keyboardDismissMode = .interactive
-        tableView.allowsSelection = false
         var frame = CGRect.zero
         frame.size.height = .leastNormalMagnitude
         tableView.tableHeaderView = UIView(frame: frame)
@@ -48,19 +44,7 @@ class UploadUserTableViewController<T: UploadUserDisplayer>: UploadTableViewCont
         
     }
     
-    private func setupNavigationItems() {
-        
-        navigationItem.leftBarButtonItem = cancelButton
-        navigationItem.rightBarButtonItem = submitButton
-        navigationItem.title = "Profile Settings"
-        navigationItem.rightBarButtonItem?.tintColor = NAVBARCOLOR
-        
-    }
-    
     //MARK: - Views
-    lazy var submitButton = UIBarButtonItem(title: "Submit", style: .done, target: nil, action: nil)
-    lazy var cancelButton = UIBarButtonItem(title: "Cancel", style: .done, target: nil, action: nil)
-    
     private lazy var imagePicker: UIImagePickerController = {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
@@ -111,13 +95,6 @@ class UploadUserTableViewController<T: UploadUserDisplayer>: UploadTableViewCont
     }
     
     //MARK: - Reactive
-    private func setupBindablesToDisplayer() {
-        
-        guard let displayer = displayer else { return }
-        submitButton.rx.tap.asDriver().drive(displayer.submitTapped).disposed(by: disposeBag)
-        cancelButton.rx.tap.asDriver().drive(displayer.cancelTapped).disposed(by: disposeBag)
-        
-    }
     
     private func setupBindablesFromDisplayer() {
         

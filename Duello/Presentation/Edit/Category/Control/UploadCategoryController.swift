@@ -1,35 +1,35 @@
 //
-//  UploadPostTableViewController.swift
+//  UploadCategoryController.swift
 //  Duello
 //
-//  Created by Darius Dresp on 3/4/20.
+//  Created by Darius Dresp on 4/2/20.
 //  Copyright © 2020 Darius Dresp. All rights reserved.
 //
 
 import RxSwift
 import RxCocoa
-import JGProgressHUD
 
-class UploadPostTableViewController<T: UploadPostDisplayer>: UploadTableViewController<T> {
+class UploadCategoryController<T: UploadCategoryDisplayer>: UploadTableViewController<T> {
     
     //MARK: - Variables
-    var datasource: UploadPostDatasource?
-    var delegate: UploadPostDelegate?
+    var datasource: UploadCategoryDatasource?
+    var delegate: UploadCategoryDelegate?
     
-    private let mediaCellId = "mediaCellId"
     private let titleCellId = "titleCellId"
+    private let imagesSelectorCellId = "imagesSelectorId"
+    private let videoSelectorCellId = "videoSelectorId"
     private let descriptionCellId = "descriptionCellId"
     
-    private let mediaCellSection = 0
-    private let titleCellSection = 1
+    private let titleCellSection = 0
+    private let selectorCellSection = 1
     private let descriptionCellSection = 2
     
     //MARK: - Setup
     init(displayer: T) {
         super.init(style: .plain)
         self.displayer = displayer
-        self.datasource = UploadPostDatasource(mediaCellId: mediaCellId, titleCellId: titleCellId, descriptionCellId: descriptionCellId, displayer: displayer, parentViewController: self)
-        self.delegate = UploadPostDelegate(mediaCellId: mediaCellId, titleCellId: titleCellId, descriptionCellId: descriptionCellId, displayer: displayer)
+        self.datasource = UploadCategoryDatasource(titleCellId: titleCellId, descriptionCellId: descriptionCellId, imageSelectorCellId: imagesSelectorCellId, videoSelectorCellId: videoSelectorCellId, displayer: displayer, parentViewController: self)
+        self.delegate = UploadCategoryDelegate(titleCellId: titleCellId, descriptionCellId: descriptionCellId, imageSelectorCellId: imagesSelectorCellId, videoSelectorCellId: videoSelectorCellId, displayer: displayer)
     }
     
     override func viewDidLoad() {
@@ -40,33 +40,14 @@ class UploadPostTableViewController<T: UploadPostDisplayer>: UploadTableViewCont
         registerCells()
         setupBindablesFromDisplayer()
         
-        navigationItem.title = "Post"
-        
+        navigationItem.title = "Category"
     }
     
     private func registerCells() {
         tableView.register(UploadTitleCell.self, forCellReuseIdentifier: titleCellId)
+        tableView.register(UploadImagesSelectorCell.self, forCellReuseIdentifier: imagesSelectorCellId)
+        tableView.register(UploadVideoSelectorCell.self, forCellReuseIdentifier: videoSelectorCellId)
         tableView.register(UploadDescriptionCell.self, forCellReuseIdentifier: descriptionCellId)
-        
-        guard let displayer = displayer else { return }
-        
-        switch displayer {
-        case is UploadSingleImagePostDisplayer:
-            tableView.register(UploadSingleImageMediaPostCell.self, forCellReuseIdentifier: mediaCellId)
-        case is UploadImagesPostDisplayer:
-            tableView.register(UploadImagesMediaPostCell.self, forCellReuseIdentifier: mediaCellId)
-        case is UploadVideoPostDisplayer:
-            tableView.register(UploadVideoMediaPostCell.self, forCellReuseIdentifier: mediaCellId)
-        default:
-            ()
-        }
-    }
-    
-    //MARK: - Interactions
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        displayer?.didDisappear.accept(())
     }
     
     //MARK: - Reactive
@@ -85,3 +66,4 @@ class UploadPostTableViewController<T: UploadPostDisplayer>: UploadTableViewCont
     }
     
 }
+

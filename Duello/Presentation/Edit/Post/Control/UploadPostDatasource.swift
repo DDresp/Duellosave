@@ -66,12 +66,12 @@ class UploadPostDatasource: NSObject, UITableViewDataSource {
             }
             
         case titleCellSection:
-            let cell = tableView.dequeueReusableCell(withIdentifier: titleCellId, for: indexPath) as! UploadPostTitleCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: titleCellId, for: indexPath) as! UploadTitleCell
             cell.displayer = displayer.titleDisplayer
             return cell
             
         case descriptionCellSection:
-            let cell = tableView.dequeueReusableCell(withIdentifier: descriptionCellId, for: indexPath) as! UploadPostDescriptionCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: descriptionCellId, for: indexPath) as! UploadDescriptionCell
             cell.displayer = displayer.descriptionDisplayer
             return cell
         default:

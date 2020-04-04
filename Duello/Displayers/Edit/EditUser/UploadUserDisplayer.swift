@@ -15,8 +15,6 @@ protocol UploadUserDisplayer: UploadDisplayer {
     var numberOfSections: Int { get }
     
     //MARK: - Bindables
-    var cancelTapped: PublishSubject<Void> { get }
-    var submitTapped: PublishSubject<Void> { get }
     var showImagePickerView: PublishSubject<Void> { get }
     
     //MARK: - Getters
