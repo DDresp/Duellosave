@@ -16,7 +16,7 @@ class UploadPostImageSelectorCell: UITableViewCell {
     //MARK: - Displayer
     var displayer: UploadPostTypeSelectorDisplayer? {
         didSet {
-
+            setupBindablesToDisplayer()
         }
     }
     
@@ -46,12 +46,19 @@ class UploadPostImageSelectorCell: UITableViewCell {
     private func setupLayout() {
         contentView.addSubview(imagesLabel)
         contentView.addSubview(imagesSwitch)
-        imagesLabel.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: nil, padding: .init(top: STANDARDSPACING, left: STANDARDSPACING, bottom: STANDARDSPACING, right: 0), size: .init(width: 0, height: 30))
-        imagesSwitch.anchor(top: contentView.topAnchor, leading: nil, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor, padding: .init(top: STANDARDSPACING, left: 0, bottom: STANDARDSPACING, right: STANDARDSPACING), size: .init(width: 60, height: 30))
+        imagesLabel.anchor(top: nil, leading: contentView.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: STANDARDSPACING, left: STANDARDSPACING, bottom: STANDARDSPACING, right: 0), size: .init(width: 0, height: 30))
+        imagesLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        imagesSwitch.anchor(top: nil, leading: nil, bottom: nil, trailing: contentView.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: STANDARDSPACING), size: .init(width: 60, height: 30))
+        imagesSwitch.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
     }
     
     //MARK: - Reactive
     private var disposeBag = DisposeBag()
+    
+    private func setupBindablesToDisplayer() {
+        guard let displayer = displayer else { return }
+        imagesSwitch.rx.isOn.asDriver().drive(displayer.imagesIsOn).disposed(by: disposeBag)
+    }
     
     override func prepareForReuse() {
         disposeBag = DisposeBag()

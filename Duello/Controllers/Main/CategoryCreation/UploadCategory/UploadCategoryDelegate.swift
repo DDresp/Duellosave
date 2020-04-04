@@ -66,6 +66,10 @@ class UploadCategoryDelegate: NSObject, UITableViewDelegate {
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if typeCellSection == indexPath.section {
+            return 50
+        }
         return UITableView.automaticDimension
     }
 }

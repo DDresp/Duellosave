@@ -47,6 +47,12 @@ class UploadCategoryViewModel: UploadCategoryDisplayer {
             alert.accept(Alert(alertMessage: "You need a description and the description can't exceed \(descriptionDisplayer.maxCharacters) characters", alertHeader: "Not Finished"))
             return false
         }
+        
+        if !typeSelectorDisplayer.mediaTypeIsSelected.value {
+            alert.accept(Alert(alertMessage: "You need to allow at least one MediaType", alertHeader: "Not Finished"))
+            return false
+        }
+        
         return true
     }
     
@@ -56,7 +62,7 @@ class UploadCategoryViewModel: UploadCategoryDisplayer {
         category.description.value = descriptionDisplayer.description.value
         category.title.value = titleDisplayer.title.value
         category.creationDate.value = Date().timeIntervalSince1970
-        category.typeData.value = RoughMediaType.Image
+        category.typeData.value = typeSelectorDisplayer.mediaType.value
         return category
     }
     

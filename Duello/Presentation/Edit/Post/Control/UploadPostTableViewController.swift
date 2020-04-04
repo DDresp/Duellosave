@@ -37,6 +37,11 @@ class UploadPostTableViewController<T: UploadPostDisplayer>: UploadTableViewCont
         tableView.dataSource = datasource
         tableView.delegate = delegate
         
+        //disable floating headers
+        let dummyViewHeight = CGFloat(40)
+        tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: dummyViewHeight))
+        tableView.contentInset = UIEdgeInsets(top: -dummyViewHeight, left: 0, bottom: 0, right: 0)
+        
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(endEditing)))
         
         setupTableView()

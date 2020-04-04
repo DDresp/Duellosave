@@ -6,6 +6,14 @@
 //  Copyright © 2020 Darius Dresp. All rights reserved.
 //
 
-import Foundation
+import RxSwift
+import RxCocoa
 
-protocol UploadPostTypeSelectorDisplayer {}
+protocol UploadPostTypeSelectorDisplayer {
+    
+    var imagesIsOn: BehaviorRelay<Bool> { get }
+    var videoIsOn: BehaviorRelay<Bool> { get }
+    var mediaTypeIsSelected: BehaviorRelay<Bool> { get }
+    var mediaType: BehaviorRelay<RoughMediaType?> { get }
+    
+}

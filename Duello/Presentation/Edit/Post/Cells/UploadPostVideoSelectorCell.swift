@@ -14,7 +14,7 @@ class UploadPostVideoSelectorCell: UITableViewCell {
     //MARK: - Displayer
     var displayer: UploadPostTypeSelectorDisplayer? {
         didSet {
-
+            setupBindablesToDisplayer()
         }
     }
     
@@ -44,8 +44,10 @@ class UploadPostVideoSelectorCell: UITableViewCell {
     private func setupLayout() {
         contentView.addSubview(videoLabel)
         contentView.addSubview(videoSwitch)
-        videoLabel.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: nil, padding: .init(top: STANDARDSPACING, left: STANDARDSPACING, bottom: STANDARDSPACING, right: 0), size: .init(width: 0, height: 30))
-        videoSwitch.anchor(top: contentView.topAnchor, leading: nil, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor, padding: .init(top: STANDARDSPACING, left: 0, bottom: STANDARDSPACING, right: STANDARDSPACING), size: .init(width: 60, height: 30))
+        videoLabel.anchor(top: nil, leading: contentView.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 0, left: STANDARDSPACING, bottom: 0, right: 0), size: .init(width: 0, height: 30))
+        videoLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        videoSwitch.anchor(top: nil, leading: nil, bottom: nil, trailing: contentView.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: STANDARDSPACING), size: .init(width: 60, height: 30))
+        videoSwitch.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
     }
     
     //MARK: - Reactive
@@ -57,6 +59,11 @@ class UploadPostVideoSelectorCell: UITableViewCell {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupBindablesToDisplayer() {
+        guard let displayer = displayer else { return }
+        videoSwitch.rx.isOn.asDriver().drive(displayer.videoIsOn).disposed(by: disposeBag)
     }
 }
 

@@ -12,8 +12,10 @@ import RxSwift
 class UploadPostTypeSelectorViewModel: UploadPostTypeSelectorDisplayer {
     
     //MARK: - Bindables
-    var title: BehaviorRelay<String?> = BehaviorRelay<String?>(value: nil)
-    var titleIsValid: BehaviorRelay<Bool> = BehaviorRelay<Bool>(value: false)
+    var imagesIsOn: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+    var videoIsOn: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+    var mediaTypeIsSelected: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+    var mediaType: BehaviorRelay<RoughMediaType?> = BehaviorRelay(value: nil)
     
     //MARK: - Setup
     init() {
@@ -24,13 +26,23 @@ class UploadPostTypeSelectorViewModel: UploadPostTypeSelectorDisplayer {
     private let disposeBag = DisposeBag()
     
     private func setupBindablesFromOwnProperties() {
-        title.asDriver().map { (title) -> Bool in
-            if let title = title, title.count > 0, title.count < 150 {
-                return true
+        
+        Observable.combineLatest(imagesIsOn, videoIsOn).map { (imagesIsOn, videoIsOn) -> RoughMediaType? in
+            if imagesIsOn && videoIsOn {
+                return .VideoAndImage
+            } else if imagesIsOn {
+                return .Image
+            } else if videoIsOn {
+                return .Video
             } else {
-                return false
+                return nil
             }
-            }.drive(titleIsValid).disposed(by: disposeBag)
+            }.bind(to: mediaType).disposed(by: disposeBag)
+        
+        mediaType.map { (mediaType) -> Bool in
+            return mediaType != nil
+            }.bind(to: mediaTypeIsSelected).disposed(by: disposeBag)
+        
     }
     
 }
