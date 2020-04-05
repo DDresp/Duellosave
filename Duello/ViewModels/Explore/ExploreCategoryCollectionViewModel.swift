@@ -37,6 +37,8 @@ class ExploreCategoryCollectionViewModel: CategoryCollectionDisplayer {
     var insertData: PublishRelay<(Int, Int)> = PublishRelay()
     var reloadData: PublishRelay<Void> = PublishRelay()
     
+    var goToCategory: PublishSubject<CategoryDisplayer?> = PublishSubject()
+    
     var requestDataForIndexPath: PublishRelay<[IndexPath]> = PublishRelay<[IndexPath]>()
     
     //MARK: - Setup
@@ -85,9 +87,8 @@ class ExploreCategoryCollectionViewModel: CategoryCollectionDisplayer {
             return [IndexPath(item: index, section: 0)]
             }.bind(to: requestDataForIndexPath).disposed(by: disposeBag)
         
-        exploreCategoryListViewModel.goToCategory.subscribe(onNext: { (category) in
-            print("debug: go to category: \(category?.title ?? "no title")")
-            }).disposed(by: disposeBag)
+        exploreCategoryListViewModel.goToCategory.bind(to: goToCategory).disposed(by: disposeBag)
+
 
     }
     

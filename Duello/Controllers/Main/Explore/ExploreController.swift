@@ -35,7 +35,7 @@ class ExploreController: CategoryCollectionMasterViewController {
     
     //MARK: - Views
     lazy var collectionView: CategoryCollectionView = {
-        let collectionView = CategoryCollectionView(displayer: viewModel.categoriesViewModel)
+        let collectionView = CategoryCollectionView(displayer: viewModel.categoryCollectionViewModel)
         return collectionView
     }()
     

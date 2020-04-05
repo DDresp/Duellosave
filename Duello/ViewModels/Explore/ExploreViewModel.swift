@@ -23,7 +23,7 @@ class ExploreViewModel: CategoryCollectionMasterDisplayer {
     var categories = [CategoryModel]()
     
     //MARK: - Child Displayers
-    let categoriesViewModel = ExploreCategoryCollectionViewModel()
+    let categoryCollectionViewModel = ExploreCategoryCollectionViewModel()
     
     //MARK: - Variables
     let fetchSteps: Int = 20
@@ -77,23 +77,22 @@ class ExploreViewModel: CategoryCollectionMasterDisplayer {
     
     private func setupBindablesFromViewModel() {
 
-        categoriesViewModel.needsRestart.filter { (needsRestart) -> Bool in
+        categoryCollectionViewModel.needsRestart.filter { (needsRestart) -> Bool in
             return needsRestart
         }.subscribe(onNext: { [weak self] (_) in
             self?.start()
             }).disposed(by: disposeBag)
         
-        categoriesViewModel.fetchNext.subscribe(onNext: { [weak self] (_) in
+        categoryCollectionViewModel.fetchNext.subscribe(onNext: { [weak self] (_) in
             guard (self?.categories.count ?? 0) > 0 else { return }
             self?.fetchCategories()
             }).disposed(by: disposeBag)
         
-        
     }
     
     private func setupBindablesToViewModel() {
-        displayedCategories.bind(to: categoriesViewModel.categories).disposed(by: disposeBag)
-        loadedAllCategories.bind(to: categoriesViewModel.finished).disposed(by: disposeBag)
+        displayedCategories.bind(to: categoryCollectionViewModel.categories).disposed(by: disposeBag)
+        loadedAllCategories.bind(to: categoryCollectionViewModel.finished).disposed(by: disposeBag)
         
     }
 
@@ -101,6 +100,15 @@ class ExploreViewModel: CategoryCollectionMasterDisplayer {
     private func setupBindablesToCoordinator() {
         guard let coordinator = coordinator else { return }
         
+        categoryCollectionViewModel.goToCategory.map { [weak self] (displayer) -> CategoryModel? in
+            guard let displayer = displayer else { return nil }
+            let category = self?.categories.first(where: { (model) -> Bool in
+                let modelId = model.getId()
+                let displayerId = displayer.categoryId
+                return modelId == displayerId
+            })
+            return category
+            }.bind(to: coordinator.requestedCategory).disposed(by: disposeBag)
     }
     
-}
+}   
