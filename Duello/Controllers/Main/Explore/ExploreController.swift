@@ -9,15 +9,16 @@
 import RxCocoa
 import RxSwift
 
-class ExploreController: ViewController {
+class ExploreController: CategoryCollectionMasterViewController {
     
     //MARK: - ViewModels
-    let viewModel: ExploreViewModel
+    var viewModel: ExploreViewModel {
+        return displayer as! ExploreViewModel
+    }
     
     //MARK: - Setup
     init(viewModel: ExploreViewModel) {
-        self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
+        super.init(displayer: viewModel)
     }
     
     override func viewDidLoad() {
@@ -25,12 +26,24 @@ class ExploreController: ViewController {
         
         view.backgroundColor = .blue
         setupNavigationItems()
-
-        viewModel.start()
+        setupCollectionView()
     }
     
     private func setupNavigationItems() {
         navigationItem.title = "Explore"
+    }
+    
+    //MARK: - Views
+    lazy var collectionView: CategoryCollectionView = {
+        let collectionView = CategoryCollectionView(displayer: viewModel.categoriesViewModel)
+        return collectionView
+    }()
+    
+    private func setupCollectionView() {
+        edgesForExtendedLayout = []
+        
+        view.addSubview(collectionView)
+        collectionView.fillSuperview()
     }
     
     required init?(coder aDecoder: NSCoder) {

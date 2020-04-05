@@ -9,7 +9,7 @@ import RxCocoa
 import RxSwift
 import JGProgressHUD
 
-class NewsController: PostFeedViewController {
+class NewsController: PostCollectionMasterViewController {
     
     //MARK: - ViewModel
     let viewModel: HomeViewModel

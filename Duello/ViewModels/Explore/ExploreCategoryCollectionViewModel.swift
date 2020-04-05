@@ -9,14 +9,21 @@
 import RxSwift
 import RxCocoa
 
-class ExploreCategoryCollectionViewModel {
+class ExploreCategoryCollectionViewModel: CategoryCollectionDisplayer {
     
     //MARK: - Models
     var categories: BehaviorRelay<[CategoryModel]?> = BehaviorRelay<[CategoryModel]?>(value: nil)
     
     //MARK: - Child Displayers
-    //maybe categorylistdisplayer here
-//    var postListDisplayer: PostListDisplayer = HomePostListViewModel()
+    var categoryListDisplayer: CategoryListDisplayer = ExploreCategoryListViewModel()
+    
+    //MARK: Child ViewModels
+    var exploreCategoryListViewModel: ExploreCategoryListViewModel {
+        return categoryListDisplayer as! ExploreCategoryListViewModel
+    }
+    
+    //MARK: - Variables
+    var hasNoCategories: Bool { return categories.value?.count == 0 }
     
     //MARK: - Bindables
     var finished: BehaviorRelay<Bool> = BehaviorRelay(value: false)
@@ -27,8 +34,8 @@ class ExploreCategoryCollectionViewModel {
 
     var refreshChanged: PublishSubject<Void> = PublishSubject()
     
-    var reloadData: PublishRelay<(Int, Int)> = PublishRelay()
-    var restartData: PublishRelay<Void> = PublishRelay()
+    var insertData: PublishRelay<(Int, Int)> = PublishRelay()
+    var reloadData: PublishRelay<Void> = PublishRelay()
     
     var requestDataForIndexPath: PublishRelay<[IndexPath]> = PublishRelay<[IndexPath]>()
     
@@ -48,10 +55,9 @@ class ExploreCategoryCollectionViewModel {
     var disposeBag = DisposeBag()
     
     private func setupBindables() {
-//        setupBasicBindables()
-//        setupBindablesFromChildViewModels()
+        setupBindablesFromChildViewModels()
         setupBindablesToChildViewModels()
-//        setupBindablesFromOwnProperties()
+        setupBindablesFromOwnProperties()
     }
     
     private func setupBindablesToChildViewModels() {
@@ -59,16 +65,12 @@ class ExploreCategoryCollectionViewModel {
         categories.subscribe(onNext: { [weak self] (categories) in
             guard let categories = categories else { return }
             
-            let categoryNames = categories.map { (category) -> String in
-                return category.getTitle()
+            if self?.needsRestart.value == true {
+                self?.categoryListDisplayer.update(with: categories, fromStart: true)
+                self?.needsRestart.accept(false)
+            } else {
+                self?.categoryListDisplayer.update(with: categories, fromStart: false)
             }
-            print("debug: observing categories from here = \(categoryNames)")
-//            if self?.needsRestart.value == true {
-//                self?.postListDisplayer.update(with: posts, fromStart: true)
-//                self?.needsRestart.accept(false)
-//            } else {
-//                self?.postListDisplayer.update(with: posts, fromStart: false)
-//            }
             
         }).disposed(by: disposeBag)
 
@@ -76,16 +78,17 @@ class ExploreCategoryCollectionViewModel {
     
     private func setupBindablesFromChildViewModels() {
         
-//        userHeaderViewModel.socialMediaDisplayer.selectedLink.bind(to: loadLink).disposed(by: disposeBag)
-//        userHeaderViewModel.socialMediaDisplayer.showAdditionalLinkAlert.bind(to: showAdditionalLinkAlert).disposed(by: disposeBag)
-//
-//        postListViewModel.insert.bind(to: reloadData).disposed(by: disposeBag)
-//        postListViewModel.updateLayout.bind(to: updateLayout).disposed(by: disposeBag)
+        categoryListDisplayer.insert.bind(to: insertData).disposed(by: disposeBag)
+        categoryListDisplayer.reload.bind(to: reloadData).disposed(by: disposeBag)
         
-//        postListViewModel.restart.bind(to: restartData).disposed(by: disposeBag)
-//        postListViewModel.willDisplayCell.map { (index) -> [IndexPath] in
-//            return [IndexPath(item: index, section: 0)]
-//            }.bind(to: requestDataForIndexPath).disposed(by: disposeBag)
+        categoryListDisplayer.willDisplayCell.map { (index) -> [IndexPath] in
+            return [IndexPath(item: index, section: 0)]
+            }.bind(to: requestDataForIndexPath).disposed(by: disposeBag)
+        
+        exploreCategoryListViewModel.goToCategory.subscribe(onNext: { (category) in
+            print("debug: go to category: \(category?.title ?? "no title")")
+            }).disposed(by: disposeBag)
+
     }
     
     private func setupBindablesFromOwnProperties() {

@@ -10,14 +10,15 @@ import RxCocoa
 import RxSwift
 import JGProgressHUD
 
-class HomeController: PostFeedViewController {
+class HomeController: PostCollectionMasterViewController {
     
     //MARK: - ViewModel
-    let viewModel: HomeViewModel
+    var viewModel: HomeViewModel {
+        return displayer as! HomeViewModel
+    }
     
     //MARK: - Setup
     init(viewModel: HomeViewModel) {
-        self.viewModel = viewModel
         super.init(displayer: viewModel)
     }
     

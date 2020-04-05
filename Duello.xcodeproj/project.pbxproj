@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		140AEE302411A96400258DE8 /* Ideas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140AEE2F2411A96400258DE8 /* Ideas.swift */; };
-		140AEE322412FD0E00258DE8 /* PostFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140AEE312412FD0E00258DE8 /* PostFeedViewController.swift */; };
+		140AEE322412FD0E00258DE8 /* PostCollectionMasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140AEE312412FD0E00258DE8 /* PostCollectionMasterViewController.swift */; };
 		1475AE0424103EAD00F1D24F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AE0324103EAD00F1D24F /* AppDelegate.swift */; };
 		1475AE0824103EAD00F1D24F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AE0724103EAD00F1D24F /* ViewController.swift */; };
 		1475AE0B24103EAD00F1D24F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1475AE0924103EAD00F1D24F /* Main.storyboard */; };
@@ -165,7 +165,7 @@
 		1475AFDC241057C900F1D24F /* ImagesSliderDisplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AFDB241057C900F1D24F /* ImagesSliderDisplayer.swift */; };
 		1475AFDE241057D600F1D24F /* VideoPlayerDisplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AFDD241057D600F1D24F /* VideoPlayerDisplayer.swift */; };
 		1475AFE32410580E00F1D24F /* PostListDisplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AFE22410580E00F1D24F /* PostListDisplayer.swift */; };
-		1475AFE52410582300F1D24F /* FeedMasterDisplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AFE42410582300F1D24F /* FeedMasterDisplayer.swift */; };
+		1475AFE52410582300F1D24F /* PostCollectionMasterDisplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AFE42410582300F1D24F /* PostCollectionMasterDisplayer.swift */; };
 		1475AFE72410583300F1D24F /* UserHeaderDisplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AFE62410583300F1D24F /* UserHeaderDisplayer.swift */; };
 		1475AFE92410584800F1D24F /* PostDisplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AFE82410584800F1D24F /* PostDisplayer.swift */; };
 		1475AFEB2410586600F1D24F /* UploadDisplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AFEA2410586600F1D24F /* UploadDisplayer.swift */; };
@@ -302,6 +302,19 @@
 		14B671BF243918650083F663 /* ExploreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B671BE243918650083F663 /* ExploreViewModel.swift */; };
 		14B671C224391C630083F663 /* FetchingService_Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B671C124391C630083F663 /* FetchingService_Categories.swift */; };
 		14B671C4243927EA0083F663 /* ExploreCategoryCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B671C3243927EA0083F663 /* ExploreCategoryCollectionViewModel.swift */; };
+		14B671C62439C4F60083F663 /* CategoryCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B671C52439C4F60083F663 /* CategoryCollectionView.swift */; };
+		14B671C82439C7860083F663 /* CategoryCollectionViewDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B671C72439C7860083F663 /* CategoryCollectionViewDatasource.swift */; };
+		14B671CA2439C7960083F663 /* CategoryCollectionViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B671C92439C7960083F663 /* CategoryCollectionViewDelegate.swift */; };
+		14B671CC2439C7B40083F663 /* CategoryCollectionViewPrefetchingDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B671CB2439C7B40083F663 /* CategoryCollectionViewPrefetchingDatasource.swift */; };
+		14B671CE2439CAF40083F663 /* ExploreCategoryListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B671CD2439CAF40083F663 /* ExploreCategoryListViewModel.swift */; };
+		14B671D02439CCED0083F663 /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B671CF2439CCED0083F663 /* CategoryViewModel.swift */; };
+		14B671D42439E9700083F663 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B671D32439E9700083F663 /* CategoryCell.swift */; };
+		14B671DA243A2D6A0083F663 /* CollectionDisplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B671D9243A2D6A0083F663 /* CollectionDisplayer.swift */; };
+		14B671DD243A2E560083F663 /* CategoryDisplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B671DC243A2E560083F663 /* CategoryDisplayer.swift */; };
+		14B671DF243A2EF50083F663 /* CategoryListDisplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B671DE243A2EF50083F663 /* CategoryListDisplayer.swift */; };
+		14B671E1243A31110083F663 /* CategoryCollectionDisplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B671E0243A31110083F663 /* CategoryCollectionDisplayer.swift */; };
+		14B671E3243A3C900083F663 /* CategoryCollectionMasterDisplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B671E2243A3C900083F663 /* CategoryCollectionMasterDisplayer.swift */; };
+		14B671E5243A3D010083F663 /* CategoryCollectionMasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B671E4243A3D010083F663 /* CategoryCollectionMasterViewController.swift */; };
 		14BDEC08241CBF0E00228763 /* Bool+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BDEC07241CBF0E00228763 /* Bool+Extension.swift */; };
 		14ED672B241A87550047C085 /* Pods_Duello.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14ED672A241A87550047C085 /* Pods_Duello.framework */; };
 		14ED672C241A87550047C085 /* Pods_Duello.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 14ED672A241A87550047C085 /* Pods_Duello.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -343,7 +356,7 @@
 /* Begin PBXFileReference section */
 		140AEE2E2411935300258DE8 /* Duello.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Duello.entitlements; sourceTree = "<group>"; };
 		140AEE2F2411A96400258DE8 /* Ideas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ideas.swift; sourceTree = "<group>"; };
-		140AEE312412FD0E00258DE8 /* PostFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostFeedViewController.swift; sourceTree = "<group>"; };
+		140AEE312412FD0E00258DE8 /* PostCollectionMasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCollectionMasterViewController.swift; sourceTree = "<group>"; };
 		1475AE0024103EAD00F1D24F /* Duello.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Duello.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1475AE0324103EAD00F1D24F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1475AE0724103EAD00F1D24F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -506,7 +519,7 @@
 		1475AFDB241057C900F1D24F /* ImagesSliderDisplayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesSliderDisplayer.swift; sourceTree = "<group>"; };
 		1475AFDD241057D600F1D24F /* VideoPlayerDisplayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerDisplayer.swift; sourceTree = "<group>"; };
 		1475AFE22410580E00F1D24F /* PostListDisplayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListDisplayer.swift; sourceTree = "<group>"; };
-		1475AFE42410582300F1D24F /* FeedMasterDisplayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedMasterDisplayer.swift; sourceTree = "<group>"; };
+		1475AFE42410582300F1D24F /* PostCollectionMasterDisplayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCollectionMasterDisplayer.swift; sourceTree = "<group>"; };
 		1475AFE62410583300F1D24F /* UserHeaderDisplayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHeaderDisplayer.swift; sourceTree = "<group>"; };
 		1475AFE82410584800F1D24F /* PostDisplayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDisplayer.swift; sourceTree = "<group>"; };
 		1475AFEA2410586600F1D24F /* UploadDisplayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadDisplayer.swift; sourceTree = "<group>"; };
@@ -643,6 +656,19 @@
 		14B671BE243918650083F663 /* ExploreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewModel.swift; sourceTree = "<group>"; };
 		14B671C124391C630083F663 /* FetchingService_Categories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchingService_Categories.swift; sourceTree = "<group>"; };
 		14B671C3243927EA0083F663 /* ExploreCategoryCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreCategoryCollectionViewModel.swift; sourceTree = "<group>"; };
+		14B671C52439C4F60083F663 /* CategoryCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionView.swift; sourceTree = "<group>"; };
+		14B671C72439C7860083F663 /* CategoryCollectionViewDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewDatasource.swift; sourceTree = "<group>"; };
+		14B671C92439C7960083F663 /* CategoryCollectionViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewDelegate.swift; sourceTree = "<group>"; };
+		14B671CB2439C7B40083F663 /* CategoryCollectionViewPrefetchingDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewPrefetchingDatasource.swift; sourceTree = "<group>"; };
+		14B671CD2439CAF40083F663 /* ExploreCategoryListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreCategoryListViewModel.swift; sourceTree = "<group>"; };
+		14B671CF2439CCED0083F663 /* CategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModel.swift; sourceTree = "<group>"; };
+		14B671D32439E9700083F663 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
+		14B671D9243A2D6A0083F663 /* CollectionDisplayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionDisplayer.swift; sourceTree = "<group>"; };
+		14B671DC243A2E560083F663 /* CategoryDisplayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDisplayer.swift; sourceTree = "<group>"; };
+		14B671DE243A2EF50083F663 /* CategoryListDisplayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListDisplayer.swift; sourceTree = "<group>"; };
+		14B671E0243A31110083F663 /* CategoryCollectionDisplayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionDisplayer.swift; sourceTree = "<group>"; };
+		14B671E2243A3C900083F663 /* CategoryCollectionMasterDisplayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionMasterDisplayer.swift; sourceTree = "<group>"; };
+		14B671E4243A3D010083F663 /* CategoryCollectionMasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionMasterViewController.swift; sourceTree = "<group>"; };
 		14BDEC07241CBF0E00228763 /* Bool+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+Extension.swift"; sourceTree = "<group>"; };
 		14ED672A241A87550047C085 /* Pods_Duello.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_Duello.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AB5A1CDF25F48DD3230412A /* Pods-DuelloUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DuelloUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DuelloUITests/Pods-DuelloUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -783,7 +809,7 @@
 			isa = PBXGroup;
 			children = (
 				1475B01E24105A4D00F1D24F /* DataPresentation */,
-				1475B01D24105A4500F1D24F /* PostFeed */,
+				1475B01D24105A4500F1D24F /* Feeds */,
 				1475B01C24105A3F00F1D24F /* Edit */,
 				1475B01B24105A3200F1D24F /* Authentication */,
 			);
@@ -794,7 +820,7 @@
 			isa = PBXGroup;
 			children = (
 				1475AFD32410577100F1D24F /* DataPresentation */,
-				1475AFD22410576A00F1D24F /* PostFeed */,
+				14B671D7243A2D420083F663 /* Feeds */,
 				1475AFD12410576500F1D24F /* Edit */,
 				1475AFD02410575900F1D24F /* Authentication */,
 			);
@@ -1830,13 +1856,14 @@
 		1475AFD22410576A00F1D24F /* PostFeed */ = {
 			isa = PBXGroup;
 			children = (
-				1475AFE42410582300F1D24F /* FeedMasterDisplayer.swift */,
+				1475AFE42410582300F1D24F /* PostCollectionMasterDisplayer.swift */,
 				149BC5CB2422165800CFBBC7 /* PostCollectionDisplayer.swift */,
 				1475AFE22410580E00F1D24F /* PostListDisplayer.swift */,
 				1475AFE62410583300F1D24F /* UserHeaderDisplayer.swift */,
 				1475AFDF241057F000F1D24F /* Post */,
 			);
-			path = PostFeed;
+			name = PostFeed;
+			path = "../New Group/PostFeed";
 			sourceTree = "<group>";
 		};
 		1475AFD32410577100F1D24F /* DataPresentation */ = {
@@ -2004,19 +2031,14 @@
 			path = Edit;
 			sourceTree = "<group>";
 		};
-		1475B01D24105A4500F1D24F /* PostFeed */ = {
+		1475B01D24105A4500F1D24F /* Feeds */ = {
 			isa = PBXGroup;
 			children = (
-				140AEE312412FD0E00258DE8 /* PostFeedViewController.swift */,
-				1475B03524105B0F00F1D24F /* PostCollectionView.swift */,
-				1475B03924105B2B00F1D24F /* PostCollectionViewDatasource.swift */,
-				1475B03724105B1D00F1D24F /* PostCollectionViewDelegate.swift */,
-				1475B03B24105B3900F1D24F /* PostCollectionViewPrefetchingDatasource.swift */,
-				1475B03F24105B5200F1D24F /* Header */,
 				1475B03E24105B4B00F1D24F /* Footer */,
-				1475B03D24105B4300F1D24F /* Post */,
+				14B671D6243A2CC70083F663 /* CategoryFeed */,
+				14B671D5243A2CB80083F663 /* PostFeed */,
 			);
-			path = PostFeed;
+			path = Feeds;
 			sourceTree = "<group>";
 		};
 		1475B01E24105A4D00F1D24F /* DataPresentation */ = {
@@ -2583,6 +2605,8 @@
 			children = (
 				14B671BE243918650083F663 /* ExploreViewModel.swift */,
 				14B671C3243927EA0083F663 /* ExploreCategoryCollectionViewModel.swift */,
+				14B671CD2439CAF40083F663 /* ExploreCategoryListViewModel.swift */,
+				14B671E7243A5B100083F663 /* Category */,
 			);
 			path = Explore;
 			sourceTree = "<group>";
@@ -2593,6 +2617,78 @@
 				14B671C124391C630083F663 /* FetchingService_Categories.swift */,
 			);
 			path = Categories;
+			sourceTree = "<group>";
+		};
+		14B671D5243A2CB80083F663 /* PostFeed */ = {
+			isa = PBXGroup;
+			children = (
+				140AEE312412FD0E00258DE8 /* PostCollectionMasterViewController.swift */,
+				1475B03524105B0F00F1D24F /* PostCollectionView.swift */,
+				1475B03924105B2B00F1D24F /* PostCollectionViewDatasource.swift */,
+				1475B03724105B1D00F1D24F /* PostCollectionViewDelegate.swift */,
+				1475B03B24105B3900F1D24F /* PostCollectionViewPrefetchingDatasource.swift */,
+				1475B03D24105B4300F1D24F /* Post */,
+				1475B03F24105B5200F1D24F /* Header */,
+			);
+			path = PostFeed;
+			sourceTree = "<group>";
+		};
+		14B671D6243A2CC70083F663 /* CategoryFeed */ = {
+			isa = PBXGroup;
+			children = (
+				14B671E4243A3D010083F663 /* CategoryCollectionMasterViewController.swift */,
+				14B671C52439C4F60083F663 /* CategoryCollectionView.swift */,
+				14B671C72439C7860083F663 /* CategoryCollectionViewDatasource.swift */,
+				14B671C92439C7960083F663 /* CategoryCollectionViewDelegate.swift */,
+				14B671CB2439C7B40083F663 /* CategoryCollectionViewPrefetchingDatasource.swift */,
+				14B671E6243A3DDD0083F663 /* Category */,
+			);
+			path = CategoryFeed;
+			sourceTree = "<group>";
+		};
+		14B671D7243A2D420083F663 /* Feeds */ = {
+			isa = PBXGroup;
+			children = (
+				14B671D9243A2D6A0083F663 /* CollectionDisplayer.swift */,
+				14B671D8243A2D5A0083F663 /* CategoryFeed */,
+				1475AFD22410576A00F1D24F /* PostFeed */,
+			);
+			path = Feeds;
+			sourceTree = "<group>";
+		};
+		14B671D8243A2D5A0083F663 /* CategoryFeed */ = {
+			isa = PBXGroup;
+			children = (
+				14B671E2243A3C900083F663 /* CategoryCollectionMasterDisplayer.swift */,
+				14B671E0243A31110083F663 /* CategoryCollectionDisplayer.swift */,
+				14B671DE243A2EF50083F663 /* CategoryListDisplayer.swift */,
+				14B671DB243A2E3C0083F663 /* Category */,
+			);
+			path = CategoryFeed;
+			sourceTree = "<group>";
+		};
+		14B671DB243A2E3C0083F663 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				14B671DC243A2E560083F663 /* CategoryDisplayer.swift */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		14B671E6243A3DDD0083F663 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				14B671D32439E9700083F663 /* CategoryCell.swift */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		14B671E7243A5B100083F663 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				14B671CF2439CCED0083F663 /* CategoryViewModel.swift */,
+			);
+			path = Category;
 			sourceTree = "<group>";
 		};
 		AAB327F880C324E4589AB40F /* Pods */ = {
@@ -2909,6 +3005,7 @@
 				1475AF1124104A5600F1D24F /* RootCoordinatorType.swift in Sources */,
 				1475AECB2410474D00F1D24F /* UserSingleAttribute.swift in Sources */,
 				1475AF8D241052E700F1D24F /* SingleImagePostViewModel.swift in Sources */,
+				14B671DD243A2E560083F663 /* CategoryDisplayer.swift in Sources */,
 				1475AE9E2410453D00F1D24F /* RawSingleImagePost.swift in Sources */,
 				1475B06924105CF300F1D24F /* UploadTitleCell.swift in Sources */,
 				1475B07824105D8000F1D24F /* AuthenticationView.swift in Sources */,
@@ -2919,6 +3016,7 @@
 				1475AE832410438200F1D24F /* FetchingService_User.swift in Sources */,
 				1475B05D24105C9500F1D24F /* UploadUserHeaderCell.swift in Sources */,
 				1475AE4624103FD700F1D24F /* MemoryManager.swift in Sources */,
+				14B671DA243A2D6A0083F663 /* CollectionDisplayer.swift in Sources */,
 				1475AF87241052AA00F1D24F /* HomeViewModel.swift in Sources */,
 				1475AE0824103EAD00F1D24F /* ViewController.swift in Sources */,
 				1475AFC52410551500F1D24F /* EmailLoginViewModel.swift in Sources */,
@@ -2943,7 +3041,9 @@
 				1475B04124105B7600F1D24F /* UserHeader.swift in Sources */,
 				1475AFFE2410591D00F1D24F /* UploadPostDisplayer.swift in Sources */,
 				14B6718424361FE70083F663 /* UploadCategoryController.swift in Sources */,
+				14B671E1243A31110083F663 /* CategoryCollectionDisplayer.swift in Sources */,
 				149BC5CE24222F4A00CFBBC7 /* HomePostCollectionViewModel.swift in Sources */,
+				14B671E3243A3C900083F663 /* CategoryCollectionMasterDisplayer.swift in Sources */,
 				1475B0DA2410613800F1D24F /* InputTextView.swift in Sources */,
 				1475AFF12410589800F1D24F /* UploadUserItemDisplayer.swift in Sources */,
 				1475AFCB2410553C00F1D24F /* ForgotPasswordViewModel.swift in Sources */,
@@ -2955,6 +3055,7 @@
 				1475B0D0241060F300F1D24F /* NumberTextField.swift in Sources */,
 				1475AF5C241050DC00F1D24F /* PostingUploadInstagramVideoLinkController.swift in Sources */,
 				1475AEDA241047D700F1D24F /* SingleImagePostModel.swift in Sources */,
+				14B671DF243A2EF50083F663 /* CategoryListDisplayer.swift in Sources */,
 				1475AEB12410461700F1D24F /* RawForgotPasswordUser.swift in Sources */,
 				14B671BF243918650083F663 /* ExploreViewModel.swift in Sources */,
 				1475AFCF2410555900F1D24F /* PhoneLoginViewModel.swift in Sources */,
@@ -2974,8 +3075,10 @@
 				14B67173243605A40083F663 /* CategoryCreationController.swift in Sources */,
 				1475AEA22410456200F1D24F /* RawImagesPost.swift in Sources */,
 				14BDEC08241CBF0E00228763 /* Bool+Extension.swift in Sources */,
+				14B671CA2439C7960083F663 /* CategoryCollectionViewDelegate.swift in Sources */,
 				1475AEAB241045C400F1D24F /* RawPostType.swift in Sources */,
 				14B6718C243628F90083F663 /* UploadCategoryTitleCell.swift in Sources */,
+				14B671CE2439CAF40083F663 /* ExploreCategoryListViewModel.swift in Sources */,
 				1475AF842410528A00F1D24F /* HomePostListViewModel.swift in Sources */,
 				14B6717F2436164E0083F663 /* UploadCategoryCoordinator.swift in Sources */,
 				1475AFDE241057D600F1D24F /* VideoPlayerDisplayer.swift in Sources */,
@@ -2989,17 +3092,19 @@
 				14B671C4243927EA0083F663 /* ExploreCategoryCollectionViewModel.swift in Sources */,
 				14B671AA2438AC040083F663 /* UploadDescriptionViewModel.swift in Sources */,
 				1475AE5B2410416100F1D24F /* InstagramService_Video.swift in Sources */,
-				140AEE322412FD0E00258DE8 /* PostFeedViewController.swift in Sources */,
+				140AEE322412FD0E00258DE8 /* PostCollectionMasterViewController.swift in Sources */,
 				1475AEE22410483200F1D24F /* InstagramSingleImagePostModel.swift in Sources */,
 				1475AEB32410462700F1D24F /* RawRegistrationUser.swift in Sources */,
 				1475B0AC24105FCC00F1D24F /* HoshiTextField+ReactiveExtension.swift in Sources */,
 				1475AE4024103F8A00F1D24F /* Architecture.swift in Sources */,
+				14B671D02439CCED0083F663 /* CategoryViewModel.swift in Sources */,
 				1475B02C24105AB200F1D24F /* ImagesSlider.swift in Sources */,
 				14B671882436227F0083F663 /* UploadCategoryDelegate.swift in Sources */,
 				1475B04B24105BC100F1D24F /* SingleImagePostCell.swift in Sources */,
 				1475B0C6241060A700F1D24F /* SmallHeaderLabel.swift in Sources */,
 				1475B06B24105CFF00F1D24F /* UploadDescriptionCell.swift in Sources */,
 				1475AF672410513800F1D24F /* PostingUploadInstagramImagesPostController.swift in Sources */,
+				14B671CC2439C7B40083F663 /* CategoryCollectionViewPrefetchingDatasource.swift in Sources */,
 				1475AF09241049EA00F1D24F /* LocalVideoPost.swift in Sources */,
 				1475AF9F2410538C00F1D24F /* UploadUserItemViewModel.swift in Sources */,
 				1475AECD2410475E00F1D24F /* PostSingleAttribute.swift in Sources */,
@@ -3023,6 +3128,7 @@
 				1475AE782410430D00F1D24F /* UploadingService_User.swift in Sources */,
 				1475AEC4241046FC00F1D24F /* StringConvertibleType.swift in Sources */,
 				1475AF7F2410524C00F1D24F /* ImagesSliderViewModel.swift in Sources */,
+				14B671D42439E9700083F663 /* CategoryCell.swift in Sources */,
 				1475AE7E2410434300F1D24F /* FetchingError.swift in Sources */,
 				1475AE552410406C00F1D24F /* InstagramError.swift in Sources */,
 				1475B06D24105D0C00F1D24F /* UploadDescriptionHeader.swift in Sources */,
@@ -3042,6 +3148,7 @@
 				1475AE7A2410431E00F1D24F /* UploadingService_Post.swift in Sources */,
 				1475B08324105E4600F1D24F /* LoginTextFieldsStackView.swift in Sources */,
 				1475AED5241047A300F1D24F /* PostModel.swift in Sources */,
+				14B671C62439C4F60083F663 /* CategoryCollectionView.swift in Sources */,
 				14B671AF2438B4300083F663 /* CategoryCreationUploadCategoryController.swift in Sources */,
 				1475AEA72410459C00F1D24F /* RawInstagramImagesPost.swift in Sources */,
 				1475AF6B2410515B00F1D24F /* PostingUploadInstagramVideoPostController.swift in Sources */,
@@ -3166,7 +3273,7 @@
 				1475AE8D2410440400F1D24F /* AuthenticationError.swift in Sources */,
 				1475AF0F24104A4600F1D24F /* AppCoordinatorType.swift in Sources */,
 				1475AFC92410552D00F1D24F /* GoogleLoginViewModel.swift in Sources */,
-				1475AFE52410582300F1D24F /* FeedMasterDisplayer.swift in Sources */,
+				1475AFE52410582300F1D24F /* PostCollectionMasterDisplayer.swift in Sources */,
 				1475B09C24105F5700F1D24F /* Int+Extension.swift in Sources */,
 				1475B0DE2410615B00F1D24F /* TableViewController.swift in Sources */,
 				1475AF89241052CC00F1D24F /* UserHeaderViewModel.swift in Sources */,
@@ -3176,8 +3283,10 @@
 				14B6719C243632CC0083F663 /* Category.swift in Sources */,
 				1475B0A024105F7700F1D24F /* UIFont+Extension.swift in Sources */,
 				1475B03A24105B2B00F1D24F /* PostCollectionViewDatasource.swift in Sources */,
+				14B671C82439C7860083F663 /* CategoryCollectionViewDatasource.swift in Sources */,
 				1475B05F24105CA100F1D24F /* UploadUserTableViewCell.swift in Sources */,
 				1475AF3024104BD300F1D24F /* HomeCoordinator.swift in Sources */,
+				14B671E5243A3D010083F663 /* CategoryCollectionMasterViewController.swift in Sources */,
 				1475AF03241049B800F1D24F /* LocalImagesPost.swift in Sources */,
 				14B6719124362BE20083F663 /* UploadCategoryViewModel.swift in Sources */,
 				1475AF6D2410517A00F1D24F /* AuthenticationController.swift in Sources */,

@@ -26,7 +26,7 @@ class HomePostListViewModel: PostListDisplayer {
     
     var requestedPlayingVideo: PublishRelay<Int> = PublishRelay()
 
-    var restart: PublishRelay<Void> = PublishRelay()
+    var reload: PublishRelay<Void> = PublishRelay()
     var insert: PublishRelay<(Int, Int)> = PublishRelay()
     var updateLayout: PublishRelay<Void> = PublishRelay()
     
@@ -55,7 +55,7 @@ class HomePostListViewModel: PostListDisplayer {
         }
         
         if numberOfPostDisplayers == 0 && loadedPosts.count == 0 {
-            restart.accept(())
+            reload.accept(())
             return
         }
         
@@ -68,7 +68,7 @@ class HomePostListViewModel: PostListDisplayer {
         configurePostDisplayers(with: newPosts)
 
         if fromStart {
-            restart.accept(())
+            reload.accept(())
         } else {
             insert.accept((startIndex, endIndex))
         }

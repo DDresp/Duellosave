@@ -78,7 +78,7 @@ class PostCollectionView: UICollectionView {
     
     private func setupBindablesFromDisplayer() {
         
-        displayer.restartData.subscribe(onNext: { [weak self] (_) in
+        displayer.reloadData.subscribe(onNext: { [weak self] (_) in
         
             self?.setContentOffset(.zero, animated: false)
             self?.feedDelegate.clearCache()
@@ -93,7 +93,7 @@ class PostCollectionView: UICollectionView {
             
         }).disposed(by: disposeBag)
         
-        displayer.reloadData.subscribe(onNext: { [weak self] (startIndex, endIndex) in
+        displayer.insertData.subscribe(onNext: { [weak self] (startIndex, endIndex) in
             DispatchQueue.main.async {
                 guard let self = self else { return }
                 let indexPaths = Array(startIndex...endIndex).map { IndexPath(item: $0, section: 0) }

@@ -15,12 +15,10 @@ class PostCell<T: PostDisplayer>: UICollectionViewCell {
     var displayer: T?
 
     //MARK: - Variables
-    let randomId: String
     var mediaViewHeightConstraint: NSLayoutConstraint?
 
     //MARK: - Setup
     override init(frame: CGRect) {
-        randomId = UUID().uuidString
         super.init(frame: frame)
         backgroundColor = EXTREMELIGHTGRAYCOLOR
         setupLayout()

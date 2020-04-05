@@ -10,13 +10,13 @@ import RxCocoa
 import RxSwift
 import JGProgressHUD
 
-class PostFeedViewController: ViewController {
+class PostCollectionMasterViewController: ViewController {
     
     //MARK: - Displayer
-    let displayer: FeedMasterDisplayer
+    let displayer: PostCollectionMasterDisplayer
     
     //MARK: - Setup
-    init(displayer: FeedMasterDisplayer) {
+    init(displayer: PostCollectionMasterDisplayer) {
         self.displayer = displayer
         super.init(nibName: nil, bundle: nil)
     }

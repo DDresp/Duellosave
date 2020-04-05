@@ -12,7 +12,7 @@ import RxCocoa
 class FooterLoadingCell: UICollectionReusableView {
     
     //MARK: - Displayer
-    var displayer: PostCollectionDisplayer? {
+    var displayer: CollectionDisplayer? {
         
         didSet {
             disposeBag = DisposeBag()

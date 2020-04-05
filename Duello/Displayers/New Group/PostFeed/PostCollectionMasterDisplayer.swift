@@ -9,7 +9,7 @@
 import RxSwift
 import RxCocoa
 
-protocol FeedMasterDisplayer: class {
+protocol PostCollectionMasterDisplayer: class {
     
     //MARK: - Bindables
     var loadLink: PublishRelay<String?> { get }

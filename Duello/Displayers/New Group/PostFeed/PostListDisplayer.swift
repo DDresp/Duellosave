@@ -6,9 +6,8 @@
 //  Copyright © 2020 Darius Dresp. All rights reserved.
 //
 
-
-import RxSwift
 import RxCocoa
+import RxSwift
 
 protocol PostListDisplayer: class {
     
@@ -21,11 +20,12 @@ protocol PostListDisplayer: class {
     var didEndDisplayingCell: PublishRelay<Int> { get }
     var willDisplayCell: PublishRelay<Int> { get }
     
+    var reload: PublishRelay<Void> { get }
+    var insert: PublishRelay<(Int, Int)> { get }
+    
+    
     //MARK: - Getters
     var numberOfPostDisplayers: Int { get }
-//    var loadedAllPosts: Bool { get }
-//    var loadedAllPostsTest: Bool { get }
-//    var noPostsAvailable: Bool { get }
     func getPostDisplayer(at index: Int) -> PostDisplayer?
     
     //MARK: - Methods

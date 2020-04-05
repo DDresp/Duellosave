@@ -46,8 +46,8 @@ class HomePostCollectionViewModel: PostCollectionDisplayer {
     var uiLoaded: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     var refreshChanged: PublishSubject<Void> = PublishSubject()
     
-    var reloadData: PublishRelay<(Int, Int)> = PublishRelay()
-    var restartData: PublishRelay<Void> = PublishRelay()
+    var insertData: PublishRelay<(Int, Int)> = PublishRelay()
+    var reloadData: PublishRelay<Void> = PublishRelay()
     var updateLayout: PublishRelay<Void> = PublishRelay()
     
     var requestDataForIndexPath: PublishRelay<[IndexPath]> = PublishRelay<[IndexPath]>()
@@ -68,7 +68,6 @@ class HomePostCollectionViewModel: PostCollectionDisplayer {
     var disposeBag = DisposeBag()
     
     private func setupBindables() {
-        setupBasicBindables()
         setupBindablesFromChildViewModels()
         setupBindablesToChildViewModels()
         setupBindablesFromOwnProperties()
@@ -103,10 +102,15 @@ class HomePostCollectionViewModel: PostCollectionDisplayer {
     
     private func setupBindablesFromChildViewModels() {
         
+        
+        postListDisplayer.loadLink.bind(to: loadLink).disposed(by: disposeBag)
+        postListDisplayer.showAdditionalLinkAlert.bind(to: showAdditionalLinkAlert).disposed(by: disposeBag)
+        postListDisplayer.showActionSheet.bind(to: showActionSheet).disposed(by: disposeBag)
+        
         userHeaderViewModel.socialMediaDisplayer.selectedLink.bind(to: loadLink).disposed(by: disposeBag)
         userHeaderViewModel.socialMediaDisplayer.showAdditionalLinkAlert.bind(to: showAdditionalLinkAlert).disposed(by: disposeBag)
         
-        postListViewModel.insert.bind(to: reloadData).disposed(by: disposeBag)
+        postListViewModel.insert.bind(to: insertData).disposed(by: disposeBag)
         postListViewModel.updateLayout.bind(to: updateLayout).disposed(by: disposeBag)
         
         //homeviewmodel specific
@@ -114,13 +118,25 @@ class HomePostCollectionViewModel: PostCollectionDisplayer {
         postListViewModel.updatePost.bind(to: updatePost).disposed(by: disposeBag)
         //
         
-        postListViewModel.restart.bind(to: restartData).disposed(by: disposeBag)
+        postListViewModel.reload.bind(to: reloadData).disposed(by: disposeBag)
         postListViewModel.willDisplayCell.map { (index) -> [IndexPath] in
             return [IndexPath(item: index, section: 0)]
             }.bind(to: requestDataForIndexPath).disposed(by: disposeBag)
     }
     
     private func setupBindablesFromOwnProperties() {
+        
+        isAppeared.bind(to: postListDisplayer.isAppeared).disposed(by: disposeBag)
+        
+        needsRestart.filter { (needsRestart) -> Bool in
+            return needsRestart
+        }.map { (_) -> Bool in
+            return false
+        }.bind(to: uiLoaded).disposed(by: disposeBag)
+        
+        refreshChanged.map { (_) -> Bool in
+            return true
+        }.bind(to: needsRestart).disposed(by: disposeBag)
 
         requestDataForIndexPath.subscribe(onNext: { [weak self] (indexPaths) in
             guard let self = self else { return }

@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 import Firebase
 
-class ExploreViewModel {
+class ExploreViewModel: CategoryCollectionMasterDisplayer {
     
     //MARK: - Coordinator
     weak var coordinator: ExploreCoordinatorType? {
@@ -21,13 +21,16 @@ class ExploreViewModel {
     
     //MARK: - Models
     var categories = [CategoryModel]()
-    let fetchSteps: Int = 10
     
     //MARK: - Child Displayers
-    //some collectionDisplayer maybe
     let categoriesViewModel = ExploreCategoryCollectionViewModel()
     
+    //MARK: - Variables
+    let fetchSteps: Int = 20
+    
     //MARK: - Bindables
+    var displayedCategories: BehaviorRelay<[CategoryModel]?> = BehaviorRelay(value: nil)
+    
     var isFetchingCategories: Bool = false
     var loadedAllCategories: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     
@@ -46,7 +49,6 @@ class ExploreViewModel {
     
     //MARK: - Networking
     func fetchCategories() {
-
         guard let _ = Auth.auth().currentUser?.uid, !isFetchingCategories, !loadedAllCategories.value else { return }
         
         let lastCategoryId = categories.last?.id
@@ -54,43 +56,44 @@ class ExploreViewModel {
         
         DispatchQueue.global(qos: .background).async {
             FetchingService.shared.fetchCategories(orderKey: "creationDate", limit: self.fetchSteps, startId: lastCategoryId).subscribe(onNext: { [weak self] (categories) in
+                self?.isFetchingCategories = false
                 let reachedEnd = categories.count < (self?.fetchSteps ?? 0)
                 self?.loadedAllCategories.accept(reachedEnd)
                 self?.categories.append(contentsOf: categories)
-                self?.isFetchingCategories = false
-                //
+                self?.displayedCategories.accept(self?.categories)
             }).disposed(by: self.disposeBag)
         }
     
-//        DispatchQueue.global(qos: .background).async  {
-//            FetchingService.shared.fetchUserPosts(for: uid, limit: self.fetchSteps, startId: lastCategoryId).subscribe(onNext: { [weak self] (posts) in
-//                let reachedEnd = posts.count < (self?.fetchSteps ?? 0)
-//                self?.loadedAllPosts.accept(reachedEnd)
-//                self?.displayingAllPosts.accept(true)
-//                self?.posts.append(contentsOf: posts)
-//                self?.displayedPosts.append(contentsOf: posts)
-//                self?.homeCollectionViewModel.posts.accept(self?.displayedPosts)
-//                self?.isFetchingNextPosts = false
-//                
-//            }).disposed(by: self.disposeBag)
-//        }
     }
     
     //MARK: - Reactive
     var disposeBag = DisposeBag()
     
     private func setupBindables() {
-//        setupBindablesFromViewModel()
-//        setupBindablesToViewModel()
-//        setupBindablesToCoordinator()
-//        setupBindablesFromOwnProperties()
+        setupBindablesFromViewModel()
+        setupBindablesToViewModel()
+        setupBindablesToCoordinator()
     }
     
     private func setupBindablesFromViewModel() {
+
+        categoriesViewModel.needsRestart.filter { (needsRestart) -> Bool in
+            return needsRestart
+        }.subscribe(onNext: { [weak self] (_) in
+            self?.start()
+            }).disposed(by: disposeBag)
+        
+        categoriesViewModel.fetchNext.subscribe(onNext: { [weak self] (_) in
+            guard (self?.categories.count ?? 0) > 0 else { return }
+            self?.fetchCategories()
+            }).disposed(by: disposeBag)
+        
         
     }
     
     private func setupBindablesToViewModel() {
+        displayedCategories.bind(to: categoriesViewModel.categories).disposed(by: disposeBag)
+        loadedAllCategories.bind(to: categoriesViewModel.finished).disposed(by: disposeBag)
         
     }
 

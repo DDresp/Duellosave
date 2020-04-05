@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 import Firebase
 
-class HomeViewModel: FeedMasterDisplayer {
+class HomeViewModel: PostCollectionMasterDisplayer {
     
     //MARK: - Coordinator
     weak var coordinator: HomeCoordinatorType? {
@@ -18,6 +18,9 @@ class HomeViewModel: FeedMasterDisplayer {
             setupBindablesToCoordinator()
         }
     }
+    
+    //MARK: - Models
+    var posts = [PostModel]()
     
     //MARK: - Child Displayers
     var postCollectionDisplayer: PostCollectionDisplayer = HomePostCollectionViewModel()
@@ -28,8 +31,6 @@ class HomeViewModel: FeedMasterDisplayer {
     }
     
     //MARK: - Variables
-    var posts = [PostModel]()
-    
     let fetchSteps: Int = 6
     var lastFetchAll: Date? //important to fetch all for getting the correct score
     let fetchingAllPause: Double = 10 //user shouldn't be able to fetch all Posts so often (too expensive)
@@ -67,7 +68,7 @@ class HomeViewModel: FeedMasterDisplayer {
         posts = [PostModel]()
         
         self.loadedAllPosts.accept(false)
-        self.displayingAllPosts.accept(false)
+//        self.displayingAllPosts.accept(false)
         
         if let lastFetchTime = lastFetchAll, Date().timeIntervalSince(lastFetchTime) < fetchingAllPause && !forceFetchingAll {
             fetchLimitedPosts()
@@ -112,6 +113,7 @@ class HomeViewModel: FeedMasterDisplayer {
                 return FetchingService.shared.fetchAllUserPosts(for: uid)
         }.subscribe(onNext: { [weak self] (posts, score) in
             guard let self = self else { return }
+            self.isFetching = false
             var user = self.user.value
             user?.score = score
             self.user.accept(user)
@@ -123,7 +125,6 @@ class HomeViewModel: FeedMasterDisplayer {
                 let displayedPosts = Array(self.posts[0..<self.fetchSteps])
                 self.displayedPosts.accept(displayedPosts)
             }
-            self.isFetching = false
             self.loadedAllPosts.accept(true)
         }).disposed(by: disposeBag)
     }
@@ -137,11 +138,11 @@ class HomeViewModel: FeedMasterDisplayer {
 
         DispatchQueue.global(qos: .background).async  {
             FetchingService.shared.fetchUserPosts(for: uid, limit: self.fetchSteps, startId: lastPostId).subscribe(onNext: { [weak self] (posts) in
+                self?.isFetching = false
                 let reachedEnd = posts.count < (self?.fetchSteps ?? 0)
                 self?.loadedAllPosts.accept(reachedEnd)
                 self?.posts.append(contentsOf: posts)
                 self?.displayedPosts.accept(self?.posts)
-                self?.isFetching = false
                 
             }).disposed(by: self.disposeBag)
         }

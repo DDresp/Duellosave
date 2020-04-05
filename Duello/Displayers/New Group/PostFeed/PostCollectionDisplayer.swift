@@ -9,7 +9,7 @@
 import RxSwift
 import RxCocoa
 
-protocol PostCollectionDisplayer: class {
+protocol PostCollectionDisplayer: class, CollectionDisplayer {
     
     //MARK: - Models
     var user: BehaviorRelay<UserModel?> { get }
@@ -20,7 +20,6 @@ protocol PostCollectionDisplayer: class {
     var postListDisplayer: PostListDisplayer { get }
     
     //MARK: - Bindables
-    var finished: BehaviorRelay<Bool> { get }
     var needsRestart: BehaviorRelay<Bool> { get }
     
     var loadLink: PublishRelay<String?> { get }
@@ -33,8 +32,8 @@ protocol PostCollectionDisplayer: class {
     var refreshChanged: PublishSubject<Void> { get }
     var uiLoaded: BehaviorRelay<Bool> { get }
     
-    var reloadData: PublishRelay<(Int, Int)> { get }
-    var restartData: PublishRelay<Void> { get }
+    var insertData: PublishRelay<(Int, Int)> { get }
+    var reloadData: PublishRelay<Void> { get }
     var updateLayout: PublishRelay<Void> { get  }
     
     var requestDataForIndexPath: PublishRelay<[IndexPath]> { get }
@@ -49,24 +48,4 @@ extension PostCollectionDisplayer {
     var hasProfileHeader: Bool { return userHeaderDisplayer != nil }
     var hasNoPosts: Bool { return posts.value?.count == 0 }
     
-    //MARK: - Reactive
-    func setupBasicBindables() {
-        
-        needsRestart.filter { (needsRestart) -> Bool in
-            return needsRestart
-        }.map { (_) -> Bool in
-            return false
-        }.bind(to: uiLoaded).disposed(by: disposeBag)
-        
-        refreshChanged.map { (_) -> Bool in
-            return true
-        }.bind(to: needsRestart).disposed(by: disposeBag)
-        
-        isAppeared.bind(to: postListDisplayer.isAppeared).disposed(by: disposeBag)
-        
-        postListDisplayer.loadLink.bind(to: loadLink).disposed(by: disposeBag)
-        postListDisplayer.showAdditionalLinkAlert.bind(to: showAdditionalLinkAlert).disposed(by: disposeBag)
-        postListDisplayer.showActionSheet.bind(to: showActionSheet).disposed(by: disposeBag)
-        
-    }
 }
