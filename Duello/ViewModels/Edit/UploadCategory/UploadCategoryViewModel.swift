@@ -21,7 +21,7 @@ class UploadCategoryViewModel: UploadCategoryDisplayer {
     //MARK: - ChildViewModels
     var titleDisplayer: UploadTitleDisplayer = UploadTitleViewModel()
     var descriptionDisplayer: UploadDescriptionDisplayer = UploadDescriptionViewModel(maxCharacters: 1000)
-    var typeSelectorDisplayer: UploadRoughTypeSelectorDisplayer = UploadRoughTypeSelectorViewModel()
+    var roughMediaSelectorDisplayer: UploadRoughMediaSelectorDisplayer = UploadRoughMediaSelectorViewModel()
     
     //MARK: - Variables
     var progressHudMessage: String = "Uploading Category"
@@ -48,7 +48,7 @@ class UploadCategoryViewModel: UploadCategoryDisplayer {
             return false
         }
         
-        if !typeSelectorDisplayer.mediaTypeIsSelected.value {
+        if !roughMediaSelectorDisplayer.mediaTypeIsSelected.value {
             alert.accept(Alert(alertMessage: "You need to allow at least one MediaType", alertHeader: "Not Finished"))
             return false
         }
@@ -62,7 +62,7 @@ class UploadCategoryViewModel: UploadCategoryDisplayer {
         category.description.value = descriptionDisplayer.description.value
         category.title.value = titleDisplayer.title.value
         category.creationDate.value = Date().timeIntervalSince1970
-        category.typeData.value = typeSelectorDisplayer.mediaType.value
+        category.roughMediaType.value = roughMediaSelectorDisplayer.mediaType.value
         return category
     }
     

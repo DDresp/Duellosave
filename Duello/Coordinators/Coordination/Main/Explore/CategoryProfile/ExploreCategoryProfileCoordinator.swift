@@ -11,15 +11,28 @@ import RxSwift
 
 class ExploreCategoryProfileCoordinator: CategoryProfileCoordinatorType {
     
+    //MARK: - ChildCoordinators
+    var postingCoordinator: PostingCoordinatorType?
+    
+    //MARK: - Models
+    let category: CategoryModel
+    
     //MARK: - ViewModels
+    private lazy var viewModel: ExploreCategoryProfileViewModel = {
+        let viewModel = ExploreCategoryProfileViewModel(category: category)
+        viewModel.coordinator = self
+        return viewModel
+    }()
     
     //MARK: - Variables
     
     //MARK: - Bindables
+    var requestedAddContent: PublishSubject<Void> = PublishSubject()
     
     //MARK: - Setup
-    init(rootController: UIViewController) {
+    init(rootController: UIViewController, category: CategoryModel) {
         self.rootController = rootController
+        self.category = category
     }
     
     //MARK: - Controllers
@@ -28,13 +41,35 @@ class ExploreCategoryProfileCoordinator: CategoryProfileCoordinatorType {
     
     //MARK: - Methods
     func start() {
-        let viewController = CategoryProfileController()
+        let viewController = ExploreCategoryProfileController(viewModel: viewModel)
         presentedController = viewController
         if let navigationController = rootController as? UINavigationController {
             navigationController.pushViewController(presentedController!, animated: true)
         } else {
             rootController.present(presentedController!, animated: true)
         }
+        setupBindables()
+    }
+    
+    //MARK: - Reactive
+    private let disposeBag = DisposeBag()
+    
+    private func setupBindables() {
+        
+        requestedAddContent.subscribe(onNext: { [weak self] (_) in
+            self?.goToPosting()
+            }).disposed(by: disposeBag)
+        
+    }
+    
+}
+
+//MARK: Extension: Posting
+extension ExploreCategoryProfileCoordinator {
+    
+    private func goToPosting() {
+        postingCoordinator = ExploreCategoryPostingCoordinator(rootController: rootController, category: category)
+        postingCoordinator?.start()
     }
     
 }

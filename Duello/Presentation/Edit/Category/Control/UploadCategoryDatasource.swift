@@ -68,11 +68,11 @@ class UploadCategoryDatasource: NSObject, UITableViewDataSource {
         case typeCellSection:
             if indexPath.row == 0 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: imagesSelectorCellId, for: indexPath) as! UploadImagesSelectorCell
-                cell.displayer = displayer.typeSelectorDisplayer
+                cell.displayer = displayer.roughMediaSelectorDisplayer
                 return cell
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: videoSelectorCellId, for: indexPath) as! UploadVideoSelectorCell
-                cell.displayer = displayer.typeSelectorDisplayer
+                cell.displayer = displayer.roughMediaSelectorDisplayer
                 return cell
             }
         default:

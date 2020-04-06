@@ -14,6 +14,6 @@ protocol UploadCategoryDisplayer: class, UploadDisplayer {
     //MARK: - Child Displayers
     var titleDisplayer: UploadTitleDisplayer { get }
     var descriptionDisplayer: UploadDescriptionDisplayer { get }
-    var typeSelectorDisplayer: UploadRoughTypeSelectorDisplayer { get }
+    var roughMediaSelectorDisplayer: UploadRoughMediaSelectorDisplayer { get }
     
 }

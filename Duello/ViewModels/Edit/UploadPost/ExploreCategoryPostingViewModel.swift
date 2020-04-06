@@ -9,7 +9,7 @@
 import RxSwift
 import RxCocoa
 
-class PostingViewModel {
+class ExploreCategoryPostingViewModel {
     
     //MARK: - Coordinator
     weak var coordinator: PostingCoordinatorType? {
@@ -18,11 +18,28 @@ class PostingViewModel {
         }
     }
     
+    //MARK: - Models
+    let category: CategoryModel
+    
     //MARK: - Bindables
     var imageButtonTapped: PublishRelay<Void> = PublishRelay<Void>()
     var videoButtonTapped: PublishRelay<Void> = PublishRelay<Void>()
     var instagramVideoButtonTapped: PublishRelay<Void> = PublishRelay<Void>()
     var instagramImageButtonTapped: PublishRelay<Void> = PublishRelay<Void>()
+    
+    //MARK: - Setup
+    init(category: CategoryModel) {
+        self.category = category
+    }
+    
+    //MARK: - Getters
+    var videosAllowed: Bool {
+        return category.allowsVideos()
+    }
+    
+    var imagesAllowed: Bool {
+        return category.allowsImages()
+    }
     
     //MARK: - Reactive
     private let disposeBag = DisposeBag()

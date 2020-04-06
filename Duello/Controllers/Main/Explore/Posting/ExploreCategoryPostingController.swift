@@ -11,13 +11,13 @@ import AVFoundation
 import RxSwift
 import RxCocoa
 
-class PostingController: ViewController {
+class ExploreCategoryPostingController: ViewController {
     
     //MARK: - ViewModel
-    let viewModel: PostingViewModel
+    let viewModel: ExploreCategoryPostingViewModel
     
     //MARK: - Setup
-    init(viewModel: PostingViewModel) {
+    init(viewModel: ExploreCategoryPostingViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -25,7 +25,6 @@ class PostingController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = VERYLIGHTGRAYCOLOR
-        
         setupLayout()
         setupBindablesToViewModel()
     }
@@ -36,6 +35,7 @@ class PostingController: ViewController {
         button.setTitle("upload Image", for: .normal)
         button.setTitleColor(DARKGRAYCOLOR, for: .normal)
         button.backgroundColor = .white
+        button.isHidden = true
         return button
     }()
     
@@ -44,6 +44,7 @@ class PostingController: ViewController {
         button.setTitle("upload Video", for: .normal)
         button.setTitleColor(DARKGRAYCOLOR, for: .normal)
         button.backgroundColor = .white
+        button.isHidden = true
         return button
     }()
     
@@ -52,6 +53,7 @@ class PostingController: ViewController {
         button.setTitle("upload instagram video", for: .normal)
         button.setTitleColor(DARKGRAYCOLOR, for: .normal)
         button.backgroundColor = .white
+        button.isHidden = true
         return button
     }()
     
@@ -60,6 +62,7 @@ class PostingController: ViewController {
         button.setTitle("upload instagram image", for: .normal)
         button.setTitleColor(DARKGRAYCOLOR, for: .normal)
         button.backgroundColor = .white
+        button.isHidden = true
         return button
     }()
     
@@ -74,6 +77,16 @@ class PostingController: ViewController {
         verticalStackView.axis = .vertical
         view.addSubview(verticalStackView)
         verticalStackView.centerInSuperview()
+        
+        if viewModel.imagesAllowed {
+            uploadImageButton.isHidden = false
+            uploadInstagramImageButton.isHidden = false
+        }
+        
+        if viewModel.videosAllowed {
+            uploadVideoButton.isHidden = false
+            uploadInstagramVideoButton.isHidden = false
+        }
     }
     
     //MARK: - Reactive

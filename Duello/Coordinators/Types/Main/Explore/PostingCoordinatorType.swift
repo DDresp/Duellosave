@@ -9,7 +9,7 @@
 import RxCocoa
 import RxSwift
 
-protocol PostingCoordinatorType: RootCoordinatorType {
+protocol PostingCoordinatorType: FlowCoordinatorType {
     var requestedVideoUpload: PublishSubject<Void> { get }
     var requestedImageUpload: PublishSubject<Void> { get }
     var requestedInstagramVideoUpload: PublishSubject<Void> { get }

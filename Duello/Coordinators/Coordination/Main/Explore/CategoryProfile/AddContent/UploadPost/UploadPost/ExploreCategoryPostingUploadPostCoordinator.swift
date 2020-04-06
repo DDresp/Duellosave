@@ -9,7 +9,7 @@
 import RxCocoa
 import RxSwift
 
-class PostingUploadPostCoordinator: UploadPostCoordinatorType {
+class ExploreCategoryPostingUploadPostCoordinator: UploadPostCoordinatorType {
     
     //MARK: - ViewModels
     private lazy var viewModel: UploadPostDisplayer? = {

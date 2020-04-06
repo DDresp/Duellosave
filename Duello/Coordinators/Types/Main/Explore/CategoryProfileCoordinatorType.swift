@@ -6,6 +6,8 @@
 //  Copyright © 2020 Darius Dresp. All rights reserved.
 //
 
-import Foundation
+import RxSwift
 
-protocol CategoryProfileCoordinatorType: FlowCoordinatorType {}
+protocol CategoryProfileCoordinatorType: FlowCoordinatorType {
+    var requestedAddContent: PublishSubject<Void> { get }
+}

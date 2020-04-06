@@ -54,8 +54,8 @@ extension ExploreCoordinator {
     
     //GoTo
     private func goToCategoryProfile(with category: CategoryModel?) {
-        guard let rootController = navigationController else { return }
-        exploreCategoryProfileCoordinator = ExploreCategoryProfileCoordinator(rootController: rootController)
+        guard let rootController = navigationController, let category = category else { return }
+        exploreCategoryProfileCoordinator = ExploreCategoryProfileCoordinator(rootController: rootController, category: category)
         exploreCategoryProfileCoordinator?.start()
         setupCategoryProfileBindables()
         

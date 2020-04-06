@@ -9,7 +9,7 @@
 import RxSwift
 import RxCocoa
 
-class PostingUploadInstagramLinkCoordinator: UploadLinkCoordinatorType {
+class ExploreCategoryPostingUploadInstagramLinkCoordinator: UploadLinkCoordinatorType {
     
     //MARK: - ViewModels
     lazy var viewModel: UploadInstagramLinkDisplayer = {

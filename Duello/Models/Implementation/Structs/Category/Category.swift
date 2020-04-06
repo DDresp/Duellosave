@@ -17,7 +17,7 @@ struct Category: CategoryModel {
     var title: CategorySingleAttribute = CategorySingleAttribute(attributeCase: .title, value: nil)
     var description: CategorySingleAttribute = CategorySingleAttribute(attributeCase: .description, value: nil)
     var creationDate: CategorySingleAttribute = CategorySingleAttribute(attributeCase: .creationDate, value: nil)
-    var typeData: CategorySingleAttribute = CategorySingleAttribute(attributeCase: .type, value: nil)
+    var roughMediaType: CategorySingleAttribute = CategorySingleAttribute(attributeCase: .type, value: nil)
     
     
     //MARK: - Getters
@@ -26,7 +26,7 @@ struct Category: CategoryModel {
             title,
             description,
             creationDate,
-            typeData,
+            roughMediaType,
         ]
     }
     
