@@ -29,10 +29,10 @@ class UploadLocalVideoPostViewModel: UploadPostViewModel<LocalVideoPost>, Upload
     let tappedSoundIcon: PublishRelay<Void> = PublishRelay()
 
     //MARK: - Setup
-    init(rawPost: RawVideoPost) {
+    init(rawPost: RawVideoPost, category: CategoryModel) {
         self.videoUrl.accept(rawPost.videoUrl)
         self.thumbnailImage.accept(rawPost.thumbnailImage)
-        super.init()
+        super.init(category: category)
         setupVideoPlayerBindables()
     }
     

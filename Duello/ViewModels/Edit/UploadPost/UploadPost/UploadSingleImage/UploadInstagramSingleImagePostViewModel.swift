@@ -17,10 +17,10 @@ class UploadInstagramSingleImagePostViewModel: UploadPostViewModel<InstagramSing
     let apiLink: String
     
     //MARK: - Setup
-    init(rawPost: RawInstagramSingleImagePost) {
+    init(rawPost: RawInstagramSingleImagePost, category: CategoryModel) {
         self.imageUrl = rawPost.singleImageUrl
         self.apiLink = rawPost.apiLink
-        super.init()
+        super.init(category: category)
         self.mediaRatio = rawPost.mediaRatio
     }
     

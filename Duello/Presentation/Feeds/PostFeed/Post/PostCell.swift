@@ -39,7 +39,7 @@ class PostCell<T: PostDisplayer>: UICollectionViewCell {
 
     private let categoryLabel: UILabel = {
         let label = UILabel()
-        label.text = "category"
+        label.text = ""
         label.font = UIFont.lightCustomFont(size: VERYSMALLFONTSIZE)
         label.textColor = DARKGRAYCOLOR
         return label
@@ -263,6 +263,7 @@ class PostCell<T: PostDisplayer>: UICollectionViewCell {
     }
 
     private func setupText(displayer: T) {
+        categoryLabel.text = displayer.categoryName
         nameLabel.text = displayer.userName
         titleLabel.text = displayer.title
         descriptionLabel.text = displayer.description

@@ -24,37 +24,39 @@ class ExploreCategoryProfileController: ViewController {
         super.viewDidLoad()
         view.backgroundColor = VERYLIGHTGRAYCOLOR
         setupNavigationItems()
-        setupLayout()
+        setupCollectionViewLayout()
         setupBindablesToViewModel()
     }
     
     private func setupNavigationItems() {
         navigationController?.navigationBar.tintColor = DARKGRAYCOLOR
+        navigationItem.rightBarButtonItem = addContentButton
     }
     
     //MARK: - Views
-    private let addButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("add content", for: .normal)
-        button.backgroundColor = DARKGRAYCOLOR
-        button.setTitleColor(VERYLIGHTGRAYCOLOR, for: .normal)
-        return button
+    let addContentButton = UIBarButtonItem(title: "Add Content  ", style: .plain, target: nil, action: nil)
+    
+    lazy var collectionView: PostCollectionView = {
+        let collectionView = PostCollectionView(displayer: viewModel.postCollectionDisplayer)
+        return collectionView
     }()
     
-    
     //MARK: - Layout
-    private func setupLayout() {
-        view.addSubview(addButton)
-        addButton.anchor(top: view.topAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 100, left: 0, bottom: 0, right: 0), size: .init(width: 200, height: 100))
-        addButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+    private func setupCollectionViewLayout() {
+        //so that the scrollView doesn't get hidden under the navigationBar
+        edgesForExtendedLayout = []
+        
+        view.addSubview(collectionView)
+        collectionView.fillSuperview()
     }
+    
     
     //MARK: - Reactive
     private let disposeBag = DisposeBag()
     
     private func setupBindablesToViewModel() {
         
-        addButton.rx.tap.map { (_) -> Void in
+        addContentButton.rx.tap.map { (_) -> Void in
             return ()
             }.bind(to: viewModel.requestedAddContent).disposed(by: disposeBag)
         

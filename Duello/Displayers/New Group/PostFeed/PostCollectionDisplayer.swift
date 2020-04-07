@@ -12,7 +12,7 @@ import RxCocoa
 protocol PostCollectionDisplayer: class, CollectionDisplayer {
     
     //MARK: - Models
-    var user: BehaviorRelay<UserModel?> { get }
+//    var user: BehaviorRelay<UserModel?> { get }
     var posts: BehaviorRelay<[PostModel]?> { get }
   
     //MARK: - Child Displayers
@@ -21,6 +21,8 @@ protocol PostCollectionDisplayer: class, CollectionDisplayer {
     
     //MARK: - Bindables
     var needsRestart: BehaviorRelay<Bool> { get }
+    var fetchNext: PublishRelay<Void> { get }
+    var updatePost: PublishRelay<Int> { get }
     
     var loadLink: PublishRelay<String?> { get }
     var showAdditionalLinkAlert: PublishRelay<String> { get }

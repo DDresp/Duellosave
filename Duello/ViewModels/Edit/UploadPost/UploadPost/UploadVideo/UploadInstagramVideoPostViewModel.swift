@@ -31,11 +31,11 @@ class UploadInstagramVideoPostViewModel: UploadPostViewModel<InstagramVideoPost>
 
 
     //MARK: - Setup
-    init(rawPost: RawInstagramVideoPost) {
+    init(rawPost: RawInstagramVideoPost, category: CategoryModel) {
         self.videoUrl.accept(rawPost.videoURL)
         self.thumbnailUrl.accept(rawPost.thumbnailUrl)
         self.apiLink = rawPost.apiLink
-        super.init()
+        super.init(category: category)
         self.mediaRatio = rawPost.mediaRatio
         setupVideoPlayerBindables()
     }

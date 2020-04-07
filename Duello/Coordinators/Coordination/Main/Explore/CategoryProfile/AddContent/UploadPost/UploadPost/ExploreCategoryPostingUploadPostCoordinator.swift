@@ -11,6 +11,9 @@ import RxSwift
 
 class ExploreCategoryPostingUploadPostCoordinator: UploadPostCoordinatorType {
     
+    //MARK: - Models
+    let category: CategoryModel
+    
     //MARK: - ViewModels
     private lazy var viewModel: UploadPostDisplayer? = {
         
@@ -18,27 +21,27 @@ class ExploreCategoryPostingUploadPostCoordinator: UploadPostCoordinatorType {
         
         switch rawPost {
         case let post as RawSingleImagePost:
-            let vm = UploadLocalSingleImagePostViewModel(rawPost: post)
+            let vm = UploadLocalSingleImagePostViewModel(rawPost: post, category: category)
             vm.coordinator = self
             viewModel = vm
         case let post as RawImagesPost:
-            let vm = UploadLocalImagesPostViewModel(rawPost: post)
+            let vm = UploadLocalImagesPostViewModel(rawPost: post, category: category)
             vm.coordinator = self
             viewModel = vm
         case let post as RawVideoPost:
-            let vm = UploadLocalVideoPostViewModel(rawPost: post)
+            let vm = UploadLocalVideoPostViewModel(rawPost: post, category: category)
             vm.coordinator = self
             viewModel = vm
         case let post as RawInstagramVideoPost:
-            let vm = UploadInstagramVideoPostViewModel(rawPost: post)
+            let vm = UploadInstagramVideoPostViewModel(rawPost: post, category: category)
             vm.coordinator = self
             viewModel = vm
         case let post as RawInstagramImagesPost:
-            let vm = UploadInstagramImagesPostViewModel(rawPost: post)
+            let vm = UploadInstagramImagesPostViewModel(rawPost: post, category: category)
             vm.coordinator = self
             viewModel = vm
         case let post as RawInstagramSingleImagePost:
-            let vm = UploadInstagramSingleImagePostViewModel(rawPost: post)
+            let vm = UploadInstagramSingleImagePostViewModel(rawPost: post, category: category)
             vm.coordinator = self
             viewModel = vm
         default:
@@ -54,9 +57,10 @@ class ExploreCategoryPostingUploadPostCoordinator: UploadPostCoordinatorType {
     var didSavePost: PublishRelay<Void> = PublishRelay<Void>()
     
     //MARK: - Setup
-    init(rootController: UIViewController, rawPost: RawPostType) {
+    init(rootController: UIViewController, rawPost: RawPostType, category: CategoryModel) {
         self.rootController = rootController
         self.rawPost = rawPost
+        self.category = category
     }
     
     //MARK: - Controllers

@@ -18,11 +18,11 @@ class UploadLocalImagesPostViewModel: UploadPostViewModel<LocalImagesPost>, Uplo
     let images: [UIImage]
     
     //MARK: - Setup
-    init(rawPost: RawImagesPost) {
+    init(rawPost: RawImagesPost, category: CategoryModel) {
         self.images = rawPost.images
         self.imagesSliderDisplayer = ImagesSliderViewModel()
         self.imagesSliderDisplayer.images.accept(images)
-        super.init()
+        super.init(category: category)
     }
     
     //MARK: - Methods

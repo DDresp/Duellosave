@@ -1,35 +1,42 @@
 //
-//  HomeCollectionViewModel.swift
+//  CategoryPostCollectionViewModel.swift
 //  Duello
 //
-//  Created by Darius Dresp on 3/18/20.
+//  Created by Darius Dresp on 4/7/20.
 //  Copyright © 2020 Darius Dresp. All rights reserved.
 //
+
 import RxSwift
 import RxCocoa
 
-class HomePostCollectionViewModel: PostCollectionDisplayer {
+class CategoryPostCollectionViewModel: PostCollectionDisplayer {
     
     //MARK: - Models
-    var user: BehaviorRelay<UserModel?> = BehaviorRelay<UserModel?>(value: nil)
+    
+    //Sometimes Category, sometimes User
+//    var user: BehaviorRelay<UserModel?> = BehaviorRelay<UserModel?>(value: nil)
     var posts: BehaviorRelay<[PostModel]?> = BehaviorRelay<[PostModel]?>(value: nil)
     
     //MARK: - Child Displayers
+    
+    //Should generic HeaderDisplayer!!!
     var userHeaderDisplayer: UserHeaderDisplayer? = UserHeaderViewModel()
-    var postListDisplayer: PostListDisplayer = HomePostListViewModel()
+    var postListDisplayer: PostListDisplayer = UserPostListViewModel()
     
     //MARK: - Child ViewModels
-    var userHeaderViewModel: UserHeaderViewModel {
-        return userHeaderDisplayer as! UserHeaderViewModel
-    }
+//    var userHeaderViewModel: UserHeaderViewModel {
+//        return userHeaderDisplayer as! UserHeaderViewModel
+//    }
     
-    var postListViewModel: HomePostListViewModel {
-        return postListDisplayer as! HomePostListViewModel
+    var postListViewModel: UserPostListViewModel {
+        return postListDisplayer as! UserPostListViewModel
     }
     
     //MARK: - Bindables
     var finished: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     var needsRestart: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+    var fetchNext: PublishRelay<Void> = PublishRelay()
+    var updatePost: PublishRelay<Int> = PublishRelay()
     
     var loadLink: PublishRelay<String?> = PublishRelay<String?>()
     var showAdditionalLinkAlert: PublishRelay<String> = PublishRelay<String>()
@@ -37,10 +44,10 @@ class HomePostCollectionViewModel: PostCollectionDisplayer {
     var showAlert: PublishRelay<Alert> = PublishRelay<Alert>()
     var showLoading: BehaviorRelay<Bool> = BehaviorRelay<Bool>(value: false)
 
-    var startFetching: PublishRelay<Void> = PublishRelay()
-    var fetchNext: PublishRelay<Void> = PublishRelay()
-    var deletePost: PublishRelay<String> = PublishRelay<String>()
-    var updatePost: PublishRelay<Int> = PublishRelay<Int>()
+//    var startFetching: PublishRelay<Void> = PublishRelay()
+//    var fetchNext: PublishRelay<Void> = PublishRelay()
+//    var deletePost: PublishRelay<String> = PublishRelay<String>()
+//    var updatePost: PublishRelay<Int> = PublishRelay<Int>()
     
     var isAppeared: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     var uiLoaded: BehaviorRelay<Bool> = BehaviorRelay(value: false)
@@ -58,7 +65,7 @@ class HomePostCollectionViewModel: PostCollectionDisplayer {
     }
     
     //MARK: - Methods
-    private func shouldPaginate(indexPath: IndexPath) -> Bool {
+    func shouldPaginate(indexPath: IndexPath) -> Bool {
         guard let numberOfPosts = posts.value?.count else { return false }
         let closeToCurrrentEnd = indexPath.row >= numberOfPosts - 4
         return closeToCurrrentEnd
@@ -75,10 +82,10 @@ class HomePostCollectionViewModel: PostCollectionDisplayer {
     
     private func setupBindablesToChildViewModels() {
         
-        user.subscribe(onNext: { [weak self] (user) in
-            guard let user = user else { return }
-            self?.userHeaderDisplayer?.user.accept(user)
-        }).disposed(by: disposeBag)
+//        user.subscribe(onNext: { [weak self] (user) in
+//            guard let user = user else { return }
+//            self?.userHeaderDisplayer?.user.accept(user)
+//        }).disposed(by: disposeBag)
         
         posts.subscribe(onNext: { [weak self] (posts) in
             guard let posts = posts else { return }
@@ -92,11 +99,11 @@ class HomePostCollectionViewModel: PostCollectionDisplayer {
             
         }).disposed(by: disposeBag)
 
-        Observable.combineLatest(uiLoaded, isAppeared).filter { (started, appeared) -> Bool in
-            return started && appeared
-        }.map { (_, _) -> Void in
-            return ()
-            }.bind(to: userHeaderViewModel.animateScore).disposed(by: disposeBag)
+//        Observable.combineLatest(uiLoaded, isAppeared).filter { (started, appeared) -> Bool in
+//            return started && appeared
+//        }.map { (_, _) -> Void in
+//            return ()
+//            }.bind(to: userHeaderViewModel.animateScore).disposed(by: disposeBag)
 
     }
     
@@ -107,19 +114,19 @@ class HomePostCollectionViewModel: PostCollectionDisplayer {
         postListDisplayer.showAdditionalLinkAlert.bind(to: showAdditionalLinkAlert).disposed(by: disposeBag)
         postListDisplayer.showActionSheet.bind(to: showActionSheet).disposed(by: disposeBag)
         
-        userHeaderViewModel.socialMediaDisplayer.selectedLink.bind(to: loadLink).disposed(by: disposeBag)
-        userHeaderViewModel.socialMediaDisplayer.showAdditionalLinkAlert.bind(to: showAdditionalLinkAlert).disposed(by: disposeBag)
+//        userHeaderViewModel.socialMediaDisplayer.selectedLink.bind(to: loadLink).disposed(by: disposeBag)
+//        userHeaderViewModel.socialMediaDisplayer.showAdditionalLinkAlert.bind(to: showAdditionalLinkAlert).disposed(by: disposeBag)
         
-        postListViewModel.insert.bind(to: insertData).disposed(by: disposeBag)
-        postListViewModel.updateLayout.bind(to: updateLayout).disposed(by: disposeBag)
+        postListDisplayer.reload.bind(to: reloadData).disposed(by: disposeBag)
+        postListDisplayer.insert.bind(to: insertData).disposed(by: disposeBag)
+        postListDisplayer.updateLayout.bind(to: updateLayout).disposed(by: disposeBag)
         
         //homeviewmodel specific
-        postListViewModel.deletePost.bind(to: deletePost).disposed(by: disposeBag)
-        postListViewModel.updatePost.bind(to: updatePost).disposed(by: disposeBag)
+//        postListViewModel.deletePost.bind(to: deletePost).disposed(by: disposeBag)
+//        postListViewModel.updatePost.bind(to: updatePost).disposed(by: disposeBag)
         //
         
-        postListViewModel.reload.bind(to: reloadData).disposed(by: disposeBag)
-        postListViewModel.willDisplayCell.map { (index) -> [IndexPath] in
+        postListDisplayer.willDisplayCell.map { (index) -> [IndexPath] in
             return [IndexPath(item: index, section: 0)]
             }.bind(to: requestDataForIndexPath).disposed(by: disposeBag)
     }

@@ -13,6 +13,7 @@ protocol PostModel: Model {
     
     //MARK: - Attributes
     var uid: PostSingleAttribute { get set }
+    var cid: PostSingleAttribute { get set }
     var title: PostSingleAttribute{ get set }
     var description: PostSingleAttribute { get set }
     var creationDate: PostSingleAttribute{ get set }
@@ -23,6 +24,7 @@ protocol PostModel: Model {
     var mediaRatio: PostSingleAttribute { get set }
     var isDeactivated: PostSingleAttribute { get set }
     var user: PostMapAttribute { get set }
+    var category: PostMapAttribute { get set }
 
 }
 
@@ -31,6 +33,7 @@ extension PostModel {
     //MARK: - Getters
     func getId() -> String { return id?.toStringValue() ?? "" }
     func getUID() -> String { return uid.value?.toStringValue() ?? "" }
+    func getCID() -> String { return cid.value?.toStringValue() ?? "" }
     func getTitle() -> String { return title.value?.toStringValue() ?? "" }
     func getDescription() -> String { return description.value?.toStringValue() ?? "" }
     func getCreationDate() -> Double { return Double(creationDate.value?.toStringValue() ?? "0") ?? 0 }
@@ -40,5 +43,6 @@ extension PostModel {
     func getMediaRatio() -> Double { return Double(mediaRatio.value?.toStringValue() ?? "1") ?? 1}
     func getIsDeactivated() -> Bool { return isDeactivated.value?.toStringValue() == "0" ? false : true }
     func getUser() -> UserModel { return user.getModel() as? User ?? User() }
+    func getCategory() -> CategoryModel { return category.getModel() as? Category ?? Category() }
     
 }

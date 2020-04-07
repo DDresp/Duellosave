@@ -16,9 +16,9 @@ class UploadLocalSingleImagePostViewModel: UploadPostViewModel<LocalSingleImageP
     var imageUrl: URL?
     
     //MARK: - Setup
-    init(rawPost: RawSingleImagePost) {
+    init(rawPost: RawSingleImagePost, category: CategoryModel) {
         self.image = rawPost.singleImage
-        super.init()
+        super.init(category: category)
     }
     
     //MARK: - Methods

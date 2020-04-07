@@ -20,12 +20,12 @@ class UploadInstagramImagesPostViewModel: UploadPostViewModel<InstagramImagesPos
     let apiLink: String
     
     //MARK: - Setup
-    init(rawPost: RawInstagramImagesPost) {
+    init(rawPost: RawInstagramImagesPost, category: CategoryModel) {
         self.imageUrls = rawPost.imageUrls
         self.apiLink = rawPost.apiLink
         self.imagesSliderDisplayer = ImagesSliderViewModel()
         self.imagesSliderDisplayer.imageUrls.accept(imageUrls)
-        super.init()
+        super.init(category: category)
         self.mediaRatio = rawPost.mediaRatio
         
     }

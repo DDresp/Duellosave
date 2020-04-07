@@ -25,6 +25,11 @@ class PostViewModel: PostDisplayer {
     var title: String
     var description: String
     var mediaRatio: Double
+    var userProfileImageUrl: String
+    var userHasSocialMediaNames: Bool
+    var userName: String
+    var categoryName: String
+    
     
     //MARK: - Bindables
     //from UI
@@ -56,15 +61,16 @@ class PostViewModel: PostDisplayer {
         self.title = post.getTitle()
         self.mediaRatio = post.getMediaRatio()
         self.isDeactivated = BehaviorRelay(value: post.getIsDeactivated())
+        self.userProfileImageUrl = post.getUser().imageUrl.value?.toStringValue() ?? ""
+        self.userHasSocialMediaNames = post.getUser().addedSocialMediaName
+        self.userName = post.getUser().userName.value?.toStringValue() ?? ""
+        self.categoryName = post.getCategory().title.value?.toStringValue() ?? ""
+        
         socialMediaDisplayer.user.accept(post.getUser())
         setupBindablesFromOwnProperties()
     }
     
     //MARK: - Getters
-    var userProfileImageUrl: String { return post.getUser().imageUrl.value?.toStringValue() ?? "" }
-    var userHasSocialMediaNames: Bool { return post.getUser().addedSocialMediaName }
-    var userName: String { return post.getUser().userName.value?.toStringValue() ?? "" }
-    
     var actionSheet: ActionSheet {
         
         let deleteWarning = ActionWarning(title: "Warning", message: "Do you really want to delete the post?")

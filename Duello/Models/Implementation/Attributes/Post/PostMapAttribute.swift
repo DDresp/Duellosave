@@ -32,11 +32,13 @@ enum PostMapAttributeCase: MapAttributeCase {
     
     case images
     case user
+    case category
     
     var key: String {
         switch self {
         case .images: return "images"
         case .user: return "user"
+        case .category: return "category"
         }
     }
 }

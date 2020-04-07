@@ -13,6 +13,8 @@ import Firebase
 class UploadPostViewModel<T: PostModel>: UploadPostDisplayer {
     
     //MARK: - Models
+    let category: CategoryModel
+    
     var post: T? {
         didSet {
             initialisePost()
@@ -38,7 +40,8 @@ class UploadPostViewModel<T: PostModel>: UploadPostDisplayer {
     var isLoading = BehaviorRelay(value: false)
     
     //MARK: - Setup
-    init(){
+    init(category: CategoryModel){
+        self.category = category
         setupBindablesFromOwnProperties()
     }
     
@@ -69,6 +72,8 @@ class UploadPostViewModel<T: PostModel>: UploadPostDisplayer {
         uploadPost.rate.value = rate
         uploadPost.mediaRatio.value = mediaRatio ?? 1
         uploadPost.uid.value = Auth.auth().currentUser?.uid
+        uploadPost.cid.value = category.getId()
+        uploadPost.category.model = category
         
     }
     

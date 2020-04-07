@@ -36,6 +36,7 @@ class PostSingleAttribute: SingleAttribute {
 enum PostSingleAttributeCase: SingleAttributeCase {
     
     case uid
+    case cid
     case title
     case description
     case rate
@@ -52,7 +53,7 @@ enum PostSingleAttributeCase: SingleAttributeCase {
     
     var entryType: EntryType {
         switch self {
-        case .uid, .title, .description, .imageUrl, .videoUrl, .thumbNailUrl, .apiUrl:
+        case .uid, .cid, .title, .description, .imageUrl, .videoUrl, .thumbNailUrl, .apiUrl:
             return .String
         case .dislikes, .likes:
             return .Int
@@ -70,6 +71,7 @@ enum PostSingleAttributeCase: SingleAttributeCase {
         switch self {
             
         case .uid: return "uid"
+        case .cid: return "cid"
         case .title: return "title"
         case .description: return "description"
         case .creationDate: return "creationDate"

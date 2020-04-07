@@ -216,7 +216,7 @@ extension ExploreCategoryPostingCoordinator {
     
     //GoTo
     private func goToUploadPost(from rootController: UIViewController, rawPost: RawPostType) {
-        postingUploadPostCoordinator = ExploreCategoryPostingUploadPostCoordinator(rootController: rootController, rawPost: rawPost)
+        postingUploadPostCoordinator = ExploreCategoryPostingUploadPostCoordinator(rootController: rootController, rawPost: rawPost, category: category)
         postingUploadPostCoordinator?.start()
         setupUploadPostBindables()
     }

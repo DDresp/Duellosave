@@ -16,6 +16,7 @@ struct LocalImagesPost: LocalImagesPostModel {
     
     //MARK: - Attributes
     var uid: PostSingleAttribute = PostSingleAttribute(attributeCase: .uid, value: nil)
+    var cid: PostSingleAttribute = PostSingleAttribute(attributeCase: .cid, value: nil)
     var title: PostSingleAttribute = PostSingleAttribute(attributeCase: .title, value: nil)
     var description: PostSingleAttribute = PostSingleAttribute(attributeCase: .description, value: nil)
     var creationDate: PostSingleAttribute = PostSingleAttribute(attributeCase: .creationDate, value: nil)
@@ -25,6 +26,7 @@ struct LocalImagesPost: LocalImagesPostModel {
     var mediaRatio: PostSingleAttribute = PostSingleAttribute(attributeCase: .mediaRatio, value: nil)
     var isDeactivated: PostSingleAttribute = PostSingleAttribute(attributeCase: .isDeactivated, value: false)
     var user: PostMapAttribute = PostMapAttribute(attributeCase: .user, model: User())
+    var category: PostMapAttribute = PostMapAttribute(attributeCase: .category, model: Category())
     
     var typeData: PostSingleAttribute = PostSingleAttribute(attributeCase: .type, value: FineMediaType.localImages)
     var imageUrls: PostMapAttribute = PostMapAttribute(attributeCase: .images, model: LocalImages())
@@ -34,6 +36,7 @@ struct LocalImagesPost: LocalImagesPostModel {
     func getSingleAttributes() -> [SingleAttribute] {
         return [
             uid,
+            cid,
             title,
             description,
             creationDate,
@@ -47,7 +50,7 @@ struct LocalImagesPost: LocalImagesPostModel {
     }
     
     func getMapAttributes() -> [MapAttribute]? {
-        return [imageUrls, user]
+        return [imageUrls, user, category]
     }
     
 }

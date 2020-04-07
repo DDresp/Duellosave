@@ -19,6 +19,7 @@ protocol PostDisplayer {
     var userProfileImageUrl: String  { get }
     var userHasSocialMediaNames: Bool  { get }
     var userName: String  { get }
+    var categoryName: String { get }
     var rate: Double { get }
     var title: String { get }
     var description: String { get }

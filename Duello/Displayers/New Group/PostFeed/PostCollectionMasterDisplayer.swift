@@ -12,6 +12,8 @@ import RxCocoa
 protocol PostCollectionMasterDisplayer: class {
     
     //MARK: - Bindables
+    var postCollectionDisplayer: PostCollectionDisplayer { get }
+    
     var loadLink: PublishRelay<String?> { get }
     var showAdditionalLinkAlert: PublishRelay<String> { get }
     var showActionSheet: PublishRelay<ActionSheet> { get }
