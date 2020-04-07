@@ -45,8 +45,6 @@ class ExploreCategoryProfileCoordinator: CategoryProfileCoordinatorType {
         presentedController = viewController
         if let navigationController = rootController as? UINavigationController {
             navigationController.pushViewController(presentedController!, animated: true)
-        } else {
-            rootController.present(presentedController!, animated: true)
         }
         setupBindables()
     }
@@ -70,6 +68,17 @@ extension ExploreCategoryProfileCoordinator {
     private func goToPosting() {
         postingCoordinator = ExploreCategoryPostingCoordinator(rootController: rootController, category: category)
         postingCoordinator?.start()
+        setupPostingBindables()
+    }
+    
+    private func setupPostingBindables() {
+        postingCoordinator?.uploadedMedia.subscribe(onNext: { [weak self] (uploadedMedia) in
+            if uploadedMedia, let navigationController = self?.rootController as? UINavigationController {
+                navigationController.popViewController(animated: true)
+                self?.postingCoordinator = nil
+                
+            }
+            }).disposed(by: disposeBag)
     }
     
 }

@@ -14,5 +14,5 @@ protocol PostingCoordinatorType: FlowCoordinatorType {
     var requestedImageUpload: PublishSubject<Void> { get }
     var requestedInstagramVideoUpload: PublishSubject<Void> { get }
     var requestedInstagramImageUpload: PublishSubject<Void> { get }
-    
+    var uploadedMedia: BehaviorRelay<Bool> { get }
 }

@@ -31,20 +31,13 @@ class ExploreCategoryPostingCoordinator: PostingCoordinatorType {
     var requestedImageUpload = PublishSubject<Void>()
     var requestedInstagramVideoUpload = PublishSubject<Void>()
     var requestedInstagramImageUpload = PublishSubject<Void>()
+    var uploadedMedia: BehaviorRelay = BehaviorRelay(value: false)
 
     //MARK: - Setup
     init(rootController: UIViewController, category: CategoryModel) {
         self.rootController = rootController
         self.category = category
     }
-//    init() {
-//        let postingController = PostingController(viewModel: viewModel)
-//        presentedController = postingController
-//        let navController = UINavigationController(rootViewController: presentedController)
-//        navController.tabBarItem.title = "Post"
-//        navigationController = navController
-//        setupBindables()
-//    }
     
     //MARK: - Controllers
     var rootController: UIViewController
@@ -60,18 +53,14 @@ class ExploreCategoryPostingCoordinator: PostingCoordinatorType {
         } else {
             rootController.present(presentedController!, animated: true)
         }
-        
-//        if let navigationController = roo
-//        let navController = UINavigationController(rootViewController: presentedController)
-//        navController.tabBarItem.title = "Post"
-//        navigationController = navController
         setupBindables()
     }
     
     //MARK: - Reactive
-    private let disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
     
     private func setupBindables() {
+        disposeBag = DisposeBag()
         
         requestedVideoUpload.asObservable().subscribe(onNext: { [weak self] (_) in
             self?.gotToVideoPicker()
@@ -101,9 +90,6 @@ extension ExploreCategoryPostingCoordinator {
         let imagePicker = setupImagePicker()
         configureImagePicker(imagePicker: imagePicker)
         imagePicker.modalPresentationStyle = .fullScreen
-//        if let navigationController = rootController as? UINavigationController {
-//            navigationController.pushViewController(imagePicker, animated: true)
-//        }
         rootController.present(imagePicker, animated: true)
     }
     
@@ -159,11 +145,6 @@ extension ExploreCategoryPostingCoordinator {
         configureVideoPicker(videoPicker: videoPicker)
         videoPicker.modalPresentationStyle = .fullScreen
         rootController.present(videoPicker, animated: true)
-//        if let navigationController = rootController as? UINavigationController {
-//            navigationController.pushViewController(videoPicker, animated: true)
-//        }
-        
-        
     }
     
     //Setup
@@ -245,6 +226,7 @@ extension ExploreCategoryPostingCoordinator {
         postingUploadPostCoordinator?.didSavePost.asObservable().subscribe(onNext: { [weak self] (_) in
             self?.postingUploadPostCoordinator?.rootController.dismiss(animated: true, completion: {
                 self?.postingUploadPostCoordinator = nil
+                self?.uploadedMedia.accept(true)
             })
             
         }).disposed(by: disposeBag)
