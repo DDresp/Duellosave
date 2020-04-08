@@ -321,7 +321,6 @@
 		14B671F6243B33D40083F663 /* ExploreCategoryProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B671F5243B33D40083F663 /* ExploreCategoryProfileViewModel.swift */; };
 		14B671FA243CCF420083F663 /* CategoryPostCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B671F9243CCF420083F663 /* CategoryPostCollectionViewModel.swift */; };
 		14B671FD243CD55C0083F663 /* FetchingService_CategoryPostFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B671FC243CD55C0083F663 /* FetchingService_CategoryPostFeed.swift */; };
-		14B67200243CEFFE0083F663 /* PostCollectionMasterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B671FF243CEFFE0083F663 /* PostCollectionMasterViewModel.swift */; };
 		14BDEC08241CBF0E00228763 /* Bool+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BDEC07241CBF0E00228763 /* Bool+Extension.swift */; };
 		14ED672B241A87550047C085 /* Pods_Duello.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14ED672A241A87550047C085 /* Pods_Duello.framework */; };
 		14ED672C241A87550047C085 /* Pods_Duello.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 14ED672A241A87550047C085 /* Pods_Duello.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -682,7 +681,6 @@
 		14B671F5243B33D40083F663 /* ExploreCategoryProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreCategoryProfileViewModel.swift; sourceTree = "<group>"; };
 		14B671F9243CCF420083F663 /* CategoryPostCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPostCollectionViewModel.swift; sourceTree = "<group>"; };
 		14B671FC243CD55C0083F663 /* FetchingService_CategoryPostFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchingService_CategoryPostFeed.swift; sourceTree = "<group>"; };
-		14B671FF243CEFFE0083F663 /* PostCollectionMasterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCollectionMasterViewModel.swift; sourceTree = "<group>"; };
 		14BDEC07241CBF0E00228763 /* Bool+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+Extension.swift"; sourceTree = "<group>"; };
 		14ED672A241A87550047C085 /* Pods_Duello.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_Duello.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AB5A1CDF25F48DD3230412A /* Pods-DuelloUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DuelloUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DuelloUITests/Pods-DuelloUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -1660,7 +1658,6 @@
 		1475AF76241051F200F1D24F /* PostFeed */ = {
 			isa = PBXGroup;
 			children = (
-				14B671FE243CEFDF0083F663 /* Generic */,
 				1475AF86241052AA00F1D24F /* HomeViewModel.swift */,
 				149BC5CD24222F4A00CFBBC7 /* UserPostCollectionViewModel.swift */,
 				1475AF88241052CC00F1D24F /* UserHeaderViewModel.swift */,
@@ -2776,14 +2773,6 @@
 			path = FromCategory;
 			sourceTree = "<group>";
 		};
-		14B671FE243CEFDF0083F663 /* Generic */ = {
-			isa = PBXGroup;
-			children = (
-				14B671FF243CEFFE0083F663 /* PostCollectionMasterViewModel.swift */,
-			);
-			path = Generic;
-			sourceTree = "<group>";
-		};
 		AAB327F880C324E4589AB40F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -3295,7 +3284,6 @@
 				1475AFD8241057B000F1D24F /* SocialMediaDisplayer.swift in Sources */,
 				1475B014241059E400F1D24F /* GoogleLoginDisplayer.swift in Sources */,
 				1475B09E24105F6800F1D24F /* Dictionary+Extension.swift in Sources */,
-				14B67200243CEFFE0083F663 /* PostCollectionMasterViewModel.swift in Sources */,
 				1475AF612410510800F1D24F /* PostingUploadLocalSingleImagePostController.swift in Sources */,
 				1475AFA6241053D400F1D24F /* UploadInstagramVideoLinkViewModel.swift in Sources */,
 				1475AF4F2410505500F1D24F /* HomeController.swift in Sources */,

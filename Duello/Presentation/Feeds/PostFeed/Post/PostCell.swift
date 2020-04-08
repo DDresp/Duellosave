@@ -241,7 +241,6 @@ class PostCell<T: PostDisplayer>: UICollectionViewCell {
     }
 
     func configure() {
-
         disposeBag = DisposeBag()
         guard let displayer = self.displayer else { return }
         updateMediaHeight(displayer: displayer)
@@ -384,5 +383,5 @@ class PostCell<T: PostDisplayer>: UICollectionViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
 }

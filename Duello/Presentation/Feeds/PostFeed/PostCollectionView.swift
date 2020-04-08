@@ -15,7 +15,7 @@ class PostCollectionView: UICollectionView {
     
     //MARK: - Child Displayers
     var headerDisplayer: UserHeaderDisplayer? {
-        return displayer.userHeaderDisplayer
+        return displayer.headerDisplayer
     }
     
     var postListDisplayer: PostListDisplayer  {
@@ -63,7 +63,7 @@ class PostCollectionView: UICollectionView {
         register(EmptyCell.self, forCellWithReuseIdentifier: emptyIdentifier) //Specific to Home??
         register(FooterLoadingCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: footerIdentifier)
         
-        if displayer.hasProfileHeader {
+        if displayer.hasHeader {
             register(UserHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerIdentifier)
         }
         
@@ -79,7 +79,7 @@ class PostCollectionView: UICollectionView {
     private func setupBindablesFromDisplayer() {
         
         displayer.reloadData.subscribe(onNext: { [weak self] (_) in
-        
+            
             self?.setContentOffset(.zero, animated: false)
             self?.feedDelegate.clearCache()
 
@@ -110,5 +110,5 @@ class PostCollectionView: UICollectionView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
 }

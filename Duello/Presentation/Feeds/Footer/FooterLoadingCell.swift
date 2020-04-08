@@ -33,13 +33,6 @@ class FooterLoadingCell: UICollectionReusableView {
     private let endView: UIView = {
         let view = UIView()
         view.backgroundColor = DARKGRAYCOLOR
-        let label = UILabel()
-        label.text = "END"
-        label.textColor = EXTREMELIGHTGRAYCOLOR
-        label.font = UIFont.boldCustomFont(size: MEDIUMFONTSIZE)
-        label.textAlignment = .center
-        view.addSubview(label)
-        label.fillSuperview()
         view.isHidden = true
         return view
     }()
@@ -61,7 +54,7 @@ class FooterLoadingCell: UICollectionReusableView {
     
     private func setupBindablesFromDisplayer() {
         
-        displayer?.finished.subscribe(onNext: { [weak self] (isFinished) in
+        displayer?.allDataLoaded.subscribe(onNext: { [weak self] (isFinished) in
             if isFinished {
                 self?.activityIndicator.stopAnimating()
                 self?.endView.isHidden = false

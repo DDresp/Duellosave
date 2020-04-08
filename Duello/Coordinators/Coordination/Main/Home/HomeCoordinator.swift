@@ -56,7 +56,7 @@ extension HomeCoordinator {
     //GoTo
     private func goToUpdateUser() {
         guard let rootController = presentedController else { return }
-        guard let user = viewModel.homeCollectionViewModel.userHeaderDisplayer?.user.value else { return }
+        guard let user = viewModel.homeCollectionViewModel.headerDisplayer?.user.value else { return }
         homeUpdateUserCoordinator = HomeUpdateUserCoordinator(rootController: rootController, user: user)
         homeUpdateUserCoordinator?.start()
         setupUpdateUserBindables()

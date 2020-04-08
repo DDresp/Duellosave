@@ -28,6 +28,7 @@ class ExploreCategoryProfileCoordinator: CategoryProfileCoordinatorType {
     
     //MARK: - Bindables
     var requestedAddContent: PublishSubject<Void> = PublishSubject()
+    var goBack: PublishSubject<Void> = PublishSubject()
     
     //MARK: - Setup
     init(rootController: UIViewController, category: CategoryModel) {

@@ -26,7 +26,7 @@ class ExploreCategoryCollectionViewModel: CategoryCollectionDisplayer {
     var hasNoCategories: Bool { return categories.value?.count == 0 }
     
     //MARK: - Bindables
-    var finished: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+    var allDataLoaded: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     var needsRestart: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     
     var startFetching: PublishRelay<Void> = PublishRelay()

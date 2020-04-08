@@ -63,18 +63,13 @@ extension ExploreCoordinator {
     
     //Reactive
     private func setupCategoryProfileBindables() {
-//        homeUpdateUserCoordinator?.canceledUserUpload.asObservable().subscribe(onNext: { [weak self] (_) in
-//            self?.homeUpdateUserCoordinator?.presentedController?.dismiss(animated: true, completion: nil)
-//            self?.homeUpdateUserCoordinator = nil
-//
-//        }).disposed(by: disposeBag)
-//
-//        homeUpdateUserCoordinator?.didSetUser.asObservable().subscribe(onNext: { [weak self] (user) in
-//            self?.viewModel.forceFetchingAll = true
-//            self?.viewModel.homeCollectionViewModel.needsRestart.accept(true)
-//            self?.homeUpdateUserCoordinator?.presentedController?.dismiss(animated: true, completion: nil)
-//            self?.homeUpdateUserCoordinator = nil
-//        }).disposed(by: disposeBag)
+        
+        exploreCategoryProfileCoordinator?.goBack.subscribe(onNext: { [weak self] (_) in
+            guard let navigationController = self?.navigationController else { return }
+            navigationController.popViewController(animated: true)
+            self?.exploreCategoryProfileCoordinator = nil
+        }).disposed(by: disposeBag)
+        
     }
     
 }

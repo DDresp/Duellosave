@@ -37,7 +37,6 @@ class SingleImagePostCell: PostCell<SingleImagePostViewModel> {
         super.setupBindablesFromDisplayer()
         
         displayer?.imageUrl.subscribe(onNext: { [weak self] (imageUrl) in
-            
             guard let imageUrl = imageUrl else {
                 self?.singleImageView.isHidden = true
                 return }

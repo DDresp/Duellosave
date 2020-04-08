@@ -92,7 +92,7 @@ class ExploreViewModel: CategoryCollectionMasterDisplayer {
     
     private func setupBindablesToViewModel() {
         displayedCategories.bind(to: categoryCollectionViewModel.categories).disposed(by: disposeBag)
-        loadedAllCategories.bind(to: categoryCollectionViewModel.finished).disposed(by: disposeBag)
+        loadedAllCategories.bind(to: categoryCollectionViewModel.allDataLoaded).disposed(by: disposeBag)
         
     }
 

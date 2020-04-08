@@ -9,5 +9,5 @@
 import RxCocoa
 
 protocol CollectionDisplayer {
-    var finished: BehaviorRelay<Bool> { get }
+    var allDataLoaded: BehaviorRelay<Bool> { get }
 }

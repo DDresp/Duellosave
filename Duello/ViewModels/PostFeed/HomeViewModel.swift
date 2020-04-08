@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 import Firebase
 
-class HomeViewModel: TestPostCollectionMasterDisplayer {
+class HomeViewModel: PostCollectionMasterDisplayer {
 
     //MARK: - Coordinator
     weak var coordinator: HomeCoordinatorType? {
@@ -47,7 +47,7 @@ class HomeViewModel: TestPostCollectionMasterDisplayer {
     var showAlert: PublishRelay<Alert> = PublishRelay<Alert>()
     var showLoading: BehaviorRelay<Bool> = BehaviorRelay<Bool>(value: false)
     
-    var isAppeared: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+    var viewIsAppeared: BehaviorRelay<Bool> = BehaviorRelay(value: false)
 
     var displayingAllFetchedPosts: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     var loadedAllPosts: BehaviorRelay<Bool> = BehaviorRelay(value: false)
@@ -158,7 +158,7 @@ class HomeViewModel: TestPostCollectionMasterDisplayer {
     var disposeBag = DisposeBag()
     
     private func setupBindables() {
-        setupChildDisplayerBindables()
+        setupDisplayerBindables()
         setupBindablesFromViewModel()
         setupBindablesToViewModel()
         setupBindablesToCoordinator()
@@ -190,7 +190,7 @@ class HomeViewModel: TestPostCollectionMasterDisplayer {
         }).bind(to: coordinator.loggedOut).disposed(by: disposeBag)
         
         settingsTapped.bind(to: coordinator.requestedSettings).disposed(by: disposeBag)
-        homeCollectionViewModel.userHeaderDisplayer?.imageTapped.asObservable().bind(to: coordinator.requestedSettings).disposed(by: disposeBag)
+        homeCollectionViewModel.headerDisplayer?.imageTapped.asObservable().bind(to: coordinator.requestedSettings).disposed(by: disposeBag)
     }
     
 }

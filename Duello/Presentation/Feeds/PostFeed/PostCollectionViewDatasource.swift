@@ -15,7 +15,7 @@ class PostCollectionViewDatasource: NSObject, UICollectionViewDataSource {
     let displayer: PostCollectionDisplayer
     
     //MARK: - Child Displayers
-    var profileDisplayer: UserHeaderDisplayer? { return displayer.userHeaderDisplayer }
+    var profileDisplayer: UserHeaderDisplayer? { return displayer.headerDisplayer }
     var postsDisplayer: PostListDisplayer { return displayer.postListDisplayer }
     
     //MARK: - Variables
@@ -40,8 +40,13 @@ class PostCollectionViewDatasource: NSObject, UICollectionViewDataSource {
     
     //MARK: - Datasource
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard !displayer.hasNoPosts else { return 1 }
-        return postsDisplayer.numberOfPostDisplayers
+        if displayer.hasNoPosts, displayer.allDataLoaded.value {
+            return 1
+        } else if displayer.hasNoPosts {
+            return 0
+        } else {
+            return postsDisplayer.numberOfPostDisplayers
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

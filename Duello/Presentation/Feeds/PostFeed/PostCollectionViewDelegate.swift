@@ -14,7 +14,7 @@ class PostCollectionViewDelegate: NSObject, UICollectionViewDelegate, UICollecti
     let displayer: PostCollectionDisplayer
 
     //MARK: - Child Displayers
-    var profileDisplayer: UserHeaderDisplayer? { return displayer.userHeaderDisplayer }
+    var profileDisplayer: UserHeaderDisplayer? { return displayer.headerDisplayer }
     var postListDisplayer: PostListDisplayer { return displayer.postListDisplayer }
     
     //MARK: - Variables
@@ -46,14 +46,13 @@ class PostCollectionViewDelegate: NSObject, UICollectionViewDelegate, UICollecti
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
         if displayer.hasNoPosts {
             return .zero
-        }
-        return .init(width: collectionView.frame.width, height: 70)
+        }   
+        return .init(width: collectionView.frame.width, height: 30)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
-        guard !displayer.hasNoPosts else { return .init(width: collectionView.frame.width, height: 300)}
-        guard let postDisplayer = postListDisplayer.getPostDisplayer(at: indexPath.item) else { return .init(width: 0, height: 0) }
+        guard let postDisplayer = postListDisplayer.getPostDisplayer(at: indexPath.item) else { return .init(width: frameWidth, height: 300) }
 
         if postDisplayer.didExpand.value {
             if let size = expandedSizes[indexPath.item] { return size }
@@ -90,11 +89,10 @@ class PostCollectionViewDelegate: NSObject, UICollectionViewDelegate, UICollecti
     }
     
     private func estimateCellSize(for displayer: PostDisplayer) -> CGSize {
-        
         var cell = UICollectionViewCell()
         
         switch displayer {
-
+            
         case let displayer as SingleImagePostViewModel:
             singleImageCell.displayer = displayer
             singleImageCell.fit()
@@ -110,7 +108,7 @@ class PostCollectionViewDelegate: NSObject, UICollectionViewDelegate, UICollecti
         default:
             print("displayer not known in cell sizing")
         }
-
+        
         let size = cell.systemLayoutSizeFitting(.init(width: frameWidth, height: 1000))
         return .init(width: frameWidth, height: size.height)
     }

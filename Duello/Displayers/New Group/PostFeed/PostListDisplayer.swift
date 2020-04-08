@@ -23,6 +23,7 @@ protocol PostListDisplayer: class {
     var reload: PublishRelay<Void> { get }
     var insert: PublishRelay<(Int, Int)> { get }
     var updateLayout: PublishRelay<Void> { get }
+    var updatePost: PublishRelay<Int> { get }
     
     
     //MARK: - Getters

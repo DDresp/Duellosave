@@ -10,4 +10,5 @@ import RxSwift
 
 protocol CategoryProfileCoordinatorType: FlowCoordinatorType {
     var requestedAddContent: PublishSubject<Void> { get }
+    var goBack: PublishSubject<Void> { get }
 }

@@ -8,3 +8,9 @@
 
 //Failed Instagram Request also just when server fails because of the network connection
 
+//NO DEINITING IN THE CATEGORYPOSTFEED
+
+// we should use our own back and forward logic while using navigation stack, because otherwise the coordination will break
+
+//show welcome to duello only at userpostsfeed
+

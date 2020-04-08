@@ -34,19 +34,19 @@ class PostCollectionMasterViewController: ViewController {
     //MARK: - Delegation
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        displayer.isAppeared.accept(true)
+        displayer.viewIsAppeared.accept(true)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        displayer.isAppeared.accept(false)
+        displayer.viewIsAppeared.accept(false)
     }
     
     //MARK: - Methods
     private func open(urlString: String?) {
         guard let link = urlString else { return }
         guard let url = URL(string: link) else { return }
-        displayer.isAppeared.accept(false)
+        displayer.viewIsAppeared.accept(false)
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
