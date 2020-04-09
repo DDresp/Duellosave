@@ -15,7 +15,7 @@ class PostCollectionView: UICollectionView {
     
     //MARK: - Child Displayers
     var headerDisplayer: UserHeaderDisplayer? {
-        return displayer.headerDisplayer
+        return displayer.postHeaderDisplayer
     }
     
     var postListDisplayer: PostListDisplayer  {

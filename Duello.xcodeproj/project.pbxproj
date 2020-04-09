@@ -321,6 +321,10 @@
 		14B671F6243B33D40083F663 /* ExploreCategoryProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B671F5243B33D40083F663 /* ExploreCategoryProfileViewModel.swift */; };
 		14B671FA243CCF420083F663 /* CategoryPostCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B671F9243CCF420083F663 /* CategoryPostCollectionViewModel.swift */; };
 		14B671FD243CD55C0083F663 /* FetchingService_CategoryPostFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B671FC243CD55C0083F663 /* FetchingService_CategoryPostFeed.swift */; };
+		14B67202243F1F490083F663 /* CategoryPostListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B67201243F1F490083F663 /* CategoryPostListViewModel.swift */; };
+		14B67204243F29610083F663 /* PostListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B67203243F29610083F663 /* PostListViewModel.swift */; };
+		14B67207243F2C010083F663 /* PostCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B67206243F2C010083F663 /* PostCollectionViewModel.swift */; };
+		14B67209243F53CC0083F663 /* SimplePostCollectionMasterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B67208243F53CC0083F663 /* SimplePostCollectionMasterViewModel.swift */; };
 		14BDEC08241CBF0E00228763 /* Bool+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BDEC07241CBF0E00228763 /* Bool+Extension.swift */; };
 		14ED672B241A87550047C085 /* Pods_Duello.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14ED672A241A87550047C085 /* Pods_Duello.framework */; };
 		14ED672C241A87550047C085 /* Pods_Duello.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 14ED672A241A87550047C085 /* Pods_Duello.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -681,6 +685,10 @@
 		14B671F5243B33D40083F663 /* ExploreCategoryProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreCategoryProfileViewModel.swift; sourceTree = "<group>"; };
 		14B671F9243CCF420083F663 /* CategoryPostCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPostCollectionViewModel.swift; sourceTree = "<group>"; };
 		14B671FC243CD55C0083F663 /* FetchingService_CategoryPostFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchingService_CategoryPostFeed.swift; sourceTree = "<group>"; };
+		14B67201243F1F490083F663 /* CategoryPostListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPostListViewModel.swift; sourceTree = "<group>"; };
+		14B67203243F29610083F663 /* PostListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListViewModel.swift; sourceTree = "<group>"; };
+		14B67206243F2C010083F663 /* PostCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCollectionViewModel.swift; sourceTree = "<group>"; };
+		14B67208243F53CC0083F663 /* SimplePostCollectionMasterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimplePostCollectionMasterViewModel.swift; sourceTree = "<group>"; };
 		14BDEC07241CBF0E00228763 /* Bool+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+Extension.swift"; sourceTree = "<group>"; };
 		14ED672A241A87550047C085 /* Pods_Duello.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_Duello.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AB5A1CDF25F48DD3230412A /* Pods-DuelloUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DuelloUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DuelloUITests/Pods-DuelloUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -1659,6 +1667,7 @@
 			isa = PBXGroup;
 			children = (
 				1475AF86241052AA00F1D24F /* HomeViewModel.swift */,
+				14B67205243F2BDD0083F663 /* General */,
 				149BC5CD24222F4A00CFBBC7 /* UserPostCollectionViewModel.swift */,
 				1475AF88241052CC00F1D24F /* UserHeaderViewModel.swift */,
 				1475AF832410528A00F1D24F /* UserPostListViewModel.swift */,
@@ -2743,6 +2752,7 @@
 			children = (
 				14B671F5243B33D40083F663 /* ExploreCategoryProfileViewModel.swift */,
 				14B671F9243CCF420083F663 /* CategoryPostCollectionViewModel.swift */,
+				14B67201243F1F490083F663 /* CategoryPostListViewModel.swift */,
 			);
 			path = CategoryProfile;
 			sourceTree = "<group>";
@@ -2771,6 +2781,16 @@
 				14B671FC243CD55C0083F663 /* FetchingService_CategoryPostFeed.swift */,
 			);
 			path = FromCategory;
+			sourceTree = "<group>";
+		};
+		14B67205243F2BDD0083F663 /* General */ = {
+			isa = PBXGroup;
+			children = (
+				14B67208243F53CC0083F663 /* SimplePostCollectionMasterViewModel.swift */,
+				14B67206243F2C010083F663 /* PostCollectionViewModel.swift */,
+				14B67203243F29610083F663 /* PostListViewModel.swift */,
+			);
+			path = General;
 			sourceTree = "<group>";
 		};
 		AAB327F880C324E4589AB40F /* Pods */ = {
@@ -3133,6 +3153,7 @@
 				1475AFCD2410554900F1D24F /* RegistrationViewModel.swift in Sources */,
 				1475B0002410592A00F1D24F /* UploadDescriptionDisplayer.swift in Sources */,
 				1475B02424105A7A00F1D24F /* LikePercentageView.swift in Sources */,
+				14B67204243F29610083F663 /* PostListViewModel.swift in Sources */,
 				1475B09324105EFD00F1D24F /* DESIGN_CONSTANTS.swift in Sources */,
 				1475AFEF2410588B00F1D24F /* UploadUserDisplayer.swift in Sources */,
 				1475B0D0241060F300F1D24F /* NumberTextField.swift in Sources */,
@@ -3223,6 +3244,7 @@
 				1475B0A624105FA100F1D24F /* UIColor+Extension.swift in Sources */,
 				1475AED32410479700F1D24F /* UserModel.swift in Sources */,
 				1475AEFF2410497900F1D24F /* LocalSingleImagePost.swift in Sources */,
+				14B67207243F2C010083F663 /* PostCollectionViewModel.swift in Sources */,
 				1475AE702410426E00F1D24F /* StoringService_Video.swift in Sources */,
 				1475B0B22410600800F1D24F /* ActionSheet.swift in Sources */,
 				14B6717C243613170083F663 /* CategoryCreationCoordinatorType.swift in Sources */,
@@ -3318,6 +3340,7 @@
 				14B67181243616930083F663 /* UploadCategoryCoordinatorType.swift in Sources */,
 				14B671BC243916F70083F663 /* ExploreCoordinatorType.swift in Sources */,
 				1475B07C24105D9A00F1D24F /* AuthenticationTopButtonsStackView.swift in Sources */,
+				14B67202243F1F490083F663 /* CategoryPostListViewModel.swift in Sources */,
 				1475B04D24105BCE00F1D24F /* EmptyCell.swift in Sources */,
 				1475AF07241049D200F1D24F /* InstagramImagesPost.swift in Sources */,
 				1475AEBB2410467600F1D24F /* SingleAttribute.swift in Sources */,
@@ -3353,6 +3376,7 @@
 				14B671A5243645DF0083F663 /* UploadVideoSelectorCell.swift in Sources */,
 				1475B06724105CE300F1D24F /* UploadPostDelegate.swift in Sources */,
 				1475AE4A2410400F00F1D24F /* NetworkService.swift in Sources */,
+				14B67209243F53CC0083F663 /* SimplePostCollectionMasterViewModel.swift in Sources */,
 				1475AF0B241049F800F1D24F /* InstagramVideoPost.swift in Sources */,
 				1475AE64241041E700F1D24F /* DeletingService.swift in Sources */,
 				1475AFDC241057C900F1D24F /* ImagesSliderDisplayer.swift in Sources */,

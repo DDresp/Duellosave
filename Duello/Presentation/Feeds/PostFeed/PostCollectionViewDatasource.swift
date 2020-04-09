@@ -15,7 +15,7 @@ class PostCollectionViewDatasource: NSObject, UICollectionViewDataSource {
     let displayer: PostCollectionDisplayer
     
     //MARK: - Child Displayers
-    var profileDisplayer: UserHeaderDisplayer? { return displayer.headerDisplayer }
+    var profileDisplayer: UserHeaderDisplayer? { return displayer.postHeaderDisplayer }
     var postsDisplayer: PostListDisplayer { return displayer.postListDisplayer }
     
     //MARK: - Variables
