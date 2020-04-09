@@ -9,24 +9,29 @@
 import RxSwift
 import RxCocoa
 
-protocol UserHeaderDisplayer {
-    
-    //MARK: - Model
-    var user: BehaviorRelay<UserModel?> { get }
-    
-    //MARK: - Child Displayers
-    var socialMediaDisplayer: SocialMediaDisplayer { get }
-    
-    //MARK: - Variable
-    var score: Double? { get set }
-    
-    //MARK: - Bindables
-    var imageTapped: PublishRelay<Void> { get }
-    var animateScore: PublishRelay<Void> { get } 
-
-    //MARK: - Getters
-    var imageUrl: String? { get }
-    var userName: String? { get }
-    var hasSocialMediaNames: Bool { get }
+protocol PostHeaderDisplayer {
     
 }
+
+
+//protocol UserHeaderDisplayer {
+//    
+//    //MARK: - Model
+//    var user: BehaviorRelay<UserModel?> { get }
+//    
+//    //MARK: - Child Displayers
+//    var socialMediaDisplayer: SocialMediaDisplayer { get }
+//    
+//    //MARK: - Variable
+//    var score: Double? { get set }
+//    
+//    //MARK: - Bindables
+//    var imageTapped: PublishRelay<Void> { get }
+//    var animateScore: PublishRelay<Void> { get } 
+//
+//    //MARK: - Getters
+//    var imageUrl: String? { get }
+//    var userName: String? { get }
+//    var hasSocialMediaNames: Bool { get }
+//    
+//}

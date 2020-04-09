@@ -15,7 +15,7 @@ class PostCollectionViewDatasource: NSObject, UICollectionViewDataSource {
     let displayer: PostCollectionDisplayer
     
     //MARK: - Child Displayers
-    var profileDisplayer: UserHeaderDisplayer? { return displayer.postHeaderDisplayer }
+    var profileDisplayer: PostHeaderDisplayer? { return displayer.postHeaderDisplayer }
     var postsDisplayer: PostListDisplayer { return displayer.postListDisplayer }
     
     //MARK: - Variables
@@ -83,10 +83,22 @@ class PostCollectionViewDatasource: NSObject, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         if kind == UICollectionView.elementKindSectionHeader {
-            let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerIdentifier, for: indexPath) as! UserHeader
-            cell.displayer = profileDisplayer
-            cell.configure()
-            return cell
+            guard let headerDisplayer = displayer.postHeaderDisplayer else { return UICollectionViewCell() }
+            
+            switch headerDisplayer {
+            case is UserHeaderViewModel:
+                let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerIdentifier, for: indexPath) as! UserHeader
+                cell.displayer = headerDisplayer as? UserHeaderViewModel
+                cell.configure()
+                return cell
+            case is CategoryHeaderViewModel:
+                let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerIdentifier, for: indexPath) as! CategoryHeader
+                cell.displayer = headerDisplayer as? CategoryHeaderViewModel
+                cell.configure()
+                return cell
+            default:
+                return UICollectionViewCell()
+            }
         } else if kind == UICollectionView.elementKindSectionFooter {
             let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: footerIdentifier, for: indexPath) as! FooterLoadingCell
             cell.displayer = displayer

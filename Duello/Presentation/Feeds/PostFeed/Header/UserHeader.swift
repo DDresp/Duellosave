@@ -14,7 +14,7 @@ import JGProgressHUD
 class UserHeader: UICollectionReusableView {
     
     //MARK: - Displayer
-    var displayer: UserHeaderDisplayer?
+    var displayer: UserHeaderViewModel?
     
     //MARK: - Setup
     override init(frame: CGRect) {
@@ -115,11 +115,11 @@ class UserHeader: UICollectionReusableView {
         
     }
     
-    private func setupText(displayer: UserHeaderDisplayer) {
+    private func setupText(displayer: UserHeaderViewModel) {
         nameLabel.text = displayer.userName
     }
     
-    private func setupProfileImage(displayer: UserHeaderDisplayer) {
+    private func setupProfileImage(displayer: UserHeaderViewModel) {
         
         profileImageButton.setImage(nil, for: .normal)
         activityIndicatorView.startAnimating()
@@ -131,7 +131,7 @@ class UserHeader: UICollectionReusableView {
         }
     }
     
-    private func setupSocialMedia(displayer: UserHeaderDisplayer) {
+    private func setupSocialMedia(displayer: UserHeaderViewModel) {
         
         if displayer.hasSocialMediaNames == true {
             socialMediaCollectionViewController.view.isHidden = false

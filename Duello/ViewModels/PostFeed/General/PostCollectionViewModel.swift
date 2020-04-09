@@ -15,7 +15,7 @@ class PostCollectionViewModel: PostCollectionDisplayer {
     var posts: BehaviorRelay<[PostModel]?> = BehaviorRelay<[PostModel]?>(value: nil)
     
     //MARK: - Child Displayers
-    var postHeaderDisplayer: UserHeaderDisplayer?
+    var postHeaderDisplayer: PostHeaderDisplayer?
     var postListDisplayer: PostListDisplayer
     
     //MARK: - Bindables
@@ -46,7 +46,7 @@ class PostCollectionViewModel: PostCollectionDisplayer {
     var updateLayout: PublishRelay<Void> = PublishRelay()
     
     //MARK: - Setup
-    init(listDisplayer: PostListDisplayer, headerDisplayer: UserHeaderDisplayer?) {
+    init(listDisplayer: PostListDisplayer, headerDisplayer: PostHeaderDisplayer?) {
         self.postListDisplayer = listDisplayer
         self.postHeaderDisplayer = headerDisplayer
         setupBindables()

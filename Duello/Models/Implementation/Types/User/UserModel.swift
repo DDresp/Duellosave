@@ -40,3 +40,11 @@ protocol UserModel: Model {
     func getConnectedLink(for attribute: UserSingleAttribute) -> UserSingleAttribute?
     
 }
+
+extension UserModel {
+    
+    //MARK: - Getters
+    func getUserName() -> String { return userName.value?.toStringValue() ?? "" }
+    func getImageUrl() -> String { return imageUrl.value?.toStringValue() ?? "" }
+    
+}

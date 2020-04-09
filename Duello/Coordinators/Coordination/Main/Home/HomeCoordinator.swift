@@ -23,7 +23,7 @@ class HomeCoordinator: HomeCoordinatorType {
     
     //MARK: - Bindables
     var loggedOut = PublishSubject<Void>()
-    var requestedSettings = PublishSubject<Void>()
+    var requestedSettings = PublishSubject<UserModel>()
     
     //MARK: - Setup
     init() {
@@ -43,8 +43,8 @@ class HomeCoordinator: HomeCoordinatorType {
     private let disposeBag = DisposeBag()
     
     private func setupBindables() {
-        requestedSettings.asObservable().subscribe(onNext: { [weak self] (_) in
-            self?.goToUpdateUser()
+        requestedSettings.subscribe(onNext: { [weak self] (user) in
+            self?.goToUpdateUser(user: user)
         }).disposed(by: disposeBag)
     }
     
@@ -54,9 +54,9 @@ class HomeCoordinator: HomeCoordinatorType {
 extension HomeCoordinator {
     
     //GoTo
-    private func goToUpdateUser() {
+    private func goToUpdateUser(user: UserModel) {
         guard let rootController = presentedController else { return }
-        guard let user = viewModel.homeCollectionViewModel.postHeaderDisplayer?.user.value else { return }
+//        guard let user = viewModel.homeCollectionViewModel.postHeaderDisplayer?.user.value else { return }
         homeUpdateUserCoordinator = HomeUpdateUserCoordinator(rootController: rootController, user: user)
         homeUpdateUserCoordinator?.start()
         setupUpdateUserBindables()

@@ -9,7 +9,7 @@
 import RxSwift
 import RxCocoa
 
-class UserHeaderViewModel: UserHeaderDisplayer {
+class UserHeaderViewModel: PostHeaderDisplayer {
     
     //MARK: - Models
     var user: BehaviorRelay<UserModel?> = BehaviorRelay<UserModel?>(value: nil)
@@ -26,11 +26,11 @@ class UserHeaderViewModel: UserHeaderDisplayer {
 
     //MARK: - Getters
     var imageUrl: String? {
-        return user.value?.imageUrl.value?.toStringValue()
+        return user.value?.getImageUrl()
     }
     
     var userName: String? {
-        return user.value?.userName.value?.toStringValue()
+        return user.value?.getUserName()
     }
     
     var hasSocialMediaNames: Bool {

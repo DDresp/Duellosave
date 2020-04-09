@@ -151,8 +151,14 @@ class HomeViewModel: SimplePostCollectionMasterViewModel {
             }
         }).bind(to: coordinator.loggedOut).disposed(by: disposeBag)
         
-        settingsTapped.bind(to: coordinator.requestedSettings).disposed(by: disposeBag)
-        homeCollectionViewModel.postHeaderDisplayer?.imageTapped.asObservable().bind(to: coordinator.requestedSettings).disposed(by: disposeBag)
+        settingsTapped.map { [weak self] (_) -> UserModel? in
+            return self?.user.value
+        }.flatMap { (user) -> Observable<UserModel> in
+            return Observable.from(optional: user)
+            }.bind(to: coordinator.requestedSettings).disposed(by: disposeBag)
+        
+//        settingsTapped.bind(to: coordinator.requestedSettings).disposed(by: disposeBag)
+//        homeCollectionViewModel.postHeaderDisplayer?.imageTapped.asObservable().bind(to: coordinator.requestedSettings).disposed(by: disposeBag)
     }
     
 }

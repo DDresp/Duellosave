@@ -14,7 +14,7 @@ class PostCollectionView: UICollectionView {
     let displayer: PostCollectionDisplayer
     
     //MARK: - Child Displayers
-    var headerDisplayer: UserHeaderDisplayer? {
+    var headerDisplayer: PostHeaderDisplayer? {
         return displayer.postHeaderDisplayer
     }
     
@@ -64,7 +64,15 @@ class PostCollectionView: UICollectionView {
         register(FooterLoadingCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: footerIdentifier)
         
         if displayer.hasHeader {
-            register(UserHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerIdentifier)
+            let header = displayer.postHeaderDisplayer!
+            switch header {
+            case is UserHeaderViewModel:
+                register(UserHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerIdentifier)
+            case is CategoryHeaderViewModel:
+                register(CategoryHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerIdentifier)
+            default:
+                return ()
+            }
         }
         
     }

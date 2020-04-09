@@ -14,7 +14,7 @@ class PostCollectionViewDelegate: NSObject, UICollectionViewDelegate, UICollecti
     let displayer: PostCollectionDisplayer
 
     //MARK: - Child Displayers
-    var profileDisplayer: UserHeaderDisplayer? { return displayer.postHeaderDisplayer }
+    var profileDisplayer: PostHeaderDisplayer? { return displayer.postHeaderDisplayer }
     var postListDisplayer: PostListDisplayer { return displayer.postListDisplayer }
     
     //MARK: - Variables
@@ -113,8 +113,8 @@ class PostCollectionViewDelegate: NSObject, UICollectionViewDelegate, UICollecti
         return .init(width: frameWidth, height: size.height)
     }
     
-    private func estimateHeaderSize(for displayer: UserHeaderDisplayer) -> CGSize {
-        profileHeader.displayer = displayer
+    private func estimateHeaderSize(for displayer: PostHeaderDisplayer) -> CGSize {
+        profileHeader.displayer = UserHeaderViewModel()
         profileHeader.fit()
         let size = profileHeader.systemLayoutSizeFitting(.init(width: frameWidth, height: 1000))
         return .init(width: frameWidth, height: size.height)

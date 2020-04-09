@@ -11,8 +11,28 @@ import RxCocoa
 
 class CategoryPostCollectionViewModel: PostCollectionViewModel {
     
+    //MARK: - Models
+    var category: BehaviorRelay<CategoryModel?> = BehaviorRelay<CategoryModel?>(value: nil)
+    
+    //MARK: - View Models
+    var headerViewModel: CategoryHeaderViewModel {
+        return postHeaderDisplayer as! CategoryHeaderViewModel
+    }
+    
+    //MARK: - Setup
     init() {
-        super.init(listDisplayer: CategoryPostListViewModel(), headerDisplayer: UserHeaderViewModel())
+        super.init(listDisplayer: CategoryPostListViewModel(), headerDisplayer: CategoryHeaderViewModel())
+    }
+    
+    //MARK: - Reactive
+    override func setupBindablesToChildDisplayer() {
+        super.setupBindablesToChildDisplayer()
+        
+        category.subscribe(onNext: { [weak self] (category) in
+            guard let category = category else { return }
+            self?.headerViewModel.category.accept(category)
+        }).disposed(by: disposeBag)
+        
     }
     
 }

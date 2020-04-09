@@ -15,7 +15,7 @@ protocol PostCollectionDisplayer: class, CollectionDisplayer {
     var posts: BehaviorRelay<[PostModel]?> { get }
     
     //MARK: - Child Displayersb
-    var postHeaderDisplayer: UserHeaderDisplayer? { get }
+    var postHeaderDisplayer: PostHeaderDisplayer? { get }
     var postListDisplayer: PostListDisplayer { get }
     
     //MARK: - Bindables

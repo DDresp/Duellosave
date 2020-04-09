@@ -11,6 +11,6 @@ import RxSwift
 
 protocol HomeCoordinatorType: RootCoordinatorType {
     var loggedOut: PublishSubject<Void> { get }
-    var requestedSettings: PublishSubject<Void> { get }
+    var requestedSettings: PublishSubject<UserModel> { get }
     
 }

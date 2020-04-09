@@ -22,6 +22,11 @@ class ExploreCategoryProfileViewModel: SimplePostCollectionMasterViewModel {
     //MARK: - Models
     var category: CategoryModel
     
+    //MARK: - View Model
+    var collectionViewModel: CategoryPostCollectionViewModel {
+        return postCollectionDisplayer as! CategoryPostCollectionViewModel
+    }
+    
     //MARK: - Bindables
     let requestedAddContent: PublishSubject<Void> = PublishSubject()
     let goBack: PublishSubject<Void> = PublishSubject()
@@ -32,6 +37,12 @@ class ExploreCategoryProfileViewModel: SimplePostCollectionMasterViewModel {
         super.init(postCollectionDisplayer: CategoryPostCollectionViewModel(), fetchSteps: 6) { (limit, startId) -> Observable<[PostModel]> in
             return FetchingService.shared.fetchCategoryPosts(for: category.getId(), limit: limit, startId: startId)
         }
+    }
+    
+    //MARK: - Methods
+    override func start() {
+        super.start()
+        collectionViewModel.category.accept(category)
     }
     
     

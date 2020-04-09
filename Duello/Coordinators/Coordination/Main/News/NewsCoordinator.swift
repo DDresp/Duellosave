@@ -13,7 +13,7 @@ class NewsCoordinator: HomeCoordinatorType {
     
     //Temporary
     var loggedOut: PublishSubject<Void> = PublishSubject()
-    var requestedSettings: PublishSubject<Void> = PublishSubject()
+    var requestedSettings: PublishSubject<UserModel> = PublishSubject()
     
 
     //MARK: - ViewModels
