@@ -84,7 +84,7 @@ class PostCollectionViewDatasource: NSObject, UICollectionViewDataSource {
         
         if kind == UICollectionView.elementKindSectionHeader {
             guard let headerDisplayer = displayer.postHeaderDisplayer else { return UICollectionViewCell() }
-            
+
             switch headerDisplayer {
             case is UserHeaderViewModel:
                 let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerIdentifier, for: indexPath) as! UserHeader

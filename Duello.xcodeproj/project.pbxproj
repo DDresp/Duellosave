@@ -166,7 +166,7 @@
 		1475AFDE241057D600F1D24F /* VideoPlayerDisplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AFDD241057D600F1D24F /* VideoPlayerDisplayer.swift */; };
 		1475AFE32410580E00F1D24F /* PostListDisplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AFE22410580E00F1D24F /* PostListDisplayer.swift */; };
 		1475AFE52410582300F1D24F /* PostCollectionMasterDisplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AFE42410582300F1D24F /* PostCollectionMasterDisplayer.swift */; };
-		1475AFE72410583300F1D24F /* UserHeaderDisplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AFE62410583300F1D24F /* UserHeaderDisplayer.swift */; };
+		1475AFE72410583300F1D24F /* PostHeaderDisplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AFE62410583300F1D24F /* PostHeaderDisplayer.swift */; };
 		1475AFE92410584800F1D24F /* PostDisplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AFE82410584800F1D24F /* PostDisplayer.swift */; };
 		1475AFEB2410586600F1D24F /* UploadDisplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AFEA2410586600F1D24F /* UploadDisplayer.swift */; };
 		1475AFEF2410588B00F1D24F /* UploadUserDisplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AFEE2410588B00F1D24F /* UploadUserDisplayer.swift */; };
@@ -327,6 +327,10 @@
 		14B67209243F53CC0083F663 /* SimplePostCollectionMasterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B67208243F53CC0083F663 /* SimplePostCollectionMasterViewModel.swift */; };
 		14B6720B243F56160083F663 /* CategoryHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B6720A243F56160083F663 /* CategoryHeaderViewModel.swift */; };
 		14B6720D243F5B190083F663 /* CategoryHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B6720C243F5B190083F663 /* CategoryHeader.swift */; };
+		14B672112440FE400083F663 /* SingleImagePostDisplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B672102440FE3F0083F663 /* SingleImagePostDisplayer.swift */; };
+		14B672132440FE540083F663 /* ImagesPostDisplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B672122440FE540083F663 /* ImagesPostDisplayer.swift */; };
+		14B672152440FE770083F663 /* VideoPostDisplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B672142440FE770083F663 /* VideoPostDisplayer.swift */; };
+		14B672182440FFAB0083F663 /* UserPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B672172440FFAB0083F663 /* UserPostViewModel.swift */; };
 		14BDEC08241CBF0E00228763 /* Bool+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BDEC07241CBF0E00228763 /* Bool+Extension.swift */; };
 		14ED672B241A87550047C085 /* Pods_Duello.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14ED672A241A87550047C085 /* Pods_Duello.framework */; };
 		14ED672C241A87550047C085 /* Pods_Duello.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 14ED672A241A87550047C085 /* Pods_Duello.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -532,7 +536,7 @@
 		1475AFDD241057D600F1D24F /* VideoPlayerDisplayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerDisplayer.swift; sourceTree = "<group>"; };
 		1475AFE22410580E00F1D24F /* PostListDisplayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListDisplayer.swift; sourceTree = "<group>"; };
 		1475AFE42410582300F1D24F /* PostCollectionMasterDisplayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCollectionMasterDisplayer.swift; sourceTree = "<group>"; };
-		1475AFE62410583300F1D24F /* UserHeaderDisplayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHeaderDisplayer.swift; sourceTree = "<group>"; };
+		1475AFE62410583300F1D24F /* PostHeaderDisplayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostHeaderDisplayer.swift; sourceTree = "<group>"; };
 		1475AFE82410584800F1D24F /* PostDisplayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDisplayer.swift; sourceTree = "<group>"; };
 		1475AFEA2410586600F1D24F /* UploadDisplayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadDisplayer.swift; sourceTree = "<group>"; };
 		1475AFEE2410588B00F1D24F /* UploadUserDisplayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadUserDisplayer.swift; sourceTree = "<group>"; };
@@ -693,6 +697,10 @@
 		14B67208243F53CC0083F663 /* SimplePostCollectionMasterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimplePostCollectionMasterViewModel.swift; sourceTree = "<group>"; };
 		14B6720A243F56160083F663 /* CategoryHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryHeaderViewModel.swift; sourceTree = "<group>"; };
 		14B6720C243F5B190083F663 /* CategoryHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryHeader.swift; sourceTree = "<group>"; };
+		14B672102440FE3F0083F663 /* SingleImagePostDisplayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleImagePostDisplayer.swift; sourceTree = "<group>"; };
+		14B672122440FE540083F663 /* ImagesPostDisplayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ImagesPostDisplayer.swift; path = /Users/dariusdresp/Documents/Apps/Duello/Duello/Coordinators/Coordination/ImagesPostDisplayer.swift; sourceTree = "<absolute>"; };
+		14B672142440FE770083F663 /* VideoPostDisplayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPostDisplayer.swift; sourceTree = "<group>"; };
+		14B672172440FFAB0083F663 /* UserPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPostViewModel.swift; sourceTree = "<group>"; };
 		14BDEC07241CBF0E00228763 /* Bool+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+Extension.swift"; sourceTree = "<group>"; };
 		14ED672A241A87550047C085 /* Pods_Duello.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_Duello.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AB5A1CDF25F48DD3230412A /* Pods-DuelloUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DuelloUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DuelloUITests/Pods-DuelloUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -1332,6 +1340,7 @@
 		1475AEF72410493C00F1D24F /* Post */ = {
 			isa = PBXGroup;
 			children = (
+				14B6721A244133700083F663 /* MapAttributes */,
 				1475AEFD2410496400F1D24F /* SingleImage */,
 				1475AEFC2410495E00F1D24F /* Images */,
 				1475AEFB2410495A00F1D24F /* Video */,
@@ -1360,7 +1369,6 @@
 			isa = PBXGroup;
 			children = (
 				1475AF02241049B800F1D24F /* LocalImagesPost.swift */,
-				1475AF04241049C300F1D24F /* LocalImages.swift */,
 				1475AF06241049D200F1D24F /* InstagramImagesPost.swift */,
 			);
 			path = Images;
@@ -1675,7 +1683,6 @@
 				149BC5CD24222F4A00CFBBC7 /* UserPostCollectionViewModel.swift */,
 				1475AF832410528A00F1D24F /* UserPostListViewModel.swift */,
 				1475AF88241052CC00F1D24F /* UserHeaderViewModel.swift */,
-				1475AF822410526800F1D24F /* Post */,
 			);
 			path = PostFeed;
 			sourceTree = "<group>";
@@ -1704,17 +1711,6 @@
 				1475AF7C2410523400F1D24F /* SocialMediaItemViewModel.swift */,
 			);
 			path = SocialMedia;
-			sourceTree = "<group>";
-		};
-		1475AF822410526800F1D24F /* Post */ = {
-			isa = PBXGroup;
-			children = (
-				1475AF8A241052DB00F1D24F /* PostViewModel.swift */,
-				1475AF8C241052E700F1D24F /* SingleImagePostViewModel.swift */,
-				1475AF8E241052F400F1D24F /* ImagesPostViewModel.swift */,
-				1475AF902410530100F1D24F /* VideoPostViewModel.swift */,
-			);
-			path = Post;
 			sourceTree = "<group>";
 		};
 		1475AF922410531B00F1D24F /* UploadPost */ = {
@@ -1872,8 +1868,8 @@
 				1475AFE42410582300F1D24F /* PostCollectionMasterDisplayer.swift */,
 				149BC5CB2422165800CFBBC7 /* PostCollectionDisplayer.swift */,
 				1475AFE22410580E00F1D24F /* PostListDisplayer.swift */,
-				1475AFE62410583300F1D24F /* UserHeaderDisplayer.swift */,
-				1475AFDF241057F000F1D24F /* Post */,
+				1475AFE62410583300F1D24F /* PostHeaderDisplayer.swift */,
+				14B6720F2440FE2C0083F663 /* Post */,
 			);
 			name = PostFeed;
 			path = "../New Group/PostFeed";
@@ -1912,14 +1908,6 @@
 				1475AFD9241057BC00F1D24F /* SocialMediaItemDisplayer.swift */,
 			);
 			path = SocialMedia;
-			sourceTree = "<group>";
-		};
-		1475AFDF241057F000F1D24F /* Post */ = {
-			isa = PBXGroup;
-			children = (
-				1475AFE82410584800F1D24F /* PostDisplayer.swift */,
-			);
-			path = Post;
 			sourceTree = "<group>";
 		};
 		1475AFEC2410586C00F1D24F /* EditPost */ = {
@@ -2795,8 +2783,48 @@
 				14B67208243F53CC0083F663 /* SimplePostCollectionMasterViewModel.swift */,
 				14B67206243F2C010083F663 /* PostCollectionViewModel.swift */,
 				14B67203243F29610083F663 /* PostListViewModel.swift */,
+				14B6720E2440F8320083F663 /* Post */,
 			);
 			path = General;
+			sourceTree = "<group>";
+		};
+		14B6720E2440F8320083F663 /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				1475AF8A241052DB00F1D24F /* PostViewModel.swift */,
+				14B67219244103F90083F663 /* User */,
+				1475AF8C241052E700F1D24F /* SingleImagePostViewModel.swift */,
+				1475AF8E241052F400F1D24F /* ImagesPostViewModel.swift */,
+				1475AF902410530100F1D24F /* VideoPostViewModel.swift */,
+			);
+			path = Post;
+			sourceTree = "<group>";
+		};
+		14B6720F2440FE2C0083F663 /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				1475AFE82410584800F1D24F /* PostDisplayer.swift */,
+				14B672102440FE3F0083F663 /* SingleImagePostDisplayer.swift */,
+				14B672122440FE540083F663 /* ImagesPostDisplayer.swift */,
+				14B672142440FE770083F663 /* VideoPostDisplayer.swift */,
+			);
+			path = Post;
+			sourceTree = "<group>";
+		};
+		14B67219244103F90083F663 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				14B672172440FFAB0083F663 /* UserPostViewModel.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		14B6721A244133700083F663 /* MapAttributes */ = {
+			isa = PBXGroup;
+			children = (
+				1475AF04241049C300F1D24F /* LocalImages.swift */,
+			);
+			path = MapAttributes;
 			sourceTree = "<group>";
 		};
 		AAB327F880C324E4589AB40F /* Pods */ = {
@@ -3139,6 +3167,7 @@
 				140AEE302411A96400258DE8 /* Ideas.swift in Sources */,
 				1475B04324105B8300F1D24F /* FooterLoadingCell.swift in Sources */,
 				1475AF73241051C400F1D24F /* AuthenticationUploadUserController.swift in Sources */,
+				14B672152440FE770083F663 /* VideoPostDisplayer.swift in Sources */,
 				1475AEAD241045D900F1D24F /* RawInstagramPostType.swift in Sources */,
 				1475B05B24105C8500F1D24F /* UploadUserDelegate.swift in Sources */,
 				14B671ED243A65F20083F663 /* ExploreCategoryProfileCoordinator.swift in Sources */,
@@ -3212,6 +3241,7 @@
 				1475B02C24105AB200F1D24F /* ImagesSlider.swift in Sources */,
 				14B671882436227F0083F663 /* UploadCategoryDelegate.swift in Sources */,
 				1475B04B24105BC100F1D24F /* SingleImagePostCell.swift in Sources */,
+				14B672182440FFAB0083F663 /* UserPostViewModel.swift in Sources */,
 				1475B0C6241060A700F1D24F /* SmallHeaderLabel.swift in Sources */,
 				1475B06B24105CFF00F1D24F /* UploadDescriptionCell.swift in Sources */,
 				1475AF672410513800F1D24F /* PostingUploadInstagramImagesPostController.swift in Sources */,
@@ -3220,7 +3250,7 @@
 				1475AF9F2410538C00F1D24F /* UploadUserItemViewModel.swift in Sources */,
 				1475AECD2410475E00F1D24F /* PostSingleAttribute.swift in Sources */,
 				1475AEF42410490C00F1D24F /* APIVideoPostModel.swift in Sources */,
-				1475AFE72410583300F1D24F /* UserHeaderDisplayer.swift in Sources */,
+				1475AFE72410583300F1D24F /* PostHeaderDisplayer.swift in Sources */,
 				1475AFF9241058DF00F1D24F /* UploadInstagramLinkDisplayer.swift in Sources */,
 				1475AF2624104B6C00F1D24F /* AuthenticationPhoneLoginCoordinatorType.swift in Sources */,
 				1475AF522410507100F1D24F /* HomeUpdateUserController.swift in Sources */,
@@ -3277,6 +3307,7 @@
 				1475AF7D2410523400F1D24F /* SocialMediaItemViewModel.swift in Sources */,
 				1475AE5D2410418A00F1D24F /* FirebasePaths.swift in Sources */,
 				14B671F6243B33D40083F663 /* ExploreCategoryProfileViewModel.swift in Sources */,
+				14B672112440FE400083F663 /* SingleImagePostDisplayer.swift in Sources */,
 				1475AFB52410546B00F1D24F /* UploadInstagramSingleImagePostViewModel.swift in Sources */,
 				1475AF7B2410522700F1D24F /* SocialMediaViewModel.swift in Sources */,
 				1475AFDA241057BC00F1D24F /* SocialMediaItemDisplayer.swift in Sources */,
@@ -3355,6 +3386,7 @@
 				1475B03824105B1D00F1D24F /* PostCollectionViewDelegate.swift in Sources */,
 				1475AF012410498A00F1D24F /* InstagramSingleImagePost.swift in Sources */,
 				1475B02A24105AA300F1D24F /* SocialMediaCell.swift in Sources */,
+				14B672132440FE540083F663 /* ImagesPostDisplayer.swift in Sources */,
 				1475B0C22410608A00F1D24F /* DarkSquaredButton.swift in Sources */,
 				14B67179243611AC0083F663 /* CategoryCreationViewModel.swift in Sources */,
 				1475AF3F24104CA500F1D24F /* AuthenticationCoordinator.swift in Sources */,

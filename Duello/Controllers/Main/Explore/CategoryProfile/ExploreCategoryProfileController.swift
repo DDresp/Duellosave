@@ -9,20 +9,21 @@
 import RxSwift
 import RxCocoa
 
-class ExploreCategoryProfileController: ViewController {
+class ExploreCategoryProfileController: PostCollectionMasterViewController {
     
     //MARK: - ViewModels
-    let viewModel: ExploreCategoryProfileViewModel
+    var viewModel: ExploreCategoryProfileViewModel {
+        return displayer as! ExploreCategoryProfileViewModel
+    }
     
     //MARK: - Setup
     init(viewModel: ExploreCategoryProfileViewModel) {
-        self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
+        super.init(displayer: viewModel)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = VERYLIGHTGRAYCOLOR
+
         setupNavigationItems()
         setupCollectionViewLayout()
         setupBindablesToViewModel()
@@ -72,7 +73,4 @@ class ExploreCategoryProfileController: ViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    deinit {
-        print("debug: deiniting the Exploreviewcontroller")
-    }
 }

@@ -14,7 +14,6 @@ class EmptyCell: UICollectionViewCell {
     var displayer: PostCollectionDisplayer? {
         
         didSet {
-            
             if displayer?.hasNoPosts == true {
                 isHidden = false
             } else {
@@ -28,6 +27,7 @@ class EmptyCell: UICollectionViewCell {
         super.init(frame: frame)
         setupLayout()
         isHidden = true
+        backgroundColor = VERYLIGHTGRAYCOLOR
     }
     
     //MARK: - Views
@@ -42,19 +42,10 @@ class EmptyCell: UICollectionViewCell {
         return label
     }()
     
-    let emptyView: UIView = {
-        let view = UIView()
-        view.backgroundColor = VERYLIGHTGRAYCOLOR
-        return view
-    }()
-    
     //MARK: - Layout
     private func setupLayout() {
-        contentView.addSubview(emptyView)
-        emptyView.fillSuperview()
-        
-        emptyView.addSubview(label)
-        label.fillSuperview()
+        contentView.addSubview(label)
+        label.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: .init(top: 100, left: 0, bottom: 0, right: 0), size: .zero)
     }
     
     required init?(coder aDecoder: NSCoder) {

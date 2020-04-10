@@ -40,7 +40,7 @@ class CategoryHeaderViewModel: PostHeaderDisplayer {
     
     private func setupBindablesFromOwnProperties() {
         
-        category.subscribe(onNext: { [weak self] (user) in
+        category.subscribe(onNext: { (_) in
             //DO nothing for now
         }).disposed(by: disposeBag)
         

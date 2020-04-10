@@ -9,7 +9,7 @@
 import RxSwift
 import RxCocoa
 
-class ImagesPostViewModel: PostViewModel {
+class ImagesPostViewModel: PostViewModel, ImagesPostDisplayer {
     
     //MARK: - Models
     var imagesModel: ImagesPostModel {
@@ -25,7 +25,7 @@ class ImagesPostViewModel: PostViewModel {
     var selectedPhotoIndex: BehaviorRelay<Int> = BehaviorRelay<Int>(value: 0)
     
     //MARK: - Setup
-    init(post: ImagesPostModel, index: Int) {
+    init(post: ImagesPostModel, index: Int, options: PostViewModelOptions) {
         
         switch post {
         case let post as LocalImagesPostModel:
@@ -35,7 +35,7 @@ class ImagesPostViewModel: PostViewModel {
         default:
             ()
         }
-        super.init(post: post, index: index)
+        super.init(post: post, index: index, options: options)
         socialMediaDisplayer.user.accept(post.getUser())
         setupBindablesFromChildViewModels()
         setupBindablesFromOwnProperties()

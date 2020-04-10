@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 import AVFoundation
 
-class VideoPostViewModel: PostViewModel, VideoPlayerDisplayer {
+class VideoPostViewModel: PostViewModel, VideoPostDisplayer {
     
     //MARK: - Models
     var videoModel: VideoPostModel  {
@@ -33,7 +33,7 @@ class VideoPostViewModel: PostViewModel, VideoPlayerDisplayer {
     let isMuted: BehaviorRelay<Bool> = BehaviorRelay<Bool>(value: true)
     
     //MARK: - Setup
-    init(post: VideoPostModel, index: Int) {
+    init(post: VideoPostModel, index: Int, options: PostViewModelOptions) {
         
         switch post {
         case let post as LocalVideoPostModel:
@@ -46,7 +46,7 @@ class VideoPostViewModel: PostViewModel, VideoPlayerDisplayer {
         default:
             ()
         }
-        super.init(post: post, index: index)
+        super.init(post: post, index: index, options: options)
         setupBindables()
     }
     

@@ -14,10 +14,17 @@ class CategoryPostCollectionViewModel: PostCollectionViewModel {
     //MARK: - Models
     var category: BehaviorRelay<CategoryModel?> = BehaviorRelay<CategoryModel?>(value: nil)
     
-    //MARK: - View Models
+    //MARK: - Child ViewModels
     var headerViewModel: CategoryHeaderViewModel {
         return postHeaderDisplayer as! CategoryHeaderViewModel
     }
+    
+    var listViewModel: CategoryPostListViewModel {
+        return postListDisplayer as! CategoryPostListViewModel
+    }
+    
+    //MARK: - Bindables
+    var reportPost: PublishRelay<String> = PublishRelay<String>()
     
     //MARK: - Setup
     init() {
@@ -33,6 +40,12 @@ class CategoryPostCollectionViewModel: PostCollectionViewModel {
             self?.headerViewModel.category.accept(category)
         }).disposed(by: disposeBag)
         
+    }
+    
+    override func setupBindablesFromChildDisplayer() {
+        super.setupBindablesFromChildDisplayer()
+        
+        listViewModel.reportPost.bind(to: reportPost).disposed(by: disposeBag)
     }
     
 }

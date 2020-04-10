@@ -14,11 +14,11 @@ class UserPostCollectionViewModel: PostCollectionViewModel {
     var user: BehaviorRelay<UserModel?> = BehaviorRelay<UserModel?>(value: nil)
 
     //MARK: - Child ViewModels
-    var userHeaderViewModel: UserHeaderViewModel {
+    var headerViewModel: UserHeaderViewModel {
         return postHeaderDisplayer as! UserHeaderViewModel
     }
     
-    var userPostListViewModel: UserPostListViewModel {
+    var listViewModel: UserPostListViewModel {
         return postListDisplayer as! UserPostListViewModel
     }
     
@@ -35,23 +35,23 @@ class UserPostCollectionViewModel: PostCollectionViewModel {
         super.setupBindablesToChildDisplayer()
         user.subscribe(onNext: { [weak self] (user) in
             guard let user = user else { return }
-            self?.userHeaderViewModel.user.accept(user)
+            self?.headerViewModel.user.accept(user)
         }).disposed(by: disposeBag)
 
         Observable.combineLatest(uiLoaded, viewIsAppeared).filter { (started, appeared) -> Bool in
             return started && appeared
         }.map { (_, _) -> Void in
             return ()
-            }.bind(to: userHeaderViewModel.animateScore).disposed(by: disposeBag)
+            }.bind(to: headerViewModel.animateScore).disposed(by: disposeBag)
         
     }
     
     override func setupBindablesFromChildDisplayer() {
         super.setupBindablesFromChildDisplayer()
-        userHeaderViewModel.socialMediaDisplayer.selectedLink.bind(to: loadLink).disposed(by: disposeBag)
-        userHeaderViewModel.socialMediaDisplayer.showAdditionalLinkAlert.bind(to: showAdditionalLinkAlert).disposed(by: disposeBag)
+        headerViewModel.socialMediaDisplayer.selectedLink.bind(to: loadLink).disposed(by: disposeBag)
+        headerViewModel.socialMediaDisplayer.showAdditionalLinkAlert.bind(to: showAdditionalLinkAlert).disposed(by: disposeBag)
         
-        userPostListViewModel.deletePost.bind(to: deletePost).disposed(by: disposeBag)
+        listViewModel.deletePost.bind(to: deletePost).disposed(by: disposeBag)
         
     }
     

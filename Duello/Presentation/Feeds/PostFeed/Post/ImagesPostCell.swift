@@ -9,7 +9,12 @@
 import RxSwift
 import RxCocoa
 
-class ImagesPostCell: PostCell<ImagesPostViewModel> {
+class ImagesPostCell: PostCell {
+    
+    //MARK: Displayer
+    var imagesPostDisplayer: ImagesPostDisplayer? {
+        return displayer as? ImagesPostDisplayer
+    }
     
     //MARK: - Views
     private lazy var imagesSlider: ImagesSlider = {
@@ -28,6 +33,33 @@ class ImagesPostCell: PostCell<ImagesPostViewModel> {
     //MARK: - Methods
     override func configure() {
         super.configure()
-        imagesSlider.displayer = displayer?.imagesSliderDisplayer
+        imagesSlider.displayer = imagesPostDisplayer?.imagesSliderDisplayer
     }
 }
+
+
+//import RxSwift
+//import RxCocoa
+//
+//class ImagesPostCell: PostCell<ImagesPostViewModel> {
+//
+//    //MARK: - Views
+//    private lazy var imagesSlider: ImagesSlider = {
+//        let slider = ImagesSlider()
+//        slider.addGestureRecognizer(doubleTapGesture)
+//        return slider
+//    }()
+//
+//    override var mediaView: UIView {
+//        get {
+//            return imagesSlider
+//        }
+//        set {}
+//    }
+//
+//    //MARK: - Methods
+//    override func configure() {
+//        super.configure()
+//        imagesSlider.displayer = displayer?.imagesSliderDisplayer
+//    }
+//}

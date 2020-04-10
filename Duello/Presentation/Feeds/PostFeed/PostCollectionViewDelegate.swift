@@ -44,15 +44,15 @@ class PostCollectionViewDelegate: NSObject, UICollectionViewDelegate, UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        if displayer.hasNoPosts {
-            return .zero
-        }   
+//        if displayer.hasNoPosts {
+//            return .zero
+//        }
         return .init(width: collectionView.frame.width, height: 30)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
-        guard let postDisplayer = postListDisplayer.getPostDisplayer(at: indexPath.item) else { return .init(width: frameWidth, height: 300) }
+        guard let postDisplayer = postListDisplayer.getPostDisplayer(at: indexPath.item) else { return .init(width: frameWidth, height: 500) }
 
         if postDisplayer.didExpand.value {
             if let size = expandedSizes[indexPath.item] { return size }

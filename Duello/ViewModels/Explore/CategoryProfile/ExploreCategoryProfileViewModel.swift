@@ -47,6 +47,22 @@ class ExploreCategoryProfileViewModel: SimplePostCollectionMasterViewModel {
     
     
     //MARK: - Reactive
+    override func setupBindblesFromChildDisplayer() {
+        super.setupBindblesFromChildDisplayer()
+//        collectionViewModel.reportPost.subscribe(onNext: { [weak self] (postId) in
+//            
+//            var actions = [AlertAction]()
+//            let action = AlertAction(title: "wtf") {
+//                print("debug: pressed wtf lol")
+//            }
+//            actions.append(action)
+//            
+//            let actionSheet = ActionSheet(actionHeader: "Some header", actionMessage: "come on dude", actions: actions)
+//            self?.showActionSheet.accept(actionSheet)
+//            
+//            }).disposed(by: disposeBag)
+    }
+    
     private func setupBindablesToCoordinator() {
         guard let coordinator = coordinator else { return }
         requestedAddContent.bind(to: coordinator.requestedAddContent).disposed(by: disposeBag)

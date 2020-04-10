@@ -9,4 +9,22 @@
 import RxSwift
 import RxCocoa
 
-class CategoryPostListViewModel: PostListViewModel {}
+class CategoryPostListViewModel: PostListViewModel {
+    
+    //MARK: - Bindables
+    var reportPost: PublishRelay<String> = PublishRelay<String>()
+    
+    //MARK: - Setup
+    init() {
+        var postViewModelOptions = PostViewModelOptions()
+        postViewModelOptions.allowsReport = true
+        super.init(optionsForPostViewModels: postViewModelOptions)
+    }
+    
+    //MARK: - Methods
+    override func configurePostDisplayer(for postDisplayer: PostDisplayer) {
+        super.configurePostDisplayer(for: postDisplayer)
+        postDisplayer.reportMe.bind(to: reportPost).disposed(by: disposeBag)
+    }
+    
+}

@@ -13,6 +13,13 @@ class UserPostListViewModel: PostListViewModel {
     //MARK: - Bindables
     var deletePost: PublishRelay<String> = PublishRelay<String>()
     
+    //MARK: - Setup
+    init() {
+        var options = PostViewModelOptions()
+        options.allowsDelete = true
+        super.init(optionsForPostViewModels: options)
+    }
+    
     //MARK: - Methods
     override func configurePostDisplayer(for postDisplayer: PostDisplayer) {
         super.configurePostDisplayer(for: postDisplayer)

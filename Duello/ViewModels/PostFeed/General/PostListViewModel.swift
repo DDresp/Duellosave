@@ -14,8 +14,10 @@ class PostListViewModel: PostListDisplayer {
     //MARK: - ChildViewModels
     private var postDisplayers = [PostDisplayer]()
     
-    //MARK: - Bindables
+    //MARK: - Variables
+    let optionsForPostViewModels: PostViewModelOptions
     
+    //MARK: - Bindables
     //from Parent
     var isAppeared: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     
@@ -37,6 +39,11 @@ class PostListViewModel: PostListDisplayer {
     
     //to UI
     var videosAreMuted: BehaviorRelay<Bool> = BehaviorRelay(value: true)
+    
+    //MARK: - Setup
+    init(optionsForPostViewModels: PostViewModelOptions) {
+        self.optionsForPostViewModels = optionsForPostViewModels
+    }
     
     //MARK: - Getters
     var numberOfPostDisplayers: Int { return postDisplayers.count }
@@ -88,11 +95,11 @@ class PostListViewModel: PostListDisplayer {
             
             switch post {
             case let model as SingleImagePostModel:
-                viewModel = SingleImagePostViewModel(post: model, index: modelIndex)
+                viewModel = SingleImagePostViewModel(post: model, index: modelIndex, options: optionsForPostViewModels)
             case let model as ImagesPostModel:
-                viewModel = ImagesPostViewModel(post: model, index: modelIndex)
+                viewModel = ImagesPostViewModel(post: model, index: modelIndex, options: optionsForPostViewModels)
             case let model as VideoPostModel:
-                viewModel = VideoPostViewModel(post: model, index: modelIndex)
+                viewModel = VideoPostViewModel(post: model, index: modelIndex, options: optionsForPostViewModels)
             default:
                 ()
             }

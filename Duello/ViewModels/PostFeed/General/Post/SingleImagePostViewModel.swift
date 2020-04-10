@@ -9,7 +9,7 @@
 import RxSwift
 import RxCocoa
 
-class SingleImagePostViewModel: PostViewModel {
+class SingleImagePostViewModel: PostViewModel, SingleImagePostDisplayer {
     
     //MARK: - Models
     var singleImageModel: SingleImagePostModel {
@@ -21,7 +21,7 @@ class SingleImagePostViewModel: PostViewModel {
     var imageUrl: BehaviorRelay<URL?> = BehaviorRelay(value: nil)
     
     //MARK: - Setup
-    init(post: SingleImagePostModel, index: Int) {
+    init(post: SingleImagePostModel, index: Int, options: PostViewModelOptions) {
         
         switch post {
         case let post as LocalSingleImagePostModel:
@@ -31,7 +31,7 @@ class SingleImagePostViewModel: PostViewModel {
         default:
             ()
         }
-        super.init(post: post, index: index)
+        super.init(post: post, index: index, options: options)
         setupBindablesFromOwnProperties()
     }
     
