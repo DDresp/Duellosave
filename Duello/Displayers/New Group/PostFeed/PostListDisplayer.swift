@@ -15,6 +15,7 @@ protocol PostListDisplayer: class {
     var showActionSheet: PublishRelay<ActionSheet> { get }
     var loadLink: PublishRelay<String?> { get }
     var showAdditionalLinkAlert: PublishRelay<String> { get }
+    var showAlert: PublishRelay<Alert> { get }
     
     var isAppeared: BehaviorRelay<Bool> { get }
     var didEndDisplayingCell: PublishRelay<Int> { get }

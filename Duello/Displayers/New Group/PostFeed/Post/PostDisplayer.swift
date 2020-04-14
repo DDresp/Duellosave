@@ -28,11 +28,14 @@ protocol PostDisplayer {
 
     //MARK: - Bindables
     var deleteMe: PublishRelay<String> { get }
-    var reportMe: PublishRelay<String> { get }
+    var reportAsInappropriate: PublishRelay<String> { get }
+    var reportAsInWrongCategory: PublishRelay<String> { get }
+    var reportAsFromFakeUser: PublishRelay<String> { get }
     
     var isDeactivated: BehaviorRelay<Bool> { get }
     var updateDeactivation: PublishRelay<Int> { get }
     var showActionSheet: PublishRelay<ActionSheet> { get }
+    var showAlert: PublishRelay<Alert> { get }
     var doubleTapped: PublishSubject<Void> { get }
     var likeBlurViewTapped: PublishSubject<Void> { get }
     var showLikeView: BehaviorRelay<Bool> { get }

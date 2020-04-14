@@ -107,6 +107,7 @@ class SimplePostCollectionMasterViewModel: PostCollectionMasterDisplayer {
         postCollectionDisplayer.loadLink.bind(to: loadLink).disposed(by: disposeBag)
         postCollectionDisplayer.showAdditionalLinkAlert.bind(to: showAdditionalLinkAlert).disposed(by: disposeBag)
         postCollectionDisplayer.showActionSheet.bind(to: showActionSheet).disposed(by: disposeBag)
+        postCollectionDisplayer.showAlert.bind(to: showAlert).disposed(by: disposeBag)
         
         postCollectionDisplayer.needsRestart.filter { (needsRestart) -> Bool in
             return needsRestart

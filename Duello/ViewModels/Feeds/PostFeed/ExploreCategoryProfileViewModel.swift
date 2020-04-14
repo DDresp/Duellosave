@@ -49,18 +49,19 @@ class ExploreCategoryProfileViewModel: SimplePostCollectionMasterViewModel {
     //MARK: - Reactive
     override func setupBindblesFromChildDisplayer() {
         super.setupBindblesFromChildDisplayer()
-//        collectionViewModel.reportPost.subscribe(onNext: { [weak self] (postId) in
-//            
-//            var actions = [AlertAction]()
-//            let action = AlertAction(title: "wtf") {
-//                print("debug: pressed wtf lol")
-//            }
-//            actions.append(action)
-//            
-//            let actionSheet = ActionSheet(actionHeader: "Some header", actionMessage: "come on dude", actions: actions)
-//            self?.showActionSheet.accept(actionSheet)
-//            
-//            }).disposed(by: disposeBag)
+        
+        collectionViewModel.reportAsInWrongCategory.subscribe(onNext: { (postId) in
+            print("debug: wrong category \(postId)")
+        }).disposed(by: disposeBag)
+        
+        collectionViewModel.reportAsFromFakeUser.subscribe(onNext: { (postId) in
+            print("debug: from fake user \(postId)")
+        }).disposed(by: disposeBag)
+        
+        collectionViewModel.reportAsInappropriate.subscribe(onNext: { (postId) in
+            print("debug: inappropriate \(postId)")
+        }).disposed(by: disposeBag)
+        
     }
     
     private func setupBindablesToCoordinator() {

@@ -113,6 +113,7 @@ class PostCollectionViewModel: PostCollectionDisplayer {
         postListDisplayer.loadLink.bind(to: loadLink).disposed(by: disposeBag)
         postListDisplayer.showAdditionalLinkAlert.bind(to: showAdditionalLinkAlert).disposed(by: disposeBag)
         postListDisplayer.showActionSheet.bind(to: showActionSheet).disposed(by: disposeBag)
+        postListDisplayer.showAlert.bind(to: showAlert).disposed(by: disposeBag)
         postListDisplayer.updatePost.bind(to: updatePost).disposed(by: disposeBag)
         postListDisplayer.reload.bind(to: reloadData).disposed(by: disposeBag)
         postListDisplayer.insert.bind(to: insertData).disposed(by: disposeBag)

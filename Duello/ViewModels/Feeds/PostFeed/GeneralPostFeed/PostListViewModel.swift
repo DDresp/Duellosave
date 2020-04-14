@@ -31,7 +31,8 @@ class PostListViewModel: PostListDisplayer {
     var loadLink: PublishRelay<String?> = PublishRelay<String?>()
     var showAdditionalLinkAlert: PublishRelay<String> = PublishRelay<String>()
     var showActionSheet: PublishRelay<ActionSheet> = PublishRelay<ActionSheet>()
-   
+    var showAlert: PublishRelay<Alert> = PublishRelay<Alert>()
+    
     //from UI
     var willDisplayCell: PublishRelay<Int> = PublishRelay()
     var didEndDisplayingCell: PublishRelay<Int> = PublishRelay()
@@ -119,6 +120,7 @@ class PostListViewModel: PostListDisplayer {
     func configurePostDisplayer(for postDisplayer: PostDisplayer) {
         
         postDisplayer.showActionSheet.bind(to: showActionSheet).disposed(by: disposeBag)
+        postDisplayer.showAlert.bind(to: showAlert).disposed(by: disposeBag)
         postDisplayer.socialMediaDisplayer.showAdditionalLinkAlert.bind(to: showAdditionalLinkAlert).disposed(by: disposeBag)
         postDisplayer.socialMediaDisplayer.selectedLink.bind(to: loadLink).disposed(by: disposeBag)
 
