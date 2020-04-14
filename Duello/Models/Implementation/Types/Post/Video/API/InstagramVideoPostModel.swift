@@ -7,7 +7,7 @@
 //
 
 protocol InstagramVideoPostModel: ApiVideoPostModel {
-    var apiUrl: PostSingleAttribute { get set }
+    var apiUrl: PostAttribute { get set }
     
 }
 

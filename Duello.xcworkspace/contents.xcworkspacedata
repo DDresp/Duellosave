@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/dariusdresp/Documents/Apps/Duello/Duello/Coordinators/Coordination/ImagesPostDisplayer.swift">
-   </FileRef>
-   <FileRef
       location = "group:Duello.xcodeproj">
    </FileRef>
    <FileRef

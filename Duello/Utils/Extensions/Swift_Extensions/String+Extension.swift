@@ -65,7 +65,7 @@ extension String {
     
 }
 
-extension String: StringConvertibleType {
+extension String: DatabaseConvertibleType {
     
     func toStringValue() -> String {
         return self

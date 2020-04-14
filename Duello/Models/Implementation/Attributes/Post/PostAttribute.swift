@@ -8,32 +8,32 @@
 
 //MARK: - Attribute
 
-class PostSingleAttribute: SingleAttribute {
+class PostAttribute: ModelAttribute {
     
-    var attributeCase: PostSingleAttributeCase
-    var value: StringConvertibleType?
+    var attributeCase: PostAttributeCase
+    var value: DatabaseConvertibleType?
     
-    init(attributeCase: PostSingleAttributeCase, value: StringConvertibleType?) {
+    init(attributeCase: PostAttributeCase, value: DatabaseConvertibleType?) {
         self.attributeCase = attributeCase
         self.value = value
     }
     
-    func getCase() -> SingleAttributeCase {
+    func getCase() -> ModelAttributeCase {
         return attributeCase
     }
     
-    func getValue() -> StringConvertibleType? {
+    func getValue() -> DatabaseConvertibleType? {
         return value
     }
     
-    func setValue(of value: StringConvertibleType) {
+    func setValue(of value: DatabaseConvertibleType) {
         self.value = value
     }
     
 }
 
 //MARK: - Attribute Case
-enum PostSingleAttributeCase: SingleAttributeCase {
+enum PostAttributeCase: ModelAttributeCase {
     
     case uid
     case cid
@@ -43,13 +43,17 @@ enum PostSingleAttributeCase: SingleAttributeCase {
     case likes
     case dislikes
     case creationDate
-    case imageUrl(Int)
+    case imageUrl
+    case imageUrls
     case videoUrl
     case thumbNailUrl
     case type
     case apiUrl
     case mediaRatio
     case isDeactivated
+    case isInWrongCategory
+    case isInappropriate
+    case isFromFakeUser
     
     var entryType: EntryType {
         switch self {
@@ -61,8 +65,10 @@ enum PostSingleAttributeCase: SingleAttributeCase {
             return .Double
         case .type:
             return .FineMediaType
-        case .isDeactivated:
+        case .isDeactivated, .isFromFakeUser, .isInappropriate, .isInWrongCategory:
             return .Bool
+        case .imageUrls:
+            return .StringArray
         }
     }
     
@@ -78,18 +84,17 @@ enum PostSingleAttributeCase: SingleAttributeCase {
         case .dislikes: return "dislikes"
         case .likes: return "likes"
         case .rate: return "rate"
-        case .imageUrl(let index):
-            if index == 0 {
-                return "imageUrl"
-            } else {
-                return "imageUrl\(index + 1)"
-            }
+        case .imageUrl: return "imageUrl"
+        case .imageUrls: return "imageUrls"
         case .type: return "type"
         case .videoUrl: return "videoUrl"
         case .thumbNailUrl: return "thumbNailUrl"
         case .apiUrl: return "apiLink"
         case .mediaRatio: return "mediaRatio"
         case .isDeactivated: return "isDeactivated"
+        case .isInappropriate: return "isInapproprate"
+        case .isInWrongCategory: return "isInWrongCategory"
+        case .isFromFakeUser: return "isFromFakeUser"
             
         }
     }

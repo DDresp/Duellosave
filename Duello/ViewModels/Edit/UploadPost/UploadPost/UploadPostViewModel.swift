@@ -59,7 +59,7 @@ class UploadPostViewModel<T: PostModel>: UploadPostDisplayer {
     }
     
     //MARK: - Methods
-    private func initialisePost() {
+    func initialisePost() {
         guard let uploadPost = post else { return }
         uploadPost.description.value = descriptionDisplayer.description.value
         uploadPost.title.value = titleDisplayer.title.value

@@ -40,7 +40,7 @@ extension FetchingService {
     
     func configurePost(data: [String: Any], postId: String) -> PostModel? {
     
-        guard let mediaType = data[PostSingleAttributeCase.type.key] as? String else { return nil }
+        guard let mediaType = data[PostAttributeCase.type.key] as? String else { return nil }
         
         var post: PostModel?
         

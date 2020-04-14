@@ -7,17 +7,17 @@
 //
 
 //Database Attribute (map) that stores another Model
-protocol MapAttribute: Attribute {
+protocol ModelReference {
     func getModel() -> Model
-    func getCase() -> MapAttributeCase
+    func getCase() -> ModelReferenceCase
 }
 
-extension MapAttribute {
+extension ModelReference {
     func getKey() -> String {
         return getCase().key
     }
 }
 
-protocol MapAttributeCase {
+protocol ModelReferenceCase {
     var key: String { get }
 }

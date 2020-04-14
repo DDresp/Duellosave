@@ -22,10 +22,9 @@ class UploadLocalSingleImagePostViewModel: UploadPostViewModel<LocalSingleImageP
     }
     
     //MARK: - Methods
-    private func makePost(imageUrl: String) -> LocalSingleImagePost {
+    private func makePost(imageUrl: String) {
         post = LocalSingleImagePost()
         post?.imageUrl.value = imageUrl
-        return post ?? LocalSingleImagePost()
     }
     
     //MARK: - Networking
@@ -37,8 +36,8 @@ class UploadLocalSingleImagePostViewModel: UploadPostViewModel<LocalSingleImageP
         isLoading.accept(true)
         
         StoringService.shared.storeSingleImage(image: image).flatMapLatest { [weak self] (imageUrl) -> Observable<PostModel?> in
-            let post = self?.makePost(imageUrl: imageUrl) ?? LocalSingleImagePost()
-            return UploadingService.shared.create(post: post)
+            self?.makePost(imageUrl: imageUrl)
+            return UploadingService.shared.create(post: self?.post ?? LocalSingleImagePost())
             }.subscribe(onNext: { [weak self] (post) in
                 self?.isLoading.accept(false)
                 self?.coordinator?.didSavePost.accept(())

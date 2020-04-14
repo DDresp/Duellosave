@@ -9,10 +9,10 @@
 protocol CategoryModel: Model {
     
     //MARK: - Attributes
-    var title: CategorySingleAttribute { get set }
-    var description: CategorySingleAttribute { get set }
-    var creationDate: CategorySingleAttribute{ get set }
-    var roughMediaType: CategorySingleAttribute { get set }
+    var title: CategoryAttribute { get set }
+    var description: CategoryAttribute { get set }
+    var creationDate: CategoryAttribute{ get set }
+    var roughMediaType: CategoryAttribute { get set }
 
 }
 

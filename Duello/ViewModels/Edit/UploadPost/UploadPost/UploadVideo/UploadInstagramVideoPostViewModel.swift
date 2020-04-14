@@ -41,10 +41,9 @@ class UploadInstagramVideoPostViewModel: UploadPostViewModel<InstagramVideoPost>
     }
     
     //MARK: - Methods
-    private func makePost() -> InstagramVideoPost {
+    private func makePost() {
         post = InstagramVideoPost()
         post?.apiUrl.value = apiLink
-        return post ?? InstagramVideoPost()
     }
     
     //MARK: - Networking
@@ -52,10 +51,10 @@ class UploadInstagramVideoPostViewModel: UploadPostViewModel<InstagramVideoPost>
         super.saveData()
         if !dataIsValid() { return }
         
-        let post = makePost()
+        makePost()
         isLoading.accept(true)
         
-        UploadingService.shared.create(post: post).subscribe(onNext: { [weak self] (post) in
+        UploadingService.shared.create(post: post!).subscribe(onNext: { [weak self] (post) in
             self?.isLoading.accept(false)
             self?.coordinator?.didSavePost.accept(())
             }, onError: { [weak self] (error) in

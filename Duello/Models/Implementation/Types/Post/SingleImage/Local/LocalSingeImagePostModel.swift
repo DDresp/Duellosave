@@ -9,7 +9,7 @@
 import Foundation
 
 protocol LocalSingleImagePostModel: SingleImagePostModel {
-    var imageUrl: PostSingleAttribute { get set }
+    var imageUrl: PostAttribute { get set }
 }
 
 extension LocalSingleImagePostModel {

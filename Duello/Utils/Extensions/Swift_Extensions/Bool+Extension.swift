@@ -6,7 +6,7 @@
 //  Copyright © 2020 Darius Dresp. All rights reserved.
 //
 
-extension Bool: StringConvertibleType {
+extension Bool: DatabaseConvertibleType {
     
     func toStringValue() -> String {
         return (self == true) ? "1" : "0"

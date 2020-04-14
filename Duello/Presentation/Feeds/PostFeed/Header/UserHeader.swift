@@ -77,7 +77,7 @@ class UserHeader: UICollectionReusableView {
     
     private func setupLayoutNameLabel() {
         addSubview(nameLabel)
-        nameLabel.anchor(top: profileImageButton.bottomAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 10, left: 0, bottom: 0, right: 0))
+        nameLabel.anchor(top: profileImageButton.bottomAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 10, left: 0, bottom: 0, right: 0), size: .init(width: 0, height: 20))
         nameLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
     }
     
@@ -109,8 +109,7 @@ class UserHeader: UICollectionReusableView {
         setupText(displayer: displayer)
         setupSocialMedia(displayer: displayer)
         layoutIfNeeded()
-        
-        setupBindablesToDisplayer()
+
         setupBindablesFromDisplayer()
         
     }
@@ -143,13 +142,6 @@ class UserHeader: UICollectionReusableView {
     
     //MARK: - Reactive
     private var disposeBag = DisposeBag()
-    
-    private func setupBindablesToDisplayer() {
-        guard let displayer = displayer else { return }
-        profileImageButton.rx.tap.bind(to: displayer.imageTapped).disposed(by: disposeBag)
-    }
-    
-    
     
     private func setupBindablesFromDisplayer() {
         

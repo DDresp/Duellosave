@@ -8,32 +8,32 @@
 
 //MARK: - Attribute
 
-class CategorySingleAttribute: SingleAttribute {
+class CategoryAttribute: ModelAttribute {
     
-    var attributeCase: CategorySingleAttributeCase
-    var value: StringConvertibleType?
+    var attributeCase: CategoryAttributeCase
+    var value: DatabaseConvertibleType?
     
-    init(attributeCase: CategorySingleAttributeCase, value: StringConvertibleType?) {
+    init(attributeCase: CategoryAttributeCase, value: DatabaseConvertibleType?) {
         self.attributeCase = attributeCase
         self.value = value
     }
     
-    func getCase() -> SingleAttributeCase {
+    func getCase() -> ModelAttributeCase {
         return attributeCase
     }
     
-    func getValue() -> StringConvertibleType? {
+    func getValue() -> DatabaseConvertibleType? {
         return value
     }
     
-    func setValue(of value: StringConvertibleType) {
+    func setValue(of value: DatabaseConvertibleType) {
         self.value = value
     }
     
 }
 
 //MARK: - Attribute Case
-enum CategorySingleAttributeCase: SingleAttributeCase {
+enum CategoryAttributeCase: ModelAttributeCase {
     
     case title
     case description

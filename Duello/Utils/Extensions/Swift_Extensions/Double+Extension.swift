@@ -6,7 +6,7 @@
 //  Copyright © 2020 Darius Dresp. All rights reserved.
 //
 
-extension Double: StringConvertibleType {
+extension Double: DatabaseConvertibleType {
     
     func toStringValue() -> String {
         return String(self)

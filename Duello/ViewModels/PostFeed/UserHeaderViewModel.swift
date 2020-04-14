@@ -21,7 +21,6 @@ class UserHeaderViewModel: PostHeaderDisplayer {
     var score: Double?
     
     //MARK: - Bindables
-    var imageTapped: PublishRelay<Void> = PublishRelay<Void>()
     var animateScore: PublishRelay<Void> = PublishRelay()
 
     //MARK: - Getters

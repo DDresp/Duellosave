@@ -7,31 +7,31 @@
 //
 
 //MARK: - Attribute
-class UserSingleAttribute: SingleAttribute {
+class UserAttribute: ModelAttribute {
     
-    var attributeCase: UserSingleAttributeCase
-    var value: StringConvertibleType?
+    var attributeCase: UserAttributeCase
+    var value: DatabaseConvertibleType?
     
-    init(attributeCase: UserSingleAttributeCase, value: StringConvertibleType?) {
+    init(attributeCase: UserAttributeCase, value: DatabaseConvertibleType?) {
         self.attributeCase = attributeCase
         self.value = value
     }
     
-    func getValue() -> StringConvertibleType? {
+    func getValue() -> DatabaseConvertibleType? {
         return value
     }
     
-    func setValue(of value: StringConvertibleType) {
+    func setValue(of value: DatabaseConvertibleType) {
         self.value = value
     }
     
-    func getCase() -> SingleAttributeCase {
+    func getCase() -> ModelAttributeCase {
         return attributeCase
     }
 }
 
 //MARK: - Attribute Case
-enum UserSingleAttributeCase: SingleAttributeCase {
+enum UserAttributeCase: ModelAttributeCase {
     
     case userName
     
@@ -81,7 +81,7 @@ enum UserSingleAttributeCase: SingleAttributeCase {
         }
     }
     
-    var connectedLinkAttributeCase: UserSingleAttributeCase? {
+    var connectedLinkAttributeCase: UserAttributeCase? {
         
         switch self {
         case .youtubeName: return .youtubeLink

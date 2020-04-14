@@ -6,16 +6,15 @@
 //  Copyright © 2020 Darius Dresp. All rights reserved.
 //
 
-//Database Attribute (single) that stores single Value
-protocol SingleAttribute: Attribute {
+protocol ModelAttribute {
     
-    func getValue() -> StringConvertibleType?
-    func setValue(of value: StringConvertibleType) -> ()
-    func getCase() -> SingleAttributeCase
+    func getValue() -> DatabaseConvertibleType?
+    func setValue(of value: DatabaseConvertibleType) -> ()
+    func getCase() -> ModelAttributeCase
     func getEntryType() -> EntryType
 }
 
-extension SingleAttribute {
+extension ModelAttribute {
     
     func getEntryType() -> EntryType {
         return getCase().entryType
@@ -26,7 +25,7 @@ extension SingleAttribute {
     }
 }
     
-protocol SingleAttributeCase {
+protocol ModelAttributeCase {
     var key: String { get }
     var entryType: EntryType { get }
 }

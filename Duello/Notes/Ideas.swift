@@ -10,6 +10,8 @@
 
 //start video automatically in duello mode
 
+//save Blocked User Collection
+
 
 //ALL that information in a Report Object
 
@@ -34,3 +36,10 @@
 //reported Posts should be saved in own collection for review
 // 1) Fake User 2) Graphical/Inappropriate Content 3) Wrong Feed 4) I don't like it
 //a post that got reported more often should be deactivated also without review, until reviewed
+
+
+
+//Following idea for storing dictionary objects
+// have standard key like user/imageUrl etc
+//iterate through the array of images, users you got and set the corresponding index after the standardKey
+//save a string like the uid or the imageUrl as the value of the dictionary

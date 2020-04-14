@@ -12,19 +12,22 @@ protocol PostModel: Model {
     var type: FineMediaType { get }
     
     //MARK: - Attributes
-    var uid: PostSingleAttribute { get set }
-    var cid: PostSingleAttribute { get set }
-    var title: PostSingleAttribute{ get set }
-    var description: PostSingleAttribute { get set }
-    var creationDate: PostSingleAttribute{ get set }
-    var likes: PostSingleAttribute { get set }
-    var dislikes: PostSingleAttribute { get set }
-    var rate: PostSingleAttribute{ get set }
-    var typeData: PostSingleAttribute { get set }
-    var mediaRatio: PostSingleAttribute { get set }
-    var isDeactivated: PostSingleAttribute { get set }
-    var user: PostMapAttribute { get set }
-    var category: PostMapAttribute { get set }
+    var uid: PostAttribute { get set }
+    var cid: PostAttribute { get set }
+    var title: PostAttribute{ get set }
+    var description: PostAttribute { get set }
+    var creationDate: PostAttribute{ get set }
+    var likes: PostAttribute { get set }
+    var dislikes: PostAttribute { get set }
+    var rate: PostAttribute{ get set }
+    var typeData: PostAttribute { get set }
+    var mediaRatio: PostAttribute { get set }
+    var isDeactivated: PostAttribute { get set }
+    var isInappropriate: PostAttribute { get set }
+    var isInWrongCategory: PostAttribute { get set }
+    var isFromFakeUser: PostAttribute { get set }
+    var user: PostReference { get set }
+    var category: PostReference { get set }
 
 }
 
@@ -42,6 +45,9 @@ extension PostModel {
     func getRate() -> Double { return Double(rate.value?.toStringValue() ?? "0") ?? 0 }
     func getMediaRatio() -> Double { return Double(mediaRatio.value?.toStringValue() ?? "1") ?? 1}
     func getIsDeactivated() -> Bool { return isDeactivated.value?.toStringValue() == "0" ? false : true }
+    func getIsInappropriate() -> Bool { return isInappropriate.value?.toStringValue() == "0" ? false : true }
+    func getIsInWrongCategory() -> Bool { return isInWrongCategory.value?.toStringValue() == "0" ? false : true }
+    func getIsFromFakeUser() -> Bool { return isFromFakeUser.value?.toStringValue() == "0" ? false : true }
     func getUser() -> UserModel { return user.getModel() as? User ?? User() }
     func getCategory() -> CategoryModel { return category.getModel() as? Category ?? Category() }
     

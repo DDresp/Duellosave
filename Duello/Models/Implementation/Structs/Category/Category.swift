@@ -14,14 +14,14 @@ struct Category: CategoryModel {
     var id: String?
     
     //MARK: - Attributes
-    var title: CategorySingleAttribute = CategorySingleAttribute(attributeCase: .title, value: nil)
-    var description: CategorySingleAttribute = CategorySingleAttribute(attributeCase: .description, value: nil)
-    var creationDate: CategorySingleAttribute = CategorySingleAttribute(attributeCase: .creationDate, value: nil)
-    var roughMediaType: CategorySingleAttribute = CategorySingleAttribute(attributeCase: .type, value: nil)
+    var title: CategoryAttribute = CategoryAttribute(attributeCase: .title, value: nil)
+    var description: CategoryAttribute = CategoryAttribute(attributeCase: .description, value: nil)
+    var creationDate: CategoryAttribute = CategoryAttribute(attributeCase: .creationDate, value: nil)
+    var roughMediaType: CategoryAttribute = CategoryAttribute(attributeCase: .type, value: nil)
     
     
     //MARK: - Getters
-    func getSingleAttributes() -> [SingleAttribute] {
+    func getAttributes() -> [ModelAttribute] {
         return [
             title,
             description,

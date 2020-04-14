@@ -7,12 +7,12 @@
 //
 
 //MARK: - Attribute
-class PostMapAttribute: MapAttribute {
-    
+class PostReference: ModelReference {
+
     var model: Model
-    let attributeCase: PostMapAttributeCase
+    let attributeCase: PostReferenceCase
     
-    init(attributeCase: PostMapAttributeCase, model: Model) {
+    init(attributeCase: PostReferenceCase, model: Model) {
         self.model = model
         self.attributeCase = attributeCase
     }
@@ -21,22 +21,20 @@ class PostMapAttribute: MapAttribute {
         return model
     }
     
-    func getCase() -> MapAttributeCase {
+    func getCase() -> ModelReferenceCase {
         return attributeCase
     }
     
 }
 
 //MARK: - Attribute Case
-enum PostMapAttributeCase: MapAttributeCase {
+enum PostReferenceCase: ModelReferenceCase {
     
-    case images
     case user
     case category
     
     var key: String {
         switch self {
-        case .images: return "images"
         case .user: return "user"
         case .category: return "category"
         }
