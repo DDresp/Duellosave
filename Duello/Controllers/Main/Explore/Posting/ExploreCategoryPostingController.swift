@@ -87,6 +87,7 @@ class ExploreCategoryPostingController: ViewController {
             uploadVideoButton.isHidden = false
             uploadInstagramVideoButton.isHidden = false
         }
+        
     }
     
     //MARK: - Reactive

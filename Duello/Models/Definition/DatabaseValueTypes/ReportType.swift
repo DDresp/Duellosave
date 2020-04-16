@@ -7,10 +7,9 @@
 //
 import Foundation
 
-//IF YOU CHANGE THIS ENUM, YOU ALSO HAVE TO CHANGE THE FIRESTORE FUNCTIONS!
-
 enum ReportType: String, DatabaseConvertibleType {
     
+    case notReported
     case inappropriate
     case fakeUser
     case wrongCategory

@@ -23,9 +23,7 @@ protocol PostModel: Model {
     var typeData: PostAttribute { get set }
     var mediaRatio: PostAttribute { get set }
     var isDeactivated: PostAttribute { get set }
-    var isInappropriate: PostAttribute { get set }
-    var isInWrongCategory: PostAttribute { get set }
-    var isFromFakeUser: PostAttribute { get set }
+    var report: PostAttribute { get set }
     var user: PostReference { get set }
     var category: PostReference { get set }
 
@@ -45,9 +43,8 @@ extension PostModel {
     func getRate() -> Double { return Double(rate.value?.toStringValue() ?? "0") ?? 0 }
     func getMediaRatio() -> Double { return Double(mediaRatio.value?.toStringValue() ?? "1") ?? 1}
     func getIsDeactivated() -> Bool { return isDeactivated.value?.toStringValue() == "0" ? false : true }
-    func getIsInappropriate() -> Bool { return isInappropriate.value?.toStringValue() == "0" ? false : true }
-    func getIsInWrongCategory() -> Bool { return isInWrongCategory.value?.toStringValue() == "0" ? false : true }
-    func getIsFromFakeUser() -> Bool { return isFromFakeUser.value?.toStringValue() == "0" ? false : true }
+    
+    func getReport() -> ReportType { return report.getValue() as? ReportType ?? ReportType.notReported }
     func getUser() -> UserModel { return user.getModel() as? User ?? User() }
     func getCategory() -> CategoryModel { return category.getModel() as? Category ?? Category() }
     

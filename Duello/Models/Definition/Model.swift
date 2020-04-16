@@ -165,6 +165,8 @@ extension Model {
                         attribute.setValue(of: ReportType.fakeUser)
                     case ReportType.wrongCategory.toStringValue():
                         attribute.setValue(of: ReportType.wrongCategory)
+                    case ReportType.notReported.toStringValue():
+                        attribute.setValue(of: ReportType.notReported)
                     default:
                         return
                     }

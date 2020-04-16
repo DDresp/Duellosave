@@ -51,9 +51,7 @@ enum PostAttributeCase: ModelAttributeCase {
     case apiUrl
     case mediaRatio
     case isDeactivated
-    case isInWrongCategory
-    case isInappropriate
-    case isFromFakeUser
+    case report
     
     var entryType: EntryType {
         switch self {
@@ -65,8 +63,10 @@ enum PostAttributeCase: ModelAttributeCase {
             return .Double
         case .type:
             return .FineMediaType
-        case .isDeactivated, .isFromFakeUser, .isInappropriate, .isInWrongCategory:
+        case .isDeactivated:
             return .Bool
+        case .report:
+            return .ReportType
         case .imageUrls:
             return .StringArray
         }
@@ -92,9 +92,7 @@ enum PostAttributeCase: ModelAttributeCase {
         case .apiUrl: return "apiLink"
         case .mediaRatio: return "mediaRatio"
         case .isDeactivated: return "isDeactivated"
-        case .isInappropriate: return "isInapproprate"
-        case .isInWrongCategory: return "isInWrongCategory"
-        case .isFromFakeUser: return "isFromFakeUser"
+        case .report: return "report"
             
         }
     }

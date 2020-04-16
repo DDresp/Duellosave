@@ -25,12 +25,9 @@ struct LocalSingleImagePost: LocalSingleImagePostModel {
     var rate: PostAttribute = PostAttribute(attributeCase: .rate, value: nil)
     var mediaRatio: PostAttribute = PostAttribute(attributeCase: .mediaRatio, value: nil)
     var isDeactivated: PostAttribute = PostAttribute(attributeCase: .isDeactivated, value: false)
-    var isInappropriate: PostAttribute = PostAttribute(attributeCase: .isInappropriate, value: false)
-    var isInWrongCategory: PostAttribute = PostAttribute(attributeCase: .isInWrongCategory, value: false)
-    var isFromFakeUser: PostAttribute = PostAttribute(attributeCase: .isFromFakeUser, value: false)
     var typeData: PostAttribute = PostAttribute(attributeCase: .type, value: FineMediaType.localSingleImage)
     var imageUrl: PostAttribute = PostAttribute(attributeCase: .imageUrl, value: nil)
-    
+    var report: PostAttribute = PostAttribute(attributeCase: .report, value: ReportType.notReported)
     var user: PostReference = PostReference(attributeCase: .user, model: User())
     var category: PostReference = PostReference(attributeCase: .category, model: Category())
     
@@ -49,9 +46,7 @@ struct LocalSingleImagePost: LocalSingleImagePostModel {
             imageUrl,
             mediaRatio,
             isDeactivated,
-            isInappropriate,
-            isInWrongCategory,
-            isFromFakeUser
+            report
         ]
     }
     
