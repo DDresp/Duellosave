@@ -26,16 +26,16 @@ extension CategoryModel {
     func allowsVideos() -> Bool {
         guard let mediaType = roughMediaType.getValue() as? RoughMediaType else { return false }
         switch mediaType {
-        case .Image: return false
-        case .VideoAndImage, .Video: return true
+        case .image: return false
+        case .videoAndImage, .video: return true
         }
         
     }
     func allowsImages() -> Bool {
         guard let mediaType = roughMediaType.getValue() as? RoughMediaType else { return false }
         switch mediaType {
-        case .Image, .VideoAndImage: return true
-        case .Video: return false
+        case .image, .videoAndImage: return true
+        case .video: return false
         }
     }
 }

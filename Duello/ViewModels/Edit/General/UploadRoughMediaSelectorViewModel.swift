@@ -29,11 +29,11 @@ class UploadRoughMediaSelectorViewModel: UploadRoughMediaSelectorDisplayer {
         
         Observable.combineLatest(imagesIsOn, videoIsOn).map { (imagesIsOn, videoIsOn) -> RoughMediaType? in
             if imagesIsOn && videoIsOn {
-                return .VideoAndImage
+                return .videoAndImage
             } else if imagesIsOn {
-                return .Image
+                return .image
             } else if videoIsOn {
-                return .Video
+                return .video
             } else {
                 return nil
             }

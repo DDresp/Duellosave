@@ -157,8 +157,6 @@ class HomeViewModel: SimplePostCollectionMasterViewModel {
             return Observable.from(optional: user)
             }.bind(to: coordinator.requestedSettings).disposed(by: disposeBag)
         
-//        settingsTapped.bind(to: coordinator.requestedSettings).disposed(by: disposeBag)
-//        homeCollectionViewModel.postHeaderDisplayer?.imageTapped.asObservable().bind(to: coordinator.requestedSettings).disposed(by: disposeBag)
     }
     
 }

@@ -28,9 +28,7 @@ protocol PostDisplayer {
 
     //MARK: - Bindables
     var deleteMe: PublishRelay<String> { get }
-    var reportAsInappropriate: PublishRelay<String> { get }
-    var reportAsInWrongCategory: PublishRelay<String> { get }
-    var reportAsFromFakeUser: PublishRelay<String> { get }
+    var reportMe: PublishRelay<(ReportType, String)> { get }
     
     var isDeactivated: BehaviorRelay<Bool> { get }
     var updateDeactivation: PublishRelay<Int> { get }

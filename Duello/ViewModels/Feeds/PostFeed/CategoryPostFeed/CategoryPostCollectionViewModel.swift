@@ -24,9 +24,7 @@ class CategoryPostCollectionViewModel: PostCollectionViewModel {
     }
     
     //MARK: - Bindables
-    var reportAsInWrongCategory: PublishRelay<String> = PublishRelay<String>()
-    var reportAsFromFakeUser: PublishRelay<String> = PublishRelay<String>()
-    var reportAsInappropriate: PublishRelay<String> = PublishRelay<String>()
+    var reportPost: PublishRelay<(ReportType, String)> = PublishRelay()
     
     //MARK: - Setup
     init() {
@@ -47,9 +45,7 @@ class CategoryPostCollectionViewModel: PostCollectionViewModel {
     override func setupBindablesFromChildDisplayer() {
         super.setupBindablesFromChildDisplayer()
         
-        listViewModel.reportAsInWrongCategory.bind(to: reportAsInWrongCategory).disposed(by: disposeBag)
-        listViewModel.reportAsFromFakeUser.bind(to: reportAsFromFakeUser).disposed(by: disposeBag)
-        listViewModel.reportAsInappropriate.bind(to: reportAsInappropriate).disposed(by: disposeBag)
+        listViewModel.reportPost.bind(to: reportPost).disposed(by: disposeBag)
         
     }
     

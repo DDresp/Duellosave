@@ -63,15 +63,19 @@ extension Model {
                 }
             case .FineMediaType:
                 if let value = attribute.getValue() as? FineMediaType {
-                    dictionary[attribute.getKey()] = value.rawValue
+                    dictionary[attribute.getKey()] = value.toStringValue()
                 }
             case .RoughMediaType:
                 if let value = attribute.getValue() as? RoughMediaType {
-                    dictionary[attribute.getKey()] = value.rawValue
+                    dictionary[attribute.getKey()] = value.toStringValue()
                 }
             case .Bool:
                 if let value = attribute.getValue() as? Bool {
                     dictionary[attribute.getKey()] = value ? 1 : 0
+                }
+            case .ReportType:
+                if let value = attribute.getValue() as? ReportType {
+                    dictionary[attribute.getKey()] = value.toStringValue()
                 }
             case .StringArray:
                 if let value = attribute.getValue() as? [String] {
@@ -114,17 +118,17 @@ extension Model {
                 if let value = dic[attribute.getKey()] as? String {
                     
                     switch value {
-                    case FineMediaType.localSingleImage.rawValue:
+                    case FineMediaType.localSingleImage.toStringValue():
                         attribute.setValue(of: FineMediaType.localSingleImage)
-                    case FineMediaType.localImages.rawValue:
+                    case FineMediaType.localImages.toStringValue():
                         attribute.setValue(of: FineMediaType.localImages)
-                    case FineMediaType.localVideo.rawValue:
+                    case FineMediaType.localVideo.toStringValue():
                         attribute.setValue(of: FineMediaType.localVideo)
-                    case FineMediaType.instagramVideo.rawValue:
+                    case FineMediaType.instagramVideo.toStringValue():
                         attribute.setValue(of: FineMediaType.instagramVideo)
-                    case FineMediaType.instagramSingleImage.rawValue:
+                    case FineMediaType.instagramSingleImage.toStringValue():
                         attribute.setValue(of: FineMediaType.instagramSingleImage)
-                    case FineMediaType.instagramImages.rawValue:
+                    case FineMediaType.instagramImages.toStringValue():
                         attribute.setValue(of: FineMediaType.instagramImages)
                     default:
                         return
@@ -134,12 +138,12 @@ extension Model {
                 if let value = dic[attribute.getKey()] as? String {
                     
                     switch value {
-                    case RoughMediaType.Video.rawValue:
-                        attribute.setValue(of: RoughMediaType.Video)
-                    case RoughMediaType.Image.rawValue:
-                        attribute.setValue(of: RoughMediaType.Image)
-                    case RoughMediaType.VideoAndImage.rawValue:
-                        attribute.setValue(of: RoughMediaType.VideoAndImage)
+                    case RoughMediaType.video.toStringValue():
+                        attribute.setValue(of: RoughMediaType.video)
+                    case RoughMediaType.image.toStringValue():
+                        attribute.setValue(of: RoughMediaType.image)
+                    case RoughMediaType.videoAndImage.toStringValue():
+                        attribute.setValue(of: RoughMediaType.videoAndImage)
                     default:
                         return
                     }
@@ -150,6 +154,20 @@ extension Model {
                     attribute.setValue(of: false)
                 } else {
                     attribute.setValue(of: true)
+                }
+            case .ReportType:
+                if let value = dic[attribute.getKey()] as? String {
+                    
+                    switch value {
+                    case ReportType.inappropriate.toStringValue():
+                        attribute.setValue(of: ReportType.inappropriate)
+                    case ReportType.fakeUser.toStringValue():
+                        attribute.setValue(of: ReportType.fakeUser)
+                    case ReportType.wrongCategory.toStringValue():
+                        attribute.setValue(of: ReportType.wrongCategory)
+                    default:
+                        return
+                    }
                 }
             case .StringArray:
                 if let value = dic[attribute.getKey()] as? [String] {

@@ -38,15 +38,16 @@ class PostViewModel: PostDisplayer {
     
     //MARK: - Bindables
     //from UI
-    var didExpand: BehaviorRelay<Bool> = BehaviorRelay<Bool>(value: false)
-    var tappedEllipsis: PublishRelay<Void> = PublishRelay<Void>()
-    var doubleTapped: PublishSubject<Void> = PublishSubject<Void>()
-    var likeBlurViewTapped: PublishSubject<Void> = PublishSubject<Void>()
+    var didExpand: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+    var tappedEllipsis: PublishRelay<Void> = PublishRelay()
+    var tappedReport: PublishRelay<Void> = PublishRelay()
+    var doubleTapped: PublishSubject<Void> = PublishSubject()
+    var likeBlurViewTapped: PublishSubject<Void> = PublishSubject()
     
     //to UI
-    var showLikeView: BehaviorRelay<Bool> = BehaviorRelay<Bool>(value: false)
-    var showActionSheet: PublishRelay<ActionSheet> = PublishRelay<ActionSheet>()
-    var showAlert: PublishRelay<Alert> = PublishRelay<Alert>()
+    var showLikeView: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+    var showActionSheet: PublishRelay<ActionSheet> = PublishRelay()
+    var showAlert: PublishRelay<Alert> = PublishRelay()
     var isDeactivated: BehaviorRelay<Bool>
     
     //from Parent
@@ -54,12 +55,10 @@ class PostViewModel: PostDisplayer {
     var willBeDisplayed: PublishRelay<Void> = PublishRelay()
     
     //to Parent
-    var updateDeactivation: PublishRelay<Int> = PublishRelay<Int>()
-    var deleteMe: PublishRelay<String> = PublishRelay<String>()
-    var reportAsInappropriate: PublishRelay<String> = PublishRelay<String>()
-    var reportAsInWrongCategory: PublishRelay<String> = PublishRelay<String>()
-    var reportAsFromFakeUser: PublishRelay<String> = PublishRelay<String>()
-    var report: PublishRelay<Void> = PublishRelay<Void>()
+    var updateDeactivation: PublishRelay<Int> = PublishRelay()
+    var deleteMe: PublishRelay<String> = PublishRelay()
+    var reportMe: PublishRelay<(ReportType, String)> = PublishRelay()
+    
     
     //MARK: - Setup
     init(post: PostModel, index: Int, options: PostViewModelOptions) {
@@ -103,7 +102,7 @@ class PostViewModel: PostDisplayer {
         
         if options.allowsReport {
             let reportAction = AlertAction(title: "Report") { [weak self] () in
-                self?.report.accept(())
+                self?.tappedReport.accept(())
             }
             actions.append(reportAction)
         }
@@ -142,25 +141,26 @@ class PostViewModel: PostDisplayer {
             return self?.index ?? 0
         }.bind(to: updateDeactivation).disposed(by: disposeBag)
         
-        report.subscribe(onNext: { [weak self] (_) in
+        tappedReport.subscribe(onNext: { [weak self] (_) in
             var actions = [AlertAction]()
             let thankYouAlert = Alert(alertMessage: "Thank you for your report!", alertHeader: "Reported")
             
             let inappropriatePostReport = AlertAction(title: "Inappropriate Post") {
                 guard let postId = self?.postId else { return }
-                self?.reportAsInappropriate.accept(postId)
+                self?.reportMe.accept((ReportType.inappropriate, postId))
                 self?.showAlert.accept(thankYouAlert)
             }
             let fakeUserReport = AlertAction(title: "Fake User") {
                 guard let postId = self?.postId else { return }
-                self?.reportAsFromFakeUser.accept(postId)
+                self?.reportMe.accept((ReportType.fakeUser, postId))
                 self?.showAlert.accept(thankYouAlert)
             }
             let wrongCategoryReport = AlertAction(title: "Wrong Category") {
                 guard let postId = self?.postId else { return }
-                self?.reportAsInWrongCategory.accept(postId)
+                self?.reportMe.accept((ReportType.wrongCategory, postId))
                 self?.showAlert.accept(thankYouAlert)
             }
+            
             actions.append(contentsOf: [inappropriatePostReport, fakeUserReport, wrongCategoryReport])
             
             let actionSheet = ActionSheet(actionHeader: "report", actionMessage: nil, actions: actions)

@@ -13,6 +13,7 @@ let USERS_REFERENCE = Firestore.firestore().collection("users")
 let POST_REFERENCE = Firestore.firestore().collection("posts")
 let CATEGORY_REFERENCE = Firestore.firestore().collection("categories")
 
-let INAPPROPRIATE_REPORT = "inappropriateReports"
-let IN_WRONG_CATEGORY_REPORT = "inWrongCategoryReports"
-let FROM_FAKE_USER_REPORT = "fromFakeUserReports"
+let USER_REPORTED_POSTS_COLLECTION = "reportedPosts"
+//let INAPPROPRIATE_REPORT = "inappropriateReports"
+//let IN_WRONG_CATEGORY_REPORT = "inWrongCategoryReports"
+//let FROM_FAKE_USER_REPORT = "fromFakeUserReports"

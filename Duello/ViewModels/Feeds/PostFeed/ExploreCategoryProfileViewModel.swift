@@ -45,40 +45,19 @@ class ExploreCategoryProfileViewModel: SimplePostCollectionMasterViewModel {
         collectionViewModel.category.accept(category)
     }
     
-    func reportInappropriatePost(for postId: String) {
-        UploadingService.shared.createInappropriateReport(postId: postId).subscribe(onNext: { (_) in
+    func reportPost(for postId: String, report: ReportType) {
+        UploadingService.shared.createReport(postId: postId, report: report).subscribe(onNext: { (_) in
             //created report
             }).disposed(by: disposeBag)
     }
-    
-    func reportInWrongCategoryPost(for postId: String) {
-        UploadingService.shared.createWrongCategoryReport(postId: postId).subscribe(onNext: { (_) in
-            //created report
-            }).disposed(by: disposeBag)
-    }
-    
-    func reportFromFakeUserPost(for postId: String) {
-        UploadingService.shared.createFromFakeUserReport(postId: postId).subscribe(onNext: { (_) in
-            //created report
-            }).disposed(by: disposeBag)
-    }
-    
     
     //MARK: - Reactive
     override func setupBindblesFromChildDisplayer() {
         super.setupBindblesFromChildDisplayer()
         
-        collectionViewModel.reportAsInappropriate.subscribe(onNext: { (postId) in
-            self.reportInappropriatePost(for: postId)
-        }).disposed(by: disposeBag)
-        
-        collectionViewModel.reportAsInWrongCategory.subscribe(onNext: { [weak self] (postId) in
-            self?.reportInWrongCategoryPost(for: postId)
-        }).disposed(by: disposeBag)
-        
-        collectionViewModel.reportAsFromFakeUser.subscribe(onNext: { (postId) in
-            self.reportFromFakeUserPost(for: postId)
-        }).disposed(by: disposeBag)
+        collectionViewModel.reportPost.subscribe(onNext: { [weak self] (report, postId) in
+            self?.reportPost(for: postId, report: report)
+            }).disposed(by: disposeBag)
         
     }
     

@@ -18,7 +18,7 @@ extension StoringService {
     }
     
     private func storeVideo(videoUrl: URL) -> Observable<String> {
-        return uploadVideo(videoUrl: videoUrl, path: "/postVideos")
+        return uploadVideo(videoUrl: videoUrl, path: "/postVideos/")
     }
     
     private func uploadVideo(videoUrl: URL, path: String) -> Observable<String> {

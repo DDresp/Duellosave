@@ -12,9 +12,7 @@ import RxCocoa
 class CategoryPostListViewModel: PostListViewModel {
     
     //MARK: - Bindables
-    var reportAsInWrongCategory: PublishRelay<String> = PublishRelay<String>()
-    var reportAsFromFakeUser: PublishRelay<String> = PublishRelay<String>()
-    var reportAsInappropriate: PublishRelay<String> = PublishRelay<String>()
+    var reportPost: PublishRelay<(ReportType, String)> = PublishRelay()
     
     //MARK: - Setup
     init() {
@@ -26,9 +24,10 @@ class CategoryPostListViewModel: PostListViewModel {
     //MARK: - Methods
     override func configurePostDisplayer(for postDisplayer: PostDisplayer) {
         super.configurePostDisplayer(for: postDisplayer)
-        postDisplayer.reportAsInWrongCategory.bind(to: reportAsInWrongCategory).disposed(by: disposeBag)
-        postDisplayer.reportAsFromFakeUser.bind(to: reportAsFromFakeUser).disposed(by: disposeBag)
-        postDisplayer.reportAsInappropriate.bind(to: reportAsInappropriate).disposed(by: disposeBag)
+        postDisplayer.reportMe.bind(to: reportPost).disposed(by: disposeBag)
+//        postDisplayer.reportAsInWrongCategory.bind(to: reportAsInWrongCategory).disposed(by: disposeBag)
+//        postDisplayer.reportAsFromFakeUser.bind(to: reportAsFromFakeUser).disposed(by: disposeBag)
+//        postDisplayer.reportAsInappropriate.bind(to: reportAsInappropriate).disposed(by: disposeBag)
     }
     
 }

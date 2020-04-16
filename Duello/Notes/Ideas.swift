@@ -38,6 +38,12 @@
 //a post that got reported more often should be deactivated also without review, until reviewed
 
 
+//posts (listeners to reportedPosts and postsForReview)
+//reportedPosts (listeners to postsForReview)
+//postsForReview
+//verifiedPosts (listeners to posts)
+//removedPosts (listeners to posts)
+
 
 //Following idea for storing dictionary objects
 // have standard key like user/imageUrl etc
