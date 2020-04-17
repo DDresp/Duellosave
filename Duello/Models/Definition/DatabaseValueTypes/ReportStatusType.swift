@@ -13,7 +13,7 @@ import Foundation
 enum ReportStatusType: String, DatabaseConvertibleType {
     
     case notReported
-    case currentlyReviewed
+    case reviewRequested
     case inappropriate
     case fakeUser
     case wrongCategory
