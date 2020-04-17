@@ -28,7 +28,7 @@ struct InstagramVideoPost: InstagramVideoPostModel {
     var isDeactivated: PostAttribute = PostAttribute(attributeCase: .isDeactivated, value: false)
     var typeData: PostAttribute = PostAttribute(attributeCase: .type, value: FineMediaType.instagramVideo)
     var apiUrl: PostAttribute = PostAttribute(attributeCase: .apiUrl, value: nil)
-    var report: PostAttribute = PostAttribute(attributeCase: .report, value: ReportType.notReported)
+    var report: PostAttribute = PostAttribute(attributeCase: .report, value: ReportStatusType.notReported)
     var user: PostReference = PostReference(attributeCase: .user, model: User())
     var category: PostReference = PostReference(attributeCase: .category, model: Category())
     

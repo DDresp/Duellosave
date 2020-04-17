@@ -44,7 +44,7 @@ extension PostModel {
     func getMediaRatio() -> Double { return Double(mediaRatio.value?.toStringValue() ?? "1") ?? 1}
     func getIsDeactivated() -> Bool { return isDeactivated.value?.toStringValue() == "0" ? false : true }
     
-    func getReport() -> ReportType { return report.getValue() as? ReportType ?? ReportType.notReported }
+    func getReport() -> ReportStatusType { return report.getValue() as? ReportStatusType ?? ReportStatusType.notReported }
     func getUser() -> UserModel { return user.getModel() as? User ?? User() }
     func getCategory() -> CategoryModel { return category.getModel() as? Category ?? Category() }
     

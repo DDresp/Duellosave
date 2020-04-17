@@ -33,7 +33,7 @@ extension UploadingService {
 //        return self.saveDictionary(dic: [String : Any](), reference: reference, id: postId)
 //    }
     
-    func createReport(postId: String, report: ReportType) -> Observable<Void> {
+    func createReport(postId: String, report: ReportStatusType) -> Observable<Void> {
         guard hasInternetConnection() else { return Observable.error(UploadingError.networkError)}
         guard let uid = Auth.auth().currentUser?.uid else { return Observable.error(UploadingError.userNotLoggedIn)}
         

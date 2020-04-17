@@ -27,7 +27,7 @@ struct LocalImagesPost: LocalImagesPostModel {
     var isDeactivated: PostAttribute = PostAttribute(attributeCase: .isDeactivated, value: false)
     var imageUrls: PostAttribute = PostAttribute(attributeCase: .imageUrls, value: [String]())
     var typeData: PostAttribute = PostAttribute(attributeCase: .type, value: FineMediaType.localImages)
-    var report: PostAttribute = PostAttribute(attributeCase: .report, value: ReportType.notReported)
+    var report: PostAttribute = PostAttribute(attributeCase: .report, value: ReportStatusType.notReported)
     var user: PostReference = PostReference(attributeCase: .user, model: User())
     var category: PostReference = PostReference(attributeCase: .category, model: Category())
     

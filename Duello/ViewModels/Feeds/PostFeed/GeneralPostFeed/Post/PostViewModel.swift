@@ -57,7 +57,7 @@ class PostViewModel: PostDisplayer {
     //to Parent
     var updateDeactivation: PublishRelay<Int> = PublishRelay()
     var deleteMe: PublishRelay<String> = PublishRelay()
-    var reportMe: PublishRelay<(ReportType, String)> = PublishRelay()
+    var reportMe: PublishRelay<(ReportStatusType, String)> = PublishRelay()
     
     
     //MARK: - Setup
@@ -147,17 +147,17 @@ class PostViewModel: PostDisplayer {
             
             let inappropriatePostReport = AlertAction(title: "Inappropriate Post") {
                 guard let postId = self?.postId else { return }
-                self?.reportMe.accept((ReportType.inappropriate, postId))
+                self?.reportMe.accept((ReportStatusType.inappropriate, postId))
                 self?.showAlert.accept(thankYouAlert)
             }
             let fakeUserReport = AlertAction(title: "Fake User") {
                 guard let postId = self?.postId else { return }
-                self?.reportMe.accept((ReportType.fakeUser, postId))
+                self?.reportMe.accept((ReportStatusType.fakeUser, postId))
                 self?.showAlert.accept(thankYouAlert)
             }
             let wrongCategoryReport = AlertAction(title: "Wrong Category") {
                 guard let postId = self?.postId else { return }
-                self?.reportMe.accept((ReportType.wrongCategory, postId))
+                self?.reportMe.accept((ReportStatusType.wrongCategory, postId))
                 self?.showAlert.accept(thankYouAlert)
             }
             

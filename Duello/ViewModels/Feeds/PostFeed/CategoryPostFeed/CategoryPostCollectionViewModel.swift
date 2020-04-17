@@ -24,7 +24,7 @@ class CategoryPostCollectionViewModel: PostCollectionViewModel {
     }
     
     //MARK: - Bindables
-    var reportPost: PublishRelay<(ReportType, String)> = PublishRelay()
+    var reportPost: PublishRelay<(ReportStatusType, String)> = PublishRelay()
     
     //MARK: - Setup
     init() {

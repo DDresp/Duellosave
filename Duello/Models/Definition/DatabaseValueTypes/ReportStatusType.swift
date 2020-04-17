@@ -7,9 +7,13 @@
 //
 import Foundation
 
-enum ReportType: String, DatabaseConvertibleType {
+//WARNING
+//Cloud functions use those keys, so if you change them, you have to change the cloud functions
+
+enum ReportStatusType: String, DatabaseConvertibleType {
     
     case notReported
+    case currentlyReviewed
     case inappropriate
     case fakeUser
     case wrongCategory

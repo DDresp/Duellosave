@@ -74,7 +74,7 @@ extension Model {
                     dictionary[attribute.getKey()] = value ? 1 : 0
                 }
             case .ReportType:
-                if let value = attribute.getValue() as? ReportType {
+                if let value = attribute.getValue() as? ReportStatusType {
                     dictionary[attribute.getKey()] = value.toStringValue()
                 }
             case .StringArray:
@@ -159,14 +159,14 @@ extension Model {
                 if let value = dic[attribute.getKey()] as? String {
                     
                     switch value {
-                    case ReportType.inappropriate.toStringValue():
-                        attribute.setValue(of: ReportType.inappropriate)
-                    case ReportType.fakeUser.toStringValue():
-                        attribute.setValue(of: ReportType.fakeUser)
-                    case ReportType.wrongCategory.toStringValue():
-                        attribute.setValue(of: ReportType.wrongCategory)
-                    case ReportType.notReported.toStringValue():
-                        attribute.setValue(of: ReportType.notReported)
+                    case ReportStatusType.inappropriate.toStringValue():
+                        attribute.setValue(of: ReportStatusType.inappropriate)
+                    case ReportStatusType.fakeUser.toStringValue():
+                        attribute.setValue(of: ReportStatusType.fakeUser)
+                    case ReportStatusType.wrongCategory.toStringValue():
+                        attribute.setValue(of: ReportStatusType.wrongCategory)
+                    case ReportStatusType.notReported.toStringValue():
+                        attribute.setValue(of: ReportStatusType.notReported)
                     default:
                         return
                     }
