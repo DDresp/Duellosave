@@ -1,6 +1,8 @@
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 
+//WARNING: ReportTypes should have the same values like in the Frontend specified!
+
 //MARK: - Listeners
 exports.reportedPosts = functions.firestore
   .document("reportedPosts/{postId}")
@@ -120,21 +122,26 @@ function checkFakeUserReview(count, rate, likes) {
 
 function passOnReport(automaticDelete, review, report, reportType, postId) {
   const reviewDoc = admin.firestore().doc(`/reviewPosts/${postId}`);
-  const automaticDoc = admin.firestore().doc(`/automaticPosts/${postId}`);
+  const postDoc = admin.firestore().doc(`/posts/${postId}`);
 
+
+  //Todo: if automatically deleted, probably should also be deleted from reportedPosts
   if (automaticDelete && review) {
-    report.report = `${reportType} review and automatic delete`;
+    report.reportType = `${reportType}`;
     report.deleted = true;
     return reviewDoc.set(report).then(() => {
-      return automaticDoc.set(report);
+      return postDoc.set({
+        reportStatus: 'reviewRequested'
+      }, {merge: true});
     });
   } else if (automaticDelete) {
-    report.report = `${reportType} automatic delete`;
-    report.deleted = true;
-    return automaticDoc.set(report);
+    return postDoc.set({
+        reportStatus: reportType
+      }, {merge: true});
   } else if (review) {
-    report.report = `${reportType} review`;
+    report.reportType = `${reportType}`;
     report.deleted = false;
-    return reviewDoc.set(report);
+    return reviewDoc.set(report); //not changing the reportStatus of the post yet, shouldn't be deleted automatically
   }
+
 }
