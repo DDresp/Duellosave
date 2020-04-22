@@ -123,6 +123,7 @@ function checkFakeUserReview(count, rate, likes) {
 function passOnReport(automaticDelete, review, report, reportType, postId) {
   const reviewDoc = admin.firestore().doc(`/reviewPosts/${postId}`);
   const postDoc = admin.firestore().doc(`/posts/${postId}`);
+  const reportDoc = admin.firestore().doc(`/reportedPosts/${postId}`)
 
 
   //Todo: if automatically deleted, probably should also be deleted from reportedPosts
@@ -133,11 +134,15 @@ function passOnReport(automaticDelete, review, report, reportType, postId) {
       return postDoc.set({
         reportStatus: 'reviewRequested'
       }, {merge: true});
+    }).then(() => {
+      return reportDoc.delete();
     });
   } else if (automaticDelete) {
     return postDoc.set({
         reportStatus: reportType
-      }, {merge: true});
+      }, {merge: true}).then(() => {
+        return reportDoc.delete();
+      });
   } else if (review) {
     report.reportType = `${reportType}`;
     report.deleted = false;

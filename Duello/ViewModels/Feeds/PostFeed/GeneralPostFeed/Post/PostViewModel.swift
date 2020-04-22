@@ -12,6 +12,7 @@ import RxCocoa
 struct PostViewModelOptions {
     var allowsDelete: Bool = false
     var allowsReport: Bool = false
+    var allowsReviewRequest: Bool = false
 }
 
 class PostViewModel: PostDisplayer {
@@ -33,6 +34,8 @@ class PostViewModel: PostDisplayer {
     var userHasSocialMediaNames: Bool
     var userName: String
     var categoryName: String
+    var isVerified: Bool
+    var isBlocked: Bool
     
     let options: PostViewModelOptions
     
@@ -49,6 +52,7 @@ class PostViewModel: PostDisplayer {
     var showActionSheet: PublishRelay<ActionSheet> = PublishRelay()
     var showAlert: PublishRelay<Alert> = PublishRelay()
     var isDeactivated: BehaviorRelay<Bool>
+    var reportStatus: BehaviorRelay<ReportStatusType>
     
     //from Parent
     var didDisappear: PublishRelay<Void> = PublishRelay()
@@ -58,6 +62,7 @@ class PostViewModel: PostDisplayer {
     var updateDeactivation: PublishRelay<Int> = PublishRelay()
     var deleteMe: PublishRelay<String> = PublishRelay()
     var reportMe: PublishRelay<(ReportStatusType, String)> = PublishRelay()
+    var reviewMe: PublishRelay<String> = PublishRelay()
     
     
     //MARK: - Setup
@@ -69,7 +74,10 @@ class PostViewModel: PostDisplayer {
         self.description = post.getDescription()
         self.title = post.getTitle()
         self.mediaRatio = post.getMediaRatio()
+        self.isVerified = post.getIsVerified()
+        self.isBlocked = post.getIsBlocked()
         self.isDeactivated = BehaviorRelay(value: post.getIsDeactivated())
+        self.reportStatus = BehaviorRelay(value: post.getReportStatus())
         self.userProfileImageUrl = post.getUser().imageUrl.value?.toStringValue() ?? ""
         self.userHasSocialMediaNames = post.getUser().addedSocialMediaName
         self.userName = post.getUser().userName.value?.toStringValue() ?? ""
@@ -85,11 +93,13 @@ class PostViewModel: PostDisplayer {
     func getActions() -> [AlertAction] {
         var actions = [AlertAction]()
         
-        let likeViewAction = AlertAction(title: showLikeView.value ? "Dismiss Score" : "Show Score") { [weak self] () in
-            guard let showsLikeViewValue = self?.showLikeView.value else { return }
-            self?.showLikeView.accept(!showsLikeViewValue)
+        if reportStatus.value == .noReport, isDeactivated.value == false {
+            let likeViewAction = AlertAction(title: showLikeView.value ? "Dismiss Score" : "Show Score") { [weak self] () in
+                guard let showsLikeViewValue = self?.showLikeView.value else { return }
+                self?.showLikeView.accept(!showsLikeViewValue)
+            }
+            actions.append(likeViewAction)
         }
-        actions.append(likeViewAction)
         
         if options.allowsDelete {
             let deleteWarning = ActionWarning(title: "Warning", message: "Do you really want to delete the post?")
@@ -100,11 +110,22 @@ class PostViewModel: PostDisplayer {
             actions.append(deleteAction)
         }
         
-        if options.allowsReport {
+        if options.allowsReport, reportStatus.value == .noReport, !isVerified {
             let reportAction = AlertAction(title: "Report") { [weak self] () in
                 self?.tappedReport.accept(())
             }
             actions.append(reportAction)
+        }
+        
+        if options.allowsReviewRequest, reportStatus.value != .noReport, reportStatus.value != .reviewRequested, !isBlocked {
+            let reviewWarning = ActionWarning(title: "Warning", message: "Please be sure that the report isn't justified. Posting inappropriate content can lead to the deactivation of your account.")
+            let reviewRequestAction = AlertAction(title: "Request Report Review", actionWarning: reviewWarning) { [weak self] () in
+                self?.reportStatus.accept(.reviewRequested)
+//                self?.reviewMe.accept(postId)
+                print("debug: requested review!")
+                
+            }
+            actions.append(reviewRequestAction)
         }
         
         return actions
@@ -115,7 +136,7 @@ class PostViewModel: PostDisplayer {
     
     private func setupBindablesFromOwnProperties() {
         
-        tappedEllipsis.share().asObservable().map { [weak self] (_) -> ActionSheet? in
+        tappedEllipsis.map { [weak self] (_) -> ActionSheet? in
             guard let actions = self?.getActions() else { return nil }
             let actionSheet = ActionSheet(actionHeader: nil, actionMessage: "select option", actions: actions)
             return actionSheet

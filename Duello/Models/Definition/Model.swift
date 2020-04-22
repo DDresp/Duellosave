@@ -14,7 +14,7 @@ protocol Model {
     
     func getReferences() -> [ModelReference]?
     func getAttributes() -> [ModelAttribute]
-
+    
 }
 
 extension Model {
@@ -43,7 +43,7 @@ extension Model {
         
         return dictionary
     }
-
+    
     private func makeDictionary(attributes: [ModelAttribute]) -> [String: Any] {
         var dictionary = [String: Any]()
         for attribute in attributes {
@@ -73,7 +73,7 @@ extension Model {
                 if let value = attribute.getValue() as? Bool {
                     dictionary[attribute.getKey()] = value ? 1 : 0
                 }
-            case .ReportType:
+            case .ReportStatusType:
                 if let value = attribute.getValue() as? ReportStatusType {
                     dictionary[attribute.getKey()] = value.toStringValue()
                 }
@@ -116,59 +116,32 @@ extension Model {
                 }
             case .FineMediaType:
                 if let value = dic[attribute.getKey()] as? String {
-                    
-                    switch value {
-                    case FineMediaType.localSingleImage.toStringValue():
-                        attribute.setValue(of: FineMediaType.localSingleImage)
-                    case FineMediaType.localImages.toStringValue():
-                        attribute.setValue(of: FineMediaType.localImages)
-                    case FineMediaType.localVideo.toStringValue():
-                        attribute.setValue(of: FineMediaType.localVideo)
-                    case FineMediaType.instagramVideo.toStringValue():
-                        attribute.setValue(of: FineMediaType.instagramVideo)
-                    case FineMediaType.instagramSingleImage.toStringValue():
-                        attribute.setValue(of: FineMediaType.instagramSingleImage)
-                    case FineMediaType.instagramImages.toStringValue():
-                        attribute.setValue(of: FineMediaType.instagramImages)
-                    default:
-                        return
+                    FineMediaType.allCases.forEach { (type) in
+                        if value == type.toStringValue() {
+                            return attribute.setValue(of: type)
+                        }
                     }
                 }
             case .RoughMediaType:
                 if let value = dic[attribute.getKey()] as? String {
-                    
-                    switch value {
-                    case RoughMediaType.video.toStringValue():
-                        attribute.setValue(of: RoughMediaType.video)
-                    case RoughMediaType.image.toStringValue():
-                        attribute.setValue(of: RoughMediaType.image)
-                    case RoughMediaType.videoAndImage.toStringValue():
-                        attribute.setValue(of: RoughMediaType.videoAndImage)
-                    default:
-                        return
+                    RoughMediaType.allCases.forEach { (type) in
+                        if value == type.toStringValue() {
+                            return attribute.setValue(of: type)
+                        }
                     }
                 }
-                
             case .Bool:
-                if let value = dic[attribute.getKey()] as? Int, value == 0 {
-                    attribute.setValue(of: false)
-                } else {
+                if let value = dic[attribute.getKey()] as? Int, value == 1 {
                     attribute.setValue(of: true)
+                } else {
+                    attribute.setValue(of: false)
                 }
-            case .ReportType:
+            case .ReportStatusType:
                 if let value = dic[attribute.getKey()] as? String {
-                    
-                    switch value {
-                    case ReportStatusType.inappropriate.toStringValue():
-                        attribute.setValue(of: ReportStatusType.inappropriate)
-                    case ReportStatusType.fakeUser.toStringValue():
-                        attribute.setValue(of: ReportStatusType.fakeUser)
-                    case ReportStatusType.wrongCategory.toStringValue():
-                        attribute.setValue(of: ReportStatusType.wrongCategory)
-                    case ReportStatusType.notReported.toStringValue():
-                        attribute.setValue(of: ReportStatusType.notReported)
-                    default:
-                        return
+                    ReportStatusType.allCases.forEach { (type) in
+                        if value == type.toStringValue() {
+                            return attribute.setValue(of: type)
+                        }
                     }
                 }
             case .StringArray:
@@ -177,7 +150,6 @@ extension Model {
                 }
             }
         }
-        
         guard let references = getReferences() else { return }
         for reference in references {
             if let refDic = dic[reference.getKey()] as? [String: Any] {

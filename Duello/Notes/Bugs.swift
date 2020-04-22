@@ -24,6 +24,12 @@
 
 //You have to be careful that if a user created a post, the likes and dislikes should be 0
 
-//You have to implement secutiry rules for a post, allowing users to only increment likes or dislikes of a post and setting the reportStatus to reviewRequested!
+//You have to implement secutiry rules for a post, allowing users to only increment likes or dislikes of a post and setting the reportStatus to reviewRequested! And "not reported" only at creation
 
 
+//Other name then isDeactivated
+
+
+//Be careful with paginatation: what happens if a post is deleted/reported during the fetch, what happens if the ranking changes during the fetch
+
+//Report Type (.not reported) and Verified should be seperated as we can't query for OR

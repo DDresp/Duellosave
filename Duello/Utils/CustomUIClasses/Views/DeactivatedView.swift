@@ -13,12 +13,17 @@ class DeactivatedView: UIView {
     var label: UILabel = {
         let label = UILabel()
         label.backgroundColor = .clear
-        label.text = "Post is Deactivated"
         label.font = UIFont.boldCustomFont(size: LARGEFONTSIZE)
         label.textColor = VERYLIGHTGRAYCOLOR
+        label.numberOfLines = 0
+        label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
+    func set(text: String) {
+        label.text = text
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)

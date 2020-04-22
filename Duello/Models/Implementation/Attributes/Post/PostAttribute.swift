@@ -51,7 +51,9 @@ enum PostAttributeCase: ModelAttributeCase {
     case apiUrl
     case mediaRatio
     case isDeactivated
-    case report
+    case isBlocked
+    case isVerified
+    case reportStatus
     
     var entryType: EntryType {
         switch self {
@@ -63,10 +65,10 @@ enum PostAttributeCase: ModelAttributeCase {
             return .Double
         case .type:
             return .FineMediaType
-        case .isDeactivated:
+        case .isDeactivated, .isVerified, .isBlocked:
             return .Bool
-        case .report:
-            return .ReportType
+        case .reportStatus:
+            return .ReportStatusType
         case .imageUrls:
             return .StringArray
         }
@@ -91,8 +93,10 @@ enum PostAttributeCase: ModelAttributeCase {
         case .thumbNailUrl: return "thumbNailUrl"
         case .apiUrl: return "apiLink"
         case .mediaRatio: return "mediaRatio"
+        case .isVerified: return "isVerified"
+        case .isBlocked: return "isBlocked"
         case .isDeactivated: return "isDeactivated"
-        case .report: return "report"
+        case .reportStatus: return "reportStatus"
             
         }
     }

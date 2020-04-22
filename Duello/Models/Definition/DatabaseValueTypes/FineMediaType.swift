@@ -6,7 +6,7 @@
 //  Copyright © 2020 Darius Dresp. All rights reserved.
 //
 
-enum FineMediaType: String, DatabaseConvertibleType {
+enum FineMediaType: String, DatabaseConvertibleType, CaseIterable {
     
     case localVideo
     case localImages

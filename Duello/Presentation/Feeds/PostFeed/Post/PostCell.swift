@@ -216,7 +216,7 @@ class PostCell: UICollectionViewCell {
         //Layout Deactivated View
         contentView.addSubview(deactivatedView)
         deactivatedView.anchor(top: headerStackView.bottomAnchor, leading: contentView.leadingAnchor, bottom: bottomStackView.topAnchor, trailing: contentView.trailingAnchor, padding: .init(top: 0, left: 0, bottom: STANDARDSPACING, right: 0))
-
+        
         //Layout Interactive Views
         mediaView.addSubview(blurView)
         blurView.fillSuperview()
@@ -373,10 +373,32 @@ class PostCell: UICollectionViewCell {
                 self?.blurView.isHidden = true
             }
         }).disposed(by: disposeBag)
+        
+        Observable.combineLatest(displayer.isDeactivated, displayer.reportStatus).subscribe(onNext: { [weak self] (isDeactivated, reportStatus) in
+            if isDeactivated, reportStatus == .noReport {
+                self?.deactivatedView.set(text: "Post is deactivated")
+                self?.deactivatedView.isHidden = false
 
-        displayer.isDeactivated.map { (isDeactivated) -> Bool in
-            return !isDeactivated
-        }.bind(to: deactivatedView.rx.isHidden).disposed(by: disposeBag)
+            } else {
+                let reportMessage = displayer.isBlocked ? "Post is blocked.\nReason: " : "Post was reported.\nReason: "
+                self?.deactivatedView.isHidden = false
+                
+                switch reportStatus {
+                case .fakeUser:
+                    self?.deactivatedView.set(text: (reportMessage + "Fake User"))
+                case .wrongCategory:
+                    self?.deactivatedView.set(text: (reportMessage + "Wrong Category"))
+                case .inappropriate:
+                    self?.deactivatedView.set(text: (reportMessage + "Inappropriate"))
+                case .reviewRequested:
+                    self?.deactivatedView.set(text: "Post is currently reviewed")
+                case .noReport:
+                    self?.deactivatedView.isHidden = true
+                }
+                
+            }
+            }).disposed(by: disposeBag)
+        
 
     }
 

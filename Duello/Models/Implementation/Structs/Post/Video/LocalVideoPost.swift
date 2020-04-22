@@ -24,11 +24,13 @@ struct LocalVideoPost: LocalVideoPostModel {
     var dislikes: PostAttribute = PostAttribute(attributeCase: .dislikes, value: nil)
     var rate: PostAttribute = PostAttribute(attributeCase: .rate, value: nil)
     var mediaRatio: PostAttribute = PostAttribute(attributeCase: .mediaRatio, value: nil)
+    var isVerified: PostAttribute = PostAttribute(attributeCase: .isVerified, value: false)
+    var isBlocked: PostAttribute = PostAttribute(attributeCase: .isBlocked, value: false)
     var isDeactivated: PostAttribute = PostAttribute(attributeCase: .isDeactivated, value: false)
     var typeData: PostAttribute = PostAttribute(attributeCase: .type, value: FineMediaType.localVideo)
     var videoUrl: PostAttribute = PostAttribute(attributeCase: .videoUrl, value: nil)
     var thumbNailUrl: PostAttribute = PostAttribute(attributeCase: .thumbNailUrl, value: nil)
-    var report: PostAttribute = PostAttribute(attributeCase: .report, value: ReportStatusType.notReported)
+    var reportStatus: PostAttribute = PostAttribute(attributeCase: .reportStatus, value: ReportStatusType.noReport)
     var user: PostReference = PostReference(attributeCase: .user, model: User())
     var category: PostReference = PostReference(attributeCase: .category, model: Category())
     
@@ -47,8 +49,10 @@ struct LocalVideoPost: LocalVideoPostModel {
             videoUrl,
             thumbNailUrl,
             mediaRatio,
+            isVerified,
+            isBlocked,
             isDeactivated,
-            report
+            reportStatus
         ]
     }
     

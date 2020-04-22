@@ -2662,8 +2662,8 @@
 				1475B03924105B2B00F1D24F /* PostCollectionViewDatasource.swift */,
 				1475B03724105B1D00F1D24F /* PostCollectionViewDelegate.swift */,
 				1475B03B24105B3900F1D24F /* PostCollectionViewPrefetchingDatasource.swift */,
-				1475B03D24105B4300F1D24F /* Post */,
 				1475B03F24105B5200F1D24F /* Header */,
+				1475B03D24105B4300F1D24F /* Post */,
 			);
 			path = PostFeed;
 			sourceTree = "<group>";

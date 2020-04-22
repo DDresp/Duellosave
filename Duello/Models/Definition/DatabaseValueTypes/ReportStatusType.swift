@@ -10,9 +10,10 @@ import Foundation
 //WARNING
 //Cloud functions use those keys, so if you change them, you have to change the cloud functions
 
-enum ReportStatusType: String, DatabaseConvertibleType {
+enum ReportStatusType: String, DatabaseConvertibleType, CaseIterable {
     
-    case notReported
+//    case verified
+    case noReport
     case reviewRequested
     case inappropriate
     case fakeUser

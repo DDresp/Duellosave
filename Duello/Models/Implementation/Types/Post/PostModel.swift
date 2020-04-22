@@ -22,8 +22,10 @@ protocol PostModel: Model {
     var rate: PostAttribute{ get set }
     var typeData: PostAttribute { get set }
     var mediaRatio: PostAttribute { get set }
+    var isVerified: PostAttribute { get set }
+    var isBlocked: PostAttribute { get set }
     var isDeactivated: PostAttribute { get set }
-    var report: PostAttribute { get set }
+    var reportStatus: PostAttribute { get set }
     var user: PostReference { get set }
     var category: PostReference { get set }
 
@@ -42,9 +44,12 @@ extension PostModel {
     func getDislikes() -> Double { return Double(dislikes.value?.toStringValue() ?? "0") ?? 0 }
     func getRate() -> Double { return Double(rate.value?.toStringValue() ?? "0") ?? 0 }
     func getMediaRatio() -> Double { return Double(mediaRatio.value?.toStringValue() ?? "1") ?? 1}
-    func getIsDeactivated() -> Bool { return isDeactivated.value?.toStringValue() == "0" ? false : true }
     
-    func getReport() -> ReportStatusType { return report.getValue() as? ReportStatusType ?? ReportStatusType.notReported }
+    func getIsVerified() -> Bool { return isVerified.value?.toStringValue() == "1" ? true : false}
+    func getIsBlocked() -> Bool { return isBlocked.value?.toStringValue() == "1" ? true : false}
+    func getIsDeactivated() -> Bool { return isDeactivated.value?.toStringValue() == "1" ? true : false }
+    
+    func getReportStatus() -> ReportStatusType { return reportStatus.getValue() as? ReportStatusType ?? ReportStatusType.noReport }
     func getUser() -> UserModel { return user.getModel() as? User ?? User() }
     func getCategory() -> CategoryModel { return category.getModel() as? Category ?? Category() }
     

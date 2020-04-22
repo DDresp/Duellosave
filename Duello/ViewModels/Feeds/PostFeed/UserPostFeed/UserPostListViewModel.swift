@@ -17,6 +17,7 @@ class UserPostListViewModel: PostListViewModel {
     init() {
         var options = PostViewModelOptions()
         options.allowsDelete = true
+        options.allowsReviewRequest = true
         super.init(optionsForPostViewModels: options)
     }
     

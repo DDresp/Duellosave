@@ -9,7 +9,8 @@ exports.verifiedPost = functions.firestore
     const reviewDoc = admin.firestore().doc(`/reviewPosts/${postId}`);
     const reportDoc = admin.firestore().doc(`/reportedPosts/${postId}`);
     return postDoc.set({
-      reportStatus: "verified"
+      isVerified: 1,
+      reportStatus: "noReport"
     }, {merge: true}).then(() => {
       return reviewDoc.delete().then(() => {
         return reportDoc.delete();
