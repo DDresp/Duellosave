@@ -25,9 +25,6 @@ class CategoryPostListViewModel: PostListViewModel {
     override func configurePostDisplayer(for postDisplayer: PostDisplayer) {
         super.configurePostDisplayer(for: postDisplayer)
         postDisplayer.reportMe.bind(to: reportPost).disposed(by: disposeBag)
-//        postDisplayer.reportAsInWrongCategory.bind(to: reportAsInWrongCategory).disposed(by: disposeBag)
-//        postDisplayer.reportAsFromFakeUser.bind(to: reportAsFromFakeUser).disposed(by: disposeBag)
-//        postDisplayer.reportAsInappropriate.bind(to: reportAsInappropriate).disposed(by: disposeBag)
     }
     
 }

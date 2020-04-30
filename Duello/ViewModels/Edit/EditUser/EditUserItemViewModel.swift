@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 import Firebase
 
-class UploadUserItemViewModel: UploadUserItemDisplayer {
+class EditUserItemViewModel: EditUserItemDisplayer {
     
     //MARK: - Definitions
     enum ItemType: String {

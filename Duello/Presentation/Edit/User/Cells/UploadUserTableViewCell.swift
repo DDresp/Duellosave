@@ -12,7 +12,7 @@ import RxCocoa
 class UploadUserTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     //MARK: - Displayer
-    var displayer: UploadUserItemDisplayer? {
+    var displayer: EditUserItemDisplayer? {
         didSet {
             setupLayout()
             setupBindables()

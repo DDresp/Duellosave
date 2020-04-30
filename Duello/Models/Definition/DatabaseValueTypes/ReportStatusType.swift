@@ -12,9 +12,8 @@ import Foundation
 
 enum ReportStatusType: String, DatabaseConvertibleType, CaseIterable {
     
-//    case verified
     case noReport
-    case reviewRequested
+    case deletedButReviewed
     case inappropriate
     case fakeUser
     case wrongCategory

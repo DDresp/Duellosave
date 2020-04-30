@@ -21,7 +21,7 @@ struct Category: CategoryModel {
     
     
     //MARK: - Getters
-    func getAttributes() -> [ModelAttribute] {
+    func getAttributes() -> [ModelAttributeType] {
         return [
             title,
             description,

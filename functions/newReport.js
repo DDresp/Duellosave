@@ -5,15 +5,14 @@ const admin = require("firebase-admin");
 exports.newReport = functions.firestore
   .document("users/{uid}/reportedPosts/{postId}")
   .onCreate((snapshot, context) => {
-    const uid = context.params.uid;
     const reportData = snapshot.data();
     const reportType = reportData.report;
-    return createNewReport(reportType, uid, snapshot.id);
+    return createNewReport(reportType, snapshot.id);
   });
 
 //------------------------------------------------------------------------------------------------------------------------------------
 //MARK: - Methods
-async function createNewReport(reportType, uid, postId) {
+async function createNewReport(reportType, postId) {
   const reportDoc = admin.firestore().doc(`/reportedPosts/${postId}`);
   const reportSnapshot = await reportDoc.get();
   const reportData = reportSnapshot.data();

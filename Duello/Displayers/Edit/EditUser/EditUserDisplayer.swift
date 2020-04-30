@@ -9,7 +9,7 @@
 import RxSwift
 import RxCocoa
 
-protocol UploadUserDisplayer: UploadDisplayer {
+protocol EditUserDisplayer: UploadDisplayer {
     
     //MARK: - Variables
     var numberOfSections: Int { get }
@@ -18,7 +18,7 @@ protocol UploadUserDisplayer: UploadDisplayer {
     var showImagePickerView: PublishSubject<Void> { get }
     
     //MARK: - Getters
-    func getUploadUserItemDisplayer(at index: Int) -> UploadUserItemDisplayer
-    func getUploadUserHeaderDisplayer() -> UploadUserHeaderDisplayer
+    func getUploadUserItemDisplayer(at index: Int) -> EditUserItemDisplayer
+    func getUploadUserHeaderDisplayer() -> EditUserHeaderDisplayer
     
 }

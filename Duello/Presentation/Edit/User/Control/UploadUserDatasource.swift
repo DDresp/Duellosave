@@ -12,10 +12,10 @@ import RxSwift
 class UploadUserDatasource: NSObject, UITableViewDataSource {
     
     //MARK: - Displayer
-    var displayer: UploadUserDisplayer
+    var displayer: EditUserDisplayer
     
     //MARK: - Setup
-    init(displayer: UploadUserDisplayer) {
+    init(displayer: EditUserDisplayer) {
         self.displayer = displayer
         super.init()
     }

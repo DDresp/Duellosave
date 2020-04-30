@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 import Firebase
 
-class UploadUserHeaderViewModel: UploadUserHeaderDisplayer {
+class EditUserHeaderViewModel: EditUserHeaderDisplayer {
     
     //MARK: - Variables
     var initialImageUrl: String? = nil

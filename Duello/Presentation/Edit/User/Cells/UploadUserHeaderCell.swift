@@ -13,7 +13,7 @@ import SDWebImage
 class UploadUserHeaderCell: UITableViewCell {
     
     //MARK: - Displayer
-    var displayer: UploadUserHeaderDisplayer? {
+    var displayer: EditUserHeaderDisplayer? {
         didSet {
             setupBindablesToDisplayer()
             setupBindablesFromDisplayer()

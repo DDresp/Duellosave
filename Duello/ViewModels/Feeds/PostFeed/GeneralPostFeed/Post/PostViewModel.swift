@@ -117,12 +117,12 @@ class PostViewModel: PostDisplayer {
             actions.append(reportAction)
         }
         
-        if options.allowsReviewRequest, reportStatus.value != .noReport, reportStatus.value != .reviewRequested, !isBlocked {
-            let reviewWarning = ActionWarning(title: "Warning", message: "Please be sure that the report isn't justified. Posting inappropriate content can lead to the deactivation of your account.")
+        if options.allowsReviewRequest, reportStatus.value != .noReport, reportStatus.value != .deletedButReviewed, !isBlocked {
+            let reviewWarning = ActionWarning(title: "Warning", message: "Please be sure that the stated report isn't justified. Posting inappropriate content can lead to the deactivation of your account.")
             let reviewRequestAction = AlertAction(title: "Request Report Review", actionWarning: reviewWarning) { [weak self] () in
-                self?.reportStatus.accept(.reviewRequested)
-//                self?.reviewMe.accept(postId)
-                print("debug: requested review!")
+                guard let postId = self?.postId else { return }
+                self?.reportStatus.accept(.deletedButReviewed)
+                self?.reviewMe.accept(postId)
                 
             }
             actions.append(reviewRequestAction)

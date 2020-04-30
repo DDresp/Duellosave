@@ -96,7 +96,7 @@ struct User: UserModel {
         return nil
     }
     
-    func getAttributes() -> [ModelAttribute] {
+    func getAttributes() -> [ModelAttributeType] {
         return allAttributes
     }
     

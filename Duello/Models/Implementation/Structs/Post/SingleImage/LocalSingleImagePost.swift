@@ -34,7 +34,7 @@ struct LocalSingleImagePost: LocalSingleImagePostModel {
     var category: PostReference = PostReference(attributeCase: .category, model: Category())
     
     //MARK: - Getters
-    func getAttributes() -> [ModelAttribute] {
+    func getAttributes() -> [ModelAttributeType] {
         return [
             uid,
             cid,

@@ -12,6 +12,7 @@ class UserPostListViewModel: PostListViewModel {
     
     //MARK: - Bindables
     var deletePost: PublishRelay<String> = PublishRelay<String>()
+    var requestedReviewPost: PublishRelay<String> = PublishRelay<String>()
     
     //MARK: - Setup
     init() {
@@ -25,6 +26,7 @@ class UserPostListViewModel: PostListViewModel {
     override func configurePostDisplayer(for postDisplayer: PostDisplayer) {
         super.configurePostDisplayer(for: postDisplayer)
         postDisplayer.deleteMe.bind(to: deletePost).disposed(by: disposeBag)
+        postDisplayer.reviewMe.bind(to: requestedReviewPost).disposed(by: disposeBag)
     }
     
 }

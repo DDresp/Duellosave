@@ -16,7 +16,7 @@ exports.blockedPost = functions.firestore
         return postDoc
           .set(
             {
-              isBlocked: 1,
+              isBlocked: true,
               reportStatus: reportType,
             },
             { merge: true }

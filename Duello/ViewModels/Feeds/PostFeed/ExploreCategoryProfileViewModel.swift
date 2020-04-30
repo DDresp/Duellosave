@@ -45,6 +45,7 @@ class ExploreCategoryProfileViewModel: SimplePostCollectionMasterViewModel {
         collectionViewModel.category.accept(category)
     }
     
+    //MARK: - Networking
     func reportPost(for postId: String, report: ReportStatusType) {
         UploadingService.shared.createReport(postId: postId, report: report).subscribe(onNext: { (_) in
             //created report

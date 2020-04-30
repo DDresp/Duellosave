@@ -10,47 +10,57 @@ exports.reportedPosts = functions.firestore
     const newValue = change.after.data();
     const postId = context.params.postId;
 
-    var inappropriatePostCount = newValue.inappropriateCount;
-    var fakeUserPostCount = newValue.fakeUserCount;
-    var wrongCategoryPostCount = newValue.wrongCategoryCount;
+    var inappropriateCount = newValue.inappropriateCount;
+    var fakeUserCount = newValue.fakeUserCount;
+    var wrongCategoryCount = newValue.wrongCategoryCount;
 
     const post = newValue.post;
     const likes = post.likes;
     const rate = post.rate;
 
-    var standardReport = {
+    if (!inappropriateCount) {
+      inappropriateCount = 0;
+    }
+
+    if (!fakeUserCount) {
+      fakeUserCount = 0;
+    }
+
+    if (!wrongCategoryCount) {
+      wrongCategoryCount = 0;
+    }
+
+    var review = {
       post: post,
-      likes: likes,
-      rate: rate,
-      userInitiated: false,
+      inappropriateCount: inappropriateCount,
+      fakeUserCount: fakeUserCount,
+      wrongCategoryCount: wrongCategoryCount,
+      userInitiatedReview: false
     };
 
     //Check if potentially inappropriate post should be passed on
     //If Posts gets reviewed, others aren't checked anymore
-    var automaticInappropriate = checkInappropriateAutomaticDelete(inappropriatePostCount, rate, likes);
-    var reviewInappropriate = checkInappropriateReview(inappropriatePostCount, rate, likes);
+    var automaticDeleteInappropriate = checkInappropriateAutomaticDelete(inappropriateCount, rate, likes);
+    var shouldReviewInappropriate = checkInappropriateShouldReview(inappropriateCount, rate, likes);
 
-    if (automaticInappropriate || reviewInappropriate) {
-      standardReport.count = inappropriatePostCount;
-      return passOnReport(automaticInappropriate, reviewInappropriate, standardReport, "inappropriate", postId);
+    if (automaticDeleteInappropriate || shouldReviewInappropriate) {
+      return reviewOrDeletePost(automaticDeleteInappropriate, shouldReviewInappropriate, review, "inappropriate", postId);
     }
 
     //Check if potentially wrongCategory post should be passed on
-    var automaticWrongCategory = checkWrongCategoryAutomaticDelete(wrongCategoryPostCount, rate, likes);
-    var reviewWrongCategory = checkWrongCategoryReview(wrongCategoryPostCount, rate, likes);
+    var automaticDeleteWrongCategory = checkWrongCategoryAutomaticDelete(wrongCategoryCount, rate, likes);
+    var shouldReviewWrongCategory = checkWrongCategoryShouldReview(wrongCategoryCount, rate, likes);
 
-    if (automaticWrongCategory || reviewWrongCategory) {
-      standardReport.count = wrongCategoryPostCount;
-      return passOnReport(automaticWrongCategory, reviewWrongCategory, standardReport, "wrongCategory", postId);
+    if (automaticDeleteWrongCategory || shouldReviewWrongCategory) {
+      return reviewOrDeletePost(automaticDeleteWrongCategory, shouldReviewWrongCategory, review, "wrongCategory", postId);
     }
 
     //Check if potentially fakeUser post should be passed on
-    var automaticFakeUser = checkFakeUserAutomaticDelete(fakeUserPostCount, rate, likes);
-    var reviewFakeUser = checkFakeUserReview(fakeUserPostCount, rate, likes);
+    var automaticDeleteFakeUser = checkFakeUserAutomaticDelete(fakeUserCount, rate, likes);
+    var shouldReviewFakeUser = checkFakeUserShouldReview(fakeUserCount, rate, likes);
 
-    if (automaticFakeUser || reviewFakeUser) {
-      standardReport.count = fakeUserPostCount;
-      return passOnReport(automaticFakeUser, reviewFakeUser, standardReport, "fakeUser", postId);
+    if (automaticDeleteFakeUser || shouldReviewFakeUser) {
+      return reviewOrDeletePost(automaticDeleteFakeUser, shouldReviewFakeUser, review, "fakeUser", postId);
     }
 
   });
@@ -59,9 +69,6 @@ exports.reportedPosts = functions.firestore
 //MARK: - Methods
 //rate = 0.5 is important figure because that is the default rate when the post gets created
 function checkInappropriateAutomaticDelete(count, rate, likes) {
-  if (!count) {
-    return false;
-  }
   var automaticDelete = false;
   automaticDelete = count > 2 && rate == 0.5 && likes == 0; //NEED Extra Review
   automaticDelete = automaticDelete || (count > 1 && rate < 0.35 && likes < 10); //NO Extra Review
@@ -70,19 +77,13 @@ function checkInappropriateAutomaticDelete(count, rate, likes) {
   return automaticDelete;
 }
 
-function checkInappropriateReview(count, rate, likes) {
-  if (!count) {
-    return false;
-  }
+function checkInappropriateShouldReview(count, rate, likes) {
   var review = false;
   review = (count > 2 && rate >= 0.35); //Extra and General Review
   return review;
 }
 
 function checkWrongCategoryAutomaticDelete(count, rate, likes) {
-  if (!count) {
-    return false;
-  }
   var automaticDelete = false;
   automaticDelete = count > 3 && rate == 0.5 && likes == 0; //NEED Extra Review
   automaticDelete = automaticDelete || (count > 1 && rate < 0.25 && likes < 10); //NO Extra Review
@@ -91,19 +92,13 @@ function checkWrongCategoryAutomaticDelete(count, rate, likes) {
   return automaticDelete;
 }
 
-function checkWrongCategoryReview(count, rate, likes) {
-  if (!count) {
-    return false;
-  }
+function checkWrongCategoryShouldReview(count, rate, likes) {
   var review = false;
   review = count > 3 && rate == 0.5 && likes == 0; //Extra Review
   return review;
 }
 
 function checkFakeUserAutomaticDelete(count, rate, likes) {
-  if (!count) {
-    return false;
-  }
   var automaticDelete = false;
   automaticDelete = count > 1 && rate < 0.2 && likes < 10; //NO Extra Review
   automaticDelete = automaticDelete || (count > 3 && rate < 0.3 && likes >= 10); //NO Extra Review
@@ -112,27 +107,22 @@ function checkFakeUserAutomaticDelete(count, rate, likes) {
 }
 
 function checkFakeUserReview(count, rate, likes) {
-  if (!count) {
-    return false;
-  }
   var review = false;
   review = count > 4 && rate >= 0.4 && likes >= 10; //General Review
   return review;
 }
 
-function passOnReport(automaticDelete, review, report, reportType, postId) {
+function reviewOrDeletePost(automaticDelete, shouldReview, review, reportType, postId) {
   const reviewDoc = admin.firestore().doc(`/reviewPosts/${postId}`);
   const postDoc = admin.firestore().doc(`/posts/${postId}`);
   const reportDoc = admin.firestore().doc(`/reportedPosts/${postId}`)
 
-
   //Todo: if automatically deleted, probably should also be deleted from reportedPosts
-  if (automaticDelete && review) {
-    report.reportType = `${reportType}`;
-    report.deleted = true;
-    return reviewDoc.set(report).then(() => {
+  if (automaticDelete && shouldReview) {
+    review.deleted = true;
+    return reviewDoc.set(review).then(() => {
       return postDoc.set({
-        reportStatus: 'reviewRequested'
+        reportStatus: 'deletedButReviewed'
       }, {merge: true});
     }).then(() => {
       return reportDoc.delete();
@@ -143,10 +133,9 @@ function passOnReport(automaticDelete, review, report, reportType, postId) {
       }, {merge: true}).then(() => {
         return reportDoc.delete();
       });
-  } else if (review) {
-    report.reportType = `${reportType}`;
-    report.deleted = false;
-    return reviewDoc.set(report); //not changing the reportStatus of the post yet, shouldn't be deleted automatically
+  } else if (shouldReview) {
+    review.deleted = false;
+    return reviewDoc.set(review); //not changing the reportStatus of the post yet, shouldn't be deleted automatically
   }
 
 }

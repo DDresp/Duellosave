@@ -127,12 +127,23 @@ class HomeViewModel: SimplePostCollectionMasterViewModel {
         
     }
     
+    func createReviewRequest(for postId: String) {
+        UploadingService.shared.createReviewRequest(postId: postId).subscribe(onNext: { (_) in
+            //created review request
+            }).disposed(by: disposeBag)
+    }
+    
     //MARK: - Reactive
     override func setupBindblesFromChildDisplayer() {
         super.setupBindblesFromChildDisplayer()
         homeCollectionViewModel.deletePost.subscribe(onNext: { [weak self] (postId) in
             self?.deletePost(for: postId)
         }).disposed(by: disposeBag)
+        
+        homeCollectionViewModel.requestedReviewPost.subscribe(onNext: { [weak self] (postId) in
+            self?.createReviewRequest(for: postId)
+        }).disposed(by: disposeBag)
+        
     }
     
     override func setupBindablesToChildDisplayer() {

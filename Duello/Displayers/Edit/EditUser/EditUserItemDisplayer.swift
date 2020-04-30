@@ -9,10 +9,10 @@
 import RxSwift
 import RxCocoa
 
-protocol UploadUserItemDisplayer {
+protocol EditUserItemDisplayer {
     
     //MARK: - Variables
-    var itemType: UploadUserItemViewModel.ItemType { get }
+    var itemType: EditUserItemViewModel.ItemType { get }
     
     //MARK: - Bindables
     var name: BehaviorRelay<String?> { get }

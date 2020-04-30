@@ -35,7 +35,7 @@ struct LocalImagesPost: LocalImagesPostModel {
     
     //MARK: - Getters
     
-    func getAttributes() -> [ModelAttribute] {
+    func getAttributes() -> [ModelAttributeType] {
         return [
             uid,
             cid,

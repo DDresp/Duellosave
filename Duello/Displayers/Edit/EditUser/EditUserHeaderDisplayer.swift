@@ -9,7 +9,7 @@
 import RxSwift
 import RxCocoa
 
-protocol UploadUserHeaderDisplayer {
+protocol EditUserHeaderDisplayer {
     
     //MARK: - Variables
     var initialImageUrl: String? { get set }

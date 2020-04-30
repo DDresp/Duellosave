@@ -24,6 +24,7 @@ class UserPostCollectionViewModel: PostCollectionViewModel {
     
     //MARK: - Bindables
     var deletePost: PublishRelay<String> = PublishRelay<String>()
+    var requestedReviewPost: PublishRelay<String> = PublishRelay<String>()
     
     //MARK: - Setup
     init() {
@@ -52,6 +53,7 @@ class UserPostCollectionViewModel: PostCollectionViewModel {
         headerViewModel.socialMediaDisplayer.showAdditionalLinkAlert.bind(to: showAdditionalLinkAlert).disposed(by: disposeBag)
         
         listViewModel.deletePost.bind(to: deletePost).disposed(by: disposeBag)
+        listViewModel.requestedReviewPost.bind(to: requestedReviewPost).disposed(by: disposeBag)
         
     }
     

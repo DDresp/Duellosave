@@ -390,7 +390,7 @@ class PostCell: UICollectionViewCell {
                     self?.deactivatedView.set(text: (reportMessage + "Wrong Category"))
                 case .inappropriate:
                     self?.deactivatedView.set(text: (reportMessage + "Inappropriate"))
-                case .reviewRequested:
+                case .deletedButReviewed:
                     self?.deactivatedView.set(text: "Post is currently reviewed")
                 case .noReport:
                     self?.deactivatedView.isHidden = true

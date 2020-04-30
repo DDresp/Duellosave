@@ -11,7 +11,7 @@ import RxSwift
 import JGProgressHUD
 import CropViewController
 
-class UploadUserTableViewController<T: UploadUserDisplayer>: UploadTableViewController<T>, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CropViewControllerDelegate {
+class UploadUserTableViewController<T: EditUserDisplayer>: UploadTableViewController<T>, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CropViewControllerDelegate {
     
     //MARK: - Variables
     var datasource: UploadUserDatasource?

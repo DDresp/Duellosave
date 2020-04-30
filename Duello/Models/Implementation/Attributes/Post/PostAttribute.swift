@@ -8,7 +8,7 @@
 
 //MARK: - Attribute
 
-class PostAttribute: ModelAttribute {
+class PostAttribute: ModelAttributeType {
     
     var attributeCase: PostAttributeCase
     var value: DatabaseConvertibleType?
