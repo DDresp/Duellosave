@@ -11,6 +11,7 @@ exports.newReviewRequest = functions.firestore
 //------------------------------------------------------------------------------------------------------------------------------------
 //MARK: - Methods
 async function createNewReview(postId) {
+
   const postDoc = admin.firestore().doc(`/posts/${postId}`);
   const postSnapshot = await postDoc.get();
   const postData = postSnapshot.data();

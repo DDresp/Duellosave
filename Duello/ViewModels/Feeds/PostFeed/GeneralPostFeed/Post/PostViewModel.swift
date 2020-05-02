@@ -59,7 +59,8 @@ class PostViewModel: PostDisplayer {
     var willBeDisplayed: PublishRelay<Void> = PublishRelay()
     
     //to Parent
-    var updateDeactivation: PublishRelay<Int> = PublishRelay()
+//    var updateDeactivation: PublishRelay<Int> = PublishRelay()
+    var changeActivationStatusForMe: PublishRelay<(Bool, String)> = PublishRelay()
     var deleteMe: PublishRelay<String> = PublishRelay()
     var reportMe: PublishRelay<(ReportStatusType, String)> = PublishRelay()
     var reviewMe: PublishRelay<String> = PublishRelay()
@@ -154,13 +155,19 @@ class PostViewModel: PostDisplayer {
         
         //Checks if the associated model already captures the deactivation state of the PostDisplayer correctly
         isDeactivated.filter { [weak self] (isDeactivated) -> Bool in
-            return isDeactivated != self?.post.getIsDeactivated()
-        }.do(onNext: { [weak self] (isDeactivated) in
-            self?.post.isDeactivated.setValue(of: isDeactivated)
-        }).map { [weak self] (isDeactivated) -> Int in
-            self?.post.isDeactivated.setValue(of: isDeactivated)
-            return self?.index ?? 0
-        }.bind(to: updateDeactivation).disposed(by: disposeBag)
+            return isDeactivated != self?.post.getIsDeactivated() && self?.postId != nil
+        }.map { [weak self] (isDeactivated) -> (Bool, String) in
+            let postId = self?.postId ?? ""
+            return (!isDeactivated, postId)
+            }.bind(to: changeActivationStatusForMe).disposed(by: disposeBag)
+//        isDeactivated.filter { [weak self] (isDeactivated) -> Bool in
+//            return isDeactivated != self?.post.getIsDeactivated()
+//        }.do(onNext: { [weak self] (isDeactivated) in
+//            self?.post.isDeactivated.setValue(of: isDeactivated)
+//        }).map { [weak self] (isDeactivated) -> Int in
+//            self?.post.isDeactivated.setValue(of: isDeactivated)
+//            return self?.index ?? 0
+//        }.bind(to: updateDeactivation).disposed(by: disposeBag)
         
         tappedReport.subscribe(onNext: { [weak self] (_) in
             var actions = [AlertAction]()

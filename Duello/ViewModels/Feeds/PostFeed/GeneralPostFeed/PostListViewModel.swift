@@ -25,8 +25,9 @@ class PostListViewModel: PostListDisplayer {
     var reload: PublishRelay<Void> = PublishRelay()
     var insert: PublishRelay<(Int, Int)> = PublishRelay()
     var updateLayout: PublishRelay<Void> = PublishRelay()
-    var updatePost: PublishRelay<Int> = PublishRelay<Int>()
-    var deactivatePost: PublishRelay<String> = PublishRelay<String>()
+//    var updatePost: PublishRelay<Int> = PublishRelay<Int>()
+//    var deactivatePost: PublishRelay<String> = PublishRelay<String>()
+    var changeActivationStatusPost: PublishRelay<(Bool, String)> = PublishRelay()
     
     var loadLink: PublishRelay<String?> = PublishRelay<String?>()
     var showAdditionalLinkAlert: PublishRelay<String> = PublishRelay<String>()
@@ -130,7 +131,8 @@ class PostListViewModel: PostListDisplayer {
             return ()
         }) .bind(to: updateLayout).disposed(by: disposeBag)
 
-        postDisplayer.updateDeactivation.bind(to: updatePost).disposed(by: disposeBag)
+//        postDisplayer.updateDeactivation.bind(to: updatePost).disposed(by: disposeBag)
+        postDisplayer.changeActivationStatusForMe.bind(to: changeActivationStatusPost).disposed(by: disposeBag)
 
         isAppeared.filter { (appeared) -> Bool in
             return !appeared

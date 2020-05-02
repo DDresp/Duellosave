@@ -11,13 +11,13 @@ exports.blockedPost = functions.firestore
 
     const data = snapshot.data();
     if (data) {
-      const reportType = data.reportType;
-      if (reportType) {
+      const reportStatus = data.reportStatus;
+      if (reportStatus) {
         return postDoc
           .set(
             {
               isBlocked: true,
-              reportStatus: reportType,
+              reportStatus: reportStatus,
             },
             { merge: true }
           )

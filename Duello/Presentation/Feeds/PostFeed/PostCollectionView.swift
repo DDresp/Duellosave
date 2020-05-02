@@ -87,7 +87,6 @@ class PostCollectionView: UICollectionView {
     private func setupBindablesFromDisplayer() {
         
         displayer.reloadData.subscribe(onNext: { [weak self] (_) in
-            
             self?.setContentOffset(.zero, animated: false)
             self?.feedDelegate.clearCache()
 

@@ -70,22 +70,22 @@ exports.reportedPosts = functions.firestore
 //rate = 0.5 is important figure because that is the default rate when the post gets created
 function checkInappropriateAutomaticDelete(count, rate, likes) {
   var automaticDelete = false;
-  automaticDelete = count > 2 && rate == 0.5 && likes == 0; //NEED Extra Review
+  automaticDelete = count > 1 && rate == 0.5 && likes == 0; //NEED Extra Review
   automaticDelete = automaticDelete || (count > 1 && rate < 0.35 && likes < 10); //NO Extra Review
-  automaticDelete =
-    automaticDelete || (count > 2 && rate < 0.35 && likes >= 10); //NO Extra Review
+  automaticDelete = automaticDelete || (count > 2 && rate < 0.35 && likes >= 10); //NO Extra Review
   return automaticDelete;
 }
 
 function checkInappropriateShouldReview(count, rate, likes) {
   var review = false;
-  review = (count > 2 && rate >= 0.35); //Extra and General Review
+  review = count > 1 && rate == 0.5 && likes == 0;
+  review = review || (count > 2 && rate >= 0.35); //Extra and General Review
   return review;
 }
 
 function checkWrongCategoryAutomaticDelete(count, rate, likes) {
   var automaticDelete = false;
-  automaticDelete = count > 3 && rate == 0.5 && likes == 0; //NEED Extra Review
+  automaticDelete = count > 2 && rate == 0.5 && likes == 0; //No Extra Review
   automaticDelete = automaticDelete || (count > 1 && rate < 0.25 && likes < 10); //NO Extra Review
   automaticDelete = automaticDelete || (count > 2 && rate < 0.3 && likes >= 10); //NO Extra Review
   automaticDelete = automaticDelete || (count > 4 && rate < 0.4 && likes >= 10); //NO Extra Review
@@ -93,26 +93,25 @@ function checkWrongCategoryAutomaticDelete(count, rate, likes) {
 }
 
 function checkWrongCategoryShouldReview(count, rate, likes) {
-  var review = false;
-  review = count > 3 && rate == 0.5 && likes == 0; //Extra Review
-  return review;
+  return false; //currently no automatic review
 }
 
 function checkFakeUserAutomaticDelete(count, rate, likes) {
   var automaticDelete = false;
   automaticDelete = count > 1 && rate < 0.2 && likes < 10; //NO Extra Review
-  automaticDelete = automaticDelete || (count > 3 && rate < 0.3 && likes >= 10); //NO Extra Review
+  automaticDelete = automaticDelete || (count > 2 && rate < 0.3 && likes >= 10); //NO Extra Review
   automaticDelete = automaticDelete || (count > 4 && rate < 0.4 && likes >= 10); //NO Extra Review
   return automaticDelete;
 }
 
-function checkFakeUserReview(count, rate, likes) {
+function checkFakeUserShouldReview(count, rate, likes) {
   var review = false;
   review = count > 4 && rate >= 0.4 && likes >= 10; //General Review
   return review;
 }
 
-function reviewOrDeletePost(automaticDelete, shouldReview, review, reportType, postId) {
+//Doesn't handle the case where a post is already reviewed but not yet deleted 
+function reviewOrDeletePost(automaticDelete, shouldReview, review, reportStatus, postId) {
   const reviewDoc = admin.firestore().doc(`/reviewPosts/${postId}`);
   const postDoc = admin.firestore().doc(`/posts/${postId}`);
   const reportDoc = admin.firestore().doc(`/reportedPosts/${postId}`)
@@ -129,7 +128,7 @@ function reviewOrDeletePost(automaticDelete, shouldReview, review, reportType, p
     });
   } else if (automaticDelete) {
     return postDoc.set({
-        reportStatus: reportType
+        reportStatus: reportStatus
       }, {merge: true}).then(() => {
         return reportDoc.delete();
       });

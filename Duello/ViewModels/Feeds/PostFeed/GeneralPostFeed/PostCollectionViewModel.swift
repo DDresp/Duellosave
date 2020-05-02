@@ -39,6 +39,7 @@ class PostCollectionViewModel: PostCollectionDisplayer {
     var refreshChanged: PublishSubject<Void> = PublishSubject()
     var uiLoaded: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     var requestDataForIndexPath: PublishRelay<[IndexPath]> = PublishRelay<[IndexPath]>()
+    var changeActivationStatusPost: PublishRelay<(Bool, String)> = PublishRelay()
     
     //To UI
     var insertData: PublishRelay<(Int, Int)> = PublishRelay()
@@ -114,7 +115,9 @@ class PostCollectionViewModel: PostCollectionDisplayer {
         postListDisplayer.showAdditionalLinkAlert.bind(to: showAdditionalLinkAlert).disposed(by: disposeBag)
         postListDisplayer.showActionSheet.bind(to: showActionSheet).disposed(by: disposeBag)
         postListDisplayer.showAlert.bind(to: showAlert).disposed(by: disposeBag)
-        postListDisplayer.updatePost.bind(to: updatePost).disposed(by: disposeBag)
+//        postListDisplayer.updatePost.bind(to: updatePost).disposed(by: disposeBag)
+        postListDisplayer.changeActivationStatusPost.bind(to: changeActivationStatusPost).disposed(by: disposeBag)
+        
         postListDisplayer.reload.bind(to: reloadData).disposed(by: disposeBag)
         postListDisplayer.insert.bind(to: insertData).disposed(by: disposeBag)
         postListDisplayer.updateLayout.bind(to: updateLayout).disposed(by: disposeBag)

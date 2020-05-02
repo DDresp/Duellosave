@@ -59,14 +59,21 @@ class SimplePostCollectionMasterViewModel: PostCollectionMasterDisplayer {
     func retrieveNextPosts() {
         fetchLimitedPosts()
     }
-    
-    func updatePost(at index: Int) {
-        guard let posts = postCollectionDisplayer.posts.value else { return }
-        let post = posts[index]
-        UploadingService.shared.updatePost(post: post).subscribe(onNext: { (_) in
-            //Updated Post
-        }).disposed(by: disposeBag)
+
+    func changeActivationStatus(for postId: String, isActivated: Bool) {
         
+        guard let posts = postCollectionDisplayer.posts.value else { return }
+        let post = posts.first { (post) -> Bool in
+            return post.id == postId
+        }
+        
+        guard let toUpdatePost = post else { return }
+        toUpdatePost.isDeactivated.setValue(of: !isActivated)
+        
+        UploadingService.shared.updatePost(post: toUpdatePost).subscribe(onNext: { (_) in
+            //updated Post
+            }).disposed(by: disposeBag)
+
     }
     
     func fetchLimitedPosts() {
@@ -121,9 +128,12 @@ class SimplePostCollectionMasterViewModel: PostCollectionMasterDisplayer {
             self?.retrieveNextPosts()
         }).disposed(by: disposeBag)
         
-        postCollectionDisplayer.updatePost.subscribe(onNext: { [weak self] (index) in
-            self?.updatePost(at: index)
-        }).disposed(by: disposeBag)
+//        postCollectionDisplayer.updatePost.subscribe(onNext: { [weak self] (index) in
+//            self?.updatePost(at: index)
+//        }).disposed(by: disposeBag)
+        postCollectionDisplayer.changeActivationStatusPost.subscribe(onNext: { [weak self] (isActivated, postId) in
+            self?.changeActivationStatus(for: postId, isActivated: isActivated)
+            }).disposed(by: disposeBag)
         
     }
     

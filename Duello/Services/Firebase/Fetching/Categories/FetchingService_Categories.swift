@@ -12,7 +12,7 @@ import RxSwift
 extension FetchingService {
     
     func fetchCategories(orderKey: String, limit: Int?, startId: String?) -> Observable<[CategoryModel]> {
-        return fetchDocuments(for: CATEGORY_REFERENCE, field: nil, key: nil, orderKey: orderKey, limit: limit, startId: startId).map { (docs) -> [CategoryModel] in
+        return fetchDocuments(for: CATEGORY_REFERENCE, orderKey: orderKey, limit: limit, startId: startId).map { (docs) -> [CategoryModel] in
             guard let documents = docs else { throw DownloadError.noData }
             var categories = [CategoryModel]()
             for document in documents {

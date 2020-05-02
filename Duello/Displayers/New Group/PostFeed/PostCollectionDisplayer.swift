@@ -38,6 +38,7 @@ protocol PostCollectionDisplayer: class, CollectionDisplayer {
     var refreshChanged: PublishSubject<Void> { get }
     var uiLoaded: BehaviorRelay<Bool> { get }
     var requestDataForIndexPath: PublishRelay<[IndexPath]> { get }
+    var changeActivationStatusPost: PublishRelay<(Bool, String)> { get }
     
     //to UI
     var insertData: PublishRelay<(Int, Int)> { get }

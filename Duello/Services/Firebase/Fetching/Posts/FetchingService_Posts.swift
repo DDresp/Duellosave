@@ -12,8 +12,8 @@ import FirebaseFirestore
 
 extension FetchingService {
     
-    func fetchPosts(field: String, key: String, orderKey: String, limit: Int?, startId: String?) -> Observable<[PostModel]> {
-        return fetchDocuments(for: POST_REFERENCE, field: field, key: key, orderKey: orderKey, limit: limit, startId: startId).map { (docs) -> [PostModel] in
+    func fetchPosts(orderKey: String, limit: Int?, startId: String?, equalityConditions: [String: Any]? = nil) -> Observable<[PostModel]> {
+        return fetchDocuments(for: POST_REFERENCE, orderKey: orderKey, limit: limit, startId: startId, equalityConditions: equalityConditions).map { (docs) -> [PostModel] in
             guard let documents = docs else { throw DownloadError.noData }
             var posts = [PostModel]()
             for document in documents {

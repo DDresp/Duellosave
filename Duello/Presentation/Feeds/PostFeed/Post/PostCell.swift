@@ -376,7 +376,7 @@ class PostCell: UICollectionViewCell {
         
         Observable.combineLatest(displayer.isDeactivated, displayer.reportStatus).subscribe(onNext: { [weak self] (isDeactivated, reportStatus) in
             if isDeactivated, reportStatus == .noReport {
-                self?.deactivatedView.set(text: "Post is deactivated")
+                self?.deactivatedView.set(text: "Post is currently unavailable.")
                 self?.deactivatedView.isHidden = false
 
             } else {
