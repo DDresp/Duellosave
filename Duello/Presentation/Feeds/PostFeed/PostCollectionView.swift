@@ -60,7 +60,7 @@ class PostCollectionView: UICollectionView {
         register(SingleImagePostCell.self, forCellWithReuseIdentifier: singleImageIdentifier)
         register(ImagesPostCell.self, forCellWithReuseIdentifier: imagesIdentifier)
         register(VideoPostCell.self, forCellWithReuseIdentifier: videoIdentifier)
-        register(EmptyCell.self, forCellWithReuseIdentifier: emptyIdentifier) //Specific to Home??
+        register(EmptyCell.self, forCellWithReuseIdentifier: emptyIdentifier) //Todo: Specific to Home??
         register(FooterLoadingCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: footerIdentifier)
         
         if displayer.hasHeader {

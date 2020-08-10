@@ -128,9 +128,6 @@ class SimplePostCollectionMasterViewModel: PostCollectionMasterDisplayer {
             self?.retrieveNextPosts()
         }).disposed(by: disposeBag)
         
-//        postCollectionDisplayer.updatePost.subscribe(onNext: { [weak self] (index) in
-//            self?.updatePost(at: index)
-//        }).disposed(by: disposeBag)
         postCollectionDisplayer.changeActivationStatusPost.subscribe(onNext: { [weak self] (isActivated, postId) in
             self?.changeActivationStatus(for: postId, isActivated: isActivated)
             }).disposed(by: disposeBag)
