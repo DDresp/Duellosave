@@ -12,6 +12,7 @@ import RxSwift
 class ExploreCoordinator: ExploreCoordinatorType {
     
     //MARK: - ChildCoordinators
+    var uploadCategoryCoordinator: UploadCategoryCoordinator?
     var exploreCategoryProfileCoordinator: ExploreCategoryProfileCoordinator?
     
     //MARK: - ViewModels
@@ -23,6 +24,7 @@ class ExploreCoordinator: ExploreCoordinatorType {
     
     //MARK: - Bindables
     var requestedCategory: PublishSubject<CategoryModel?> = PublishSubject()
+    var requestedAddCategory: PublishSubject<Void> = PublishSubject()
     
     //MARK: - Setup
     init() {
@@ -45,8 +47,34 @@ class ExploreCoordinator: ExploreCoordinatorType {
         requestedCategory.subscribe(onNext: { [weak self] (category) in
             self?.goToCategoryProfile(with: category)
         }).disposed(by: disposeBag)
+        
+        requestedAddCategory.subscribe(onNext: { [weak self] (_) in
+            self?.goToUploadCategory()
+        }).disposed(by: disposeBag)
     }
 
+}
+
+//MARK: - Extension: UploadCategory
+extension ExploreCoordinator {
+    
+    //GoTo
+    private func goToUploadCategory() {
+        uploadCategoryCoordinator = UploadCategoryCoordinator(rootController: presentedController)
+        uploadCategoryCoordinator?.start()
+        setupUploadCategoryBindables()
+    }
+    
+    private func setupUploadCategoryBindables() {
+        
+        guard let coordinator = uploadCategoryCoordinator else { return }
+        Observable.of(coordinator.canceled, coordinator.didSaveCategory).merge().subscribe(onNext: { [weak self] (_) in
+            self?.uploadCategoryCoordinator?.presentedController?.dismiss(animated: true, completion: nil)
+            self?.uploadCategoryCoordinator = nil
+        }).disposed(by: disposeBag)
+        
+    }
+    
 }
 
 //MARK: - Extension: CategoryProfile

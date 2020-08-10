@@ -273,8 +273,6 @@
 		149BC5CA242209AE00CFBBC7 /* NewsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149BC5C9242209AE00CFBBC7 /* NewsController.swift */; };
 		149BC5CC2422165800CFBBC7 /* PostCollectionDisplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149BC5CB2422165800CFBBC7 /* PostCollectionDisplayer.swift */; };
 		149BC5CE24222F4A00CFBBC7 /* UserPostCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149BC5CD24222F4A00CFBBC7 /* UserPostCollectionViewModel.swift */; };
-		14B67173243605A40083F663 /* CategoryCreationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B67172243605A40083F663 /* CategoryCreationController.swift */; };
-		14B67176243606580083F663 /* CategoryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B67175243606580083F663 /* CategoryCoordinator.swift */; };
 		14B67179243611AC0083F663 /* CategoryCreationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B67178243611AC0083F663 /* CategoryCreationViewModel.swift */; };
 		14B6717C243613170083F663 /* CategoryCreationCoordinatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B6717B243613170083F663 /* CategoryCreationCoordinatorType.swift */; };
 		14B6717F2436164E0083F663 /* UploadCategoryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B6717E2436164E0083F663 /* UploadCategoryCoordinator.swift */; };
@@ -644,8 +642,6 @@
 		149BC5C9242209AE00CFBBC7 /* NewsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsController.swift; sourceTree = "<group>"; };
 		149BC5CB2422165800CFBBC7 /* PostCollectionDisplayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCollectionDisplayer.swift; sourceTree = "<group>"; };
 		149BC5CD24222F4A00CFBBC7 /* UserPostCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPostCollectionViewModel.swift; sourceTree = "<group>"; };
-		14B67172243605A40083F663 /* CategoryCreationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCreationController.swift; sourceTree = "<group>"; };
-		14B67175243606580083F663 /* CategoryCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCoordinator.swift; sourceTree = "<group>"; };
 		14B67178243611AC0083F663 /* CategoryCreationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCreationViewModel.swift; sourceTree = "<group>"; };
 		14B6717B243613170083F663 /* CategoryCreationCoordinatorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCreationCoordinatorType.swift; sourceTree = "<group>"; };
 		14B6717E2436164E0083F663 /* UploadCategoryCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadCategoryCoordinator.swift; sourceTree = "<group>"; };
@@ -1564,7 +1560,6 @@
 				14B671B5243915A20083F663 /* Explore */,
 				149BC5C82422099700CFBBC7 /* News */,
 				1475AF4B2410503700F1D24F /* Home */,
-				14B67171243605640083F663 /* CategoryCreation */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -2450,20 +2445,9 @@
 			path = FromUser;
 			sourceTree = "<group>";
 		};
-		14B67171243605640083F663 /* CategoryCreation */ = {
-			isa = PBXGroup;
-			children = (
-				14B67172243605A40083F663 /* CategoryCreationController.swift */,
-				14B6718224361FD20083F663 /* UploadCategory */,
-			);
-			path = CategoryCreation;
-			sourceTree = "<group>";
-		};
 		14B671742436062C0083F663 /* CategoryCreation */ = {
 			isa = PBXGroup;
 			children = (
-				14B67175243606580083F663 /* CategoryCoordinator.swift */,
-				14B6717D2436161A0083F663 /* UploadCategory */,
 			);
 			path = CategoryCreation;
 			sourceTree = "<group>";
@@ -2623,6 +2607,7 @@
 			isa = PBXGroup;
 			children = (
 				14B671B6243915DB0083F663 /* ExploreController.swift */,
+				14B6718224361FD20083F663 /* UploadCategory */,
 				14B671E8243A650E0083F663 /* CategoryProfile */,
 				1475AF4A2410502B00F1D24F /* Posting */,
 			);
@@ -2633,6 +2618,7 @@
 			isa = PBXGroup;
 			children = (
 				14B671B9243916630083F663 /* ExploreCoordinator.swift */,
+				14B6717D2436161A0083F663 /* UploadCategory */,
 				14B671EB243A65CD0083F663 /* CategoryProfile */,
 			);
 			path = Explore;
@@ -3167,7 +3153,6 @@
 				1475AFC72410552100F1D24F /* FacebookLoginViewModel.swift in Sources */,
 				149BC5C5242182A400CFBBC7 /* NewsCoordinator.swift in Sources */,
 				1475AEAF2410460700F1D24F /* RawEmailUser.swift in Sources */,
-				14B67176243606580083F663 /* CategoryCoordinator.swift in Sources */,
 				1475B02824105A9600F1D24F /* SocialMediaDatasource.swift in Sources */,
 				1475AEC2241046EB00F1D24F /* FineMediaType.swift in Sources */,
 				140AEE302411A96400258DE8 /* Ideas.swift in Sources */,
@@ -3218,7 +3203,6 @@
 				1475B03424105AF400F1D24F /* VideoView.swift in Sources */,
 				1475AFB72410547B00F1D24F /* UploadLocalImagesPostViewModel.swift in Sources */,
 				1475AE7C2410433700F1D24F /* FetchingService.swift in Sources */,
-				14B67173243605A40083F663 /* CategoryCreationController.swift in Sources */,
 				1475AEA22410456200F1D24F /* RawImagesPost.swift in Sources */,
 				14BDEC08241CBF0E00228763 /* Bool+Extension.swift in Sources */,
 				14B671CA2439C7960083F663 /* CategoryCollectionViewDelegate.swift in Sources */,

@@ -9,4 +9,5 @@ import RxSwift
 
 protocol ExploreCoordinatorType: RootCoordinatorType {
     var requestedCategory: PublishSubject<CategoryModel?> { get }
+    var requestedAddCategory: PublishSubject<Void> { get }
 }

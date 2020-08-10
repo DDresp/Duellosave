@@ -27,13 +27,20 @@ class ExploreController: CategoryCollectionMasterViewController {
         view.backgroundColor = .blue
         setupNavigationItems()
         setupCollectionView()
+        setupBindablesToDisplayer()
     }
     
     private func setupNavigationItems() {
         navigationItem.title = "Explore"
+        navigationItem.rightBarButtonItem = addCategoryButton
+        navigationItem.rightBarButtonItem?.tintColor = NAVBARCOLOR
+        
     }
     
     //MARK: - Views
+    
+    let addCategoryButton = UIBarButtonItem(title: "add category", style: .plain, target: nil, action: nil)
+    
     lazy var collectionView: CategoryCollectionView = {
         let collectionView = CategoryCollectionView(displayer: viewModel.categoryCollectionViewModel)
         return collectionView
@@ -45,6 +52,14 @@ class ExploreController: CategoryCollectionMasterViewController {
         view.addSubview(collectionView)
         collectionView.fillSuperview()
     }
+    
+    //MARK: - Reactive
+    private let disposeBag = DisposeBag()
+
+    private func setupBindablesToDisplayer() {
+        addCategoryButton.rx.tap.asObservable().bind(to: viewModel.addCategoryTapped).disposed(by: disposeBag)
+    }
+    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

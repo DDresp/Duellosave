@@ -17,6 +17,7 @@ class CategoryCollectionMasterViewController: ViewController {
     init(displayer: CategoryCollectionMasterDisplayer) {
         self.displayer = displayer
         super.init(nibName: nil, bundle: nil)
+        
     }
     
     required init?(coder aDecoder: NSCoder) {

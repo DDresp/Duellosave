@@ -34,6 +34,7 @@ class ExploreViewModel: CategoryCollectionMasterDisplayer {
     var isFetchingCategories: Bool = false
     var loadedAllCategories: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     
+    var addCategoryTapped: PublishSubject<Void> = PublishSubject<Void>()
     
     //MARK: - Setup
     init() {
@@ -109,6 +110,8 @@ class ExploreViewModel: CategoryCollectionMasterDisplayer {
             })
             return category
             }.bind(to: coordinator.requestedCategory).disposed(by: disposeBag)
-    }
+        
+        addCategoryTapped.bind(to: coordinator.requestedAddCategory).disposed(by: disposeBag)
     
 }   
+}
