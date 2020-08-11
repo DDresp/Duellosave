@@ -978,10 +978,10 @@
 		1475AE3E24103F2B00F1D24F /* Notes */ = {
 			isa = PBXGroup;
 			children = (
+				146AE3AB24E3284E00E56924 /* General.swift */,
 				1475AE4324103FA500F1D24F /* Bugs.swift */,
 				1475AE3F24103F8A00F1D24F /* Architecture.swift */,
 				140AEE2F2411A96400258DE8 /* Ideas.swift */,
-				146AE3AB24E3284E00E56924 /* General.swift */,
 			);
 			path = Notes;
 			sourceTree = "<group>";
