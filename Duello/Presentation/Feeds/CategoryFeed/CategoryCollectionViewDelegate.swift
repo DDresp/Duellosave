@@ -40,7 +40,11 @@ class CategoryCollectionViewDelegate: NSObject, UICollectionViewDelegate, UIColl
         categoryCell.displayer = categoryViewModel
         categoryCell.fit()
         let size = categoryCell.systemLayoutSizeFitting(.init(width: frameWidth, height: 1000))
-        return CGSize(width: frameWidth, height: size.height)
+        return CGSize(width: frameWidth - 30, height: size.height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 30
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {

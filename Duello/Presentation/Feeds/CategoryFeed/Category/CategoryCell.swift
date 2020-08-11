@@ -39,6 +39,15 @@ class CategoryCell: UICollectionViewCell {
         return label
     }()
     
+    private let topPostImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = #imageLiteral(resourceName: "image7").withRenderingMode(.alwaysOriginal)
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.layer.masksToBounds = true
+        return imageView
+    }()
+    
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [titleLabel, descriptionLabel])
         stackView.axis = .vertical
@@ -58,8 +67,12 @@ class CategoryCell: UICollectionViewCell {
     //MARK: - Layout
     
     private func setupLayout() {
+        
+        contentView.addSubview(topPostImageView)
+        topPostImageView.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: nil, trailing: contentView.trailingAnchor, padding: .zero, size: .init(width: 0, height: 250))
+        
         contentView.addSubview(stackView)
-        stackView.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor, padding: .init(top: STANDARDSPACING, left: STANDARDSPACING, bottom: STANDARDSPACING, right: STANDARDSPACING), size: .zero)
+        stackView.anchor(top: topPostImageView.bottomAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor, padding: .init(top: STANDARDSPACING, left: STANDARDSPACING, bottom: STANDARDSPACING, right: STANDARDSPACING), size: .zero)
     }
 
     //MARK: - Methods

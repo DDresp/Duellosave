@@ -37,6 +37,8 @@ class CategoryCollectionViewDatasource: NSObject, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: categoryIdentifier, for: indexPath) as! CategoryCell
         cell.displayer = categoryListDisplayer.getCategoryDisplayer(at: indexPath.item)
+        cell.layer.cornerRadius = 20
+        cell.layer.masksToBounds = true
         cell.configure()
         return cell
     }
