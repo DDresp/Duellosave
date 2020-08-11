@@ -26,3 +26,22 @@ extension FetchingService {
     }
     
 }
+
+//MARK Fetch User Follow Status of a Category
+extension FetchingService {
+    
+    func fetchFollowStatus(for categoryId: String) -> Observable<Bool> {
+        guard let uid = Auth.auth().currentUser?.uid else { return Observable.error(DownloadError.userNotLoggedIn) }
+        let reference = USERS_REFERENCE.document(uid).collection(USER_FOLLOWED_CATEGORIES_COLLECTION)
+        
+        return fetchDic(for: reference, id: categoryId)
+            .map { (data) -> Bool in
+                if let _ = data {
+                    return true
+                } else {
+                    return false
+                }
+        }
+    }
+
+}

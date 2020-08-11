@@ -24,6 +24,15 @@ class CategoryHeader: UICollectionReusableView {
     }
     
     //MARK: - Views
+    private let followButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.titleLabel?.font = UIFont.lightCustomFont(size: SMALLFONTSIZE)
+        button.layer.cornerRadius = 5
+        button.clipsToBounds = true
+        button.setTitleColor(UIColor.white, for: .normal)
+        return button
+    }()
+    
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldCustomFont(size: MEDIUMFONTSIZE)
@@ -49,8 +58,15 @@ class CategoryHeader: UICollectionReusableView {
     
     //MARK: - Layout
     private func setupLayout() {
+        
+        addSubview(followButton)
+        followButton.anchor(top: nil, leading: nil, bottom: bottomAnchor, trailing: nil, padding: .init(top: 0, left: 0, bottom: 10, right: 0), size: .init(width: 100, height: 60))
+        followButton.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        
         addSubview(stackView)
-        stackView.fillSuperview()
+        stackView.anchor(top: topAnchor, leading: leadingAnchor, bottom: followButton.topAnchor, trailing: trailingAnchor)
+        
+        
     }
     
     
@@ -66,7 +82,10 @@ class CategoryHeader: UICollectionReusableView {
         guard let displayer = displayer else { return }
         setupText(displayer: displayer)
         layoutIfNeeded()
-    }
+        
+        setupBindablesToDisplayer()
+        setupBindablesFromDisplayer()
+}
     
     private func setupText(displayer: CategoryHeaderViewModel) {
         nameLabel.text = displayer.title
@@ -75,6 +94,24 @@ class CategoryHeader: UICollectionReusableView {
     
     //MARK: - Reactive
     var disposeBag = DisposeBag()
+    
+    private func setupBindablesToDisplayer() {
+        guard let displayer = displayer else { return }
+        followButton.rx.tap.bind(to: displayer.tappedFollow).disposed(by: disposeBag)
+    }
+    
+    private func setupBindablesFromDisplayer() {
+        displayer?.isFollowed.subscribe(onNext: { [weak self] (isFollowed) in
+            if isFollowed {
+                self?.followButton.setTitle("unfollow", for: .normal)
+                self?.followButton.backgroundColor = LIGHTGRAYCOLOR
+                
+            } else {
+                self?.followButton.setTitle("follow", for: .normal)
+                self?.followButton.backgroundColor = LIGHTBLUECOLOR
+            }
+            }).disposed(by: disposeBag)
+    }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

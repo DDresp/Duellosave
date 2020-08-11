@@ -12,6 +12,8 @@
 		14643D7824463D0B00B725EE /* StringArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14643D7724463D0B00B725EE /* StringArray.swift */; };
 		14643D7E24472FE800B725EE /* UploadingService_Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14643D7D24472FE800B725EE /* UploadingService_Report.swift */; };
 		14643D802448425F00B725EE /* ReportStatusType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14643D7F2448425F00B725EE /* ReportStatusType.swift */; };
+		146AE3AA24E31E7E00E56924 /* DeletingService_Unfollow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146AE3A924E31E7E00E56924 /* DeletingService_Unfollow.swift */; };
+		146AE3AC24E3284E00E56924 /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146AE3AB24E3284E00E56924 /* General.swift */; };
 		1475AE0424103EAD00F1D24F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AE0324103EAD00F1D24F /* AppDelegate.swift */; };
 		1475AE0824103EAD00F1D24F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AE0724103EAD00F1D24F /* ViewController.swift */; };
 		1475AE0B24103EAD00F1D24F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1475AE0924103EAD00F1D24F /* Main.storyboard */; };
@@ -330,6 +332,7 @@
 		14B672152440FE770083F663 /* VideoPostDisplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B672142440FE770083F663 /* VideoPostDisplayer.swift */; };
 		14B6721C244140460083F663 /* ImagesPostDisplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B6721B244140460083F663 /* ImagesPostDisplayer.swift */; };
 		14BDEC08241CBF0E00228763 /* Bool+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BDEC07241CBF0E00228763 /* Bool+Extension.swift */; };
+		14E3F7B224E1D27000706B42 /* UploadingService_Follow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E3F7B124E1D27000706B42 /* UploadingService_Follow.swift */; };
 		14ED672B241A87550047C085 /* Pods_Duello.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14ED672A241A87550047C085 /* Pods_Duello.framework */; };
 		14ED672C241A87550047C085 /* Pods_Duello.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 14ED672A241A87550047C085 /* Pods_Duello.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		14FB8DD8245A45D80075CBB9 /* UploadingService_ReviewRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14FB8DD7245A45D80075CBB9 /* UploadingService_ReviewRequest.swift */; };
@@ -375,6 +378,8 @@
 		14643D7724463D0B00B725EE /* StringArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringArray.swift; sourceTree = "<group>"; };
 		14643D7D24472FE800B725EE /* UploadingService_Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadingService_Report.swift; sourceTree = "<group>"; };
 		14643D7F2448425F00B725EE /* ReportStatusType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportStatusType.swift; sourceTree = "<group>"; };
+		146AE3A924E31E7E00E56924 /* DeletingService_Unfollow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletingService_Unfollow.swift; sourceTree = "<group>"; };
+		146AE3AB24E3284E00E56924 /* General.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = General.swift; sourceTree = "<group>"; };
 		1475AE0024103EAD00F1D24F /* Duello.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Duello.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1475AE0324103EAD00F1D24F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1475AE0724103EAD00F1D24F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -699,6 +704,7 @@
 		14B672142440FE770083F663 /* VideoPostDisplayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPostDisplayer.swift; sourceTree = "<group>"; };
 		14B6721B244140460083F663 /* ImagesPostDisplayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesPostDisplayer.swift; sourceTree = "<group>"; };
 		14BDEC07241CBF0E00228763 /* Bool+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+Extension.swift"; sourceTree = "<group>"; };
+		14E3F7B124E1D27000706B42 /* UploadingService_Follow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadingService_Follow.swift; sourceTree = "<group>"; };
 		14ED672A241A87550047C085 /* Pods_Duello.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_Duello.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		14FB8DD7245A45D80075CBB9 /* UploadingService_ReviewRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadingService_ReviewRequest.swift; sourceTree = "<group>"; };
 		1AB5A1CDF25F48DD3230412A /* Pods-DuelloUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DuelloUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DuelloUITests/Pods-DuelloUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -783,6 +789,14 @@
 				14643D7D24472FE800B725EE /* UploadingService_Report.swift */,
 			);
 			path = Report;
+			sourceTree = "<group>";
+		};
+		146AE3A824E31E5700E56924 /* UnfollowCategory */ = {
+			isa = PBXGroup;
+			children = (
+				146AE3A924E31E7E00E56924 /* DeletingService_Unfollow.swift */,
+			);
+			path = UnfollowCategory;
 			sourceTree = "<group>";
 		};
 		1475ADF724103EAD00F1D24F = {
@@ -967,6 +981,7 @@
 				1475AE4324103FA500F1D24F /* Bugs.swift */,
 				1475AE3F24103F8A00F1D24F /* Architecture.swift */,
 				140AEE2F2411A96400258DE8 /* Ideas.swift */,
+				146AE3AB24E3284E00E56924 /* General.swift */,
 			);
 			path = Notes;
 			sourceTree = "<group>";
@@ -1025,6 +1040,7 @@
 			children = (
 				1475AE63241041E700F1D24F /* DeletingService.swift */,
 				1475AE65241041F700F1D24F /* DeletingError.swift */,
+				146AE3A824E31E5700E56924 /* UnfollowCategory */,
 			);
 			path = Deleting;
 			sourceTree = "<group>";
@@ -1044,6 +1060,7 @@
 			isa = PBXGroup;
 			children = (
 				1475AE71241042A400F1D24F /* UploadingService.swift */,
+				14E3F7B024E1D21700706B42 /* FollowCategory */,
 				14FB8DD6245A45AA0075CBB9 /* ReviewRequest */,
 				14643D7C24472FB600B725EE /* Report */,
 				1475AE76241042F300F1D24F /* User */,
@@ -2808,6 +2825,14 @@
 			path = Post;
 			sourceTree = "<group>";
 		};
+		14E3F7B024E1D21700706B42 /* FollowCategory */ = {
+			isa = PBXGroup;
+			children = (
+				14E3F7B124E1D27000706B42 /* UploadingService_Follow.swift */,
+			);
+			path = FollowCategory;
+			sourceTree = "<group>";
+		};
 		14FB8DD6245A45AA0075CBB9 /* ReviewRequest */ = {
 			isa = PBXGroup;
 			children = (
@@ -3124,6 +3149,7 @@
 				1475AE592410414800F1D24F /* InstagramService_Images.swift in Sources */,
 				1475AF9B2410537000F1D24F /* UploadUserViewModel.swift in Sources */,
 				1475AF3D24104C8400F1D24F /* ExploreCategoryPostingUploadPostCoordinator.swift in Sources */,
+				14E3F7B224E1D27000706B42 /* UploadingService_Follow.swift in Sources */,
 				1475AF3524104C1500F1D24F /* ExploreCategoryPostingCoordinator.swift in Sources */,
 				1475AEA52410458800F1D24F /* RawInstagramVideoPost.swift in Sources */,
 				1475B03224105AE800F1D24F /* VideoPlayer.swift in Sources */,
@@ -3223,6 +3249,7 @@
 				14B671AA2438AC040083F663 /* UploadDescriptionViewModel.swift in Sources */,
 				1475AE5B2410416100F1D24F /* InstagramService_Video.swift in Sources */,
 				140AEE322412FD0E00258DE8 /* PostCollectionMasterViewController.swift in Sources */,
+				146AE3AA24E31E7E00E56924 /* DeletingService_Unfollow.swift in Sources */,
 				1475AEE22410483200F1D24F /* InstagramSingleImagePostModel.swift in Sources */,
 				1475AEB32410462700F1D24F /* RawRegistrationUser.swift in Sources */,
 				1475B0AC24105FCC00F1D24F /* HoshiTextField+ReactiveExtension.swift in Sources */,
@@ -3334,6 +3361,7 @@
 				1475AFD8241057B000F1D24F /* SocialMediaDisplayer.swift in Sources */,
 				1475B014241059E400F1D24F /* GoogleLoginDisplayer.swift in Sources */,
 				1475B09E24105F6800F1D24F /* Dictionary+Extension.swift in Sources */,
+				146AE3AC24E3284E00E56924 /* General.swift in Sources */,
 				1475AF612410510800F1D24F /* PostingUploadLocalSingleImagePostController.swift in Sources */,
 				1475AFA6241053D400F1D24F /* UploadInstagramVideoLinkViewModel.swift in Sources */,
 				1475AF4F2410505500F1D24F /* HomeController.swift in Sources */,

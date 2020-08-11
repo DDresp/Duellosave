@@ -25,7 +25,7 @@ class DeletingService: NetworkService {
     
             POST_REFERENCE.document(postId).delete(completion: { (err) in
                 if let err = err {
-                    observer.onError(UploadingError.init(error: err))
+                    observer.onError(DeletingError.init(error: err))
                     return
                 }
                 

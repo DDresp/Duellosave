@@ -19,6 +19,12 @@ class CategoryHeaderViewModel: PostHeaderDisplayer {
     //MARK: - Variables
     
     //MARK: - Bindables
+    //from UI
+    var tappedFollow: PublishRelay<Void> = PublishRelay()
+    var changeFollowStatus: PublishRelay<Void> = PublishRelay()
+    
+    //to UI
+    var isFollowed: BehaviorRelay<Bool> = BehaviorRelay(value: false)
 
     //MARK: - Getters
     var title: String? {
@@ -32,11 +38,16 @@ class CategoryHeaderViewModel: PostHeaderDisplayer {
     
     //MARK: - Setup
     init() {
+        setupBindablesFromUI()
         setupBindablesFromOwnProperties()
     }
     
     //MARK: - Reactive
     private let disposeBag = DisposeBag()
+    
+    private func setupBindablesFromUI() {
+        tappedFollow.bind(to: changeFollowStatus).disposed(by: disposeBag)
+    }
     
     private func setupBindablesFromOwnProperties() {
         

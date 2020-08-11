@@ -160,14 +160,6 @@ class PostViewModel: PostDisplayer {
             let postId = self?.postId ?? ""
             return (!isDeactivated, postId)
             }.bind(to: changeActivationStatusForMe).disposed(by: disposeBag)
-//        isDeactivated.filter { [weak self] (isDeactivated) -> Bool in
-//            return isDeactivated != self?.post.getIsDeactivated()
-//        }.do(onNext: { [weak self] (isDeactivated) in
-//            self?.post.isDeactivated.setValue(of: isDeactivated)
-//        }).map { [weak self] (isDeactivated) -> Int in
-//            self?.post.isDeactivated.setValue(of: isDeactivated)
-//            return self?.index ?? 0
-//        }.bind(to: updateDeactivation).disposed(by: disposeBag)
         
         tappedReport.subscribe(onNext: { [weak self] (_) in
             var actions = [AlertAction]()

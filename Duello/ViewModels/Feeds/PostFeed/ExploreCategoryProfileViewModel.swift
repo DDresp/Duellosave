@@ -30,6 +30,7 @@ class ExploreCategoryProfileViewModel: SimplePostCollectionMasterViewModel {
     //MARK: - Bindables
     let requestedAddContent: PublishSubject<Void> = PublishSubject()
     let goBack: PublishSubject<Void> = PublishSubject()
+    var isFollowed: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     
     //MARK: - Setup
     init(category: CategoryModel) {
@@ -43,6 +44,21 @@ class ExploreCategoryProfileViewModel: SimplePostCollectionMasterViewModel {
     override func start() {
         super.start()
         collectionViewModel.category.accept(category)
+        fetchCategoryFollowStatus()
+    }
+    
+    func fetchCategoryFollowStatus() {
+        
+        guard let categoryId = category.id else { return }
+        
+        DispatchQueue.global(qos: .background).async  {
+            
+            FetchingService.shared.fetchFollowStatus(for: categoryId).subscribe(onNext: { [weak self] (isFollowed) in
+                self?.isFollowed.accept(isFollowed)
+            }).disposed(by: self.disposeBag)
+            
+        }
+        
     }
     
     //MARK: - Networking
@@ -50,6 +66,23 @@ class ExploreCategoryProfileViewModel: SimplePostCollectionMasterViewModel {
         UploadingService.shared.createReport(postId: postId, report: report).subscribe(onNext: { (_) in
             //created report
             }).disposed(by: disposeBag)
+    }
+    
+    func changeFollowStatus() {
+        
+        guard let categoryId = category.id else { return }
+        if isFollowed.value {
+            isFollowed.accept(!self.isFollowed.value)
+            DeletingService.shared.unfollowCategory(categoryId: categoryId).subscribe(onNext: { (_) in
+                //unfollow category
+                }).disposed(by: disposeBag)
+        } else {
+            isFollowed.accept(!self.isFollowed.value)
+            UploadingService.shared.followCategory(categoryId: categoryId).subscribe(onNext: { (_) in
+                //followed category
+            }).disposed(by: disposeBag)
+        }
+        
     }
     
     //MARK: - Reactive
@@ -60,6 +93,16 @@ class ExploreCategoryProfileViewModel: SimplePostCollectionMasterViewModel {
             self?.reportPost(for: postId, report: report)
             }).disposed(by: disposeBag)
         
+        collectionViewModel.changeFollowStatus.subscribe(onNext: { [weak self] (_) in
+            guard let self = self else { return }
+            self.changeFollowStatus()
+            }).disposed(by: disposeBag)
+        
+    }
+    
+    override func setupBindablesToChildDisplayer() {
+        super.setupBindablesToChildDisplayer()
+        isFollowed.bind(to: collectionViewModel.isFollowed).disposed(by: disposeBag)
     }
     
     private func setupBindablesToCoordinator() {
