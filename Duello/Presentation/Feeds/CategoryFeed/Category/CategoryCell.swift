@@ -17,15 +17,15 @@ class CategoryCell: UICollectionViewCell {
     //MARK: - Setup
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = EXTREMELIGHTGRAYCOLOR
+        backgroundColor = DARKCOLOR
         setupLayout()
     }
 
     //MARK: - Views
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.textColor = DARKGRAYCOLOR
-        label.font = UIFont.boldCustomFont(size: SMALLFONTSIZE)
+        label.textColor = STRONGFONTCOLOR
+        label.font = UIFont.boldCustomFont(size: MEDIUMFONTSIZE)
         label.isUserInteractionEnabled = true
         label.numberOfLines = 0
         return label
@@ -33,7 +33,7 @@ class CategoryCell: UICollectionViewCell {
 
     private lazy var descriptionLabel: UILabel = {
         let label = UILabel()
-        label.textColor = UIColor.gray
+        label.textColor = LIGHTFONTCOLOR
         label.font = UIFont.lightCustomFont(size: SMALLFONTSIZE)
         label.numberOfLines = 3
         return label
@@ -41,7 +41,7 @@ class CategoryCell: UICollectionViewCell {
     
     private let topPostImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = #imageLiteral(resourceName: "image7").withRenderingMode(.alwaysOriginal)
+        imageView.image = #imageLiteral(resourceName: "image1").withRenderingMode(.alwaysOriginal)
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.layer.masksToBounds = true

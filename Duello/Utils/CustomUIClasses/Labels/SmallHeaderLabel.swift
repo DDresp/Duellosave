@@ -13,7 +13,7 @@ class SmallHeaderLabel: UILabel {
     override init(frame: CGRect) {
         super.init(frame: frame)
         font = UIFont.boldCustomFont(size: SMALLFONTSIZE)
-        textColor = DARKGRAYCOLOR
+        textColor = STRONGFONTCOLOR
         
     }
     

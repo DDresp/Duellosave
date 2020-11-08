@@ -33,8 +33,8 @@ class EmptyCell: UICollectionViewCell {
     //MARK: - Views
     let label: UILabel = {
         let label = UILabel()
-        let attributedString = NSMutableAttributedString(string: "Welcome to Duello\n", attributes: [NSAttributedString.Key.font : UIFont.boldCustomFont(size: LARGEFONTSIZE), NSAttributedString.Key.foregroundColor: DARKGRAYCOLOR])
-        let nextAttributedString = NSAttributedString(string: "You haven't created any posts, yet", attributes: [NSAttributedString.Key.font: UIFont.mediumCustomFont(size: MEDIUMFONTSIZE), NSAttributedString.Key.foregroundColor: LIGHTGRAYCOLOR])
+        let attributedString = NSMutableAttributedString(string: "Welcome to Duello\n", attributes: [NSAttributedString.Key.font : UIFont.boldCustomFont(size: LARGEFONTSIZE), NSAttributedString.Key.foregroundColor: ULTRADARKCOLOR])
+        let nextAttributedString = NSAttributedString(string: "You haven't created any posts, yet", attributes: [NSAttributedString.Key.font: UIFont.mediumCustomFont(size: MEDIUMFONTSIZE), NSAttributedString.Key.foregroundColor: DARKCOLOR])
         attributedString.append(nextAttributedString)
         label.attributedText = attributedString
         label.textAlignment = .center

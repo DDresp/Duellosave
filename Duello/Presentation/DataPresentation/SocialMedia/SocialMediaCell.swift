@@ -18,7 +18,7 @@ class SocialMediaCell: UICollectionViewCell {
             nameLabel.text = displayer.socialMediaName
             iconImageView.image = UIImage(named: displayer.iconName)?.withRenderingMode(.alwaysOriginal)
             nameLabel.font = displayer.hasLink ? UIFont.boldCustomFont(size: SMALLFONTSIZE) : UIFont.lightCustomFont(size: SMALLFONTSIZE)
-            nameLabel.textColor = displayer.isDarkMode ? VERYLIGHTGRAYCOLOR : DARKGRAYCOLOR
+            nameLabel.textColor = displayer.isDarkMode ? STRONGFONTCOLOR : LIGHTFONTCOLOR
             
         }
     }
@@ -47,7 +47,7 @@ class SocialMediaCell: UICollectionViewCell {
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldCustomFont(size: SMALLFONTSIZE)
-        label.textColor = VERYLIGHTGRAYCOLOR
+        label.textColor = LIGHTFONTCOLOR
         label.backgroundColor = .clear
         return label
     }()

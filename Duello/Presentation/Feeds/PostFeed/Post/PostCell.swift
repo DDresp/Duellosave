@@ -20,7 +20,7 @@ class PostCell: UICollectionViewCell {
     //MARK: - Setup
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = EXTREMELIGHTGRAYCOLOR
+        backgroundColor = DARKCOLOR
         setupLayout()
     }
 
@@ -33,7 +33,7 @@ class PostCell: UICollectionViewCell {
         let label = UILabel()
         label.text = ""
         label.font = UIFont.boldCustomFont(size: SMALLFONTSIZE)
-        label.textColor = DARKGRAYCOLOR
+        label.textColor = STRONGFONTCOLOR
         return label
     }()
 
@@ -41,13 +41,13 @@ class PostCell: UICollectionViewCell {
         let label = UILabel()
         label.text = ""
         label.font = UIFont.lightCustomFont(size: VERYSMALLFONTSIZE)
-        label.textColor = DARKGRAYCOLOR
+        label.textColor = STRONGFONTCOLOR
         return label
     }()
 
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.textColor = DARKGRAYCOLOR
+        label.textColor = STRONGFONTCOLOR
         label.font = UIFont.boldCustomFont(size: SMALLFONTSIZE)
         label.isUserInteractionEnabled = true
         label.numberOfLines = 0
@@ -56,7 +56,7 @@ class PostCell: UICollectionViewCell {
 
     private lazy var descriptionLabel: UILabel = {
         let label = UILabel()
-        label.textColor = UIColor.gray
+        label.textColor = LIGHTFONTCOLOR
         label.font = UIFont.lightCustomFont(size: SMALLFONTSIZE)
         label.numberOfLines = 3
         return label
@@ -67,7 +67,7 @@ class PostCell: UICollectionViewCell {
         let iv = SmallProfileImageView(frame: .zero)
         iv.contentMode = .scaleToFill
         iv.clipsToBounds = true
-        iv.layer.borderColor = LIGHTGRAYCOLOR.cgColor
+        iv.layer.borderColor = LIGHTFONTCOLOR.cgColor
         iv.layer.borderWidth = 0.5
         return iv
     }()
@@ -91,7 +91,7 @@ class PostCell: UICollectionViewCell {
         let button = EllipsisButton(type: .system)
         let ellipsisIcon = #imageLiteral(resourceName: "ellipsisButton").withRenderingMode(.alwaysTemplate)
         button.setImage(#imageLiteral(resourceName: "ellipsisButton").withRenderingMode(.alwaysTemplate), for: .normal)
-        button.tintColor = DARKGRAYCOLOR
+        button.tintColor = ULTRADARKCOLOR
         button.isUserInteractionEnabled = false
         return button
     }()

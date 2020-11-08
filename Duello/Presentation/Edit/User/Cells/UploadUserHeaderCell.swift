@@ -41,7 +41,7 @@ class UploadUserHeaderCell: UITableViewCell {
     
     //MARK: - Layout
     private func setupLayout() {
-        backgroundColor = DARKGRAYCOLOR
+        backgroundColor = ULTRADARKCOLOR
         
         addSubview(imageButton)
         imageButton.centerInSuperview(size: .init(width: 190, height: 190))

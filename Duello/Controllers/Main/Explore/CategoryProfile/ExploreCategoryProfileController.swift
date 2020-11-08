@@ -30,7 +30,7 @@ class ExploreCategoryProfileController: PostCollectionMasterViewController {
     }
     
     private func setupNavigationItems() {
-        navigationController?.navigationBar.tintColor = DARKGRAYCOLOR
+        navigationController?.navigationBar.tintColor = ULTRADARKCOLOR
         navigationItem.rightBarButtonItem = addContentButton
         self.navigationItem.leftBarButtonItem = backButton
     }

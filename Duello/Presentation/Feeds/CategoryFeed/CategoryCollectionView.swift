@@ -27,7 +27,7 @@ class CategoryCollectionView: UICollectionView {
     init(displayer: CategoryCollectionDisplayer) {
         self.displayer = displayer
         super.init(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-        backgroundColor = DARKGRAYCOLOR
+        backgroundColor = ULTRADARKCOLOR
         setup()
         setupBindablesToDisplayer()
         setupBindablesFromDisplayer()

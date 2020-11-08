@@ -28,10 +28,25 @@ class PostCollectionMasterViewController: ViewController {
         
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
+    }
+    
     //MARK: - Views
     var progressHud: JGProgressHUD?
     
     //MARK: - Delegation
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+        setNeedsStatusBarAppearanceUpdate()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         displayer.viewIsAppeared.accept(true)
@@ -95,7 +110,7 @@ class PostCollectionMasterViewController: ViewController {
         displayer.showLoading.asObservable().subscribe(onNext: { [weak self] (isLoading) in
             guard let self = self else { return }
             if isLoading {
-                let progressHud = JGProgressHUD(style: .dark)
+                let progressHud = JGProgressHUD(style: .extraLight)
                 self.progressHud = progressHud
                 self.progressHud?.show(in: self.view.window ?? self.view)
             } else {

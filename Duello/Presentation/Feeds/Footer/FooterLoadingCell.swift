@@ -32,7 +32,7 @@ class FooterLoadingCell: UICollectionReusableView {
     
     private let endView: UIView = {
         let view = UIView()
-        view.backgroundColor = DARKGRAYCOLOR
+        view.backgroundColor = ULTRADARKCOLOR
         view.isHidden = true
         return view
     }()

@@ -46,7 +46,7 @@ class ImagesSlider: UIView {
      
      private lazy var pageControlContainerView: UIView = {
          let view = UIView()
-         view.backgroundColor = DARKGRAYCOLOR
+         view.backgroundColor = ULTRADARKCOLOR
          view.addSubview(pageControl)
          pageControl.fillSuperview()
          return view

@@ -19,14 +19,14 @@ class UserHeader: UICollectionReusableView {
     //MARK: - Setup
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = DARKGRAYCOLOR
+        backgroundColor = ULTRADARKCOLOR
         setupLayout()
     }
     
     //MARK: - Views
     private let profileImageButton: UIButton = {
         let button = UIButton(type: .system)
-        button.backgroundColor = DARKGRAYCOLOR
+        button.backgroundColor = ULTRADARKCOLOR
         button.layer.cornerRadius = 160 / 2
         button.clipsToBounds = true
         button.layer.borderColor = VERYLIGHTGRAYCOLOR.cgColor
@@ -37,7 +37,7 @@ class UserHeader: UICollectionReusableView {
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldCustomFont(size: MEDIUMFONTSIZE)
-        label.textColor = VERYLIGHTGRAYCOLOR
+        label.textColor = LIGHTFONTCOLOR
         label.numberOfLines = 1
         return label
     }()

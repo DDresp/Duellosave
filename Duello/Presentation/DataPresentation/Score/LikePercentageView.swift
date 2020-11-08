@@ -31,14 +31,14 @@ class LikePercentageView: UIView {
     //MARK: - Views
     private let shadowBarView: UIView = {
         let view = UIView()
-        view.backgroundColor = .black
+        view.backgroundColor = VERYLIGHTGRAYCOLOR
         view.clipsToBounds = true
         return view
     }()
     
     private let ratingBarView: UIView = {
         let view = UIView()
-        view.backgroundColor = LIGHTGRAYCOLOR
+        view.backgroundColor = VERYLIGHTGRAYCOLOR
         view.clipsToBounds = true
         return view
     }()
@@ -53,7 +53,7 @@ class LikePercentageView: UIView {
     
     private let stickView: UIView = {
         let stick = UIView()
-        stick.backgroundColor = VERYLIGHTGRAYCOLOR
+        stick.backgroundColor = STRONGFONTCOLOR
         stick.heightAnchor.constraint(equalToConstant: 10).isActive = true
         stick.widthAnchor.constraint(equalToConstant: 2).isActive = true
         stick.isHidden = true
@@ -64,7 +64,7 @@ class LikePercentageView: UIView {
         let label = UILabel()
         label.font = UIFont.boldCustomFont(size: VERYSMALLFONTSIZE)
         label.text = "0"
-        label.textColor = VERYLIGHTGRAYCOLOR
+        label.textColor = LIGHTFONTCOLOR
         label.isHidden = true
         return label
     }()

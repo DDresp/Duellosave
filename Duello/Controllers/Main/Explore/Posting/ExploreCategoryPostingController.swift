@@ -33,7 +33,7 @@ class ExploreCategoryPostingController: ViewController {
     let uploadImageButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("upload Image", for: .normal)
-        button.setTitleColor(DARKGRAYCOLOR, for: .normal)
+        button.setTitleColor(ULTRADARKCOLOR, for: .normal)
         button.backgroundColor = .white
         button.isHidden = true
         return button
@@ -42,7 +42,7 @@ class ExploreCategoryPostingController: ViewController {
     let uploadVideoButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("upload Video", for: .normal)
-        button.setTitleColor(DARKGRAYCOLOR, for: .normal)
+        button.setTitleColor(ULTRADARKCOLOR, for: .normal)
         button.backgroundColor = .white
         button.isHidden = true
         return button
@@ -51,7 +51,7 @@ class ExploreCategoryPostingController: ViewController {
     let uploadInstagramVideoButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("upload instagram video", for: .normal)
-        button.setTitleColor(DARKGRAYCOLOR, for: .normal)
+        button.setTitleColor(ULTRADARKCOLOR, for: .normal)
         button.backgroundColor = .white
         button.isHidden = true
         return button
@@ -60,7 +60,7 @@ class ExploreCategoryPostingController: ViewController {
     let uploadInstagramImageButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("upload instagram image", for: .normal)
-        button.setTitleColor(DARKGRAYCOLOR, for: .normal)
+        button.setTitleColor(ULTRADARKCOLOR, for: .normal)
         button.backgroundColor = .white
         button.isHidden = true
         return button

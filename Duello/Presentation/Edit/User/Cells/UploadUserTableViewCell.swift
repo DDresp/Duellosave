@@ -89,7 +89,7 @@ class UploadUserTableViewCell: UITableViewCell, UITextFieldDelegate {
         guard let displayer = displayer else { return }
         nameTextField.placeholder = displayer.namePlaceholderString
         nameTextField.text = displayer.name.value
-        nameTextField.textColor = displayer.hasDefaultLink ? LINKCOLOR : DARKGRAYCOLOR
+        nameTextField.textColor = displayer.hasDefaultLink ? LINKCOLOR : ULTRADARKCOLOR
         nameTextField.setContentHuggingPriority(.defaultLow, for: .horizontal)
         nameTextField.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
     }
@@ -188,7 +188,7 @@ class UploadUserTableViewCell: UITableViewCell, UITextFieldDelegate {
         
         guard let displayerLinkIsEdited = displayer.linkIsEdited else { return }
         displayerLinkIsEdited.asObservable().map({ (isEdited) -> UIColor in
-            return isEdited ? LINKCOLOR : DARKGRAYCOLOR
+            return isEdited ? LINKCOLOR : ULTRADARKCOLOR
         }).subscribe(onNext: { [weak self] (color) in
             self?.nameTextField.textColor = color
         }).disposed(by: disposeBag)

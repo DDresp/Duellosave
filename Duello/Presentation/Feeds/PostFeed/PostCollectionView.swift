@@ -34,13 +34,11 @@ class PostCollectionView: UICollectionView {
     let footerIdentifier = "footer"
     let emptyIdentifier = "empty"
     
-    private let refreshController = UIRefreshControl()
-    
     //MARK: - Setup
     init(displayer: PostCollectionDisplayer) {
         self.displayer = displayer
         super.init(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-        backgroundColor = VERYLIGHTGRAYCOLOR
+        backgroundColor = ULTRADARKCOLOR
         setup()
         setupBindablesToDisplayer()
         setupBindablesFromDisplayer()
@@ -76,6 +74,14 @@ class PostCollectionView: UICollectionView {
         }
         
     }
+    
+    //MARK: - Views
+    
+    private let refreshController: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.tintColor = UIColor.white
+        return refreshControl
+    }()
     
     //MARK: - Reactive
     private let disposeBag = DisposeBag()

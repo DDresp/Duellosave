@@ -51,7 +51,7 @@ class UploadTableViewController<T: UploadDisplayer>: TableViewController {
         if displayer?.cancelTapped != nil {
             navigationItem.leftBarButtonItem = cancelButton
         }
-        navigationItem.rightBarButtonItem?.tintColor = NAVBARCOLOR
+        navigationItem.rightBarButtonItem?.tintColor = NAVBARBUTTONCOLOR
         
     }
     

@@ -12,7 +12,7 @@ class DarkSquaredButton: UIButton {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = DARKGRAYCOLOR
+        backgroundColor = ULTRADARKCOLOR
         setTitleColor(UIColor.white, for: .normal)
         titleLabel?.font = UIFont.lightCustomFont(size: SMALLFONTSIZE)
         layer.cornerRadius = 5

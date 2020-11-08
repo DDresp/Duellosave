@@ -24,7 +24,7 @@ class InputTextField: UITextField {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        textColor = DARKGRAYCOLOR
+        textColor = STRONGFONTCOLOR
         autocorrectionType = .no
         font = UIFont.lightCustomFont(size: SMALLFONTSIZE)
         backgroundColor = UIColor.white

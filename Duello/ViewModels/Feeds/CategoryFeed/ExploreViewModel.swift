@@ -12,6 +12,9 @@ import Firebase
 
 class ExploreViewModel: CategoryCollectionMasterDisplayer {
     
+    //MARK: - Type Alias
+    typealias CategoryAd = (CategoryModel, PostModel?)
+    
     //MARK: - Coordinator
     weak var coordinator: ExploreCoordinatorType? {
         didSet {
@@ -56,13 +59,38 @@ class ExploreViewModel: CategoryCollectionMasterDisplayer {
         isFetchingCategories = true
         
         DispatchQueue.global(qos: .background).async {
-            FetchingService.shared.fetchCategories(orderKey: "creationDate", limit: self.fetchSteps, startId: lastCategoryId).subscribe(onNext: { [weak self] (categories) in
+            
+            FetchingService.shared.fetchCategories(orderKey: "creationDate", limit: self.fetchSteps, startId: lastCategoryId).flatMap { (categoryModels: [CategoryModel]) -> Observable<[CategoryAd]> in
+                return Observable.from(categoryModels).flatMap { (categoryModel: CategoryModel) -> Observable<CategoryAd> in
+                    return FetchingService.shared.fetchCategoryPosts(for: categoryModel.id ?? "", limit: 1, startId: nil).map { (postModels: [PostModel]) -> CategoryAd in
+                        if postModels.isEmpty {
+                            return (categoryModel, nil)
+                        } else {
+                            return (categoryModel, postModels[0])
+                        }
+                    }
+                }.toArray()
+            }.subscribe(onNext: { [weak self] (categoryAds) in
+                
                 self?.isFetchingCategories = false
+                let categories = categoryAds.map { (categoryAd) -> CategoryModel in
+                    return categoryAd.0
+                }
+                
                 let reachedEnd = categories.count < (self?.fetchSteps ?? 0)
                 self?.loadedAllCategories.accept(reachedEnd)
                 self?.categories.append(contentsOf: categories)
                 self?.displayedCategories.accept(self?.categories)
             }).disposed(by: self.disposeBag)
+            
+        
+//            FetchingService.shared.fetchCategories(orderKey: "creationDate", limit: self.fetchSteps, startId: lastCategoryId).subscribe(onNext: { [weak self] (categories) in
+//                self?.isFetchingCategories = false
+//                let reachedEnd = categories.count < (self?.fetchSteps ?? 0)
+//                self?.loadedAllCategories.accept(reachedEnd)
+//                self?.categories.append(contentsOf: categories)
+//                self?.displayedCategories.accept(self?.categories)
+//            }).disposed(by: self.disposeBag)
         }
     
     }

@@ -18,7 +18,7 @@ class SmallProfileImageView: UIImageView {
         super.init(frame: frame)
         clipsToBounds = true
         layer.cornerRadius = 30 / 2
-        backgroundColor = DARKGRAYCOLOR
+        backgroundColor = DARKCOLOR
     }
     
     required init?(coder aDecoder: NSCoder) {
