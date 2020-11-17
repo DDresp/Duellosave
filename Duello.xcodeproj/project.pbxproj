@@ -3,12 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		140AEE302411A96400258DE8 /* Ideas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140AEE2F2411A96400258DE8 /* Ideas.swift */; };
 		140AEE322412FD0E00258DE8 /* PostCollectionMasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140AEE312412FD0E00258DE8 /* PostCollectionMasterViewController.swift */; };
+		145DFBFE25639FCF001542D9 /* HomeSettingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145DFBFD25639FCF001542D9 /* HomeSettingsCoordinator.swift */; };
+		145DFC062563A1D2001542D9 /* SettingsCoordinatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145DFC052563A1D2001542D9 /* SettingsCoordinatorType.swift */; };
 		14643D7824463D0B00B725EE /* StringArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14643D7724463D0B00B725EE /* StringArray.swift */; };
 		14643D7E24472FE800B725EE /* UploadingService_Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14643D7D24472FE800B725EE /* UploadingService_Report.swift */; };
 		14643D802448425F00B725EE /* ReportStatusType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14643D7F2448425F00B725EE /* ReportStatusType.swift */; };
@@ -375,6 +377,8 @@
 		140AEE2E2411935300258DE8 /* Duello.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Duello.entitlements; sourceTree = "<group>"; };
 		140AEE2F2411A96400258DE8 /* Ideas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ideas.swift; sourceTree = "<group>"; };
 		140AEE312412FD0E00258DE8 /* PostCollectionMasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCollectionMasterViewController.swift; sourceTree = "<group>"; };
+		145DFBFD25639FCF001542D9 /* HomeSettingsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSettingsCoordinator.swift; sourceTree = "<group>"; };
+		145DFC052563A1D2001542D9 /* SettingsCoordinatorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCoordinatorType.swift; sourceTree = "<group>"; };
 		14643D7724463D0B00B725EE /* StringArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringArray.swift; sourceTree = "<group>"; };
 		14643D7D24472FE800B725EE /* UploadingService_Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadingService_Report.swift; sourceTree = "<group>"; };
 		14643D7F2448425F00B725EE /* ReportStatusType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportStatusType.swift; sourceTree = "<group>"; };
@@ -752,6 +756,14 @@
 				1475AE4724103FF500F1D24F /* VideoCacheManager.swift */,
 			);
 			path = Funeral;
+			sourceTree = "<group>";
+		};
+		145DFBFC25639F8E001542D9 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				145DFBFD25639FCF001542D9 /* HomeSettingsCoordinator.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		14643D7924467DD500B725EE /* UserPostFeed */ = {
@@ -1497,7 +1509,6 @@
 			children = (
 				1475AF2D24104BBE00F1D24F /* MainCoordinator.swift */,
 				14B671B8243916480083F663 /* Explore */,
-				14B671742436062C0083F663 /* CategoryCreation */,
 				149BC5C32421827E00CFBBC7 /* News */,
 				1475AF2C24104BB200F1D24F /* Home */,
 			);
@@ -1508,6 +1519,7 @@
 			isa = PBXGroup;
 			children = (
 				1475AF2F24104BD300F1D24F /* HomeCoordinator.swift */,
+				145DFBFC25639F8E001542D9 /* Settings */,
 				1475AF3124104BDA00F1D24F /* UpdateUser */,
 			);
 			path = Home;
@@ -2462,13 +2474,6 @@
 			path = FromUser;
 			sourceTree = "<group>";
 		};
-		14B671742436062C0083F663 /* CategoryCreation */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = CategoryCreation;
-			sourceTree = "<group>";
-		};
 		14B67177243611930083F663 /* UploadCategory */ = {
 			isa = PBXGroup;
 			children = (
@@ -2772,6 +2777,7 @@
 			isa = PBXGroup;
 			children = (
 				1475AF1F24104B2200F1D24F /* HomeCoordinatorType.swift */,
+				145DFC052563A1D2001542D9 /* SettingsCoordinatorType.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -3004,17 +3010,16 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Duello/Pods-Duello-resources.sh",
-				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Duello/Pods-Duello-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Duello/Pods-Duello-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Duello/Pods-Duello-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Duello/Pods-Duello-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		60CA72B833200D489A720F2D /* [CP] Check Pods Manifest.lock */ = {
@@ -3076,63 +3081,16 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Duello/Pods-Duello-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework",
-				"${BUILT_PRODUCTS_DIR}/CountryPickerView/CountryPickerView.framework",
-				"${BUILT_PRODUCTS_DIR}/CropViewController/CropViewController.framework",
-				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
-				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
-				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
-				"${BUILT_PRODUCTS_DIR}/JGProgressHUD/JGProgressHUD.framework",
-				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
-				"${BUILT_PRODUCTS_DIR}/PryntTrimmerView/PryntTrimmerView.framework",
-				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
-				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
-				"${BUILT_PRODUCTS_DIR}/SKCountryPicker/SKCountryPicker.framework",
-				"${BUILT_PRODUCTS_DIR}/SteviaLayout/Stevia.framework",
-				"${BUILT_PRODUCTS_DIR}/TextFieldEffects/TextFieldEffects.framework",
-				"${BUILT_PRODUCTS_DIR}/UICircularProgressRing/UICircularProgressRing.framework",
-				"${BUILT_PRODUCTS_DIR}/YPImagePicker/YPImagePicker.framework",
-				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
-				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
-				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Duello/Pods-Duello-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl_grpc.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CountryPickerView.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CropViewController.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JGProgressHUD.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PryntTrimmerView.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SKCountryPicker.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Stevia.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TextFieldEffects.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UICircularProgressRing.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YPImagePicker.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Duello/Pods-Duello-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Duello/Pods-Duello-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Duello/Pods-Duello-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -3146,6 +3104,7 @@
 				14643D802448425F00B725EE /* ReportStatusType.swift in Sources */,
 				1475AE72241042A400F1D24F /* UploadingService.swift in Sources */,
 				1475AF912410530100F1D24F /* VideoPostViewModel.swift in Sources */,
+				145DFC062563A1D2001542D9 /* SettingsCoordinatorType.swift in Sources */,
 				1475AE592410414800F1D24F /* InstagramService_Images.swift in Sources */,
 				1475AF9B2410537000F1D24F /* UploadUserViewModel.swift in Sources */,
 				1475AF3D24104C8400F1D24F /* ExploreCategoryPostingUploadPostCoordinator.swift in Sources */,
@@ -3176,6 +3135,7 @@
 				1475AFC52410551500F1D24F /* EmailLoginViewModel.swift in Sources */,
 				14B671A3243645910083F663 /* UploadRoughMediaSelectorViewModel.swift in Sources */,
 				1475B0C42410609800F1D24F /* EllipsisButton.swift in Sources */,
+				145DFBFE25639FCF001542D9 /* HomeSettingsCoordinator.swift in Sources */,
 				1475AFC72410552100F1D24F /* FacebookLoginViewModel.swift in Sources */,
 				149BC5C5242182A400CFBBC7 /* NewsCoordinator.swift in Sources */,
 				1475AEAF2410460700F1D24F /* RawEmailUser.swift in Sources */,

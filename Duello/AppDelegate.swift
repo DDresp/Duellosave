@@ -24,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let attributes = [NSAttributedString.Key.font : NAVIGATIONBARBUTTONFONT]
         UINavigationBar.appearance().titleTextAttributes = attributes // Title fonts
         UIBarButtonItem.appearance().setTitleTextAttributes(attributes, for: .normal) // Bar Button fonts
+        
 
         //Facebook Login
         ApplicationDelegate.shared.application( application, didFinishLaunchingWithOptions: launchOptions)
@@ -51,7 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let isFacebookOpenUrl = ApplicationDelegate.shared.application(app, open: url, sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String, annotation: options[UIApplication.OpenURLOptionsKey.annotation])
 
         //Google Login
-        let isGoogleOpenUrl = GIDSignIn.sharedInstance().handle(url, sourceApplication:options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String, annotation: [:])
+        let isGoogleOpenUrl = GIDSignIn.sharedInstance().handle(url)
 
         if isGoogleOpenUrl { return true }
         if isFacebookOpenUrl { return true }

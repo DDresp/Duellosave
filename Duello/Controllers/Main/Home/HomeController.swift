@@ -41,11 +41,6 @@ class HomeController: PostCollectionMasterViewController {
     let logoutButton = UIBarButtonItem(title: "logout", style: .plain, target: nil, action: nil)
     let settingsButton = UIBarButtonItem(title: "settings", style: .plain, target: nil, action: nil)
     
-    lazy var collectionView: PostCollectionView = {
-        let collectionView = PostCollectionView(displayer: viewModel.homeCollectionViewModel)
-        return collectionView
-    }()
-    
     let editButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Edit", for: .normal)
@@ -54,13 +49,18 @@ class HomeController: PostCollectionMasterViewController {
         return button
     }()
     
+    lazy var collectionView: PostCollectionView = {
+        let collectionView = PostCollectionView(displayer: viewModel.homeCollectionViewModel)
+        return collectionView
+    }()
+    
     //MARK: - Layout
     private func setupCollectionViewLayout() {
         //so that the scrollView doesn't get hidden under the navigationBar
         edgesForExtendedLayout = []
         
         view.addSubview(editButton)
-        editButton.anchor(top: view.topAnchor, leading: nil, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 25, left: STANDARDSPACING, bottom: 0, right: 0), size: .init(width: 30, height: 25))
+        editButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: nil, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 25, left: STANDARDSPACING, bottom: 0, right: 0), size: .init(width: 30, height: 25))
         
         view.addSubview(collectionView)
         collectionView.anchor(top: editButton.bottomAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: STANDARDSPACING, left: 0, bottom: 0, right: 0))
@@ -74,6 +74,7 @@ class HomeController: PostCollectionMasterViewController {
     private func setupBindablesToDisplayer() {
         logoutButton.rx.tap.asObservable().bind(to: viewModel.logoutTapped).disposed(by: disposeBag)
         settingsButton.rx.tap.asObservable().bind(to: viewModel.settingsTapped).disposed(by: disposeBag)
+        editButton.rx.tap.asObservable().bind(to: viewModel.editingTapped).disposed(by: disposeBag)
     }
     
     required init?(coder aDecoder: NSCoder) {

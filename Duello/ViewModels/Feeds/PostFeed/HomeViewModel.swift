@@ -34,6 +34,7 @@ class HomeViewModel: SimplePostCollectionMasterViewModel {
     
     var settingsTapped: PublishSubject<Void> = PublishSubject<Void>()
     var logoutTapped: PublishSubject<Void> = PublishSubject<Void>()
+    var editingTapped: PublishSubject<Void> = PublishSubject<Void>()
     
     //MARK: - Setup
     init() {
@@ -167,6 +168,12 @@ class HomeViewModel: SimplePostCollectionMasterViewModel {
         }.flatMap { (user) -> Observable<UserModel> in
             return Observable.from(optional: user)
             }.bind(to: coordinator.requestedSettings).disposed(by: disposeBag)
+        
+        editingTapped.map { [weak self] (_) -> UserModel? in
+            return self?.user.value
+        }.flatMap { (user) -> Observable<UserModel> in
+            return Observable.from(optional: user)
+        }.bind(to: coordinator.requestedEditing).disposed(by: disposeBag)
         
     }
     

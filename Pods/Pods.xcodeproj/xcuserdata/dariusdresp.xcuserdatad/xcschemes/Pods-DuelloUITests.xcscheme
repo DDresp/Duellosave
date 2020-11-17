@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0930"
+   LastUpgradeVersion = "1100"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "ACAC60158844B074C2DCE1A122240948"
+               BlueprintIdentifier = "3A97B16546B56F545F24E8B4B460173B"
                BuildableName = "Pods_DuelloUITests.framework"
                BlueprintName = "Pods-DuelloUITests"
                ReferencedContainer = "container:Pods.xcodeproj">

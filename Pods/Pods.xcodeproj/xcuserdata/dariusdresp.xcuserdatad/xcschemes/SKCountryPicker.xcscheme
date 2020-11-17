@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0930"
+   LastUpgradeVersion = "1100"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E69E181029F7858E26A14DE096C52908"
+               BlueprintIdentifier = "CD6AE62B70B78355A3257C4DC46F7A3E"
+               BuildableName = "SKCountryPicker.framework"
                BlueprintName = "SKCountryPicker"
-               ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "SKCountryPicker.framework">
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

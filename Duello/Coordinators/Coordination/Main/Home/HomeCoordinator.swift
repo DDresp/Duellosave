@@ -13,6 +13,7 @@ class HomeCoordinator: HomeCoordinatorType {
     
     //MARK: - ChildCoordinators
     var homeUpdateUserCoordinator: HomeUpdateUserCoordinator?
+    var homeSettingsCoordinator: HomeSettingsCoordinator?
     
     //MARK: - ViewModels
     lazy var viewModel: HomeViewModel = {
@@ -24,6 +25,7 @@ class HomeCoordinator: HomeCoordinatorType {
     //MARK: - Bindables
     var loggedOut = PublishSubject<Void>()
     var requestedSettings = PublishSubject<UserModel>()
+    var requestedEditing = PublishSubject<UserModel>()
     
     //MARK: - Setup
     init() {
@@ -46,6 +48,11 @@ class HomeCoordinator: HomeCoordinatorType {
         requestedSettings.subscribe(onNext: { [weak self] (user) in
             self?.goToUpdateUser(user: user)
         }).disposed(by: disposeBag)
+        
+        requestedEditing.subscribe {[weak self] (user) in
+            self?.goToEditing(user: user)
+        }.disposed(by: disposeBag)
+        
     }
     
 }
@@ -56,11 +63,18 @@ extension HomeCoordinator {
     //GoTo
     private func goToUpdateUser(user: UserModel) {
         guard let rootController = presentedController else { return }
-//        guard let user = viewModel.homeCollectionViewModel.postHeaderDisplayer?.user.value else { return }
+        //        guard let user = viewModel.homeCollectionViewModel.postHeaderDisplayer?.user.value else { return }
         homeUpdateUserCoordinator = HomeUpdateUserCoordinator(rootController: rootController, user: user)
         homeUpdateUserCoordinator?.start()
         setupUpdateUserBindables()
         
+    }
+    
+    private func goToEditing(user: UserModel) {
+        guard let rootController = presentedController else { return }
+        homeSettingsCoordinator = HomeSettingsCoordinator(rootController: rootController, user: user)
+        homeSettingsCoordinator?.start()
+        setupBindablesFromSettings()
     }
     
     //Reactive
@@ -76,6 +90,20 @@ extension HomeCoordinator {
             self?.viewModel.homeCollectionViewModel.needsRestart.accept(true)
             self?.homeUpdateUserCoordinator?.presentedController?.dismiss(animated: true, completion: nil)
             self?.homeUpdateUserCoordinator = nil
+        }).disposed(by: disposeBag)
+    }
+    
+    private func setupBindablesFromSettings() {
+        homeSettingsCoordinator?.closed.asObservable().subscribe(onNext: { [weak self] (_) in
+            self?.homeSettingsCoordinator?.presentedController?.dismiss(animated: true, completion: nil)
+            self?.homeSettingsCoordinator = nil
+        }).disposed(by: disposeBag)
+        
+        homeSettingsCoordinator?.editedUser.asObservable().subscribe(onNext: { [weak self] (user) in
+            self?.viewModel.forceFetchingAll = true
+            self?.viewModel.homeCollectionViewModel.needsRestart.accept(true)
+            self?.homeSettingsCoordinator?.presentedController?.dismiss(animated: true, completion: nil)
+            self?.homeSettingsCoordinator = nil
         }).disposed(by: disposeBag)
     }
     

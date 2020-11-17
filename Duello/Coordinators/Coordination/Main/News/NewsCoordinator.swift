@@ -14,7 +14,7 @@ class NewsCoordinator: HomeCoordinatorType {
     //Temporary
     var loggedOut: PublishSubject<Void> = PublishSubject()
     var requestedSettings: PublishSubject<UserModel> = PublishSubject()
-    
+    var requestedEditing: PublishSubject<UserModel> = PublishSubject()
 
     //MARK: - ViewModels
     lazy var viewModel: HomeViewModel = {
