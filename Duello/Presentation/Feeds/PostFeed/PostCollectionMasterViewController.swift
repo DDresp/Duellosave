@@ -28,12 +28,12 @@ class PostCollectionMasterViewController: ViewController {
         
     }
     
+    //MARK: - Views
+    var progressHud: JGProgressHUD?
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         .lightContent
     }
-    
-    //MARK: - Views
-    var progressHud: JGProgressHUD?
     
     //MARK: - Delegation
     override func viewWillAppear(_ animated: Bool) {

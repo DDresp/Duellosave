@@ -33,7 +33,7 @@ class UploadUserTableViewController<T: EditUserDisplayer>: UploadTableViewContro
         tableView.dataSource = datasource
         tableView.delegate = delegate
         
-        navigationItem.title = "Profile Settings"
+        navigationItem.title = "Edit"
     }
     
     //MARK: - Views
@@ -87,7 +87,6 @@ class UploadUserTableViewController<T: EditUserDisplayer>: UploadTableViewContro
     }
     
     //MARK: - Reactive
-    
     private func setupBindablesFromDisplayer() {
         
         displayer?.showImagePickerView.asObservable().subscribe(onNext: { [weak self] (_) in

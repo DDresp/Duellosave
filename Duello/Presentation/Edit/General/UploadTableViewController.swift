@@ -34,7 +34,7 @@ class UploadTableViewController<T: UploadDisplayer>: TableViewController {
         tableView.contentInset = UIEdgeInsets(top: -dummyViewHeight, left: 0, bottom: 0, right: 0)
 
         
-        tableView.backgroundColor = EXTREMELIGHTGRAYCOLOR
+        tableView.backgroundColor = BLACK
         tableView.keyboardDismissMode = .interactive
         tableView.allowsSelection = false
         tableView.tableFooterView = UIView()
@@ -51,14 +51,13 @@ class UploadTableViewController<T: UploadDisplayer>: TableViewController {
         if displayer?.cancelTapped != nil {
             navigationItem.leftBarButtonItem = cancelButton
         }
-        navigationItem.rightBarButtonItem?.tintColor = NAVBARBUTTONCOLOR
         
     }
     
     //MARK: - Views
     var progressHud: JGProgressHUD?
     
-    lazy var submitButton = UIBarButtonItem(title: "Submit", style: .done, target: nil, action: nil)
+    lazy var submitButton = UIBarButtonItem(title: "Save", style: .done, target: nil, action: nil)
     lazy var cancelButton = UIBarButtonItem(title: "Cancel", style: .done, target: nil, action: nil)
     
     //MARK: - Interactions

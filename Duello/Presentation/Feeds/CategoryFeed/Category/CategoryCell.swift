@@ -17,14 +17,14 @@ class CategoryCell: UICollectionViewCell {
     //MARK: - Setup
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = DARKCOLOR
+        backgroundColor = DARK_GRAY
         setupLayout()
     }
 
     //MARK: - Views
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.textColor = STRONGFONTCOLOR
+        label.textColor = WHITE
         label.font = UIFont.boldCustomFont(size: MEDIUMFONTSIZE)
         label.isUserInteractionEnabled = true
         label.numberOfLines = 0
@@ -33,7 +33,7 @@ class CategoryCell: UICollectionViewCell {
 
     private lazy var descriptionLabel: UILabel = {
         let label = UILabel()
-        label.textColor = LIGHTFONTCOLOR
+        label.textColor = LIGHT_GRAY
         label.font = UIFont.lightCustomFont(size: SMALLFONTSIZE)
         label.numberOfLines = 3
         return label

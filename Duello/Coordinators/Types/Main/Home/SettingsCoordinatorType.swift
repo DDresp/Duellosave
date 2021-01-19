@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 
 protocol SettingsCoordinatorType: FlowCoordinatorType {
-    var closed: PublishRelay<Void> { get }
-    var editedUser: PublishRelay<UserModel?> { get }
+    var requestedCancel: PublishRelay<Void> { get }
+    var didSetUser: PublishRelay<UserModel?> { get }
     
 }

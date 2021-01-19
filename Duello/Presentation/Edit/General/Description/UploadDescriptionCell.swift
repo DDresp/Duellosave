@@ -33,7 +33,7 @@ class UploadDescriptionCell: UITableViewCell {
     let placeholderLabel: InputLabel = {
         let label = InputLabel()
         label.text = "Add a description for your post"
-        label.textColor = PLACEHOLDERCOLOR
+        label.textColor = LIGHT_GRAY
         label.isUserInteractionEnabled = true
         label.backgroundColor = .clear
         return label

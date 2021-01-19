@@ -27,7 +27,7 @@ class UploadSingleImageMediaPostCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         clipsToBounds = true
-        backgroundColor = EXTREMELIGHTGRAYCOLOR
+        backgroundColor = LIGHT_GRAY
         addSubview(singleImageView)
         singleImageView.fillSuperview()
         

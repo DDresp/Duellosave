@@ -85,15 +85,15 @@ class EditUserItemViewModel: EditUserItemDisplayer {
         case .twitter: return "twitter name"
         case .vimeo: return "vimeo name"
         case .tiktok: return "tiktok name"
-        case .additionalLink: return "additional link title"
+        case .additionalLink: return "title for the link"
         }
     }
     
     var namePlaceholderString: String {
         if isOptional {
-            return "Add your \(placeholderName) (optional)"
-        } else {
             return "Add your \(placeholderName)"
+        } else {
+            return "Add your \(placeholderName) (required)"
         }
     }
     

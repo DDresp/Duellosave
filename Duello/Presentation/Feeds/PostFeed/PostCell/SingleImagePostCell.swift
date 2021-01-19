@@ -30,7 +30,7 @@ class SingleImagePostCell: PostCell {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.backgroundColor = VERYLIGHTGRAYCOLOR
+        imageView.backgroundColor = DARK_GRAY
         imageView.isUserInteractionEnabled = true
         imageView.addGestureRecognizer(doubleTapGesture)
         return imageView

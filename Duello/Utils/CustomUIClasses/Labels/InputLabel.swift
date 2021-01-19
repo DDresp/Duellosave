@@ -21,7 +21,7 @@ class InputLabel: UILabel {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        textColor = STRONGFONTCOLOR
+        textColor = WHITE
         font = UIFont.lightCustomFont(size: SMALLFONTSIZE)
         backgroundColor = UIColor.white
         

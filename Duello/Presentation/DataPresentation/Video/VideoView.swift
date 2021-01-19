@@ -5,6 +5,7 @@
 //  Created by Darius Dresp on 3/4/20.
 //  Copyright © 2020 Darius Dresp. All rights reserved.
 //
+//
 
 import RxSwift
 import RxCocoa
@@ -51,7 +52,7 @@ class VideoView: UIView {
 
     let soundIcon: UIImageView = {
         let imageView = UIImageView()
-        imageView.tintColor = VERYLIGHTGRAYCOLOR
+        imageView.tintColor = LIGHT_GRAY
         imageView.contentMode = .scaleToFill
         return imageView
     }()
@@ -112,7 +113,7 @@ class VideoView: UIView {
         controlsContainerView.addSubview(soundView)
         soundView.anchor(top: topAnchor, leading: nil, bottom: nil, trailing: trailingAnchor, size: .init(width: 50, height: 50))
         soundView.addSubview(soundIcon)
-        soundIcon.anchor(top: nil, leading: nil, bottom: nil, trailing: nil, padding: .zero, size: .init(width: 30, height: 30))
+        soundIcon.anchor(top: nil, leading: nil, bottom: nil, trailing: nil, padding: .zero, size: .init(width: 20, height: 20))
         soundIcon.centerInSuperview()
 
         controlsContainerView.addSubview(playBackSlider)

@@ -38,7 +38,7 @@ class PostCollectionView: UICollectionView {
     init(displayer: PostCollectionDisplayer) {
         self.displayer = displayer
         super.init(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-        backgroundColor = ULTRADARKCOLOR
+        backgroundColor = BLACK
         setup()
         setupBindablesToDisplayer()
         setupBindablesFromDisplayer()

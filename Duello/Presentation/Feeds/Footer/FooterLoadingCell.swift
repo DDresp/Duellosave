@@ -23,7 +23,7 @@ class FooterLoadingCell: UICollectionReusableView {
     //MARK: - Setup
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = VERYLIGHTGRAYCOLOR
+        backgroundColor = DARK_GRAY
         setupLayout()
     }
     
@@ -32,7 +32,7 @@ class FooterLoadingCell: UICollectionReusableView {
     
     private let endView: UIView = {
         let view = UIView()
-        view.backgroundColor = ULTRADARKCOLOR
+        view.backgroundColor = BLACK
         view.isHidden = true
         return view
     }()

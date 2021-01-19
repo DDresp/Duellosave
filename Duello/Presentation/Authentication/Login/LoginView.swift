@@ -49,7 +49,7 @@ class LoginView: UIView {
     private lazy var forgotPasswordButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Forgot Password?", for: .normal)
-        button.setTitleColor(ULTRADARKCOLOR, for: .normal)
+        button.setTitleColor(BLACK, for: .normal)
         button.titleLabel?.font = UIFont.lightCustomFont(size: SMALLFONTSIZE)
         return button
     }()
@@ -58,7 +58,7 @@ class LoginView: UIView {
         let label = UILabel()
         label.text = "You can also sign in by using facebook, google or your phone number. Click on the corresponding items to do so."
         label.font = UIFont.mediumCustomFont(size: VERYSMALLFONTSIZE)
-        label.textColor = LIGHTFONTCOLOR
+        label.textColor = GRAY
         label.numberOfLines = 0
         label.textAlignment = .center
         return label

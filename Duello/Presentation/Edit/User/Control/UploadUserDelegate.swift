@@ -22,7 +22,7 @@ class UploadUserDelegate: NSObject, UITableViewDelegate {
     //MARK: - Delegation
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 { return 0 }
-        return 35
+        return 25
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -34,7 +34,7 @@ class UploadUserDelegate: NSObject, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
-            return 300
+            return 250
         }
         return UITableView.automaticDimension
     }

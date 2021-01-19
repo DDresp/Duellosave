@@ -21,7 +21,7 @@ class UploadSelectorCell: UITableViewCell {
     //MARK: - Views
     var label: UILabel = {
         let label = UILabel()
-        label.textColor = STRONGFONTCOLOR
+        label.textColor = WHITE
         label.font = UIFont.mediumCustomFont(size: MEDIUMFONTSIZE)
         return label
     }()

@@ -34,8 +34,8 @@ class AuthenticationController: ViewController {
         setupLayout()
         setupBindablesFromViewModel()
         
-        //old
-//        GIDSignIn.sharedInstance().uiDelegate = self  //for Google SignIn
+        GIDSignIn.sharedInstance()?.presentingViewController = self
+
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {

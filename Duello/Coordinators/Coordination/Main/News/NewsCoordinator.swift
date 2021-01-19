@@ -12,7 +12,7 @@ import RxSwift
 class NewsCoordinator: HomeCoordinatorType {
     
     //Temporary
-    var loggedOut: PublishSubject<Void> = PublishSubject()
+    var requestedLogout: PublishSubject<Void> = PublishSubject()
     var requestedSettings: PublishSubject<UserModel> = PublishSubject()
     var requestedEditing: PublishSubject<UserModel> = PublishSubject()
 

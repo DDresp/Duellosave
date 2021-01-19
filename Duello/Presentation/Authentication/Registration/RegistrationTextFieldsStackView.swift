@@ -53,7 +53,7 @@ class RegistrationTextFieldsStackView: UIStackView, UITextFieldDelegate {
         textField.keyboardType = .emailAddress
         textField.autocorrectionType = UITextAutocorrectionType.no
         textField.placeholder = "Email"
-        textField.borderActiveColor = PURPLECOLOR
+        textField.borderActiveColor = PURPLE
         return textField
     }()
     
@@ -63,7 +63,7 @@ class RegistrationTextFieldsStackView: UIStackView, UITextFieldDelegate {
         textField.keyboardType = UIKeyboardType.default
         textField.autocorrectionType = UITextAutocorrectionType.no
         textField.placeholder = "Password"
-        textField.borderActiveColor = PURPLECOLOR
+        textField.borderActiveColor = PURPLE
         return textField
     }()
     
@@ -73,7 +73,7 @@ class RegistrationTextFieldsStackView: UIStackView, UITextFieldDelegate {
         textField.keyboardType = UIKeyboardType.default
         textField.autocorrectionType = UITextAutocorrectionType.no
         textField.placeholder = "Confirm Password"
-        textField.borderActiveColor = PURPLECOLOR
+        textField.borderActiveColor = PURPLE
         return textField
     }()
     
@@ -107,19 +107,19 @@ class RegistrationTextFieldsStackView: UIStackView, UITextFieldDelegate {
     
     private func emailIsValidChanged() {
         registrationDisplayer.emailIsValid.asDriver().map({ (isValid) -> UIColor in
-            return isValid ? GREENCOLOR : PURPLECOLOR
+            return isValid ? GREEN : PURPLE
         }).drive(emailTextField.rx.borderActiveColor).disposed(by: disposeBag)
     }
     
     private func passwordIsValidChanged() {
         registrationDisplayer.passwordIsValid.asDriver().map({ (isValid) -> UIColor in
-            return isValid ? GREENCOLOR : PURPLECOLOR
+            return isValid ? GREEN : PURPLE
         }).drive(passwordTextField.rx.borderActiveColor).disposed(by: disposeBag)
     }
     
     private func confirmedPasswordIsValidChanged() {
         registrationDisplayer.confirmedPasswordIsValid.asObservable().map { (isValid) -> UIColor in
-            return isValid ? GREENCOLOR : PURPLECOLOR
+            return isValid ? GREEN : PURPLE
             }.subscribe (onNext: { [weak self] (color) in
                 if (self?.confirmPasswordTextField.text?.count ?? 0) == 0 { return } //otherwise the textField will appear to be selected after clearing text entries
                 
@@ -147,9 +147,9 @@ class RegistrationTextFieldsStackView: UIStackView, UITextFieldDelegate {
             self?.registrationDisplayer.confirmedPassword.accept(nil)
             
             //otherwise bug that borderInactive Color doesnt show up
-            self?.emailTextField.borderActiveColor = PURPLECOLOR
-            self?.passwordTextField.borderActiveColor = PURPLECOLOR
-            self?.confirmPasswordTextField.borderActiveColor = PURPLECOLOR
+            self?.emailTextField.borderActiveColor = PURPLE
+            self?.passwordTextField.borderActiveColor = PURPLE
+            self?.confirmPasswordTextField.borderActiveColor = PURPLE
         }).disposed(by: disposeBag)
     }
     

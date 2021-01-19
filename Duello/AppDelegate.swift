@@ -19,12 +19,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         //Navigation UI
-        UINavigationBar.appearance().tintColor = NAVBARCANCELCOLOR
-        UINavigationBar.appearance().barTintColor = NAVBARCOLOR
-        let attributes = [NSAttributedString.Key.font : NAVIGATIONBARBUTTONFONT]
+        UINavigationBar.appearance().tintColor = LIGHT_GRAY
+        UINavigationBar.appearance().barTintColor = BLACK
+        UINavigationBar.appearance().isTranslucent = false
+        let attributes = [NSAttributedString.Key.font : UIFont.boldCustomFont(size: 16), NSAttributedString.Key.foregroundColor: LIGHT_GRAY]
         UINavigationBar.appearance().titleTextAttributes = attributes // Title fonts
         UIBarButtonItem.appearance().setTitleTextAttributes(attributes, for: .normal) // Bar Button fonts
-        
 
         //Facebook Login
         ApplicationDelegate.shared.application( application, didFinishLaunchingWithOptions: launchOptions)

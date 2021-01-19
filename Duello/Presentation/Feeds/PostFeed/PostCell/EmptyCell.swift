@@ -27,14 +27,14 @@ class EmptyCell: UICollectionViewCell {
         super.init(frame: frame)
         setupLayout()
         isHidden = true
-        backgroundColor = VERYLIGHTGRAYCOLOR
+        backgroundColor = DARK_GRAY
     }
     
     //MARK: - Views
     let label: UILabel = {
         let label = UILabel()
-        let attributedString = NSMutableAttributedString(string: "Welcome to Duello\n", attributes: [NSAttributedString.Key.font : UIFont.boldCustomFont(size: LARGEFONTSIZE), NSAttributedString.Key.foregroundColor: ULTRADARKCOLOR])
-        let nextAttributedString = NSAttributedString(string: "You haven't created any posts, yet", attributes: [NSAttributedString.Key.font: UIFont.mediumCustomFont(size: MEDIUMFONTSIZE), NSAttributedString.Key.foregroundColor: DARKCOLOR])
+        let attributedString = NSMutableAttributedString(string: "Welcome to Duello\n", attributes: [NSAttributedString.Key.font : UIFont.boldCustomFont(size: LARGEFONTSIZE), NSAttributedString.Key.foregroundColor: BLACK])
+        let nextAttributedString = NSAttributedString(string: "You haven't created any posts, yet", attributes: [NSAttributedString.Key.font: UIFont.mediumCustomFont(size: MEDIUMFONTSIZE), NSAttributedString.Key.foregroundColor: DARK_GRAY])
         attributedString.append(nextAttributedString)
         label.attributedText = attributedString
         label.textAlignment = .center

@@ -45,7 +45,7 @@ class UploadTitleCell: UITableViewCell {
     
     let emptyView: UIView = {
         let view = UIView()
-        view.backgroundColor = EXTREMELIGHTGRAYCOLOR
+        view.backgroundColor = LIGHT_GRAY
         view.heightAnchor.constraint(equalToConstant: 15).isActive = true
         return view
     }()

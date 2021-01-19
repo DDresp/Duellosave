@@ -59,7 +59,7 @@ extension MainCoordinator {
     
     //Reactive
     private func setupHomeBindables() {
-        homeCoordinator.loggedOut.asObservable().bind(to: loggedOut).disposed(by: disposeBag)
+        homeCoordinator.requestedLogout.asObservable().bind(to: loggedOut).disposed(by: disposeBag)
 
     }
     
