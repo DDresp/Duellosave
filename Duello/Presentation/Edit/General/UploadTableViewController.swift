@@ -68,16 +68,18 @@ class UploadTableViewController<T: UploadDisplayer>: TableViewController {
     //MARK: - Methods
     func resizeTextCell(with textView: UITextView) {
         
-        let startHeight = textView.frame.size.height
-        let calcHeight = textView.sizeThatFits(textView.frame.size).height  //iOS 8+ only
+        //DONT DELETE YET
         
-        if startHeight != calcHeight {
-            
-            UIView.setAnimationsEnabled(false) // Disable animations
-            self.tableView.beginUpdates()
-            self.tableView.endUpdates()
-            UIView.setAnimationsEnabled(true)
-        }
+//        let startHeight = textView.frame.size.height
+//        let calcHeight = textView.sizeThatFits(textView.frame.size).height  //iOS 8+ only
+//
+//        if startHeight != calcHeight {
+//
+//            UIView.setAnimationsEnabled(false) // Disable animations
+//            self.tableView.beginUpdates()
+//            self.tableView.endUpdates()
+//            UIView.setAnimationsEnabled(true)
+//        }
     }
     
     //MARK: - Reactive

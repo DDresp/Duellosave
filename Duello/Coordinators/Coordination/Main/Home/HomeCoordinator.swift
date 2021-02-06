@@ -31,7 +31,8 @@ class HomeCoordinator: HomeCoordinatorType {
         let homeController = HomeController(viewModel: viewModel)
         presentedController = homeController
         let navController = UINavigationController(rootViewController: presentedController)
-        navController.tabBarItem.title = "Home"
+        navController.tabBarItem.image = #imageLiteral(resourceName: "profileIcon").withRenderingMode(.alwaysTemplate)
+        navController.tabBarItem.title = "Profile"
         navigationController = navController
         setupBindables()
     }

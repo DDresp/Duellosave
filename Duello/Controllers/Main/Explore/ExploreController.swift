@@ -33,7 +33,6 @@ class ExploreController: CategoryCollectionMasterViewController {
     private func setupNavigationItems() {
         navigationItem.title = "Explore"
         navigationItem.rightBarButtonItem = addCategoryButton
-        
     }
     
     //MARK: - Views

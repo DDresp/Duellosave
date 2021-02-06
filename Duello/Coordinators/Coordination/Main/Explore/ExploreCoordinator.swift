@@ -31,6 +31,7 @@ class ExploreCoordinator: ExploreCoordinatorType {
         let exploreController = ExploreController(viewModel: viewModel)
         presentedController = exploreController
         let navController = UINavigationController(rootViewController: presentedController)
+        navController.tabBarItem.image = #imageLiteral(resourceName: "exploreIcon").withRenderingMode(.alwaysTemplate)
         navController.tabBarItem.title = "Explore"
         navigationController = navController
         setupBindables()

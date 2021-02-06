@@ -39,9 +39,8 @@ class CategoryCell: UICollectionViewCell {
         return label
     }()
     
-    private let topPostImageView: UIImageView = {
+    private let coverImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = #imageLiteral(resourceName: "image1").withRenderingMode(.alwaysOriginal)
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.layer.masksToBounds = true
@@ -68,11 +67,11 @@ class CategoryCell: UICollectionViewCell {
     
     private func setupLayout() {
         
-        contentView.addSubview(topPostImageView)
-        topPostImageView.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: nil, trailing: contentView.trailingAnchor, padding: .zero, size: .init(width: 0, height: 250))
+        contentView.addSubview(coverImageView)
+        coverImageView.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: nil, trailing: contentView.trailingAnchor, padding: .zero, size: .init(width: 0, height: 250))
         
         contentView.addSubview(stackView)
-        stackView.anchor(top: topPostImageView.bottomAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor, padding: .init(top: STANDARDSPACING, left: STANDARDSPACING, bottom: STANDARDSPACING, right: STANDARDSPACING), size: .zero)
+        stackView.anchor(top: coverImageView.bottomAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor, padding: .init(top: STANDARDSPACING, left: STANDARDSPACING, bottom: STANDARDSPACING, right: STANDARDSPACING), size: .zero)
     }
 
     //MARK: - Methods
@@ -90,6 +89,7 @@ class CategoryCell: UICollectionViewCell {
         
         layoutIfNeeded()
         
+        setupCoverImage(displayer: displayer)
         setupText(displayer: displayer)
 
         layoutIfNeeded()
@@ -97,6 +97,14 @@ class CategoryCell: UICollectionViewCell {
         setupBindablesToDisplayer()
         setupBindablesFromDisplayer()
 
+    }
+    
+    private func setupCoverImage(displayer: CategoryDisplayer) {
+        guard let urlString = displayer.imageUrl else {
+            coverImageView.image = #imageLiteral(resourceName: "image5").withRenderingMode(.alwaysOriginal)
+            return }
+        guard let url = URL(string: urlString) else { return }
+        coverImageView.sd_setImage(with: url)
     }
 
     private func setupText(displayer: CategoryDisplayer) {

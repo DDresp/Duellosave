@@ -86,7 +86,7 @@ class HomeController: PostCollectionMasterViewController {
     
     private func layoutCollectionView() {
         view.addSubview(collectionView)
-        collectionView.anchor(top: settingsButton.bottomAnchor, leading: view.leadingAnchor, bottom: view.bottomAnchor, trailing: view.trailingAnchor, padding: .init(top: STANDARDSPACING, left: 0, bottom: 0, right: 0))
+        collectionView.anchor(top: settingsButton.bottomAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: .init(top: STANDARDSPACING, left: 0, bottom: 0, right: 0))
     }
     
     

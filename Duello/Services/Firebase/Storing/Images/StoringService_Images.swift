@@ -11,6 +11,12 @@ import Firebase
 
 extension StoringService {
     
+    func storeCoverImage(image: UIImage) -> Observable<String> {
+        if !hasInternetConnection() { return Observable.error(StoringError.networkError) }
+        return uploadImage(image: image, path: "/categoryCoverImages/")
+
+    }
+    
     func storeSingleImage(image: UIImage) -> Observable<String> {
         if !hasInternetConnection() { return Observable.error(StoringError.networkError) }
         return uploadImage(image: image, path: "/postImages/")

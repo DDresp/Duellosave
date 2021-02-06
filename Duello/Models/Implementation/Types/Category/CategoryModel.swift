@@ -9,6 +9,7 @@
 protocol CategoryModel: Model {
     
     //MARK: - Attributes
+    var imageUrl: CategoryAttribute { get set }
     var title: CategoryAttribute { get set }
     var description: CategoryAttribute { get set }
     var creationDate: CategoryAttribute{ get set }
@@ -19,6 +20,7 @@ protocol CategoryModel: Model {
 extension CategoryModel {
     
     //MARK: - Getters
+    func getImageUrl() -> String? { return imageUrl.value?.toStringValue() }
     func getTitle() -> String { return title.value?.toStringValue() ?? "" }
     func getDescription() -> String { return description.value?.toStringValue() ?? "" }
     func getCreationDate() -> Double { return Double(creationDate.value?.toStringValue() ?? "0") ?? 0 }

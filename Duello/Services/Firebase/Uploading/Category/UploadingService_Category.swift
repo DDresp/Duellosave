@@ -10,7 +10,10 @@ import RxSwift
 
 extension UploadingService {
     
-    func create(category: CategoryModel) -> Observable<CategoryModel?> {
+    func create(category: CategoryModel?) -> Observable<CategoryModel?> {
+        guard let category = category else { return
+            Observable.error(UploadingError.unknown(description: "unknown error"))
+        }
         let id = UUID().uuidString
         return saveCategory(category: category, categoryId: id)
     }

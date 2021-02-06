@@ -53,7 +53,7 @@ class UploadUserTableViewCell: UITableViewCell, UITextFieldDelegate {
         textField.textColor = WHITE
         textField.autocorrectionType = .no
         textField.font = UIFont.boldCustomFont(size: SMALLFONTSIZE)
-        textField.attributedPlaceholder = NSAttributedString(string: textField.placeholder ?? "placeholder text", attributes: [NSAttributedString.Key.foregroundColor: GRAY])
+        textField.attributedPlaceholder = NSAttributedString(string: textField.placeholder ?? "placeholder text", attributes: [NSAttributedString.Key.foregroundColor: GRAY, NSAttributedString.Key.font: UIFont.mediumCustomFont(size: SMALLFONTSIZE)])
         textField.backgroundColor = BLACK
         return textField
     }()
@@ -82,7 +82,7 @@ class UploadUserTableViewCell: UITableViewCell, UITextFieldDelegate {
         textField.textColor = WHITE
         textField.autocorrectionType = .no
         textField.font = UIFont.boldCustomFont(size: SMALLFONTSIZE)
-        textField.attributedPlaceholder = NSAttributedString(string: textField.placeholder ?? "placeholder text", attributes: [NSAttributedString.Key.foregroundColor: GRAY])
+        textField.attributedPlaceholder = NSAttributedString(string: textField.placeholder ?? "placeholder text", attributes: [NSAttributedString.Key.foregroundColor: GRAY, NSAttributedString.Key.font: UIFont.mediumCustomFont(size: SMALLFONTSIZE)])
         textField.backgroundColor = BLACK
         textField.delegate = self
         return textField
@@ -136,7 +136,6 @@ class UploadUserTableViewCell: UITableViewCell, UITextFieldDelegate {
         guard let displayer = displayer else { return }
         nameTextField.placeholder = displayer.namePlaceholderString
         nameTextField.text = displayer.name.value
-//        nameTextField.textColor = displayer.hasDefaultLink ? WHITE : GRAY
     }
     
     private func setupIconImageView() {
@@ -161,12 +160,7 @@ class UploadUserTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     private func setupLinkTextField() {
         guard let displayer = displayer else { return }
-//        linkTextField = InputTextField()
         linkTextField.text = displayer.link?.value ?? ""
-//        linkTextField!.tag = linkTextFieldTag
-//        linkTextField!.delegate = self
-//        linkTextField!.setContentHuggingPriority(.defaultLow, for: .horizontal)
-//        linkTextField!.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
     }
     
     private func setupEmptyView() {
@@ -219,8 +213,8 @@ class UploadUserTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     private func setupLinkBindables() {
         guard let displayer = displayer else { return }
-
-//        guard let linkTextField = linkTextField else { return }
+        
+        
         guard let displayerLink = displayer.link else { return }
         linkTextField.rx.text.distinctUntilChanged().bind(to: displayerLink).disposed(by: disposeBag)
 
@@ -228,7 +222,6 @@ class UploadUserTableViewCell: UITableViewCell, UITextFieldDelegate {
         displayerLinkIsEdited.map({ (isEdited) -> UIColor in
             return isEdited ? WHITE : GRAY
         }).subscribe(onNext: { [weak self] (color) in
-//            self?.nameTextField.textColor = color
             self?.linkTextField.textColor = color
         }).disposed(by: disposeBag)
     }

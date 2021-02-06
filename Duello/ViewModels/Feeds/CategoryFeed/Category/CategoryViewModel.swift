@@ -17,6 +17,7 @@ class CategoryViewModel: CategoryDisplayer {
     //MARK: - Variables
     var index: Int
     var categoryId: String
+    var imageUrl: String?
     var title: String
     var description: String
     
@@ -29,6 +30,7 @@ class CategoryViewModel: CategoryDisplayer {
         self.category = category
         self.index = index
         self.categoryId = category.getId()
+        self.imageUrl = category.getImageUrl()
         self.description = category.getDescription()
         self.title = category.getTitle()
         setupBindablesFromOwnProperties()

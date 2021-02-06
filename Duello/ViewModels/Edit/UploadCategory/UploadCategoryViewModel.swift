@@ -29,6 +29,8 @@ class UploadCategoryViewModel: UploadCategoryDisplayer {
     //MARK: - Bindables
     var submitTapped: PublishSubject<Void> = PublishSubject<Void>()
     var cancelTapped: PublishSubject<Void>? = PublishSubject<Void>()
+    var image: BehaviorRelay<UIImage?> = BehaviorRelay<UIImage?>(value: nil)
+    var imageButtonTapped: BehaviorRelay<Void> = BehaviorRelay<Void>(value: ())
     var alert: BehaviorRelay<Alert?> = BehaviorRelay<Alert?>(value: nil)
     var isLoading = BehaviorRelay(value: false)
     
@@ -39,6 +41,12 @@ class UploadCategoryViewModel: UploadCategoryDisplayer {
     
     //MARK: - Getters
     func dataIsValid() -> Bool {
+        
+        if image.value == nil {
+            alert.accept(Alert(alertMessage: "You need a cover image.", alertHeader: "Not Finished"))
+            return false
+        }
+        
         if !titleDisplayer.titleIsValid.value {
             alert.accept(Alert(alertMessage: "You need a title.", alertHeader: "Not Finished"))
             return false
@@ -57,8 +65,9 @@ class UploadCategoryViewModel: UploadCategoryDisplayer {
     }
     
     //MARK: - Methods
-    private func makeCategory() -> CategoryModel {
+    private func makeCategory(imageUrl: String) -> CategoryModel {
         let category = Category()
+        category.imageUrl.value = imageUrl
         category.description.value = descriptionDisplayer.description.value
         category.title.value = titleDisplayer.title.value
         category.creationDate.value = Date().timeIntervalSince1970
@@ -71,18 +80,24 @@ class UploadCategoryViewModel: UploadCategoryDisplayer {
         if !dataIsValid() { return }
         isLoading.accept(true)
         
-        let category = makeCategory()
-        
-        UploadingService.shared.create(category: category).subscribe(onNext: { [weak self] (_) in
-            self?.isLoading.accept(false)
-            self?.coordinator?.didSaveCategory.accept(())
-            }, onError: { [weak self] (error) in
+        guard let image = image.value else {
+            isLoading.accept(false)
+            return
+        }
+
+        StoringService.shared.storeCoverImage(image: image).flatMapLatest { [weak self] (imageUrl) -> Observable<CategoryModel?> in
+            let category = self?.makeCategory(imageUrl: imageUrl)
+            return UploadingService.shared.create(category: category)
+            }.subscribe(onNext: { [weak self] (_) in
                 self?.isLoading.accept(false)
-                if let uploadError = error as? DuelloError {
-                    self?.alert.accept(Alert(alertMessage: uploadError.errorMessage, alertHeader: uploadError.errorHeader))
-                    print("error: ", error.localizedDescription)
-                }
-        }).disposed(by: disposeBag)
+                self?.coordinator?.didSaveCategory.accept(())
+                }, onError: { [weak self] (error) in
+                    self?.isLoading.accept(false)
+                    if let uploadError = error as? DuelloError {
+                        self?.alert.accept(Alert(alertMessage: uploadError.errorMessage, alertHeader: uploadError.errorHeader))
+                        print("error: ", error.localizedDescription)
+                    }
+            }).disposed(by: disposeBag)
         
     }
     
@@ -101,6 +116,7 @@ class UploadCategoryViewModel: UploadCategoryDisplayer {
             return
         }
         cancelTapped?.bind(to: coordinator.canceled).disposed(by: disposeBag)
+        imageButtonTapped.bind(to: coordinator.requestedImageUpload).disposed(by: disposeBag)
     }
     
 }

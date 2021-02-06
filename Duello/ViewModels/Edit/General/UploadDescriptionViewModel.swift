@@ -47,17 +47,9 @@ class UploadDescriptionViewModel: UploadDescriptionDisplayer {
             }.asObservable().bind(to: description).disposed(by: disposeBag)
         
         description.asDriver().map { (text) -> Int in
-            guard let text = text else { return 0}
+            guard let text = text else { return 0 }
             return text.count
             }.drive(numberOfCharacters).disposed(by: disposeBag)
-        
-        description.asDriver().map { (description) -> Bool in
-            if let text = description, text.count > 0 {
-                return true
-            } else {
-                return false
-            }
-            }.drive(showPlaceHolderLabel).disposed(by: disposeBag)
         
         description.asDriver().map { (description) -> Bool in
             if let text = description, text.count > 0, text.count <= self.maxCharacters {
@@ -67,13 +59,21 @@ class UploadDescriptionViewModel: UploadDescriptionDisplayer {
             }
             }.drive(descriptionIsValid).disposed(by: disposeBag)
         
-        Observable.of(didBeginEditing, didEndEditing).merge().withLatestFrom(description).map { (text) -> Bool in
-            if let text = text, text.count > 0 {
+        description.asDriver().map { (description) -> Bool in
+            if let text = description, text.count > 0 {
                 return true
             } else {
                 return false
             }
-            }.bind(to: showPlaceHolderLabel).disposed(by: disposeBag)
+            }.drive(showPlaceHolderLabel).disposed(by: disposeBag)
+        
+//        Observable.of(didBeginEditing, didEndEditing).merge().withLatestFrom(description).map { (text) -> Bool in
+//            if let text = text, text.count > 0 {
+//                return true
+//            } else {
+//                return false
+//            }
+//            }.bind(to: showPlaceHolderLabel).disposed(by: disposeBag)
     }
     
 }

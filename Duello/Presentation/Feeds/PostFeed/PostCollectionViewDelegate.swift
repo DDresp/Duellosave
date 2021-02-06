@@ -44,9 +44,9 @@ class PostCollectionViewDelegate: NSObject, UICollectionViewDelegate, UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-//        if displayer.hasNoPosts {
-//            return .zero
-//        }
+        if displayer.hasNoPosts || displayer.allDataLoaded.value {
+            return .zero
+        }
         return .init(width: collectionView.frame.width, height: 30)
     }
     

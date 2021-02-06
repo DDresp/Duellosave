@@ -72,7 +72,7 @@ class AuthenticationPhoneLoginController: ViewController {
         alert.addTextField { (textField) in
             textField.placeholder = "verification code"
             textField.font = UIFont.mediumCustomFont(size: MEDIUMFONTSIZE - 1)
-            textField.textColor = WHITE
+            textField.textColor = DARK_GRAY
             textField.keyboardType = .phonePad
             verificationCodeTextField = textField
         }

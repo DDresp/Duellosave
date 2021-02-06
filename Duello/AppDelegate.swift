@@ -25,6 +25,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let attributes = [NSAttributedString.Key.font : UIFont.boldCustomFont(size: 16), NSAttributedString.Key.foregroundColor: LIGHT_GRAY]
         UINavigationBar.appearance().titleTextAttributes = attributes // Title fonts
         UIBarButtonItem.appearance().setTitleTextAttributes(attributes, for: .normal) // Bar Button fonts
+        UITabBar.appearance().tintColor = LIGHT_GRAY
+        UITabBar.appearance().barTintColor = BLACK
+        
+        
 
         //Facebook Login
         ApplicationDelegate.shared.application( application, didFinishLaunchingWithOptions: launchOptions)
