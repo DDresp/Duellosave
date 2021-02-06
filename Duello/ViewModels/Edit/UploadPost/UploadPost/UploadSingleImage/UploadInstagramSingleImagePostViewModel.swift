@@ -17,18 +17,17 @@ class UploadInstagramSingleImagePostViewModel: UploadPostViewModel<InstagramSing
     let apiLink: String
     
     //MARK: - Setup
-    init(rawPost: RawInstagramSingleImagePost) {
+    init(rawPost: RawInstagramSingleImagePost, category: CategoryModel) {
         self.imageUrl = rawPost.singleImageUrl
         self.apiLink = rawPost.apiLink
-        super.init()
+        super.init(category: category)
         self.mediaRatio = rawPost.mediaRatio
     }
     
     //MARK: - Methods
-    private func makePost() -> InstagramSingleImagePost {
+    private func makePost() {
         post = InstagramSingleImagePost()
         post?.apiUrl.value = apiLink
-        return post ?? InstagramSingleImagePost()
     }
     
     //MARK: - Networking
@@ -36,10 +35,10 @@ class UploadInstagramSingleImagePostViewModel: UploadPostViewModel<InstagramSing
         super.saveData()
         if !dataIsValid() { return }
         
-        let post = makePost()
+        makePost()
         isLoading.accept(true)
         
-        UploadingService.shared.create(post: post).subscribe(onNext: { [weak self] (post) in
+        UploadingService.shared.create(post: self.post!).subscribe(onNext: { [weak self] (post) in
             self?.isLoading.accept(false)
             self?.coordinator?.didSavePost.accept(())
             }, onError: { [weak self] (error) in

@@ -15,7 +15,7 @@ class PlaySlider: UISlider {
         progressView.setProgress(progress, animated: animated)
     }
     
-    private let progressView = UIProgressView(progressViewStyle: .default)
+    private let progressView = UIProgressView(progressViewStyle: .bar)
     
     override init (frame: CGRect) {
          super.init(frame: frame)
@@ -37,8 +37,8 @@ class PlaySlider: UISlider {
         progressView.backgroundColor = .clear
         progressView.isUserInteractionEnabled = false
         progressView.progress = 0.0
-        progressView.progressTintColor = GREENCOLOR
-        progressView.trackTintColor = LIGHTGRAYCOLOR
+        progressView.progressTintColor = UIColor.gray
+        progressView.trackTintColor = DARK_GRAY
         
         addSubview(progressView)
         progressView.fillSuperview()

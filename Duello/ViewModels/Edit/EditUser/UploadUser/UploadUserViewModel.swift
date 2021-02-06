@@ -11,7 +11,7 @@ import RxCocoa
 import Firebase
 import SDWebImage
 
-class UploadUserViewModel: UploadUserDisplayer {
+class UploadUserViewModel: EditUserDisplayer {
     
     //MARK: - Coordinator
     weak var coordinator: UpdateUserCoordinatorType? {
@@ -21,18 +21,18 @@ class UploadUserViewModel: UploadUserDisplayer {
     }
     
     //MARK: - ChildViewModels
-    var uploadUserHeaderViewModel: UploadUserHeaderDisplayer = UploadUserHeaderViewModel()
+    var uploadUserHeaderViewModel: EditUserHeaderDisplayer = EditUserHeaderViewModel()
     
-    let itemViewModels: [UploadUserItemDisplayer] = [
-        UploadUserItemViewModel(itemType: .username),
-        UploadUserItemViewModel(itemType: .instagram),
-        UploadUserItemViewModel(itemType: .snapchat),
-        UploadUserItemViewModel(itemType: .youtube),
-        UploadUserItemViewModel(itemType: .facebook),
-        UploadUserItemViewModel(itemType: .twitter),
-        UploadUserItemViewModel(itemType: .vimeo),
-        UploadUserItemViewModel(itemType: .tiktok),
-        UploadUserItemViewModel(itemType: .additionalLink)
+    let itemViewModels: [EditUserItemDisplayer] = [
+        EditUserItemViewModel(itemType: .username),
+        EditUserItemViewModel(itemType: .instagram),
+        EditUserItemViewModel(itemType: .snapchat),
+        EditUserItemViewModel(itemType: .youtube),
+        EditUserItemViewModel(itemType: .facebook),
+        EditUserItemViewModel(itemType: .twitter),
+        EditUserItemViewModel(itemType: .vimeo),
+        EditUserItemViewModel(itemType: .tiktok),
+        EditUserItemViewModel(itemType: .additionalLink)
     ]
     
     //MARK: - Variables
@@ -55,11 +55,11 @@ class UploadUserViewModel: UploadUserDisplayer {
         return itemViewModels.count + 1
     }
     
-    func getUploadUserItemDisplayer(at index: Int) -> UploadUserItemDisplayer {
+    func getUploadUserItemDisplayer(at index: Int) -> EditUserItemDisplayer {
         return itemViewModels[index - 1]
     }
     
-    func getUploadUserHeaderDisplayer() -> UploadUserHeaderDisplayer {
+    func getUploadUserHeaderDisplayer() -> EditUserHeaderDisplayer {
         return uploadUserHeaderViewModel
     }
     
@@ -78,7 +78,6 @@ class UploadUserViewModel: UploadUserDisplayer {
     }
     
     //Data Validation
-    
     var itemHasMissingName: Bool {
         let itemWithInvalidName = itemViewModels.filter { (item) -> Bool in
             return !item.addedName.value

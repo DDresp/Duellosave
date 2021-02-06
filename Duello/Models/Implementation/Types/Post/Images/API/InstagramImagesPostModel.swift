@@ -7,7 +7,7 @@
 //
 
 protocol InstagramImagesPostModel: ApiImagesPostModel {
-    var apiUrl: PostSingleAttribute { get set }
+    var apiUrl: PostAttribute { get set }
     
 }
 

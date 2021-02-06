@@ -12,7 +12,6 @@ import UIKit
 let EXTREMELARGEFONTSIZE: CGFloat = 42
 let LARGEFONTSIZE: CGFloat = 24
 let MEDIUMFONTSIZE: CGFloat = 19
-let NAVIGATIONFONTSIZE: CGFloat = 16
 let SMALLFONTSIZE: CGFloat = 16
 let VERYSMALLFONTSIZE: CGFloat = 11
 
@@ -22,27 +21,21 @@ let MEDIUMFONT = "HelveticaNeue"
 let LIGHTFONT = "HelveticaNeue-Light"
 let OBLIQUEFONT = "Avenir-Oblique"
 
-let NAVIGATIONBARBUTTONFONT = UIFont.boldCustomFont(size: NAVIGATIONFONTSIZE)
-
 //COLORS
-let DARKGRAYCOLOR = UIColor.hexStringToUIColor(hex: "292B36")
-let LIGHTGRAYCOLOR = UIColor.lightGray
-let VERYLIGHTGRAYCOLOR = UIColor.hexStringToUIColor(hex: "DCDDDC")
-let EXTREMELIGHTGRAYCOLOR = UIColor.hexStringToUIColor(hex: "ECECEC")
-let FACEBOOKBLUECOLOR = UIColor.hexStringToUIColor(hex: "3D5B97")
-let GREENCOLOR = UIColor.hexStringToUIColor(hex: "2BFEC3")
-let PURPLECOLOR = UIColor.hexStringToUIColor(hex: "E31BAA")
-let LINKCOLOR = UIColor.hexStringToUIColor(hex: "3D5B97")
-let LIGHTBLUECOLOR = UIColor.hexStringToUIColor(hex: "1e90ff")
-let NAVBARCANCELCOLOR = UIColor.red
-let NAVBARCOLOR = DARKGRAYCOLOR
-let PLACEHOLDERCOLOR = UIColor(red: 0, green: 0, blue: 0.0980392, alpha: 0.22)
+let BLACK = UIColor.hexStringToUIColor(hex: "000000")
+let WHITE = UIColor.hexStringToUIColor(hex: "FFFFFF")
+let LIGHT_GRAY = UIColor.hexStringToUIColor(hex: "F3F2F8")
+let GRAY = UIColor.gray
+let DARK_GRAY = UIColor.hexStringToUIColor(hex: "1C1C1E")
+let GREEN = UIColor.hexStringToUIColor(hex: "2BFEC3")
+let PURPLE = UIColor.hexStringToUIColor(hex: "E31BAA")
+let LIGHT_BLUE = UIColor.hexStringToUIColor(hex: "0CCBFD")
 
 //LAYOUT
 let STANDARDSPACING: CGFloat = 14
 
 //ETC
-let LIGHTALPHA: CGFloat = 0.15
+let LIGHTALPHA: CGFloat = 0.4
 
 //Media
 let MAXMEDIAHEIGHTRATIO: Double = 1.3

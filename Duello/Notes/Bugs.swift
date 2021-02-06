@@ -5,20 +5,31 @@
 //  Created by Darius Dresp on 3/4/20.
 //  Copyright © 2020 Darius Dresp. All rights reserved.
 //
-    
-//Work on lacking feed
-
-//Work on more reliable pagination
 
 //Failed Instagram Request also just when server fails because of the network connection
 
-//Squized first cell sometimes
+//NO DEINITING IN THE CATEGORYPOSTFEED
 
-//safe username etc on post
+//IF deleting a post, the post also has to be deleted in the reports????
+
+// we should use our own back and forward logic while using navigation stack, because otherwise the coordination will break
+
+//show welcome to duello only at userpostsfeed
+
+//Username not shown in profile
+
+//Check how it is checked wether the user already set the profileSettings Or Not
+
+//MISSING SECURITY RULES
+
+//You have to be careful that if a user created a post, the likes and dislikes should be 0
+
+//You have to implement secutiry rules for a post, allowing users to only increment likes or dislikes of a post and setting the reportStatus to reviewRequested! And "not reported" only at creation
 
 
-///GET USERMODEL GOING --> Currently: check getMapAttributes for the structs
+//Other name then isDeactivated
 
-//if you change value for user, you have to update all his Posts
 
-//Double Displaying/ Pagination Bug
+//Be careful with paginatation: what happens if a post is deleted/reported during the fetch, what happens if the ranking changes during the fetch
+
+//Report Type (.not reported) and Verified should be seperated as we can't query for OR

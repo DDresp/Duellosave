@@ -24,10 +24,10 @@ class InputTextField: UITextField {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        textColor = DARKGRAYCOLOR
+        textColor = LIGHT_GRAY
         autocorrectionType = .no
         font = UIFont.lightCustomFont(size: SMALLFONTSIZE)
-        backgroundColor = UIColor.white
+        backgroundColor = BLACK
         
     }
     

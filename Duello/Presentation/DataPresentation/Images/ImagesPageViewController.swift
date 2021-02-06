@@ -28,7 +28,7 @@ class ImagesPageViewController: UIPageViewController, UIPageViewControllerDataSo
     //MARK: - Setup
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = VERYLIGHTGRAYCOLOR
+        view.backgroundColor = DARK_GRAY
         dataSource = self
         delegate = self
         
@@ -69,7 +69,7 @@ class ImagesPageViewController: UIPageViewController, UIPageViewControllerDataSo
         
         displayer?.imageUrls.subscribe(onNext: { [weak self] (imageUrls) in
             guard let self = self else { return }
-            guard let urls = imageUrls else { return }
+            guard let urls = imageUrls, urls.count > 0 else { return }
             let newControllers = urls.map({ (url) -> ImageViewController in
                 let controller = ImageViewController()
                 controller.setImageUrl(imageUrl: url)

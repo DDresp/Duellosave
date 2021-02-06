@@ -35,7 +35,7 @@ class AuthenticationTopButtonsStackView: UIStackView {
         let button = UIButton(type: .system)
         button.setTitle("Sign In", for: .normal)
         button.titleLabel?.font = UIFont.mediumCustomFont(size: LARGEFONTSIZE)
-        button.setTitleColor(DARKGRAYCOLOR, for: .normal)
+        button.setTitleColor(BLACK, for: .normal)
         return button
     }()
     
@@ -43,7 +43,7 @@ class AuthenticationTopButtonsStackView: UIStackView {
         let button = UIButton(type: .system)
         button.setTitle("Sign Up", for: .normal)
         button.titleLabel?.font = UIFont.mediumCustomFont(size: LARGEFONTSIZE)
-        button.setTitleColor(LIGHTGRAYCOLOR, for: .normal)
+        button.setTitleColor(GRAY, for: .normal)
         return button
     }()
     
@@ -67,11 +67,11 @@ class AuthenticationTopButtonsStackView: UIStackView {
     private func setupBindablesFromDisplayer() {
         
         displayer.showRegistrationView.asDriver().map { (isHidden) -> UIColor in
-            return isHidden ? LIGHTGRAYCOLOR : DARKGRAYCOLOR
+            return isHidden ? GRAY : BLACK
             }.drive(signInButton.rx.titleColor).disposed(by: disposeBag)
         
         displayer.showLoginView.asDriver().map { (isHidden) -> UIColor in
-            return isHidden ? LIGHTGRAYCOLOR : DARKGRAYCOLOR
+            return isHidden ? GRAY : BLACK
             }.drive(signUpButton.rx.titleColor).disposed(by: disposeBag)
         
     }

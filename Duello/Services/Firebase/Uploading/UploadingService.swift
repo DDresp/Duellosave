@@ -36,4 +36,21 @@ class UploadingService: NetworkService {
             
         })
     }
+    
+    func saveDictionary(dic: [String: Any], reference: CollectionReference, id: String) -> Observable<Void> {
+        return Observable.create { (observer) -> Disposable in
+            reference.document(id).setData(dic) { (error) in
+                if let error = error {
+                    print(error, error.localizedDescription)
+                    observer.onError(UploadingError(error: error))
+                    return
+                }
+                
+                observer.onNext(())
+                observer.onCompleted()
+            }
+            
+            return Disposables.create()
+        }
+    }
 }

@@ -32,8 +32,9 @@ class UploadTableViewController<T: UploadDisplayer>: TableViewController {
         let dummyViewHeight = CGFloat(40)
         tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: dummyViewHeight))
         tableView.contentInset = UIEdgeInsets(top: -dummyViewHeight, left: 0, bottom: 0, right: 0)
+
         
-        tableView.backgroundColor = EXTREMELIGHTGRAYCOLOR
+        tableView.backgroundColor = BLACK
         tableView.keyboardDismissMode = .interactive
         tableView.allowsSelection = false
         tableView.tableFooterView = UIView()
@@ -50,14 +51,13 @@ class UploadTableViewController<T: UploadDisplayer>: TableViewController {
         if displayer?.cancelTapped != nil {
             navigationItem.leftBarButtonItem = cancelButton
         }
-        navigationItem.rightBarButtonItem?.tintColor = NAVBARCOLOR
         
     }
     
     //MARK: - Views
     var progressHud: JGProgressHUD?
     
-    lazy var submitButton = UIBarButtonItem(title: "Submit", style: .done, target: nil, action: nil)
+    lazy var submitButton = UIBarButtonItem(title: "Save", style: .done, target: nil, action: nil)
     lazy var cancelButton = UIBarButtonItem(title: "Cancel", style: .done, target: nil, action: nil)
     
     //MARK: - Interactions
@@ -68,16 +68,18 @@ class UploadTableViewController<T: UploadDisplayer>: TableViewController {
     //MARK: - Methods
     func resizeTextCell(with textView: UITextView) {
         
-        let startHeight = textView.frame.size.height
-        let calcHeight = textView.sizeThatFits(textView.frame.size).height  //iOS 8+ only
+        //DONT DELETE YET
         
-        if startHeight != calcHeight {
-            
-            UIView.setAnimationsEnabled(false) // Disable animations
-            self.tableView.beginUpdates()
-            self.tableView.endUpdates()
-            UIView.setAnimationsEnabled(true)
-        }
+//        let startHeight = textView.frame.size.height
+//        let calcHeight = textView.sizeThatFits(textView.frame.size).height  //iOS 8+ only
+//
+//        if startHeight != calcHeight {
+//
+//            UIView.setAnimationsEnabled(false) // Disable animations
+//            self.tableView.beginUpdates()
+//            self.tableView.endUpdates()
+//            UIView.setAnimationsEnabled(true)
+//        }
     }
     
     //MARK: - Reactive

@@ -12,10 +12,15 @@ import RxCocoa
 class MainCoordinator: MainCoordinatorType {
     
     //MARK: - ChildCoordinators
-    private var newsCoordinator = NewsCoordinator()
     private var homeCoordinator = HomeCoordinator()
-    private var postingCoordinator = PostingCoordinator()
-    private var categoryCoordinator = CategoryCreationCoordinator()
+    private var exploreCoordinator = ExploreCoordinator()
+    
+    //MARK: - ViewModels
+    lazy var viewModel: MainViewModel = {
+        let viewModel = MainViewModel()
+        viewModel.coordinator = self
+        return viewModel
+    }()
     
     //MARK: - Bindables
     var loggedOut = PublishSubject<Void>()
@@ -27,10 +32,8 @@ class MainCoordinator: MainCoordinatorType {
     
     private func setupChildViewControllers(for tabBarController: UITabBarController) {
         tabBarController.viewControllers = [
-            newsCoordinator.navigationController ?? UIViewController(),
+            exploreCoordinator.navigationController ?? UIViewController(),
             homeCoordinator.navigationController ?? UIViewController(),
-            postingCoordinator.navigationController ?? UIViewController(),
-            categoryCoordinator.navigationController ?? UIViewController()
         ]
     }
     
@@ -40,7 +43,7 @@ class MainCoordinator: MainCoordinatorType {
     
     //MARK: - Methods
     func start() {
-        let mainController = MainController()
+        let mainController = MainController(viewModel: viewModel)
         setupChildViewControllers(for: mainController)
         presentedController = mainController
         rootController.present(presentedController!, animated: true)
@@ -61,7 +64,7 @@ extension MainCoordinator {
     
     //Reactive
     private func setupHomeBindables() {
-        homeCoordinator.loggedOut.asObservable().bind(to: loggedOut).disposed(by: disposeBag)
+        homeCoordinator.requestedLogout.bind(to: loggedOut).disposed(by: disposeBag)
 
     }
     

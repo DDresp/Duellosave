@@ -15,29 +15,29 @@ struct User: UserModel {
     var score: Double?
     
     //MARK: - Attributes
-    var userName = UserSingleAttribute(attributeCase: .userName, value: "Default User Name")
+    var userName = UserAttribute(attributeCase: .userName, value: "Default User Name")
     
-    var instagramName = UserSingleAttribute(attributeCase: .instagramName, value: nil)
-    var snapchatName = UserSingleAttribute(attributeCase: .snapchatName, value: nil)
-    var youtubeName = UserSingleAttribute(attributeCase: .youtubeName, value: nil)
-    var facebookName = UserSingleAttribute(attributeCase: .facebookName, value: nil)
-    var twitterName = UserSingleAttribute(attributeCase: .twitterName, value: nil)
-    var vimeoName = UserSingleAttribute(attributeCase: .vimeoName, value: nil)
-    var tikTokName = UserSingleAttribute(attributeCase: .tikTokName, value: nil)
-    var additionalName = UserSingleAttribute(attributeCase: .additionalName, value: nil)
+    var instagramName = UserAttribute(attributeCase: .instagramName, value: nil)
+    var snapchatName = UserAttribute(attributeCase: .snapchatName, value: nil)
+    var youtubeName = UserAttribute(attributeCase: .youtubeName, value: nil)
+    var facebookName = UserAttribute(attributeCase: .facebookName, value: nil)
+    var twitterName = UserAttribute(attributeCase: .twitterName, value: nil)
+    var vimeoName = UserAttribute(attributeCase: .vimeoName, value: nil)
+    var tikTokName = UserAttribute(attributeCase: .tikTokName, value: nil)
+    var additionalName = UserAttribute(attributeCase: .additionalName, value: nil)
     
-    var youtubeLink = UserSingleAttribute(attributeCase: .youtubeLink, value: nil)
-    var facebookLink = UserSingleAttribute(attributeCase: .facebookLink, value: nil)
-    var vimeoLink = UserSingleAttribute(attributeCase: .vimeoLink, value: nil)
-    var additionalLink = UserSingleAttribute(attributeCase: .additionalLink, value: nil)
-    var instagramLink = UserSingleAttribute(attributeCase: .instagramLink, value: nil)
-    var twitterLink = UserSingleAttribute(attributeCase: .twitterLink, value: nil)
-    var snapChatLink = UserSingleAttribute(attributeCase: .snapchatLink, value: nil)
+    var youtubeLink = UserAttribute(attributeCase: .youtubeLink, value: nil)
+    var facebookLink = UserAttribute(attributeCase: .facebookLink, value: nil)
+    var vimeoLink = UserAttribute(attributeCase: .vimeoLink, value: nil)
+    var additionalLink = UserAttribute(attributeCase: .additionalLink, value: nil)
+    var instagramLink = UserAttribute(attributeCase: .instagramLink, value: nil)
+    var twitterLink = UserAttribute(attributeCase: .twitterLink, value: nil)
+    var snapChatLink = UserAttribute(attributeCase: .snapchatLink, value: nil)
     
-    var imageUrl = UserSingleAttribute(attributeCase: .imageUrl, value: nil)
+    var imageUrl = UserAttribute(attributeCase: .imageUrl, value: nil)
     
     //MARK: - Getters
-    var allAttributes: [UserSingleAttribute] {
+    var allAttributes: [UserAttribute] {
         
         return [
             userName,
@@ -69,14 +69,14 @@ struct User: UserModel {
         return false
     }
     
-    func hasConnectedLink(for attribute: UserSingleAttribute) -> Bool {
+    func hasConnectedLink(for attribute: UserAttribute) -> Bool {
         if !attribute.attributeCase.isSocialMediaName { return false }
         return getConnectedLink(for: attribute) == nil ? false : true
     }
     
-    func getAllSocialMediaNames() -> [UserSingleAttribute] {
+    func getAllSocialMediaNames() -> [UserAttribute] {
         
-        var socialMediaNames = [UserSingleAttribute]()
+        var socialMediaNames = [UserAttribute]()
         for attribute in allAttributes {
             if attribute.attributeCase.isSocialMediaName {
                 socialMediaNames.append(attribute)
@@ -86,7 +86,7 @@ struct User: UserModel {
         
     }
     
-    func getConnectedLink(for attribute: UserSingleAttribute) -> UserSingleAttribute? {
+    func getConnectedLink(for attribute: UserAttribute) -> UserAttribute? {
         guard let connectedLinkType = attribute.attributeCase.connectedLinkAttributeCase else { return nil }
         
         for attribute in allAttributes {
@@ -96,7 +96,7 @@ struct User: UserModel {
         return nil
     }
     
-    func getSingleAttributes() -> [SingleAttribute] {
+    func getAttributes() -> [ModelAttributeType] {
         return allAttributes
     }
     

@@ -12,7 +12,7 @@ import RxCocoa
 class UploadVideoSelectorCell: UploadSelectorCell {
     
     //MARK: - Displayer
-    var displayer: UploadRoughTypeSelectorDisplayer? {
+    var displayer: UploadRoughMediaSelectorDisplayer? {
         didSet {
             setupBindablesToDisplayer()
         }

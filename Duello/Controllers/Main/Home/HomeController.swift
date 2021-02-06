@@ -9,57 +9,106 @@
 import RxCocoa
 import RxSwift
 import JGProgressHUD
+import SDWebImage
 
-class HomeController: PostFeedViewController {
+class HomeController: PostCollectionMasterViewController {
     
     //MARK: - ViewModel
-    let viewModel: HomeViewModel
+    var viewModel: HomeViewModel {
+        return displayer as! HomeViewModel
+    }
     
     //MARK: - Setup
     init(viewModel: HomeViewModel) {
-        self.viewModel = viewModel
         super.init(displayer: viewModel)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupNavigationItems()
         setupCollectionViewLayout()
         setupBindablesToDisplayer()
+        setupBindablesFromDisplayer()
     }
-    
-    private func setupNavigationItems() {
-        navigationItem.title = "Home"
-        navigationItem.leftBarButtonItem = logoutButton
-        navigationItem.rightBarButtonItem = settingsButton
-        navigationItem.rightBarButtonItem?.tintColor = NAVBARCOLOR
-    }
-    
+
     //MARK: - Views
-    let logoutButton = UIBarButtonItem(title: "logout", style: .plain, target: nil, action: nil)
-    let settingsButton = UIBarButtonItem(title: "settings", style: .plain, target: nil, action: nil)
+    private let profileImageView: SmallProfileImageView = {
+        let iv = SmallProfileImageView(frame: .zero)
+        iv.translatesAutoresizingMaskIntoConstraints = false
+        return iv
+    }()
+    
+    let settingsButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(#imageLiteral(resourceName: "settingsIcon").withRenderingMode(.alwaysTemplate), for: .normal)
+        button.tintColor = LIGHT_GRAY
+        return button
+    }()
+    
+    private var nameLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = WHITE
+        label.font = UIFont.boldCustomFont(size: SMALLFONTSIZE)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
     
     lazy var collectionView: PostCollectionView = {
         let collectionView = PostCollectionView(displayer: viewModel.homeCollectionViewModel)
         return collectionView
     }()
     
-    
     //MARK: - Layout
     private func setupCollectionViewLayout() {
-        //so that the scrollView doesn't get hidden under the navigationBar
-        edgesForExtendedLayout = []
-        
-        view.addSubview(collectionView)
-        collectionView.fillSuperview()
+        layoutSettingsButton()
+        layoutProfileImageView()
+        layoutNameLabel()
+        layoutCollectionView()
     }
+    
+    private func layoutSettingsButton() {
+        view.addSubview(settingsButton)
+        settingsButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: nil, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: STANDARDSPACING, left: 0, bottom: 0, right: STANDARDSPACING), size: .init(width: 25, height: 25))
+    }
+    
+    private func layoutNameLabel() {
+        view.addSubview(nameLabel)
+        nameLabel.centerYAnchor.constraint(equalTo: settingsButton.centerYAnchor, constant: 0).isActive = true
+        nameLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 8).isActive = true
+        nameLabel.text = viewModel.user.value?.getUserName()
+    }
+    
+    private func layoutProfileImageView() {
+        view.addSubview(profileImageView)
+        profileImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: STANDARDSPACING).isActive = true
+        profileImageView.centerYAnchor.constraint(equalTo: settingsButton.centerYAnchor, constant: 0).isActive = true
+    }
+    
+    private func layoutCollectionView() {
+        view.addSubview(collectionView)
+        collectionView.anchor(top: settingsButton.bottomAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: .init(top: STANDARDSPACING, left: 0, bottom: 0, right: 0))
+    }
+    
     
     //MARK: - Reactive
     private let disposeBag = DisposeBag()
+    
+    private func setupBindablesFromDisplayer() {
+        
+        viewModel.user.subscribe(onNext: { [weak self] (user) in
+            guard let self = self else { return }
+            guard let user = user else { return }
+            self.nameLabel.text = user.getUserName()
+            guard let imageUrl = URL(string: user.getImageUrl()) else { return }
+            SDWebImageManager.shared.loadImage(with: imageUrl, options: .continueInBackground, progress: nil) { (image, _, _, _, _, _) in
+                self.profileImageView.image = image?.withRenderingMode(.alwaysOriginal)
+            }
+        }).disposed(by: disposeBag)
+        
+   }
+
 
     private func setupBindablesToDisplayer() {
-        logoutButton.rx.tap.asObservable().bind(to: viewModel.logoutTapped).disposed(by: disposeBag)
         settingsButton.rx.tap.asObservable().bind(to: viewModel.settingsTapped).disposed(by: disposeBag)
     }
     

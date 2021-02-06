@@ -14,18 +14,21 @@ class UploadCategoryDelegate: NSObject, UITableViewDelegate {
     var displayer: UploadCategoryDisplayer
     
     //MARK: - Variables
+    private let coverImageCellId: String
     private let titleCellId: String
     private let imagesSelectorCellId: String
     private let videoSelectorCellId: String
     private let descriptionCellId: String
     
-    private let titleCellSection = 0
-    private let typeCellSection = 1
-    private let descriptionCellSection = 2
+    private let coverImageCellSection = 0
+    private let titleCellSection = 1
+    private let selectorCellSection = 2
+    private let descriptionCellSection = 3
     
     //MARK: - Setup
-    init(titleCellId: String, descriptionCellId: String, imageSelectorCellId: String, videoSelectorCellId: String, displayer: UploadCategoryDisplayer) {
+    init(coverImageCellId: String, titleCellId: String, descriptionCellId: String, imageSelectorCellId: String, videoSelectorCellId: String, displayer: UploadCategoryDisplayer) {
         self.displayer = displayer
+        self.coverImageCellId = coverImageCellId 
         self.titleCellId = titleCellId
         self.imagesSelectorCellId = imageSelectorCellId
         self.videoSelectorCellId = videoSelectorCellId
@@ -37,24 +40,27 @@ class UploadCategoryDelegate: NSObject, UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         switch section {
+        case coverImageCellSection:
+            return UploadSimpleHeader(title: "COVER IMAGE")
         case descriptionCellSection:
             let header = UploadDescriptionHeader()
             header.displayer = displayer.descriptionDisplayer
             return header
         case titleCellSection:
-            let label = SmallHeaderLabel()
-            label.text = "TITLE"
-            return label
-        case typeCellSection:
-            let label = SmallHeaderLabel()
-            label.text = "MEDIA ALLOWED"
-            return label
+            return UploadSimpleHeader(title: "TITLE")
+        case selectorCellSection:
+            return UploadSimpleHeader(title: "MEDIA")
         default:
             return nil
         }
         
     }
 
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = .black
+        return view
+    }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == descriptionCellSection {
@@ -64,12 +70,29 @@ class UploadCategoryDelegate: NSObject, UITableViewDelegate {
         }
     }
     
+
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == coverImageCellSection {
+            return 300
+        } else if indexPath.section == selectorCellSection {
+            return 80
+        } else {
+            return 40
+        }
+    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        if typeCellSection == indexPath.section {
-            return 50
+        if coverImageCellSection == indexPath.section {
+            return tableView.frame.width
         }
         return UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if section == titleCellSection {
+            return 15
+        } else {
+            return 5
+        }
     }
 }

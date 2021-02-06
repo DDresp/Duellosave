@@ -6,11 +6,11 @@
 //  Copyright © 2020 Darius Dresp. All rights reserved.
 //
 
-enum RoughMediaType: String, StringConvertibleType {
+enum RoughMediaType: String, DatabaseConvertibleType, CaseIterable {
     
-    case Video
-    case Image
-    case VideoAndImage
+    case video
+    case image
+    case videoAndImage
     
     func toStringValue() -> String {
         return self.rawValue

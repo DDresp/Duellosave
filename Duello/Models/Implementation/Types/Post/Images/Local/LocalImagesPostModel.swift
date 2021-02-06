@@ -10,7 +10,7 @@ import Foundation
 
 protocol LocalImagesPostModel: ImagesPostModel
 {
-    var imageUrls: PostMapAttribute { get set }
+    var imageUrls: PostAttribute { get set }
 }
 
 extension LocalImagesPostModel {
@@ -20,16 +20,12 @@ extension LocalImagesPostModel {
     }
     
     func getImageURLS() -> [URL]? {
-        
-        guard let images = imageUrls.getModel() as? LocalImages else { return nil }
-        var imageUrls = [URL]()
-        let attributes = [images.imageUrl1, images.imageUrl2, images.imageUrl3, images.imageUrl4, images.imageUrl5, images.imageUrl6]
-        for attribute in attributes {
-            
-            if let string = attribute.value?.toStringValue(), let url = URL(string: string) {
-                imageUrls.append(url)
-            }
+        guard let imageUrlStrings = imageUrls.value as? [String] else { return nil }
+        let imageUrls = imageUrlStrings.compactMap { (imageUrlString) -> URL? in
+            return URL(string: imageUrlString)
         }
+        
         return imageUrls
     }
+    
 }

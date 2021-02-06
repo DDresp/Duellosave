@@ -11,7 +11,7 @@ import Foundation
 protocol SocialMediaItemDisplayer {
     
     //MARK: - Variables
-    var link: UserSingleAttribute? { get }
+    var link: UserAttribute? { get }
     var socialMediaName: String { get }
     var hasLink: Bool { get }
     var iconName: String { get }

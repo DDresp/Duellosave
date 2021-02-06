@@ -26,7 +26,7 @@ class AuthenticationPhoneLoginController: ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = EXTREMELIGHTGRAYCOLOR
+        view.backgroundColor = LIGHT_GRAY
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(handleCancel))
     }
     
@@ -72,7 +72,7 @@ class AuthenticationPhoneLoginController: ViewController {
         alert.addTextField { (textField) in
             textField.placeholder = "verification code"
             textField.font = UIFont.mediumCustomFont(size: MEDIUMFONTSIZE - 1)
-            textField.textColor = DARKGRAYCOLOR
+            textField.textColor = DARK_GRAY
             textField.keyboardType = .phonePad
             verificationCodeTextField = textField
         }

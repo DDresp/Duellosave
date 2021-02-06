@@ -17,9 +17,8 @@
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
 
-#import "../Basics/Internal/FBSDKBasicUtility+Internal.h"
+#import "FBSDKCoreKit+Internal.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -28,15 +27,6 @@ NS_ASSUME_NONNULL_BEGIN
 #define FBSDK_CANOPENURL_MESSENGER @"fb-messenger-share-api"
 #define FBSDK_CANOPENURL_MSQRD_PLAYER @"msqrdplayer"
 #define FBSDK_CANOPENURL_SHARE_EXTENSION @"fbshareextension"
-
-typedef NS_ENUM(int32_t, FBSDKUIKitVersion)
-{
-  FBSDKUIKitVersion_6_0 = 0x0944,
-  FBSDKUIKitVersion_6_1 = 0x094C,
-  FBSDKUIKitVersion_7_0 = 0x0B57,
-  FBSDKUIKitVersion_7_1 = 0x0B77,
-  FBSDKUIKitVersion_8_0 = 0x0CF6,
-} NS_SWIFT_NAME(FBUIKit.Version);
 
 /**
  Describes the callback for appLinkFromURLInBackground.
@@ -80,19 +70,6 @@ NS_SWIFT_NAME(InternalUtility)
  The version of the operating system on which the process is executing.
  */
 @property (class, nonatomic, assign, readonly) NSOperatingSystemVersion operatingSystemVersion;
-
-/**
- Tests whether the orientation should be manually adjusted for views outside of the root view controller.
-
- With the legacy layout the developer must worry about device orientation when working with views outside of
- the window's root view controller and apply the correct rotation transform and/or swap a view's width and height
- values.  If the application was linked with UIKit on iOS 7 or earlier or the application is running on iOS 7 or earlier
- then we need to use the legacy layout code.  Otherwise if the application was linked with UIKit on iOS 8 or later and
- the application is running on iOS 8 or later, UIKit handles all of the rotation complexity and the origin is always in
- the top-left and no rotation transform is necessary.
- @return YES if if the orientation must be manually adjusted, otherwise NO.
- */
-@property (class, nonatomic, assign, readonly) BOOL shouldManuallyAdjustOrientation;
 
 /*
  Checks if the app is Unity.
@@ -176,20 +153,6 @@ NS_SWIFT_NAME(InternalUtility)
 + (BOOL)isSafariBundleIdentifier:(NSString *)bundleIdentifier;
 
 /**
-  Tests whether the UIKit version that the current app was linked to is at least the specified version.
- @param version The version to test against.
- @return YES if the linked UIKit version is greater than or equal to the specified version, otherwise NO.
- */
-+ (BOOL)isUIKitLinkTimeVersionAtLeast:(FBSDKUIKitVersion)version;
-
-/**
-  Tests whether the UIKit version in the runtime is at least the specified version.
- @param version The version to test against.
- @return YES if the runtime UIKit version is greater than or equal to the specified version, otherwise NO.
- */
-+ (BOOL)isUIKitRunTimeVersionAtLeast:(FBSDKUIKitVersion)version;
-
-/**
   Checks equality between 2 objects.
 
  Checks for pointer equality, nils, isEqual:.
@@ -208,11 +171,11 @@ NS_SWIFT_NAME(InternalUtility)
  @param errorRef If an error occurs, upon return contains an NSError object that describes the problem.
  @return The URL.
  */
-+ (NSURL *)URLWithScheme:(NSString *)scheme
-                    host:(NSString *)host
-                    path:(NSString *)path
-         queryParameters:(NSDictionary *)queryParameters
-                   error:(NSError *__autoreleasing *)errorRef;
++ (nullable NSURL *)URLWithScheme:(NSString *)scheme
+                             host:(NSString *)host
+                             path:(NSString *)path
+                  queryParameters:(NSDictionary *)queryParameters
+                            error:(NSError *__autoreleasing *)errorRef;
 
 /**
  *  Deletes all the cookies in the NSHTTPCookieStorage for Facebook web dialogs
@@ -266,7 +229,7 @@ NS_SWIFT_NAME(InternalUtility)
 /**
   Attempts to find the first UIViewController in the view's responder chain. Returns nil if not found.
  */
-+ (UIViewController *)viewControllerForView:(UIView *)view;
++ (nullable UIViewController *)viewControllerForView:(UIView *)view;
 
 /**
   returns true if the url scheme is registered in the CFBundleURLTypes
@@ -276,17 +239,24 @@ NS_SWIFT_NAME(InternalUtility)
 /**
  returns the current key window
  */
-+ (UIWindow *)findWindow;
++ (nullable UIWindow *)findWindow;
 
 /**
   returns currently displayed top view controller.
  */
-+ (UIViewController *)topMostViewController;
++ (nullable UIViewController *)topMostViewController;
+
+#if !TARGET_OS_TV
+/**
+  returns interface orientation for the key window.
+ */
++ (UIInterfaceOrientation)statusBarOrientation;
+#endif
 
 /**
   Converts NSData to a hexadecimal UTF8 String.
  */
-+ (NSString *)hexadecimalStringFromData:(NSData *)data;
++ (nullable NSString *)hexadecimalStringFromData:(NSData *)data;
 
 /*
   Checks if the permission is a publish permission.

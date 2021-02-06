@@ -29,19 +29,18 @@ class UploadLocalVideoPostViewModel: UploadPostViewModel<LocalVideoPost>, Upload
     let tappedSoundIcon: PublishRelay<Void> = PublishRelay()
 
     //MARK: - Setup
-    init(rawPost: RawVideoPost) {
+    init(rawPost: RawVideoPost, category: CategoryModel) {
         self.videoUrl.accept(rawPost.videoUrl)
         self.thumbnailImage.accept(rawPost.thumbnailImage)
-        super.init()
+        super.init(category: category)
         setupVideoPlayerBindables()
     }
     
     //MARK: - Methods
-    private func makePost(thumbnailUrl: String, videoUrl: String) -> LocalVideoPost {
+    private func makePost(thumbnailUrl: String, videoUrl: String) {
         post = LocalVideoPost()
         post?.thumbNailUrl.value = thumbnailUrl
         post?.videoUrl.value = videoUrl
-        return post ?? LocalVideoPost()
     }
     
     //MARK: - Networking
@@ -54,8 +53,8 @@ class UploadLocalVideoPostViewModel: UploadPostViewModel<LocalVideoPost>, Upload
         isLoading.accept(true)
         
         StoringService.shared.storeVideoAndThumbnail(image: image, videoUrl: videoUrl).flatMapLatest { [weak self] (urlStrings) -> Observable<PostModel?> in
-            let post = self?.makePost(thumbnailUrl: urlStrings[0], videoUrl: urlStrings[1]) ?? LocalVideoPost()
-            return UploadingService.shared.create(post: post)
+            self?.makePost(thumbnailUrl: urlStrings[0], videoUrl: urlStrings[1])
+            return UploadingService.shared.create(post: self?.post ?? LocalVideoPost())
             }.subscribe(onNext: { [weak self] (post) in
                 self?.isLoading.accept(false)
                 self?.coordinator?.didSavePost.accept(())

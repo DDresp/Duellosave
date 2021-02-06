@@ -14,6 +14,10 @@ protocol UploadCategoryDisplayer: class, UploadDisplayer {
     //MARK: - Child Displayers
     var titleDisplayer: UploadTitleDisplayer { get }
     var descriptionDisplayer: UploadDescriptionDisplayer { get }
-    var typeSelectorDisplayer: UploadRoughTypeSelectorDisplayer { get }
+    var roughMediaSelectorDisplayer: UploadRoughMediaSelectorDisplayer { get }
+    
+    //MARK: - Bindables
+    var image: BehaviorRelay<UIImage?> { get }
+    var imageButtonTapped: BehaviorRelay<Void> { get }
     
 }

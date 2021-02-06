@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0930"
+   LastUpgradeVersion = "1100"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6F055D8863700897D5CF458BC326B761"
+               BlueprintIdentifier = "0E23D02329F7BEFE7BB1CDC851377D20"
                BuildableName = "Pods_Duello.framework"
                BlueprintName = "Pods-Duello"
                ReferencedContainer = "container:Pods.xcodeproj">

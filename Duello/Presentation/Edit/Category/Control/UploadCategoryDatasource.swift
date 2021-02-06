@@ -18,17 +18,20 @@ class UploadCategoryDatasource: NSObject, UITableViewDataSource {
     //MARK: - Variables
     weak var parentViewController: UIViewController?
     
+    let coverImageCellId: String
     let titleCellId: String
     let imagesSelectorCellId: String
     let videoSelectorCellId: String
     let descriptionCellId: String
     
-    private let titleCellSection = 0
-    private let typeCellSection = 1
-    private let descriptionCellSection = 2
+    private let coverImageCellSection = 0
+    private let titleCellSection = 1
+    private let selectorCellSection = 2
+    private let descriptionCellSection = 3
     
     //MARK: - Setup
-    init(titleCellId: String, descriptionCellId: String, imageSelectorCellId: String, videoSelectorCellId: String, displayer: UploadCategoryDisplayer, parentViewController: UIViewController) {
+    init(coverImageCellId: String, titleCellId: String, descriptionCellId: String, imageSelectorCellId: String, videoSelectorCellId: String, displayer: UploadCategoryDisplayer, parentViewController: UIViewController) {
+        self.coverImageCellId = coverImageCellId
         self.titleCellId = titleCellId
         self.descriptionCellId = descriptionCellId
         self.imagesSelectorCellId = imageSelectorCellId
@@ -40,11 +43,11 @@ class UploadCategoryDatasource: NSObject, UITableViewDataSource {
     
     //MARK: - Datasource
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 4
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == typeCellSection {
+        if section == selectorCellSection {
             return 2
         } else {
             return 1
@@ -54,6 +57,11 @@ class UploadCategoryDatasource: NSObject, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         switch indexPath.section {
+        
+        case coverImageCellSection:
+            let cell = tableView.dequeueReusableCell(withIdentifier: coverImageCellId, for: indexPath) as! UploadCategoryImageCell
+            cell.displayer = displayer
+            return cell
             
         case titleCellSection:
             let cell = tableView.dequeueReusableCell(withIdentifier: titleCellId, for: indexPath) as! UploadTitleCell
@@ -65,14 +73,16 @@ class UploadCategoryDatasource: NSObject, UITableViewDataSource {
             cell.displayer = displayer.descriptionDisplayer
             return cell
             
-        case typeCellSection:
+        case selectorCellSection:
             if indexPath.row == 0 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: imagesSelectorCellId, for: indexPath) as! UploadImagesSelectorCell
-                cell.displayer = displayer.typeSelectorDisplayer
+                cell.displayer = displayer.roughMediaSelectorDisplayer
+                cell.layoutIfNeeded()
                 return cell
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: videoSelectorCellId, for: indexPath) as! UploadVideoSelectorCell
-                cell.displayer = displayer.typeSelectorDisplayer
+                cell.displayer = displayer.roughMediaSelectorDisplayer
+                cell.layoutIfNeeded()
                 return cell
             }
         default:
@@ -80,5 +90,5 @@ class UploadCategoryDatasource: NSObject, UITableViewDataSource {
         }
         
     }
-    
+
 }

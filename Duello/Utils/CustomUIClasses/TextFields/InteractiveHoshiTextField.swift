@@ -14,11 +14,11 @@ class InteractiveHoshiTextField: HoshiTextField {
     override init(frame: CGRect) {
         super.init(frame: frame)
         placeholderFontScale = 1
-        placeholderColor = LIGHTGRAYCOLOR
+        placeholderColor = DARK_GRAY
         font = UIFont.lightCustomFont(size: SMALLFONTSIZE)
-        textColor = DARKGRAYCOLOR
-        borderActiveColor = DARKGRAYCOLOR
-        borderInactiveColor = DARKGRAYCOLOR
+        textColor = BLACK
+        borderActiveColor = BLACK
+        borderInactiveColor = BLACK
         autocorrectionType = UITextAutocorrectionType.no
     }
     

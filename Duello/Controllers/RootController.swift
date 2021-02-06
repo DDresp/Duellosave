@@ -13,6 +13,6 @@ class RootController: ViewController {
     //MARK: - Setup
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = DARKGRAYCOLOR
+        view.backgroundColor = DARK_GRAY
     }
-}
+}   

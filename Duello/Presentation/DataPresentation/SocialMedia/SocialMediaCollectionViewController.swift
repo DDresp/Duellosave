@@ -19,7 +19,7 @@ class SocialMediaCollectionViewController: UICollectionViewController, UICollect
             disposeBag = DisposeBag()
             setupBindablesFromDisplayer()
             datasource.displayer = displayer
-            collectionView.backgroundColor = displayer.isDarkMode ? DARKGRAYCOLOR : EXTREMELIGHTGRAYCOLOR
+            collectionView.backgroundColor = displayer.isDarkMode ? BLACK : DARK_GRAY
             
         }
     }
@@ -43,7 +43,7 @@ class SocialMediaCollectionViewController: UICollectionViewController, UICollect
     }
     
     private func setupCollectionView() {
-        collectionView.backgroundColor = DARKGRAYCOLOR
+        collectionView.backgroundColor = BLACK
         collectionView.isScrollEnabled = true
         collectionView.alwaysBounceVertical = false
         collectionView.alwaysBounceHorizontal = false

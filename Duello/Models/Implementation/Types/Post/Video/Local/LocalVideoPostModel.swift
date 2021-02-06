@@ -7,8 +7,8 @@
 //
 
 protocol LocalVideoPostModel: VideoPostModel {
-    var videoUrl: PostSingleAttribute { get set }
-    var thumbNailUrl: PostSingleAttribute { get set }
+    var videoUrl: PostAttribute { get set }
+    var thumbNailUrl: PostAttribute { get set }
     
 }
 

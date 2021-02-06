@@ -12,31 +12,39 @@ protocol UserModel: Model {
     var score: Double? { get set }
     
     //MARK: - Attributes
-    var userName: UserSingleAttribute { get set }
+    var userName: UserAttribute { get set }
     
-    var instagramName: UserSingleAttribute { get set }
-    var snapchatName: UserSingleAttribute { get set }
-    var youtubeName: UserSingleAttribute { get set }
-    var facebookName: UserSingleAttribute { get set }
-    var twitterName: UserSingleAttribute { get set }
-    var vimeoName: UserSingleAttribute { get set }
-    var tikTokName: UserSingleAttribute { get set }
-    var additionalName: UserSingleAttribute { get set }
+    var instagramName: UserAttribute { get set }
+    var snapchatName: UserAttribute { get set }
+    var youtubeName: UserAttribute { get set }
+    var facebookName: UserAttribute { get set }
+    var twitterName: UserAttribute { get set }
+    var vimeoName: UserAttribute { get set }
+    var tikTokName: UserAttribute { get set }
+    var additionalName: UserAttribute { get set }
     
-    var youtubeLink: UserSingleAttribute { get set }
-    var facebookLink: UserSingleAttribute { get set }
-    var vimeoLink: UserSingleAttribute { get set }
-    var additionalLink: UserSingleAttribute { get set }
-    var instagramLink: UserSingleAttribute { get set }
-    var twitterLink: UserSingleAttribute { get set }
-    var snapChatLink: UserSingleAttribute { get set }
+    var youtubeLink: UserAttribute { get set }
+    var facebookLink: UserAttribute { get set }
+    var vimeoLink: UserAttribute { get set }
+    var additionalLink: UserAttribute { get set }
+    var instagramLink: UserAttribute { get set }
+    var twitterLink: UserAttribute { get set }
+    var snapChatLink: UserAttribute { get set }
     
-    var imageUrl: UserSingleAttribute { get set }
+    var imageUrl: UserAttribute { get set }
     
     //MARK: - Getters
     var addedSocialMediaName: Bool { get }
-    func hasConnectedLink(for attribute: UserSingleAttribute) -> Bool
-    func getAllSocialMediaNames() -> [UserSingleAttribute]
-    func getConnectedLink(for attribute: UserSingleAttribute) -> UserSingleAttribute?
+    func hasConnectedLink(for attribute: UserAttribute) -> Bool
+    func getAllSocialMediaNames() -> [UserAttribute]
+    func getConnectedLink(for attribute: UserAttribute) -> UserAttribute?
+    
+}
+
+extension UserModel {
+    
+    //MARK: - Getters
+    func getUserName() -> String { return userName.value?.toStringValue() ?? "" }
+    func getImageUrl() -> String { return imageUrl.value?.toStringValue() ?? "" }
     
 }

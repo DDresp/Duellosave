@@ -74,7 +74,7 @@ class SocialMediaViewModel: SocialMediaDisplayer {
             self?.setAttributes()
         }).disposed(by: disposeBag)
         
-        selectedItemIndex.asObservable().map { [weak self] (index) -> UserSingleAttribute? in
+        selectedItemIndex.asObservable().map { [weak self] (index) -> UserAttribute? in
             guard let index = index else { return nil}
             guard let link = self?.items[index].link else { return nil}
             return link

@@ -23,7 +23,7 @@ class UploadImagesMediaPostCell: UITableViewCell {
     //MARK: - Setup
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        backgroundColor = EXTREMELIGHTGRAYCOLOR
+        backgroundColor = LIGHT_GRAY
         clipsToBounds = true
         setupLayout()
         

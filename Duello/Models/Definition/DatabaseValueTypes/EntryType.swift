@@ -17,5 +17,7 @@ enum EntryType {
     case FineMediaType
     case RoughMediaType
     case Bool
+    case ReportStatusType
+    case StringArray
     
 }

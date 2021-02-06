@@ -12,7 +12,7 @@ import GoogleSignIn
 import CountryPickerView
 import Firebase
 
-class AuthenticationController: ViewController, GIDSignInUIDelegate {
+class AuthenticationController: ViewController {
     
     //MARK: - ViewModel
     var viewModel: AuthenticationViewModel
@@ -34,7 +34,8 @@ class AuthenticationController: ViewController, GIDSignInUIDelegate {
         setupLayout()
         setupBindablesFromViewModel()
         
-        GIDSignIn.sharedInstance().uiDelegate = self  //for Google SignIn
+        GIDSignIn.sharedInstance()?.presentingViewController = self
+
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {

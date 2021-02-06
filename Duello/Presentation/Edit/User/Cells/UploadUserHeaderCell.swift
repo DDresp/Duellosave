@@ -13,7 +13,7 @@ import SDWebImage
 class UploadUserHeaderCell: UITableViewCell {
     
     //MARK: - Displayer
-    var displayer: UploadUserHeaderDisplayer? {
+    var displayer: EditUserHeaderDisplayer? {
         didSet {
             setupBindablesToDisplayer()
             setupBindablesFromDisplayer()
@@ -29,21 +29,22 @@ class UploadUserHeaderCell: UITableViewCell {
     //MARK: - Views
     private let imageButton: UIButton = {
         let button = UIButton(type: .system)
-        button.backgroundColor = VERYLIGHTGRAYCOLOR
+        button.backgroundColor = LIGHT_GRAY
         button.layer.cornerRadius = 190 / 2
         button.setTitle("Select Photo", for: .normal)
+        button.setTitleColor(DARK_GRAY, for: .normal)
         button.clipsToBounds = true
         button.imageView?.contentMode = .scaleToFill
         button.layer.borderWidth = 3
-        button.layer.borderColor = VERYLIGHTGRAYCOLOR.cgColor
+        button.layer.borderColor = DARK_GRAY.cgColor
         return button
     }()
     
     //MARK: - Layout
     private func setupLayout() {
-        backgroundColor = DARKGRAYCOLOR
+        contentView.backgroundColor = BLACK
         
-        addSubview(imageButton)
+        contentView.addSubview(imageButton)
         imageButton.centerInSuperview(size: .init(width: 190, height: 190))
         
     }

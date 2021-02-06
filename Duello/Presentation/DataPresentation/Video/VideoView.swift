@@ -5,23 +5,24 @@
 //  Created by Darius Dresp on 3/4/20.
 //  Copyright © 2020 Darius Dresp. All rights reserved.
 //
+//
 
 import RxSwift
 import RxCocoa
 import AVFoundation
 
 class VideoView: UIView {
-    
+
     //MARK: - Displayer
     var displayer: VideoPlayerDisplayer? {
         didSet {
-            
+
             self.disposeBag = DisposeBag()
             self.activityIndicatorView.startAnimating()
             self.playerLayer.player = nil
             self.setupBindablesFromDisplayer()
             self.setupBindablesToDisplayer()
-            
+
         }
     }
 
@@ -29,33 +30,33 @@ class VideoView: UIView {
     var playerLooper: AVPlayerLooper?
     var player: AVQueuePlayer = AVQueuePlayer()
     var playerItem: AVPlayerItem?
-    
+
     //MARK: - Setup
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupLayout()
     }
-    
+
     //MARK: - Views
     let activityIndicatorView: UIActivityIndicatorView = {
         let aiv = UIActivityIndicatorView(style: .whiteLarge)
         aiv.translatesAutoresizingMaskIntoConstraints = false
         return aiv
     }()
-    
+
     let controlsContainerView: UIView = {
         let view = UIView()
         view.backgroundColor = .clear
         return view
     }()
-    
+
     let soundIcon: UIImageView = {
         let imageView = UIImageView()
-        imageView.tintColor = VERYLIGHTGRAYCOLOR
+        imageView.tintColor = LIGHT_GRAY
         imageView.contentMode = .scaleToFill
         return imageView
     }()
-    
+
     let oneTapGesture: UITapGestureRecognizer = {
         let tap = UITapGestureRecognizer()
         tap.numberOfTapsRequired = 1
@@ -69,7 +70,7 @@ class VideoView: UIView {
         view.addGestureRecognizer(oneTapGesture)
         return view
     }()
-    
+
     lazy var playBackSlider: PlaySlider = {
        let slider = PlaySlider()
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(sliderTapped))
@@ -79,7 +80,7 @@ class VideoView: UIView {
 
     //MARK: - Interactions
     @objc func sliderTapped(gestureRecognizer: UIGestureRecognizer) {
-        
+
         let pointTapped: CGPoint = gestureRecognizer.location(in: self)
         let positionOfSlider: CGPoint = playBackSlider.frame.origin
         let widthOfSlider: CGFloat = playBackSlider.frame.size.width
@@ -88,52 +89,51 @@ class VideoView: UIView {
         let timeScale = player.currentItem?.asset.duration.timescale ?? 1
         let targetTime = CMTimeMakeWithSeconds(floatedSeconds, preferredTimescale: timeScale)
         player.seek(to: targetTime, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
-        
+
     }
-    
+
     //MARK: - Layout
     override class var layerClass: AnyClass {
         return AVPlayerLayer.self
     }
-    
+
     var playerLayer: AVPlayerLayer {
         return layer as! AVPlayerLayer
     }
-    
+
     private func setupLayout() {
-        
+
         addSubview(controlsContainerView)
         controlsContainerView.fillSuperview()
-        
+
         controlsContainerView.addSubview(activityIndicatorView)
         activityIndicatorView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         activityIndicatorView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        
+
         controlsContainerView.addSubview(soundView)
         soundView.anchor(top: topAnchor, leading: nil, bottom: nil, trailing: trailingAnchor, size: .init(width: 50, height: 50))
         soundView.addSubview(soundIcon)
-        soundIcon.anchor(top: nil, leading: nil, bottom: nil, trailing: nil, padding: .zero, size: .init(width: 30, height: 30))
+        soundIcon.anchor(top: nil, leading: nil, bottom: nil, trailing: nil, padding: .zero, size: .init(width: 20, height: 20))
         soundIcon.centerInSuperview()
-        
+
         controlsContainerView.addSubview(playBackSlider)
-        playBackSlider.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 0), size: .init(width: 0, height: 10))
-        
+        playBackSlider.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 0), size: .init(width: 0, height: 7))
+
     }
-    
+
     //MARK: - Methods
-    
     private func startVideo(asset: AVAsset) {
-        
+
         playerItem = AVPlayerItem(asset: asset)
-        
+
         let duration = self.playerItem?.asset.duration
         let seconds = CMTimeGetSeconds(duration ?? CMTimeMake(value: 0, timescale: 0))
         let floatseconds = Float(seconds)
-        
+
         playBackSlider.maximumValue = floatseconds
         playBackSlider.changeProgress(progress: 0, animated: false)
         player = AVQueuePlayer(playerItem: self.playerItem)
-        
+
         let interval = CMTime(seconds: 0.05, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
         self.player.addPeriodicTimeObserver(forInterval: interval, queue: DispatchQueue.main, using: { [weak self] (time) in
             guard let self = self else { return }
@@ -146,7 +146,7 @@ class VideoView: UIView {
                 self.playBackSlider.changeProgress(progress: timeRatio, animated: false)
             }
         })
-        
+
         player.isMuted = displayer?.isMuted.value ?? true
         playerLooper = AVPlayerLooper(player: player, templateItem: playerItem!)
         playerLayer.player = player
@@ -160,22 +160,22 @@ class VideoView: UIView {
         player.seek(to: CMTime.zero)
         playBackSlider.changeProgress(progress: 0, animated: false)
     }
-    
+
     //MARK: - Reactive
     private var disposeBag = DisposeBag()
-    
+
     private func setupBindablesToDisplayer() {
         guard let displayer = displayer else { return }
         oneTapGesture.rx.event.asObservable().map { (_) -> () in
             return ()
             }.bind(to: displayer.tappedSoundIcon).disposed(by: disposeBag)
     }
-    
+
     private func setupBindablesFromDisplayer() {
         guard let displayer = displayer else { return }
-        
+
         let isMuted = displayer.isMuted.share(replay: 2, scope: .whileConnected)
-        
+
         isMuted.map { (isMuted) -> UIImage? in
             if isMuted {
                 return UIImage(named: "soundoffIcon")?.withRenderingMode(.alwaysTemplate)
@@ -185,7 +185,7 @@ class VideoView: UIView {
             }.flatMap { (image) -> Observable<UIImage> in
                 return Observable.from(optional: image)
             }.bind(to: soundIcon.rx.image).disposed(by: disposeBag)
-        
+
         isMuted.subscribe(onNext: { [weak self] (isMuted) in
             if isMuted {
                 self?.player.isMuted = true
@@ -193,22 +193,23 @@ class VideoView: UIView {
                 self?.player.isMuted = false
             }
         }).disposed(by: disposeBag)
-        
+
         displayer.playVideoRequested.filter { (playVideoRequested) -> Bool in
             return !playVideoRequested
         }.subscribe(onNext: { [weak self] (_) in
             self?.stopVideo()
             }).disposed(by: disposeBag)
-        
-        displayer.startVideo.subscribe(onNext: { (asset) in
+
+        displayer.startVideo.subscribe(onNext: { [weak self] (asset) in
             DispatchQueue.main.async {
-                self.startVideo(asset: asset)
+                self?.startVideo(asset: asset)
             }
             }).disposed(by: disposeBag)
-        
+
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
 }

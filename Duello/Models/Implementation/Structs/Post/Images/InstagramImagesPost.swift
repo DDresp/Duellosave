@@ -15,24 +15,30 @@ struct InstagramImagesPost: InstagramImagesPostModel {
     var name = "InstagramImage"
     
     //MARK: - Attributes
-    var uid: PostSingleAttribute = PostSingleAttribute(attributeCase: .uid, value: nil)
-    var title: PostSingleAttribute = PostSingleAttribute(attributeCase: .title, value: nil)
-    var description: PostSingleAttribute = PostSingleAttribute(attributeCase: .description, value: nil)
-    var creationDate: PostSingleAttribute = PostSingleAttribute(attributeCase: .creationDate, value: nil)
-    var likes: PostSingleAttribute = PostSingleAttribute(attributeCase: .likes, value: nil)
-    var dislikes: PostSingleAttribute = PostSingleAttribute(attributeCase: .dislikes, value: nil)
-    var rate: PostSingleAttribute = PostSingleAttribute(attributeCase: .rate, value: nil)
-    var mediaRatio: PostSingleAttribute = PostSingleAttribute(attributeCase: .mediaRatio, value: nil)
-    var isDeactivated: PostSingleAttribute = PostSingleAttribute(attributeCase: .isDeactivated, value: false)
-    var user: PostMapAttribute = PostMapAttribute(attributeCase: .user, model: User())
+    var uid: PostAttribute = PostAttribute(attributeCase: .uid, value: nil)
+    var cid: PostAttribute = PostAttribute(attributeCase: .cid, value: nil)
+    var title: PostAttribute = PostAttribute(attributeCase: .title, value: nil)
+    var description: PostAttribute = PostAttribute(attributeCase: .description, value: nil)
+    var creationDate: PostAttribute = PostAttribute(attributeCase: .creationDate, value: nil)
+    var likes: PostAttribute = PostAttribute(attributeCase: .likes, value: nil)
+    var dislikes: PostAttribute = PostAttribute(attributeCase: .dislikes, value: nil)
+    var rate: PostAttribute = PostAttribute(attributeCase: .rate, value: nil)
+    var mediaRatio: PostAttribute = PostAttribute(attributeCase: .mediaRatio, value: nil)
+    var isVerified: PostAttribute = PostAttribute(attributeCase: .isVerified, value: false)
+    var isBlocked: PostAttribute = PostAttribute(attributeCase: .isBlocked, value: false)
+    var isDeactivated: PostAttribute = PostAttribute(attributeCase: .isDeactivated, value: false)
+    var typeData: PostAttribute = PostAttribute(attributeCase: .type, value: FineMediaType.instagramImages)
+    var apiUrl: PostAttribute = PostAttribute(attributeCase: .apiUrl, value: nil)
+    var reportStatus: PostAttribute = PostAttribute(attributeCase: .reportStatus, value: ReportStatusType.noReport)
     
-    var typeData: PostSingleAttribute = PostSingleAttribute(attributeCase: .type, value: FineMediaType.instagramImages)
-    var apiUrl: PostSingleAttribute = PostSingleAttribute(attributeCase: .apiUrl, value: nil)
+    var user: PostReference = PostReference(attributeCase: .user, model: User())
+    var category: PostReference = PostReference(attributeCase: .category, model: Category())
     
     //MARK: - Getters
-    func getSingleAttributes() -> [SingleAttribute] {
+    func getAttributes() -> [ModelAttributeType] {
         return [
             uid,
+            cid,
             title,
             description,
             creationDate,
@@ -42,12 +48,15 @@ struct InstagramImagesPost: InstagramImagesPostModel {
             typeData,
             apiUrl,
             mediaRatio,
-            isDeactivated
+            isVerified,
+            isBlocked,
+            isDeactivated,
+            reportStatus
         ]
     }
 
-    func getMapAttributes() -> [MapAttribute]? {
-        return [user]
+    func getReferences() -> [ModelReference]? {
+        return [user, category]
     }
     
     //MARK: - Networking
