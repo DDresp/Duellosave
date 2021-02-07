@@ -22,19 +22,23 @@ class UploadDescriptionHeader: UIView {
     override init(frame: CGRect) {
         super.init(frame: .zero)
         addSubview(overallStackView)
-        overallStackView.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: STANDARDSPACING, left: 0, bottom: 6, right: 0))
+        overallStackView.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: STANDARDSPACING, left: 0, bottom: STANDARDSPACING, right: 0))
         
     }
     
     //MARK: - Views
-    let descriptionLabel: SmallHeaderLabel = {
-        let label = SmallHeaderLabel()
+    let descriptionLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.mediumCustomFont(size: VERYSMALLFONTSIZE)
+        label.textColor = LIGHT_GRAY
         label.text = "DESCRIPTION"
         return label
     }()
     
-    let countLabel: SmallHeaderLabel = {
-        let label = SmallHeaderLabel()
+    let countLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.mediumCustomFont(size: VERYSMALLFONTSIZE)
+        label.textColor = LIGHT_GRAY
         label.textAlignment = .right
         return label
     }()
@@ -43,6 +47,8 @@ class UploadDescriptionHeader: UIView {
         let stackView = UIStackView(arrangedSubviews: [descriptionLabel, countLabel])
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
+        stackView.isLayoutMarginsRelativeArrangement = true
+        stackView.layoutMargins = .init(top: 0, left: STANDARDSPACING, bottom: 0, right: STANDARDSPACING)
         return stackView
     }()
     

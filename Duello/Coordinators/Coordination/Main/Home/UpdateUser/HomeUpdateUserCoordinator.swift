@@ -37,8 +37,10 @@ class HomeUpdateUserCoordinator: UpdateUserCoordinatorType {
     //MARK: - Methods
     func start() {
         let homeUpdateUserController = HomeUpdateUserController(viewModel: viewModel ?? UpdateUserViewModel(user: User()))
-        presentedController = UINavigationController(rootViewController: homeUpdateUserController)
-        rootController.present(presentedController!, animated: true, completion: nil)
+        presentedController = homeUpdateUserController
+        if let navigationController = rootController as? UINavigationController {
+            navigationController.pushViewController(presentedController!, animated: true)
+        }
     }
     
 }

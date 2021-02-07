@@ -14,6 +14,7 @@ protocol CategoryDisplayer {
     
     //MARK: - Variables
     var index: Int { get }
+    var imageUrl: String? { get }
     var title: String { get }
     var description: String { get }
     var categoryId: String { get }

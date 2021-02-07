@@ -16,4 +16,8 @@ protocol UploadCategoryDisplayer: class, UploadDisplayer {
     var descriptionDisplayer: UploadDescriptionDisplayer { get }
     var roughMediaSelectorDisplayer: UploadRoughMediaSelectorDisplayer { get }
     
+    //MARK: - Bindables
+    var image: BehaviorRelay<UIImage?> { get }
+    var imageButtonTapped: BehaviorRelay<Void> { get }
+    
 }

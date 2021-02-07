@@ -24,20 +24,23 @@ class InstagramService: NetworkService {
                 return Disposables.create()
             }
             
-            Alamofire.request(url).validate().responseJSON(completionHandler: { (response) in
+            AF.request(url).validate().responseJSON(completionHandler: { (response) in
 
-                if response.result.isFailure {
+                switch response.result {
+                case let .success(value):
+                    if let result = value as? [String: Any] {
+                        observer.onNext(result.description)
+                        observer.onCompleted()
+                    }
+                case let .failure(error):
                     if let statusCode = response.response?.statusCode, statusCode == 404 {
                         return observer.onError(InstagramError.deactive)
                     } else {
                         return observer.onError(InstagramError.unknown(description: "Unknown Error."))
                     }
+                
                 }
 
-                if let result = response.result.value as? [String: Any] {
-                    observer.onNext(result.description)
-                    observer.onCompleted()
-                }
 
             })
             return Disposables.create()

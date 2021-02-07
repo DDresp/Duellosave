@@ -78,7 +78,6 @@ class UploadUserViewModel: EditUserDisplayer {
     }
     
     //Data Validation
-    
     var itemHasMissingName: Bool {
         let itemWithInvalidName = itemViewModels.filter { (item) -> Bool in
             return !item.addedName.value

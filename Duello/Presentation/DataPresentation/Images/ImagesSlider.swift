@@ -36,8 +36,8 @@ class ImagesSlider: UIView {
      
      private var pageControl: UIPageControl = {
          let pageControl = UIPageControl()
-         pageControl.currentPageIndicatorTintColor = EXTREMELIGHTGRAYCOLOR
-         pageControl.pageIndicatorTintColor = UIColor.gray
+         pageControl.currentPageIndicatorTintColor = WHITE
+         pageControl.pageIndicatorTintColor = DARK_GRAY
          pageControl.isUserInteractionEnabled = false
          pageControl.translatesAutoresizingMaskIntoConstraints = false
          pageControl.heightAnchor.constraint(equalToConstant: 25).isActive = true
@@ -46,7 +46,7 @@ class ImagesSlider: UIView {
      
      private lazy var pageControlContainerView: UIView = {
          let view = UIView()
-         view.backgroundColor = ULTRADARKCOLOR
+         view.backgroundColor = BLACK
          view.addSubview(pageControl)
          pageControl.fillSuperview()
          return view

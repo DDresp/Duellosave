@@ -6,18 +6,28 @@
 //  Copyright © 2020 Darius Dresp. All rights reserved.
 //
 
-import Firebase
-import RxCocoa
-import RxSwift
+import UIKit
 
 class MainController: UITabBarController {
     
     //MARK: - Coordinator
     weak var coordinator: MainCoordinatorType?
     
+    //MARK: - ViewModel
+    let viewModel: MainViewModel
+    
     //MARK: - Setup
+    init(viewModel: MainViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
 }

@@ -14,6 +14,7 @@ struct Category: CategoryModel {
     var id: String?
     
     //MARK: - Attributes
+    var imageUrl: CategoryAttribute = CategoryAttribute(attributeCase: .imageUrl, value: nil)
     var title: CategoryAttribute = CategoryAttribute(attributeCase: .title, value: nil)
     var description: CategoryAttribute = CategoryAttribute(attributeCase: .description, value: nil)
     var creationDate: CategoryAttribute = CategoryAttribute(attributeCase: .creationDate, value: nil)
@@ -23,6 +24,7 @@ struct Category: CategoryModel {
     //MARK: - Getters
     func getAttributes() -> [ModelAttributeType] {
         return [
+            imageUrl,
             title,
             description,
             creationDate,

@@ -23,13 +23,8 @@ class PostCollectionMasterViewController: ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupBindablesFromDisplayer()
         
-    }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        .lightContent
     }
     
     //MARK: - Views
@@ -39,7 +34,6 @@ class PostCollectionMasterViewController: ViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
-        setNeedsStatusBarAppearanceUpdate()
     }
     
     override func viewWillDisappear(_ animated: Bool) {

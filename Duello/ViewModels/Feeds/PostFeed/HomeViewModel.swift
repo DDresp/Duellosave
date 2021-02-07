@@ -31,9 +31,7 @@ class HomeViewModel: SimplePostCollectionMasterViewModel {
     
     //MARK: - Bindables
     var user: BehaviorRelay<UserModel?> = BehaviorRelay(value: nil)
-    
     var settingsTapped: PublishSubject<Void> = PublishSubject<Void>()
-    var logoutTapped: PublishSubject<Void> = PublishSubject<Void>()
     
     //MARK: - Setup
     init() {
@@ -154,19 +152,11 @@ class HomeViewModel: SimplePostCollectionMasterViewModel {
     func setupBindablesToCoordinator() {
         guard let coordinator = coordinator else { return }
         
-        logoutTapped.do(onNext: { (_) in
-            do {
-                try Auth.auth().signOut()
-            } catch let err {
-                print("failed to logout the user", err)
-            }
-        }).bind(to: coordinator.loggedOut).disposed(by: disposeBag)
-        
         settingsTapped.map { [weak self] (_) -> UserModel? in
             return self?.user.value
         }.flatMap { (user) -> Observable<UserModel> in
             return Observable.from(optional: user)
-            }.bind(to: coordinator.requestedSettings).disposed(by: disposeBag)
+        }.bind(to: coordinator.requestedSettings).disposed(by: disposeBag)
         
     }
     

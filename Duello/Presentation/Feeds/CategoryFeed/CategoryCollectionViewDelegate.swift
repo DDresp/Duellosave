@@ -20,7 +20,7 @@ class CategoryCollectionViewDelegate: NSObject, UICollectionViewDelegate, UIColl
     //MARK: - Variables
     weak var collectionView: UICollectionView?
     
-    private lazy var categoryCell = CategoryCell(frame: .init(x: 0, y: 0, width: frameWidth, height: 1000))
+    private lazy var categoryCell = CategoryCell(frame: .init(x: 0, y: 0, width: frameWidth - 30, height: 1000))
     
     //MARK: - Setup
     init(displayer: CategoryCollectionDisplayer, collectionView: UICollectionView) {
@@ -32,14 +32,17 @@ class CategoryCollectionViewDelegate: NSObject, UICollectionViewDelegate, UIColl
     //MARK: - Delegation
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        return .init(width: frameWidth, height: 70)
+        if displayer.hasNoCategories || displayer.allDataLoaded.value {
+            return .init(width: frameWidth, height: STANDARDSPACING)
+        }
+        return .init(width: frameWidth, height: 30)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let categoryViewModel = categoryListDisplayer.getCategoryDisplayer(at: indexPath.item)
         categoryCell.displayer = categoryViewModel
         categoryCell.fit()
-        let size = categoryCell.systemLayoutSizeFitting(.init(width: frameWidth, height: 1000))
+        let size = categoryCell.systemLayoutSizeFitting(.init(width: frameWidth - 30, height: 1000))
         return CGSize(width: frameWidth - 30, height: size.height)
     }
     

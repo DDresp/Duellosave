@@ -38,7 +38,7 @@ class VideoPlayer: UIView  {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.backgroundColor = VERYLIGHTGRAYCOLOR
+        imageView.backgroundColor = DARK_GRAY
         return imageView
     }()
     
@@ -51,7 +51,7 @@ class VideoPlayer: UIView  {
     private let videoIcon: UIImageView = {
         let image = #imageLiteral(resourceName: "videoIcon").withRenderingMode(.alwaysTemplate)
         let imageView = UIImageView(image: image)
-        imageView.tintColor = VERYLIGHTGRAYCOLOR
+        imageView.tintColor = LIGHT_GRAY
         imageView.contentMode = .scaleToFill
         return imageView
     }()
@@ -59,7 +59,7 @@ class VideoPlayer: UIView  {
     private let playIcon: UIImageView = {
         let image = #imageLiteral(resourceName: "playIcon").withRenderingMode(.alwaysTemplate)
         let imageView = UIImageView(image: image)
-        imageView.tintColor = VERYLIGHTGRAYCOLOR
+        imageView.tintColor = LIGHT_GRAY
         imageView.contentMode = .scaleToFill
         return imageView
     }()
@@ -83,7 +83,7 @@ class VideoPlayer: UIView  {
         thumbnailImageView.addSubview(shadowView)
         shadowView.fillSuperview()
         thumbnailImageView.addSubview(videoIcon)
-        videoIcon.anchor(top: thumbnailImageView.topAnchor, leading: nil, bottom: nil, trailing: thumbnailImageView.trailingAnchor, padding: .init(top: 10, left: 0, bottom: 0, right: 10), size: .init(width: 30, height: 30))
+        videoIcon.anchor(top: thumbnailImageView.topAnchor, leading: nil, bottom: nil, trailing: thumbnailImageView.trailingAnchor, padding: .init(top: 10, left: 0, bottom: 0, right: 10), size: .init(width: 20, height: 20))
         thumbnailImageView.addSubview(playIcon)
         playIcon.anchor(top: nil, leading: nil, bottom: nil, trailing: nil, padding: .zero, size: .init(width: 50, height: 50))
         playIcon.centerXAnchor.constraint(equalTo: thumbnailImageView.centerXAnchor).isActive = true

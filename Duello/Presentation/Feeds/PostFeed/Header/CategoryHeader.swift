@@ -19,7 +19,7 @@ class CategoryHeader: UICollectionReusableView {
     //MARK: - Setup
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = ULTRADARKCOLOR
+        backgroundColor = BLACK
         setupLayout()
     }
     
@@ -36,7 +36,7 @@ class CategoryHeader: UICollectionReusableView {
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldCustomFont(size: MEDIUMFONTSIZE)
-        label.textColor = LIGHTFONTCOLOR
+        label.textColor = LIGHT_GRAY
         label.numberOfLines = 1
         return label
     }()
@@ -44,7 +44,7 @@ class CategoryHeader: UICollectionReusableView {
     private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldCustomFont(size: MEDIUMFONTSIZE)
-        label.textColor = LIGHTFONTCOLOR
+        label.textColor = LIGHT_GRAY
         label.numberOfLines = 0
         return label
     }()
@@ -104,11 +104,11 @@ class CategoryHeader: UICollectionReusableView {
         displayer?.isFollowed.subscribe(onNext: { [weak self] (isFollowed) in
             if isFollowed {
                 self?.followButton.setTitle("unfollow", for: .normal)
-                self?.followButton.backgroundColor = DARKCOLOR
+                self?.followButton.backgroundColor = DARK_GRAY
                 
             } else {
                 self?.followButton.setTitle("follow", for: .normal)
-                self?.followButton.backgroundColor = LIGHTBLUECOLOR
+                self?.followButton.backgroundColor = LIGHT_BLUE
             }
             }).disposed(by: disposeBag)
     }

@@ -21,13 +21,11 @@ class CategoryCollectionView: UICollectionView {
     let categoryIdentifier = "categoryCell"
     let footerIdentifier = "footer"
     
-    private let refreshController = UIRefreshControl()
-    
     //MARK: - Setup
     init(displayer: CategoryCollectionDisplayer) {
         self.displayer = displayer
         super.init(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-        backgroundColor = ULTRADARKCOLOR
+        backgroundColor = BLACK
         setup()
         setupBindablesToDisplayer()
         setupBindablesFromDisplayer()
@@ -41,10 +39,17 @@ class CategoryCollectionView: UICollectionView {
         dataSource = feedDatasource
         prefetchDataSource = feedPrefetchDatasource
         delegate = feedDelegate
-        register(CategoryCell.self, forCellWithReuseIdentifier: categoryIdentifier) //Specific to Home??
+        register(CategoryCell.self, forCellWithReuseIdentifier: categoryIdentifier)
         register(FooterLoadingCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: footerIdentifier)
         
     }
+    
+    //MARK: - Views
+    private let refreshController: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.tintColor = UIColor.white
+        return refreshControl
+    }()
     
     //MARK: - Reactive
     private let disposeBag = DisposeBag()

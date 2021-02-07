@@ -14,7 +14,7 @@ class DeactivatedView: UIView {
         let label = UILabel()
         label.backgroundColor = .clear
         label.font = UIFont.boldCustomFont(size: LARGEFONTSIZE)
-        label.textColor = LIGHTFONTCOLOR
+        label.textColor = LIGHT_GRAY
         label.numberOfLines = 0
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -27,7 +27,7 @@ class DeactivatedView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = ULTRADARKCOLOR
+        backgroundColor = BLACK
         
         addSubview(label)
         label.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true

@@ -17,7 +17,7 @@ class LargeIconImageView: UIImageView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         layer.masksToBounds = true
-        backgroundColor = .white
+        backgroundColor = BLACK
         
     }
     
@@ -30,13 +30,13 @@ class LargeIconImageView: UIImageView {
 class LargeIconImageViewContainer: UIView {
     
     override var intrinsicContentSize: CGSize {
-        return .init(width: 38 + STANDARDSPACING, height: 38)
+        return .init(width: 15 + STANDARDSPACING, height: 15)
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         layer.masksToBounds = true
-        backgroundColor = .white
+        backgroundColor = BLACK
         
     }
     

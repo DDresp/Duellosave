@@ -12,4 +12,5 @@ import RxCocoa
 protocol UploadCategoryCoordinatorType: FlowCoordinatorType {
     var didSaveCategory: PublishRelay<Void> { get }
     var canceled: PublishRelay<Void> { get }
+    var requestedImageUpload: PublishRelay<Void> { get }
 }

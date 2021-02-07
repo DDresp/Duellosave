@@ -21,7 +21,7 @@ class AuthenticationHeader: UIView {
         self.init()
         self.parentViewController = parentViewController
         self.displayer = displayer
-        backgroundColor = ULTRADARKCOLOR
+        backgroundColor = BLACK
         setupLayout()
     }
     
@@ -34,7 +34,7 @@ class AuthenticationHeader: UIView {
         let label = UILabel()
         label.text = "Duello"
         label.font = UIFont.boldCustomFont(size: EXTREMELARGEFONTSIZE)
-        label.textColor = LIGHTFONTCOLOR
+        label.textColor = LIGHT_GRAY
         label.textAlignment = .center
         return label
     }()

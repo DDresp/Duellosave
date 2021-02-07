@@ -28,7 +28,7 @@ class ImagesPageViewController: UIPageViewController, UIPageViewControllerDataSo
     //MARK: - Setup
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = VERYLIGHTGRAYCOLOR
+        view.backgroundColor = DARK_GRAY
         dataSource = self
         delegate = self
         

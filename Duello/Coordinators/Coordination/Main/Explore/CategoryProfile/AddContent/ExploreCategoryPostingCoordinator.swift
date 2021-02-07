@@ -102,7 +102,7 @@ extension ExploreCategoryPostingCoordinator {
         config.showsPhotoFilters = false
         config.isScrollToChangeModesEnabled = false
         config.library.onlySquare = true
-        config.colors.tintColor = NAVBARBUTTONCOLOR
+        config.colors.tintColor = LIGHT_GRAY
         return YPImagePicker(configuration: config)
     }
     
@@ -157,7 +157,7 @@ extension ExploreCategoryPostingCoordinator {
         config.showsPhotoFilters = false
         config.isScrollToChangeModesEnabled = false
         config.library.onlySquare = true
-        config.colors.tintColor = NAVBARBUTTONCOLOR
+        config.colors.tintColor = LIGHT_GRAY
         return YPImagePicker(configuration: config)
     }
     

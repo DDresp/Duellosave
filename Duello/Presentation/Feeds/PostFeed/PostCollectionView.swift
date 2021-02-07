@@ -38,7 +38,7 @@ class PostCollectionView: UICollectionView {
     init(displayer: PostCollectionDisplayer) {
         self.displayer = displayer
         super.init(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-        backgroundColor = ULTRADARKCOLOR
+        backgroundColor = BLACK
         setup()
         setupBindablesToDisplayer()
         setupBindablesFromDisplayer()
@@ -76,7 +76,6 @@ class PostCollectionView: UICollectionView {
     }
     
     //MARK: - Views
-    
     private let refreshController: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.tintColor = UIColor.white

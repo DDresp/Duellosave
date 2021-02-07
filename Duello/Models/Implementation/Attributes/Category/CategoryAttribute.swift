@@ -35,6 +35,7 @@ class CategoryAttribute: ModelAttributeType {
 //MARK: - Attribute Case
 enum CategoryAttributeCase: ModelAttributeCase {
     
+    case imageUrl
     case title
     case description
     case creationDate
@@ -42,7 +43,7 @@ enum CategoryAttributeCase: ModelAttributeCase {
     
     var entryType: EntryType {
         switch self {
-        case .title, .description:
+        case .title, .description, .imageUrl:
             return .String
         case .creationDate:
             return .Double
@@ -54,7 +55,8 @@ enum CategoryAttributeCase: ModelAttributeCase {
     var key: String {
         
         switch self {
-            
+        
+        case .imageUrl: return "imageUrl"
         case .title: return "title"
         case .description: return "description"
         case .creationDate: return "creationDate"

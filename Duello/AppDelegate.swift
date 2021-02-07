@@ -19,11 +19,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         //Navigation UI
-        UINavigationBar.appearance().tintColor = NAVBARCANCELCOLOR
-        UINavigationBar.appearance().barTintColor = NAVBARCOLOR
-        let attributes = [NSAttributedString.Key.font : NAVIGATIONBARBUTTONFONT]
+        UISearchBar.appearance().barTintColor = BLACK
+        UISearchBar.appearance().barStyle = .default
+        
+        UIToolbar.appearance().tintColor = LIGHT_GRAY
+        UIToolbar.appearance().barTintColor = BLACK
+        UIToolbar.appearance().backgroundColor = BLACK
+        
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: LIGHT_GRAY]
+        
+        UINavigationBar.appearance().tintColor = LIGHT_GRAY
+        UINavigationBar.appearance().barTintColor = BLACK
+        UINavigationBar.appearance().isTranslucent = false
+        let attributes = [NSAttributedString.Key.font : UIFont.boldCustomFont(size: 16), NSAttributedString.Key.foregroundColor: LIGHT_GRAY]
         UINavigationBar.appearance().titleTextAttributes = attributes // Title fonts
         UIBarButtonItem.appearance().setTitleTextAttributes(attributes, for: .normal) // Bar Button fonts
+        UITabBar.appearance().tintColor = LIGHT_GRAY
+        UITabBar.appearance().barTintColor = BLACK
+        
+        
 
         //Facebook Login
         ApplicationDelegate.shared.application( application, didFinishLaunchingWithOptions: launchOptions)
@@ -51,7 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let isFacebookOpenUrl = ApplicationDelegate.shared.application(app, open: url, sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String, annotation: options[UIApplication.OpenURLOptionsKey.annotation])
 
         //Google Login
-        let isGoogleOpenUrl = GIDSignIn.sharedInstance().handle(url, sourceApplication:options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String, annotation: [:])
+        let isGoogleOpenUrl = GIDSignIn.sharedInstance().handle(url)
 
         if isGoogleOpenUrl { return true }
         if isFacebookOpenUrl { return true }

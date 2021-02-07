@@ -30,17 +30,23 @@ class UploadDescriptionCell: UITableViewCell {
     }
     
     //MARK: - Views
-    let placeholderLabel: InputLabel = {
-        let label = InputLabel()
-        label.text = "Add a description for your post"
-        label.textColor = PLACEHOLDERCOLOR
+    let placeholderLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = WHITE
+        label.font = UIFont.mediumCustomFont(size: SMALLFONTSIZE)
+        label.backgroundColor = UIColor.clear
+        label.text = "Add a description"
+        label.textColor = GRAY
         label.isUserInteractionEnabled = true
         label.backgroundColor = .clear
         return label
     }()
     
-    let textView: InputTextView = {
-        let textView = InputTextView()
+    let textView: UITextView = {
+        let textView = CustomTextView()
+        textView.font = UIFont.boldCustomFont(size: SMALLFONTSIZE)
+        textView.textColor = LIGHT_GRAY
+        textView.backgroundColor = .clear
         textView.isScrollEnabled = false
         return textView
     }()
@@ -52,11 +58,13 @@ class UploadDescriptionCell: UITableViewCell {
     
     //MARK: - Layout
     private func setupLayout() {
-        addSubview(textView)
-        textView.fillSuperview()
+        contentView.backgroundColor = BLACK
         
+        contentView.addSubview(textView)
+        textView.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor, padding: .init(top: 0, left: STANDARDSPACING, bottom: 0, right: STANDARDSPACING))
         textView.addSubview(placeholderLabel)
-        placeholderLabel.fillSuperview()
+        placeholderLabel.anchor(top: nil, leading: textView.leadingAnchor, bottom: nil, trailing: nil)
+        placeholderLabel.centerYAnchor.constraint(equalTo: textView.centerYAnchor).isActive = true
     }
     
     //MARK: - Reactive
@@ -73,8 +81,8 @@ class UploadDescriptionCell: UITableViewCell {
     private func setupBindablesFromDisplayer() {
         guard let displayer = displayer else { return }
         
-        displayer.description.asObservable().subscribe(onNext: { [weak self] (text) in
-            self?.textView.text = text
+        displayer.description.subscribe(onNext: { [weak self] (text) in
+            self?.textView.text = text //The description might have been changed in the viewModel (du to, for example, maxCharacter constraint)
         }).disposed(by: disposeBag)
         
         displayer.showPlaceHolderLabel.asObservable().bind(to: placeholderLabel.rx.isHidden).disposed(by: disposeBag)

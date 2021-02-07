@@ -10,6 +10,6 @@ import RxSwift
 import RxCocoa
 
 protocol CategoryCollectionMasterDisplayer: class {
-    
+  
 }
 

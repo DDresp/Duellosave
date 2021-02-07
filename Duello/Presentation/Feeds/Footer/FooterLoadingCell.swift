@@ -23,19 +23,19 @@ class FooterLoadingCell: UICollectionReusableView {
     //MARK: - Setup
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = VERYLIGHTGRAYCOLOR
+        backgroundColor = .black
         setupLayout()
     }
     
     //MARK: - Views
-    private let activityIndicator = UIActivityIndicatorView(style: .gray)
+    private let activityIndicator = UIActivityIndicatorView(style: .white)
     
-    private let endView: UIView = {
-        let view = UIView()
-        view.backgroundColor = ULTRADARKCOLOR
-        view.isHidden = true
-        return view
-    }()
+//    private let endView: UIView = {
+//        let view = UIView()
+//        view.backgroundColor = BLACK
+//        view.isHidden = true
+//        return view
+//    }()
     
     //MARK: - Layout
     
@@ -44,8 +44,8 @@ class FooterLoadingCell: UICollectionReusableView {
         addSubview(activityIndicator)
         activityIndicator.centerInSuperview()
         
-        addSubview(endView)
-        endView.fillSuperview()
+//        addSubview(endView)
+//        endView.fillSuperview()
         
     }
     
@@ -57,10 +57,10 @@ class FooterLoadingCell: UICollectionReusableView {
         displayer?.allDataLoaded.subscribe(onNext: { [weak self] (isFinished) in
             if isFinished {
                 self?.activityIndicator.stopAnimating()
-                self?.endView.isHidden = false
+//                self?.endView.isHidden = false
             } else {
                 self?.activityIndicator.startAnimating()
-                self?.endView.isHidden = true
+//                self?.endView.isHidden = true
             }
             }).disposed(by: disposeBag)
         

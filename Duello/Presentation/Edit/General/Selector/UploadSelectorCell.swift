@@ -14,32 +14,33 @@ class UploadSelectorCell: UITableViewCell {
     //MARK: - Setup
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        backgroundColor = .white
+        backgroundColor = BLACK
         setupLayout()
     }
     
     //MARK: - Views
     var label: UILabel = {
-        let label = UILabel()
-        label.textColor = STRONGFONTCOLOR
-        label.font = UIFont.mediumCustomFont(size: MEDIUMFONTSIZE)
+        let label = CustomLabel(width: 0, height: 40)
+        label.textColor = LIGHT_GRAY
+        label.font = UIFont.mediumCustomFont(size: SMALLFONTSIZE)
         return label
     }()
     
     var switchButton: UISwitch = {
-        let videoSwitch = UISwitch()
-        videoSwitch.isOn = false
-        return videoSwitch
+        let sb = UISwitch()
+        sb.isOn = false
+        return sb
     }()
     
     //MARK: - Layout
     private func setupLayout() {
         contentView.addSubview(label)
         contentView.addSubview(switchButton)
-        label.anchor(top: nil, leading: contentView.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: 0, left: STANDARDSPACING, bottom: 0, right: 0), size: .init(width: 0, height: 30))
-        label.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-        switchButton.anchor(top: nil, leading: nil, bottom: nil, trailing: contentView.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: STANDARDSPACING), size: .init(width: 60, height: 30))
+
+        switchButton.anchor(top: nil, leading: nil, bottom: nil, trailing: contentView.trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: STANDARDSPACING))
         switchButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        
+        label.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: switchButton.leadingAnchor, padding: .init(top: 0, left: STANDARDSPACING, bottom: 0, right: 0))
     }
     
     //MARK: - Reactive

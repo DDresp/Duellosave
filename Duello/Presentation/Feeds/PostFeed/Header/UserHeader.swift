@@ -19,25 +19,26 @@ class UserHeader: UICollectionReusableView {
     //MARK: - Setup
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = ULTRADARKCOLOR
+        backgroundColor = BLACK
         setupLayout()
     }
     
     //MARK: - Views
-    private let profileImageButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.backgroundColor = ULTRADARKCOLOR
-        button.layer.cornerRadius = 160 / 2
-        button.clipsToBounds = true
-        button.layer.borderColor = VERYLIGHTGRAYCOLOR.cgColor
-        button.layer.borderWidth = 3
-        return button
+    private let profileImageView: UIImageView = {
+        let iv = UIImageView()
+        iv.backgroundColor = BLACK
+        iv.layer.cornerRadius = 160 / 2
+        iv.clipsToBounds = true
+        iv.layer.borderColor = DARK_GRAY.cgColor
+        iv.layer.borderWidth = 3
+        return iv
     }()
+    
     
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldCustomFont(size: MEDIUMFONTSIZE)
-        label.textColor = LIGHTFONTCOLOR
+        label.textColor = LIGHT_GRAY
         label.numberOfLines = 1
         return label
     }()
@@ -54,7 +55,7 @@ class UserHeader: UICollectionReusableView {
     //MARK: - Layout
     private func setupLayout() {
         setupLayoutLikePercentageView()
-        setupLayoutProfileImageButton()
+        setupLayoutProfileImageView()
         setupLayoutNameLabel()
         setupLayoutSocialMediaCollectionViewController()
         setupLayoutActivityIndicatorView()
@@ -64,20 +65,20 @@ class UserHeader: UICollectionReusableView {
     private func setupLayoutLikePercentageView() {
         addSubview(likePercentageView)
         likePercentageView.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor)
-        likePercentageView.heightAnchor.constraint(equalToConstant: 17).isActive = true
+        likePercentageView.heightAnchor.constraint(equalToConstant: 12).isActive = true
         
     }
     
-    private func setupLayoutProfileImageButton() {
-        addSubview(profileImageButton)
-        profileImageButton.anchor(top: likePercentageView.percentageLabel.bottomAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 15, left: 0, bottom: 0, right: 0), size: .init(width: 160, height: 160))
-        profileImageButton.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+    private func setupLayoutProfileImageView() {
+        addSubview(profileImageView)
+        profileImageView.anchor(top: likePercentageView.percentageLabel.bottomAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 15, left: 0, bottom: 0, right: 0), size: .init(width: 160, height: 160))
+        profileImageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         
     }
     
     private func setupLayoutNameLabel() {
         addSubview(nameLabel)
-        nameLabel.anchor(top: profileImageButton.bottomAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 10, left: 0, bottom: 0, right: 0), size: .init(width: 0, height: 20))
+        nameLabel.anchor(top: profileImageView.bottomAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 10, left: 0, bottom: 0, right: 0), size: .init(width: 0, height: 20))
         nameLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
     }
     
@@ -87,7 +88,7 @@ class UserHeader: UICollectionReusableView {
     }
     
     private func setupLayoutActivityIndicatorView() {
-        profileImageButton.addSubview(activityIndicatorView)
+        profileImageView.addSubview(activityIndicatorView)
         activityIndicatorView.fillSuperview()
         activityIndicatorView.startAnimating()
     }
@@ -119,13 +120,12 @@ class UserHeader: UICollectionReusableView {
     }
     
     private func setupProfileImage(displayer: UserHeaderViewModel) {
-        
-        profileImageButton.setImage(nil, for: .normal)
+
         activityIndicatorView.startAnimating()
         if let imageUrl = displayer.imageUrl, let url = URL(string: imageUrl) {
             SDWebImageManager.shared.loadImage(with: url, options: .continueInBackground, progress: nil) { (image, _, _, _, _, _) in
                 self.activityIndicatorView.stopAnimating()
-                self.profileImageButton.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
+                self.profileImageView.image = image?.withRenderingMode(.alwaysOriginal)
             }
         }
     }

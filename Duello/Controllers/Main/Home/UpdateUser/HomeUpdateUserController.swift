@@ -15,6 +15,10 @@ class HomeUpdateUserController: UploadUserTableViewController<UpdateUserViewMode
         super.init(displayer: viewModel)
     }
     
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
