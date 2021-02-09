@@ -132,7 +132,7 @@ class ExploreCategoryProfileController: PostCollectionMasterViewController {
     private func setupBottomControl() {
         
         view.addSubview(bottomControlView)
-        bottomControlView.anchor(top: nil, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: .init(top: 0, left: 5, bottom: 5, right: 5), size: .init(width: 0, height: 70))
+        bottomControlView.anchor(top: nil, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: .init(top: 0, left: 5, bottom: -120, right: 5), size: .init(width: 0, height: 70))
         bottomControlView.addSubview(blurView)
         blurView.fillSuperview()
         bottomControlView.addSubview(bottomStackView)
@@ -146,12 +146,39 @@ class ExploreCategoryProfileController: PostCollectionMasterViewController {
         
     }
     
+    //MARK: - Methods
+    private func hideBottomControlView() {
+        navigationItem.titleView?.isHidden = false
+        if bottomControlView.transform != .identity {
+            UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: .curveEaseOut, animations: { [weak self] in
+                self?.bottomControlView.transform = .identity
+            })
+        }
+    }
+    
+    private func showBottomControlView() {
+        navigationItem.titleView?.isHidden = true
+        if bottomControlView.transform == .identity {
+            UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: .curveEaseOut, animations: { [weak self] in
+                self?.bottomControlView.transform = .init(translationX: 0, y: -125)
+            })
+        }
+    }
+    
     //MARK: - Delegation
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
         tabBarController?.tabBar.isHidden = true
     
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        UIView.animate(withDuration: 0.7, delay: 0.7, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: .curveEaseOut, animations: {
+            self.bottomControlView.transform = .init(translationX: 0, y: -125)
+        })
+
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -176,13 +203,14 @@ class ExploreCategoryProfileController: PostCollectionMasterViewController {
     
     private func setupBindablesFromViewModel() {
         viewModel.collectionViewScrolled.subscribe (onNext: { [weak self] (_) in
-            guard let headerBottom = self?.collectionView.supplementaryView(forElementKind: UICollectionView.elementKindSectionHeader, at: IndexPath(item: 0, section: 0))?.rectCorrespondingToWindow.maxY else { return }
+
+            guard let firstCellBottom = self?.collectionView.cellForItem(at: IndexPath(item: 1, section: 0))?.rectCorrespondingToWindow.maxY else { return }
             guard let navBottom = self?.navigationController?.navigationBar.rectCorrespondingToWindow.maxY  else { return }
             
-            if navBottom >= headerBottom {
-                self?.navigationItem.titleView?.isHidden = false
+            if navBottom >= firstCellBottom {
+                self?.hideBottomControlView()
             } else {
-                self?.navigationItem.titleView?.isHidden = true
+                self?.showBottomControlView()
             }
             
         }).disposed(by: disposeBag)
