@@ -8,6 +8,7 @@
 
 import RxSwift
 import RxCocoa
+import SDWebImage
 
 class ExploreCategoryProfileController: PostCollectionMasterViewController {
     
@@ -26,6 +27,8 @@ class ExploreCategoryProfileController: PostCollectionMasterViewController {
         
         setupNavigationItems()
         setupCollectionViewLayout()
+        setupBottomControl()
+        
         setupBindablesToViewModel()
         setupBindablesFromViewModel()
     }
@@ -39,10 +42,13 @@ class ExploreCategoryProfileController: PostCollectionMasterViewController {
         navigationItem.titleView?.isHidden = true
         
         self.navigationItem.leftBarButtonItem = backButton
+        self.navigationItem.rightBarButtonItems = [ellipsisButton, addContentButton]
     }
     
     //MARK: - Views
-//    let addContentButton = UIBarButtonItem(title: "Add Content  ", style: .plain, target: nil, action: nil)
+    let addContentButton = UIBarButtonItem(image: #imageLiteral(resourceName: "addIcon").withRenderingMode(.alwaysTemplate), style: .plain, target: nil, action: nil)
+    let ellipsisButton = UIBarButtonItem(image: UIImage(named: "ellipsisIcon")?.withRenderingMode(.alwaysTemplate), style: .plain, target: nil, action: nil)
+    
     let backButton = UIBarButtonItem(image: #imageLiteral(resourceName: "backIcon").withRenderingMode(.alwaysTemplate), style: .plain, target: nil, action: nil)
     
     lazy var collectionView: PostCollectionView = {
@@ -50,11 +56,93 @@ class ExploreCategoryProfileController: PostCollectionMasterViewController {
         return collectionView
     }()
     
+    lazy var bottomImageView: UIImageView = {
+        let iv = UIImageView()
+        iv.layer.cornerRadius = 16
+        iv.clipsToBounds = true
+        iv.translatesAutoresizingMaskIntoConstraints = false
+        iv.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        iv.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        return iv
+    }()
+    
+    private let bottomTitleLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldCustomFont(size: SMALLFONTSIZE)
+        label.textColor = LIGHT_GRAY
+        return label
+    }()
+    
+    private let bottomInfoLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldCustomFont(size: VERYSMALLFONTSIZE)
+        label.textColor = LIGHT_GRAY
+        label.text = "Rate whose content is the best"
+        return label
+    }()
+    
+    private let startButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("START", for: .normal)
+        button.setTitleColor(LIGHT_GRAY, for: .normal)
+        button.backgroundColor = GRAY
+        button.layer.cornerRadius = 12
+        button.titleLabel?.font = UIFont.boldCustomFont(size: SMALLFONTSIZE)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.widthAnchor.constraint(equalToConstant: 80).isActive = true
+        button.heightAnchor.constraint(equalToConstant: 24).isActive = true
+        return button
+    }()
+    
+    private let bottomControlView: UIView = {
+        let view = UIView()
+        view.backgroundColor = GRAY
+        view.layer.cornerRadius = 16
+        view.clipsToBounds = true
+        return view
+    }()
+    
+    private lazy var bottomLabelStackView: UIStackView = {
+        let sv = UIStackView(arrangedSubviews: [bottomTitleLabel, bottomInfoLabel])
+        sv.spacing = 5
+        sv.axis = .vertical
+        return sv
+    }()
+    
+    private lazy var bottomStackView: UIStackView = {
+        let sv = UIStackView(arrangedSubviews: [bottomImageView, bottomLabelStackView, startButton])
+        sv.spacing = STANDARDSPACING
+        sv.alignment = .center
+        return sv
+    }()
+    
+    private let blurView: UIVisualEffectView = {
+        let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+        return blurView
+    }()
+    
     //MARK: - Layout
     private func setupCollectionViewLayout() {
         
         view.addSubview(collectionView)
         collectionView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor)
+
+    }
+    
+    private func setupBottomControl() {
+        
+        view.addSubview(bottomControlView)
+        bottomControlView.anchor(top: nil, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: .init(top: 0, left: 5, bottom: 5, right: 5), size: .init(width: 0, height: 70))
+        bottomControlView.addSubview(blurView)
+        blurView.fillSuperview()
+        bottomControlView.addSubview(bottomStackView)
+        bottomStackView.anchor(top: bottomControlView.topAnchor, leading: bottomControlView.leadingAnchor, bottom: bottomControlView.bottomAnchor, trailing: bottomControlView.trailingAnchor, padding: .init(top: 0, left: STANDARDSPACING, bottom: 0, right: STANDARDSPACING))
+        
+        bottomTitleLabel.text = viewModel.category.getTitle()
+        guard let urlString = viewModel.category.getImageUrl(), let url = URL(string: urlString) else { return }
+        SDWebImageManager.shared.loadImage(with: url, options: .continueInBackground, progress: nil) { (image, _, _, _, _, _) in
+            self.bottomImageView.image = image?.withRenderingMode(.alwaysOriginal)
+        }
         
     }
     
@@ -76,10 +164,10 @@ class ExploreCategoryProfileController: PostCollectionMasterViewController {
     
     private func setupBindablesToViewModel() {
         
-//        addContentButton.rx.tap.map { (_) -> Void in
-//            return ()
-//            }.bind(to: viewModel.requestedAddContent).disposed(by: disposeBag)
-//
+        addContentButton.rx.tap.map { (_) -> Void in
+            return ()
+            }.bind(to: viewModel.requestedAddContent).disposed(by: disposeBag)
+
         backButton.rx.tap.map { (_) -> Void in
             return ()
         }.bind(to: viewModel.goBack).disposed(by: disposeBag)

@@ -19,7 +19,7 @@ class EllipsisButton: UIButton {
     }
     
     override var intrinsicContentSize: CGSize {
-        return CGSize(width: 20, height: 15)
+        return CGSize(width: 22, height: 22)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -31,7 +31,7 @@ class EllipsisButton: UIButton {
 class EllipsisButtonContainer: UIView {
     
     override var intrinsicContentSize: CGSize {
-        return CGSize(width: 50, height: 50)
+        return CGSize(width: 60, height: 50)
     }
     
     override init(frame: CGRect) {

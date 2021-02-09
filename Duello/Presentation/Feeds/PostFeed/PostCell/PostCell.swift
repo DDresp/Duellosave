@@ -85,7 +85,7 @@ class PostCell: UICollectionViewCell {
 
     private let ellipsisButton: EllipsisButton = {
         let button = EllipsisButton(type: .system)
-        button.setImage(#imageLiteral(resourceName: "ellipsisButton").withRenderingMode(.alwaysTemplate), for: .normal)
+        button.setImage(UIImage(named: "ellipsisIcon")?.withRenderingMode(.alwaysTemplate), for: .normal)
         button.tintColor = LIGHT_GRAY
         button.isUserInteractionEnabled = false
         return button
