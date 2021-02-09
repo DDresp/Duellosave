@@ -44,8 +44,8 @@ class EmptyCell: UICollectionViewCell {
     
     //MARK: - Layout
     private func setupLayout() {
-        contentView.addSubview(label)
-        label.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: .init(top: 100, left: 0, bottom: 0, right: 0), size: .zero)
+//        contentView.addSubview(label)
+//        label.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: .init(top: 100, left: 0, bottom: 0, right: 0), size: .zero)
     }
     
     required init?(coder aDecoder: NSCoder) {

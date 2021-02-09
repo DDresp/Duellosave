@@ -22,6 +22,7 @@ protocol PostCollectionDisplayer: class, CollectionDisplayer {
     //from Parent
     var allDataLoaded: BehaviorRelay<Bool> { get }
     var viewIsAppeared: BehaviorRelay<Bool> { get }
+    var collectionViewScrolled: PublishRelay<Void> { get }
     
     //to Parent
     var needsRestart: BehaviorRelay<Bool> { get }

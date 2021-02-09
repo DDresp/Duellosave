@@ -28,12 +28,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: LIGHT_GRAY]
         
+        UINavigationBar.appearance().barStyle = .default
         UINavigationBar.appearance().tintColor = LIGHT_GRAY
         UINavigationBar.appearance().barTintColor = BLACK
         UINavigationBar.appearance().isTranslucent = false
         let attributes = [NSAttributedString.Key.font : UIFont.boldCustomFont(size: 16), NSAttributedString.Key.foregroundColor: LIGHT_GRAY]
         UINavigationBar.appearance().titleTextAttributes = attributes // Title fonts
         UIBarButtonItem.appearance().setTitleTextAttributes(attributes, for: .normal) // Bar Button fonts
+        
         UITabBar.appearance().tintColor = LIGHT_GRAY
         UITabBar.appearance().barTintColor = BLACK
         

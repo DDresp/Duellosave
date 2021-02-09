@@ -21,7 +21,7 @@ protocol CategoryDisplayer {
     
     //MARK: - Bindables
     var goToMe: PublishRelay<Int?> { get }
-    var tapped: PublishSubject<Void> { get }
+    var tapped: PublishRelay<Void> { get }
     
 }
 

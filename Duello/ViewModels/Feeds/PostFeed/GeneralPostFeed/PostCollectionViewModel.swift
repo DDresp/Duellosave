@@ -23,6 +23,7 @@ class PostCollectionViewModel: PostCollectionDisplayer {
     //from Parent
     var allDataLoaded: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     var viewIsAppeared: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+    var collectionViewScrolled: PublishRelay<Void> = PublishRelay()
     
     //to Parent
     var needsRestart: BehaviorRelay<Bool> = BehaviorRelay(value: false)

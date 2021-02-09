@@ -27,6 +27,10 @@ class CategoryHeaderViewModel: PostHeaderDisplayer {
     var isFollowed: BehaviorRelay<Bool> = BehaviorRelay(value: false)
 
     //MARK: - Getters
+    var imageUrl: String? {
+        return category.value?.getImageUrl()
+    }
+    
     var title: String? {
         return category.value?.getTitle()
     }

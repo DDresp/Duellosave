@@ -88,4 +88,7 @@ extension UIView {
         }
     }
     
+    var rectCorrespondingToWindow:CGRect{
+        return self.convert(self.bounds, to: nil)
+    }
 }

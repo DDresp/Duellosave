@@ -33,6 +33,7 @@ class SimplePostCollectionMasterViewModel: PostCollectionMasterDisplayer {
     var showLoading: BehaviorRelay<Bool> = BehaviorRelay<Bool>(value: false)
     
     var viewIsAppeared: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+    var collectionViewScrolled: PublishRelay<Void> = PublishRelay()
     
     var displayingAllFetchedPosts: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     var loadedAllPosts: BehaviorRelay<Bool> = BehaviorRelay(value: false)
@@ -132,6 +133,7 @@ class SimplePostCollectionMasterViewModel: PostCollectionMasterDisplayer {
             self?.changeActivationStatus(for: postId, isActivated: isActivated)
             }).disposed(by: disposeBag)
         
+        postCollectionDisplayer.collectionViewScrolled.bind(to: collectionViewScrolled).disposed(by: disposeBag)
     }
     
     func setupBindablesToChildDisplayer() {

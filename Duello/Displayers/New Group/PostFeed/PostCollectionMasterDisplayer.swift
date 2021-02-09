@@ -19,5 +19,6 @@ protocol PostCollectionMasterDisplayer {
     var showLoading: BehaviorRelay<Bool> { get }
     
     var viewIsAppeared: BehaviorRelay<Bool> { get }
+    var collectionViewScrolled: PublishRelay<Void> { get }
     
 }

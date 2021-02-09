@@ -8,13 +8,13 @@
 import RxSwift
 import RxCocoa
 
-class PostCollectionViewDelegate: NSObject, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class PostCollectionViewDelegate: NSObject, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate {
     
     //MARK: - Displayer
     let displayer: PostCollectionDisplayer
 
     //MARK: - Child Displayers
-    var profileDisplayer: PostHeaderDisplayer? { return displayer.postHeaderDisplayer }
+    var headerDisplayer: PostHeaderDisplayer? { return displayer.postHeaderDisplayer }
     var postListDisplayer: PostListDisplayer { return displayer.postListDisplayer }
     
     //MARK: - Variables
@@ -23,7 +23,9 @@ class PostCollectionViewDelegate: NSObject, UICollectionViewDelegate, UICollecti
     var squishedSizes = [Int: CGSize]()
     var expandedSizes = [Int: CGSize]()
     
-    private lazy var profileHeader = UserHeader(frame: .init(x: 0, y: 0, width: frameWidth, height: 1000))
+    private lazy var userHeader = UserHeader(frame: .init(x: 0, y: 0, width: frameWidth, height: 1000))
+    private lazy var categoryHeader = CategoryHeader(frame: .init(x: 0, y: 0, width: frameWidth, height: 1000))
+    
     private lazy var singleImageCell = SingleImagePostCell(frame: .init(x: 0, y: 0, width: frameWidth, height: 1000))
     private lazy var imagesCell = ImagesPostCell(frame: .init(x: 0, y: 0, width: frameWidth, height: 1000))
     private lazy var videoCell = VideoPostCell(frame: .init(x: 0, y: 0, width: frameWidth, height: 1000))
@@ -38,7 +40,7 @@ class PostCollectionViewDelegate: NSObject, UICollectionViewDelegate, UICollecti
     //MARK: - Delegation
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         
-        guard let headerDisplayer = profileDisplayer else { return .zero}
+        guard let headerDisplayer = headerDisplayer else { return .zero}
         return estimateHeaderSize(for: headerDisplayer)
         
     }
@@ -73,6 +75,10 @@ class PostCollectionViewDelegate: NSObject, UICollectionViewDelegate, UICollecti
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         postListDisplayer.willDisplayCell.accept(indexPath.row)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        displayer.collectionViewScrolled.accept(())
     }
     
     //MARK: - Getters
@@ -114,10 +120,22 @@ class PostCollectionViewDelegate: NSObject, UICollectionViewDelegate, UICollecti
     }
     
     private func estimateHeaderSize(for displayer: PostHeaderDisplayer) -> CGSize {
-        profileHeader.displayer = UserHeaderViewModel()
-        profileHeader.fit()
-        let size = profileHeader.systemLayoutSizeFitting(.init(width: frameWidth, height: 1000))
-        return .init(width: frameWidth, height: size.height)
+        
+        switch displayer {
+        case let viewModel as UserHeaderViewModel:
+            userHeader.displayer = viewModel
+            userHeader.fit()
+            let size = userHeader.systemLayoutSizeFitting(.init(width: frameWidth, height: 1000))
+            return .init(width: frameWidth, height: size.height)
+        case let viewModel as CategoryHeaderViewModel:
+            categoryHeader.displayer = viewModel
+            categoryHeader.fit()
+            let size = categoryHeader.systemLayoutSizeFitting(.init(width: frameWidth, height: 1000))
+            return .init(width: frameWidth, height: size.height)
+        default:
+            return .init(width: 0, height: 0)
+        }
+        
     }
     
 }

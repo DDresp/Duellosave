@@ -30,7 +30,9 @@ class CategoryCollectionViewDelegate: NSObject, UICollectionViewDelegate, UIColl
     }
 
     //MARK: - Delegation
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        categoryListDisplayer.getCategoryDisplayer(at: indexPath.item)?.tapped.accept(())
+    }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
         if displayer.hasNoCategories || displayer.allDataLoaded.value {
             return .init(width: frameWidth, height: STANDARDSPACING)

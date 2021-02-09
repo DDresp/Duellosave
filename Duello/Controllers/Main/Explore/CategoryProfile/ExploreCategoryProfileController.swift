@@ -23,21 +23,26 @@ class ExploreCategoryProfileController: PostCollectionMasterViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupNavigationItems()
         setupCollectionViewLayout()
         setupBindablesToViewModel()
+        setupBindablesFromViewModel()
     }
     
     private func setupNavigationItems() {
         navigationController?.navigationBar.tintColor = BLACK
-        navigationItem.rightBarButtonItem = addContentButton
+//        navigationItem.rightBarButtonItem = addContentButton
+        navigationController?.navigationItem.title = viewModel.category.getTitle()
+//        navigationController?.navigationItem.titleView?.isHidden = true
         self.navigationItem.leftBarButtonItem = backButton
+        self.navigationController?.navigationBar.tintColor = WHITE
+        self.navigationController?.navigationItem.titleView?.tintColor = WHITE
     }
     
     //MARK: - Views
-    let addContentButton = UIBarButtonItem(title: "Add Content  ", style: .plain, target: nil, action: nil)
-    let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: nil)
+//    let addContentButton = UIBarButtonItem(title: "Add Content  ", style: .plain, target: nil, action: nil)
+    let backButton = UIBarButtonItem(image: #imageLiteral(resourceName: "backIcon").withRenderingMode(.alwaysTemplate), style: .plain, target: nil, action: nil)
     
     lazy var collectionView: PostCollectionView = {
         let collectionView = PostCollectionView(displayer: viewModel.postCollectionDisplayer)
@@ -46,27 +51,52 @@ class ExploreCategoryProfileController: PostCollectionMasterViewController {
     
     //MARK: - Layout
     private func setupCollectionViewLayout() {
-        //so that the scrollView doesn't get hidden under the navigationBar
-        edgesForExtendedLayout = []
         
         view.addSubview(collectionView)
-        collectionView.fillSuperview()
+        collectionView.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor)
+        
     }
     
+    //MARK: - Delegation
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+        tabBarController?.tabBar.isHidden = true
+    
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        tabBarController?.tabBar.isHidden = false
+    }
     
     //MARK: - Reactive
     private let disposeBag = DisposeBag()
     
     private func setupBindablesToViewModel() {
         
-        addContentButton.rx.tap.map { (_) -> Void in
-            return ()
-            }.bind(to: viewModel.requestedAddContent).disposed(by: disposeBag)
-        
+//        addContentButton.rx.tap.map { (_) -> Void in
+//            return ()
+//            }.bind(to: viewModel.requestedAddContent).disposed(by: disposeBag)
+//
         backButton.rx.tap.map { (_) -> Void in
             return ()
         }.bind(to: viewModel.goBack).disposed(by: disposeBag)
         
+    }
+    
+    private func setupBindablesFromViewModel() {
+        viewModel.collectionViewScrolled.subscribe (onNext: { [weak self] (_) in
+            guard let headerBottom = self?.collectionView.supplementaryView(forElementKind: UICollectionView.elementKindSectionHeader, at: IndexPath(item: 0, section: 0))?.rectCorrespondingToWindow.maxY else { return print("debug: here we are")}
+            guard let navBottom = self?.navigationController?.navigationBar.rectCorrespondingToWindow.maxY  else { return print("debug: here we are")}
+            
+            if navBottom >= headerBottom {
+                self?.navigationItem.titleView?.isHidden = false
+            } else {
+                self?.navigationItem.titleView?.isHidden = true
+            }
+        }).disposed(by: disposeBag)
+
     }
     
     required init?(coder: NSCoder) {

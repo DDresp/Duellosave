@@ -23,7 +23,7 @@ class CategoryViewModel: CategoryDisplayer {
     
     //MARK: - Bindables
     var goToMe: PublishRelay<Int?> = PublishRelay()
-    var tapped: PublishSubject<Void> = PublishSubject()
+    var tapped: PublishRelay<Void> = PublishRelay()
     
     //MARK: - Setup
     init(category: CategoryModel, index: Int) {

@@ -52,15 +52,7 @@ class CategoryCell: UICollectionViewCell {
         stackView.axis = .vertical
         stackView.spacing = STANDARDSPACING
         stackView.isUserInteractionEnabled = true
-        stackView.addGestureRecognizer(oneTapGesture)
         return stackView
-    }()
-
-    //MARK: - Interactions
-    private let oneTapGesture: UITapGestureRecognizer = {
-        let gestureRecognizer = UITapGestureRecognizer()
-        gestureRecognizer.numberOfTapsRequired = 1
-        return gestureRecognizer
     }()
     
     //MARK: - Layout
@@ -117,10 +109,6 @@ class CategoryCell: UICollectionViewCell {
     var disposeBag = DisposeBag()
 
     func setupBindablesToDisplayer() {
-        guard let displayer = displayer else { return }
-        oneTapGesture.rx.event.map { (_) -> Void in
-            return ()
-            }.bind(to: displayer.tapped).disposed(by: disposeBag)
     }
 
     func setupBindablesFromDisplayer() {
