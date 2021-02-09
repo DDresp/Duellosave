@@ -24,15 +24,6 @@ class CategoryHeader: UICollectionReusableView {
     }
     
     //MARK: - Views
-//    private let followButton: UIButton = {
-//        let button = UIButton(type: .system)
-//        button.titleLabel?.font = UIFont.lightCustomFont(size: SMALLFONTSIZE)
-//        button.layer.cornerRadius = 5
-//        button.clipsToBounds = true
-//        button.setTitleColor(UIColor.white, for: .normal)
-//        return button
-//    }()
-    
     private let coverImageView: UIImageView = {
         let iv = UIImageView()
         iv.backgroundColor = BLACK
@@ -50,19 +41,18 @@ class CategoryHeader: UICollectionReusableView {
         return label
     }()
     
-    private let favoriteCV: UIView = {
+    private lazy var favoriteCV: UIView = {
         let view = UIView()
         view.backgroundColor = .clear
         view.layer.borderWidth = 1
         view.layer.borderColor = LIGHT_GRAY.cgColor
+        view.isUserInteractionEnabled = true
+        view.addGestureRecognizer(oneTapGesture)
         return view
     }()
     
     private let favoriteIcon: UIImageView = {
         let iv = UIImageView()
-        let image = UIImage(named: "favoriteUnselectedIcon")?.withRenderingMode(.alwaysTemplate)
-        iv.image = image
-        iv.tintColor = WHITE
         return iv
     }()
     
@@ -71,7 +61,6 @@ class CategoryHeader: UICollectionReusableView {
         label.backgroundColor = .clear
         label.textColor = LIGHT_GRAY
         label.font = UIFont.lightCustomFont(size: SMALLFONTSIZE)
-        label.text = "Add to favorites"
         return label
     }()
     
@@ -83,18 +72,17 @@ class CategoryHeader: UICollectionReusableView {
         return label
     }()
     
-//    private lazy var stackView: UIStackView = {
-//        let stackView = UIStackView(arrangedSubviews: [nameLabel, descriptionLabel])
-//        stackView.axis = .vertical
-//        stackView.spacing = 10
-//        return stackView
-//    }()
+    //MARK: - User Interaction
+    let oneTapGesture: UITapGestureRecognizer = {
+        let tap = UITapGestureRecognizer()
+        tap.numberOfTapsRequired = 1
+        return tap
+    }()
     
     //MARK: - Layout
     private func setupLayout() {
         
         addSubview(coverImageView)
-//        coverImageView.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: .zero, size: .init(width: 0, height: 400))
         coverImageView.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: STANDARDSPACING, left: STANDARDSPACING, bottom: 0, right: 0), size: .init(width: frame.width * 1/3, height: frame.width * 1/3))
         
         addSubview(nameLabel)
@@ -113,7 +101,6 @@ class CategoryHeader: UICollectionReusableView {
         addSubview(descriptionLabel)
         descriptionLabel.anchor(top: coverImageView.bottomAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: STANDARDSPACING, left: STANDARDSPACING, bottom: STANDARDSPACING, right: STANDARDSPACING))
 
-        
     }
     
     
@@ -153,20 +140,34 @@ class CategoryHeader: UICollectionReusableView {
     
     private func setupBindablesToDisplayer() {
         guard let displayer = displayer else { return }
-//        followButton.rx.tap.bind(to: displayer.tappedFollow).disposed(by: disposeBag)
+        oneTapGesture.rx.event.map { (_) -> Void in
+            return ()
+        }.bind(to: displayer.tappedFavorite).disposed(by: disposeBag)
     }
     
     private func setupBindablesFromDisplayer() {
-//        displayer?.isFollowed.subscribe(onNext: { [weak self] (isFollowed) in
-//            if isFollowed {
-//                self?.followButton.setTitle("unfollow", for: .normal)
-//                self?.followButton.backgroundColor = DARK_GRAY
-//
-//            } else {
-//                self?.followButton.setTitle("follow", for: .normal)
-//                self?.followButton.backgroundColor = LIGHT_BLUE
-//            }
-//            }).disposed(by: disposeBag)
+        
+        displayer?.isFavorite.subscribe(onNext: { [weak self] (isFavorite) in
+            guard let isFavorite = isFavorite else { return }
+            if isFavorite {
+
+                let image = UIImage(named: "favoriteSelectedIcon")?.withRenderingMode(.alwaysTemplate)
+                self?.favoriteIcon.image = image
+                self?.favoriteIcon.tintColor = .yellow
+                
+                self?.favoriteLabel.text = "Added to favorites"
+
+            } else {
+                
+                let image = UIImage(named: "favoriteUnselectedIcon")?.withRenderingMode(.alwaysTemplate)
+                self?.favoriteIcon.image = image
+                self?.favoriteIcon.tintColor = WHITE
+                
+                self?.favoriteLabel.text = "Add to favorites"
+                
+            }
+            }).disposed(by: disposeBag)
+        
     }
 
     required init?(coder aDecoder: NSCoder) {

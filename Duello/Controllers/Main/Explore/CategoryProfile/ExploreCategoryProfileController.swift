@@ -31,13 +31,14 @@ class ExploreCategoryProfileController: PostCollectionMasterViewController {
     }
     
     private func setupNavigationItems() {
-        navigationController?.navigationBar.tintColor = BLACK
-//        navigationItem.rightBarButtonItem = addContentButton
-        navigationController?.navigationItem.title = viewModel.category.getTitle()
-//        navigationController?.navigationItem.titleView?.isHidden = true
+        let label = UILabel()
+        label.text = viewModel.category.getTitle()
+        label.textColor = LIGHT_GRAY
+        label.font = UIFont.boldCustomFont(size: MEDIUMFONTSIZE)
+        navigationItem.titleView = label
+        navigationItem.titleView?.isHidden = true
+        
         self.navigationItem.leftBarButtonItem = backButton
-        self.navigationController?.navigationBar.tintColor = WHITE
-        self.navigationController?.navigationItem.titleView?.tintColor = WHITE
     }
     
     //MARK: - Views
@@ -87,14 +88,15 @@ class ExploreCategoryProfileController: PostCollectionMasterViewController {
     
     private func setupBindablesFromViewModel() {
         viewModel.collectionViewScrolled.subscribe (onNext: { [weak self] (_) in
-            guard let headerBottom = self?.collectionView.supplementaryView(forElementKind: UICollectionView.elementKindSectionHeader, at: IndexPath(item: 0, section: 0))?.rectCorrespondingToWindow.maxY else { return print("debug: here we are")}
-            guard let navBottom = self?.navigationController?.navigationBar.rectCorrespondingToWindow.maxY  else { return print("debug: here we are")}
+            guard let headerBottom = self?.collectionView.supplementaryView(forElementKind: UICollectionView.elementKindSectionHeader, at: IndexPath(item: 0, section: 0))?.rectCorrespondingToWindow.maxY else { return }
+            guard let navBottom = self?.navigationController?.navigationBar.rectCorrespondingToWindow.maxY  else { return }
             
             if navBottom >= headerBottom {
                 self?.navigationItem.titleView?.isHidden = false
             } else {
                 self?.navigationItem.titleView?.isHidden = true
             }
+            
         }).disposed(by: disposeBag)
 
     }

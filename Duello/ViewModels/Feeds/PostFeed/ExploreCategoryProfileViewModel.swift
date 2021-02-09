@@ -30,7 +30,7 @@ class ExploreCategoryProfileViewModel: SimplePostCollectionMasterViewModel {
     //MARK: - Bindables
     let requestedAddContent: PublishSubject<Void> = PublishSubject()
     let goBack: PublishSubject<Void> = PublishSubject()
-    var isFollowed: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+    var isFavorite: BehaviorRelay<Bool?> = BehaviorRelay(value: nil)
     
     //MARK: - Setup
     init(category: CategoryModel) {
@@ -44,17 +44,17 @@ class ExploreCategoryProfileViewModel: SimplePostCollectionMasterViewModel {
     override func start() {
         super.start()
         collectionViewModel.category.accept(category)
-        fetchCategoryFollowStatus()
+        fetchCategoryFavoriteStatus()
     }
     
-    func fetchCategoryFollowStatus() {
+    func fetchCategoryFavoriteStatus() {
         
         guard let categoryId = category.id else { return }
         
         DispatchQueue.global(qos: .background).async  {
             
-            FetchingService.shared.fetchFollowStatus(for: categoryId).subscribe(onNext: { [weak self] (isFollowed) in
-                self?.isFollowed.accept(isFollowed)
+            FetchingService.shared.fetchFavoriteStatus(for: categoryId).subscribe(onNext: { [weak self] (isFavorite) in
+                self?.isFavorite.accept(isFavorite)
             }).disposed(by: self.disposeBag)
             
         }
@@ -68,18 +68,18 @@ class ExploreCategoryProfileViewModel: SimplePostCollectionMasterViewModel {
             }).disposed(by: disposeBag)
     }
     
-    func changeFollowStatus() {
+    func changeFavoriteStatus() {
         
-        guard let categoryId = category.id else { return }
-        if isFollowed.value {
-            isFollowed.accept(!self.isFollowed.value)
-            DeletingService.shared.unfollowCategory(categoryId: categoryId).subscribe(onNext: { (_) in
-                //unfollow category
+        guard let categoryId = category.id, let favorite = isFavorite.value else { return }
+        if favorite {
+            isFavorite.accept(!favorite)
+            DeletingService.shared.unfavorCategory(categoryId: categoryId).subscribe(onNext: { (_) in
+                //unfavored category
                 }).disposed(by: disposeBag)
         } else {
-            isFollowed.accept(!self.isFollowed.value)
-            UploadingService.shared.followCategory(categoryId: categoryId).subscribe(onNext: { (_) in
-                //followed category
+            isFavorite.accept(!favorite)
+            UploadingService.shared.favorCategory(categoryId: categoryId).subscribe(onNext: { (_) in
+                //favored category
             }).disposed(by: disposeBag)
         }
         
@@ -93,16 +93,16 @@ class ExploreCategoryProfileViewModel: SimplePostCollectionMasterViewModel {
             self?.reportPost(for: postId, report: report)
             }).disposed(by: disposeBag)
         
-        collectionViewModel.changeFollowStatus.subscribe(onNext: { [weak self] (_) in
+        collectionViewModel.changeFavoriteStatus.subscribe(onNext: { [weak self] (_) in
             guard let self = self else { return }
-            self.changeFollowStatus()
+            self.changeFavoriteStatus()
             }).disposed(by: disposeBag)
         
     }
     
     override func setupBindablesToChildDisplayer() {
         super.setupBindablesToChildDisplayer()
-        isFollowed.bind(to: collectionViewModel.isFollowed).disposed(by: disposeBag)
+        isFavorite.bind(to: collectionViewModel.isFavorite).disposed(by: disposeBag)
     }
     
     private func setupBindablesToCoordinator() {

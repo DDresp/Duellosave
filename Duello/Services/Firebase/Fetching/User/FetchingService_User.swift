@@ -27,12 +27,12 @@ extension FetchingService {
     
 }
 
-//MARK Fetch User Follow Status of a Category
+//MARK Fetch User Favorite Status of a Category
 extension FetchingService {
     
-    func fetchFollowStatus(for categoryId: String) -> Observable<Bool> {
+    func fetchFavoriteStatus(for categoryId: String) -> Observable<Bool> {
         guard let uid = Auth.auth().currentUser?.uid else { return Observable.error(DownloadError.userNotLoggedIn) }
-        let reference = USERS_REFERENCE.document(uid).collection(USER_FOLLOWED_CATEGORIES_COLLECTION)
+        let reference = USERS_REFERENCE.document(uid).collection(USER_FAVORITE_CATEGORIES_COLLECTION)
         
         return fetchDic(for: reference, id: categoryId)
             .map { (data) -> Bool in

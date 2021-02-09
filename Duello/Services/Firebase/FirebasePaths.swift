@@ -15,7 +15,7 @@ let CATEGORY_REFERENCE = Firestore.firestore().collection("categories")
 //let DEACTIVATE_POST_REFERENCE = Firestore.firestore().collection("deactivatePosts")
 //let ACTIVATE_POST_REFERENCE = Firestore.firestore().collection("activatePosts")
 
-let USER_FOLLOWED_CATEGORIES_COLLECTION = "followedCategories"
+let USER_FAVORITE_CATEGORIES_COLLECTION = "favoriteCategories"
 let USER_REPORTED_POSTS_COLLECTION = "reportedPosts"
 let USER_REVIEW_REQUESTS_COLLECTION = "reviewRequests"
 let USER_DEACTIVATE_POSTS_COLLECTION = "deactivatePosts"

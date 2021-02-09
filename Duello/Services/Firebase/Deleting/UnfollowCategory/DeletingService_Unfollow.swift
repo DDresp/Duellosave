@@ -12,11 +12,11 @@ import RxCocoa
 
 extension DeletingService {
     
-    func unfollowCategory(categoryId: String) -> Observable<Void> {
+    func unfavorCategory(categoryId: String) -> Observable<Void> {
         guard hasInternetConnection() else { return Observable.error(UploadingError.networkError)}
         guard let uid = Auth.auth().currentUser?.uid else { return Observable.error(DeletingError.userNotLoggedIn)}
         
-        let reference = USERS_REFERENCE.document(uid).collection(USER_FOLLOWED_CATEGORIES_COLLECTION)
+        let reference = USERS_REFERENCE.document(uid).collection(USER_FAVORITE_CATEGORIES_COLLECTION)
         
         return Observable.create({ (observer) -> Disposable in
             

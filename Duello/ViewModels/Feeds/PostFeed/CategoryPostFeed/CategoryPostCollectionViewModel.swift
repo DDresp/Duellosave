@@ -25,8 +25,8 @@ class CategoryPostCollectionViewModel: PostCollectionViewModel {
     
     //MARK: - Bindables
     var reportPost: PublishRelay<(ReportStatusType, String)> = PublishRelay()
-    var changeFollowStatus: PublishRelay<Void> = PublishRelay()
-    var isFollowed: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+    var changeFavoriteStatus: PublishRelay<Void> = PublishRelay()
+    var isFavorite: BehaviorRelay<Bool?> = BehaviorRelay(value: nil)
     
     //MARK: - Setup
     init() {
@@ -42,14 +42,14 @@ class CategoryPostCollectionViewModel: PostCollectionViewModel {
             self?.headerViewModel.category.accept(category)
         }).disposed(by: disposeBag)
         
-        isFollowed.bind(to: headerViewModel.isFollowed).disposed(by: disposeBag)
+        isFavorite.bind(to: headerViewModel.isFavorite).disposed(by: disposeBag)
     }
     
     override func setupBindablesFromChildDisplayer() {
         super.setupBindablesFromChildDisplayer()
         
         listViewModel.reportPost.bind(to: reportPost).disposed(by: disposeBag)
-        headerViewModel.changeFollowStatus.bind(to: changeFollowStatus).disposed(by: disposeBag)
+        headerViewModel.changeFavoriteStatus.bind(to: changeFavoriteStatus).disposed(by: disposeBag)
         
     }
     

@@ -20,11 +20,11 @@ class CategoryHeaderViewModel: PostHeaderDisplayer {
     
     //MARK: - Bindables
     //from UI
-    var tappedFollow: PublishRelay<Void> = PublishRelay()
-    var changeFollowStatus: PublishRelay<Void> = PublishRelay()
+    var tappedFavorite: PublishRelay<Void> = PublishRelay()
+    var changeFavoriteStatus: PublishRelay<Void> = PublishRelay()
     
     //to UI
-    var isFollowed: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+    var isFavorite: BehaviorRelay<Bool?> = BehaviorRelay(value: nil)
 
     //MARK: - Getters
     var imageUrl: String? {
@@ -50,7 +50,7 @@ class CategoryHeaderViewModel: PostHeaderDisplayer {
     private let disposeBag = DisposeBag()
     
     private func setupBindablesFromUI() {
-        tappedFollow.bind(to: changeFollowStatus).disposed(by: disposeBag)
+        tappedFavorite.bind(to: changeFavoriteStatus).disposed(by: disposeBag)
     }
     
     private func setupBindablesFromOwnProperties() {
