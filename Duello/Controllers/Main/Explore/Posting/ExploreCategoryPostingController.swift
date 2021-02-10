@@ -66,6 +66,14 @@ class ExploreCategoryPostingController: ViewController {
         return button
     }()
     
+    private lazy var tableView: UITableView = {
+        let tv = UITableView(frame: .zero, style: .plain)
+        tv.backgroundColor = BLACK
+        tv.separatorColor = .clear
+        tv.delegate = self
+        return tv
+    }()
+    
     //MARK: - Layout
     private func setupLayout() {
         let horizontalStackView = UIStackView(arrangedSubviews: [uploadImageButton, uploadVideoButton])

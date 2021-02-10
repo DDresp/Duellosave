@@ -19,7 +19,7 @@ class CategoryHeader: UICollectionReusableView {
     //MARK: - Setup
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = DARK_GRAY
+        backgroundColor = BLACK
         setupLayout()
     }
     
@@ -44,7 +44,7 @@ class CategoryHeader: UICollectionReusableView {
     private lazy var favoriteCV: UIView = {
         let view = UIView()
         view.backgroundColor = .clear
-        view.layer.borderWidth = 1
+        view.layer.borderWidth = 0.5
         view.layer.borderColor = LIGHT_GRAY.cgColor
         view.isUserInteractionEnabled = true
         view.addGestureRecognizer(oneTapGesture)
