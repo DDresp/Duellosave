@@ -70,7 +70,7 @@ class ExploreCategoryPostingController: ViewController {
         let tv = UITableView(frame: .zero, style: .plain)
         tv.backgroundColor = BLACK
         tv.separatorColor = .clear
-        tv.delegate = self
+//        tv.delegate = self
         return tv
     }()
     
