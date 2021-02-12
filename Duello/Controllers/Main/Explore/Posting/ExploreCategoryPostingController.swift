@@ -118,10 +118,6 @@ extension ExploreCategoryPostingController: UITableViewDataSource {
         cell.selectionStyle = .none
         cell.backgroundColor = BLACK
         cell.imageView?.tintColor = LIGHT_GRAY
-        let image = #imageLiteral(resourceName: "disclosureIcon").withRenderingMode(.alwaysTemplate)
-        let iv = UIImageView(image: image)
-        iv.tintColor = LIGHT_GRAY
-        cell.accessoryView = iv
         if indexPath.section == uploadImagesSection {
 
             switch indexPath.item {

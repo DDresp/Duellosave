@@ -87,7 +87,7 @@ extension ExploreCategoryPostingCoordinator {
         let imagePicker = setupImagePicker()
         configureImagePicker(imagePicker: imagePicker)
         imagePicker.modalPresentationStyle = .fullScreen
-        presentedController.presentWithPush(imagePicker)
+        presentedController.present(imagePicker, animated: true)
         
     }
     
@@ -100,8 +100,14 @@ extension ExploreCategoryPostingCoordinator {
         config.showsPhotoFilters = false
         config.isScrollToChangeModesEnabled = false
         config.library.onlySquare = true
-        config.colors.tintColor = LIGHT_GRAY
-        return YPImagePicker(configuration: config)
+        config.colors.libraryScreenBackgroundColor = BLACK
+        config.colors.assetViewBackgroundColor = BLACK
+        config.colors.multipleItemsSelectedCircleColor = BLACK
+        config.colors.selectionsBackgroundColor = BLACK
+        let imagePicker = YPImagePicker(configuration: config)
+        imagePicker.navigationBar.barStyle = UIBarStyle.black
+        imagePicker.navigationBar.tintColor = LIGHT_GRAY
+        return imagePicker
     }
     
     //Callback (similar to Reactive)
@@ -119,7 +125,7 @@ extension ExploreCategoryPostingCoordinator {
             }
             if cancelled {
                 self?.postingUploadPostCoordinator = nil
-                imagePicker.dismissWithPush()
+                imagePicker.dismiss(animated: true)
                 return
             }
             if images.count == 1, let singleImage = images.first {
@@ -143,7 +149,7 @@ extension ExploreCategoryPostingCoordinator {
         let videoPicker = setupVideoPicker()
         configureVideoPicker(videoPicker: videoPicker)
         videoPicker.modalPresentationStyle = .fullScreen
-        presentedController.presentWithPush(videoPicker)
+        presentedController.present(videoPicker, animated: true)
     }
     
     //Setup
@@ -155,9 +161,16 @@ extension ExploreCategoryPostingCoordinator {
         config.library.maxNumberOfItems = 1
         config.showsPhotoFilters = false
         config.isScrollToChangeModesEnabled = false
-        config.library.onlySquare = true
-        config.colors.tintColor = LIGHT_GRAY
-        return YPImagePicker(configuration: config)
+        config.colors.libraryScreenBackgroundColor = BLACK
+        config.colors.assetViewBackgroundColor = BLACK
+        config.colors.bottomMenuItemBackgroundColor = BLACK
+        config.colors.bottomMenuItemSelectedTextColor = WHITE
+        config.colors.bottomMenuItemSelectedTextColor = GRAY
+        config.colors.filterBackgroundColor = BLACK
+        let videoPicker = YPImagePicker(configuration: config)
+        videoPicker.navigationBar.barStyle = UIBarStyle.black
+        videoPicker.navigationBar.tintColor = LIGHT_GRAY
+        return videoPicker
     }
     
     //Callback (similar to Reactive)
@@ -167,7 +180,7 @@ extension ExploreCategoryPostingCoordinator {
             
             if cancelled {
                 self?.postingUploadPostCoordinator = nil
-                videoPicker.dismissWithPush()
+                videoPicker.dismiss(animated: true)
                 return
             }
             
