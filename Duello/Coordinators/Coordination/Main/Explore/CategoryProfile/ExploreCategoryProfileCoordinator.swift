@@ -12,7 +12,7 @@ import RxSwift
 class ExploreCategoryProfileCoordinator: CategoryProfileCoordinatorType {
     
     //MARK: - ChildCoordinators
-    var postingCoordinator: PostingCoordinatorType?
+    var postingCoordinator: ExploreCategoryPostingCoordinator?
     
     //MARK: - Models
     let category: CategoryModel
@@ -67,12 +67,19 @@ class ExploreCategoryProfileCoordinator: CategoryProfileCoordinatorType {
 extension ExploreCategoryProfileCoordinator {
     
     private func goToPosting() {
+        guard let rootController = presentedController else { return }
         postingCoordinator = ExploreCategoryPostingCoordinator(rootController: rootController, category: category)
         postingCoordinator?.start()
         setupPostingBindables()
     }
     
     private func setupPostingBindables() {
+        
+        postingCoordinator?.requestedCancel.subscribe(onNext: { [weak self] (_) in
+            self?.postingCoordinator?.presentedController?.dismiss(animated: true)
+            self?.postingCoordinator = nil
+        }).disposed(by: disposeBag)
+        
         postingCoordinator?.uploadedMedia.subscribe(onNext: { [weak self] (uploadedMedia) in
             if uploadedMedia, let navigationController = self?.rootController as? UINavigationController {
                 navigationController.popViewController(animated: true)

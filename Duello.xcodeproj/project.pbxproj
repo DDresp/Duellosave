@@ -2325,6 +2325,7 @@
 		1475B08D24105E9E00F1D24F /* CustomUIClasses */ = {
 			isa = PBXGroup;
 			children = (
+				1481EE1F25D6AB61002E2D68 /* TableViewCells */,
 				1475B0BA2410604F00F1D24F /* Slider */,
 				1475B0B92410604900F1D24F /* Views */,
 				1475B0B82410604300F1D24F /* StackViews */,
@@ -2482,6 +2483,13 @@
 				1475B0BB2410605D00F1D24F /* PlaySlider.swift */,
 			);
 			path = Slider;
+			sourceTree = "<group>";
+		};
+		1481EE1F25D6AB61002E2D68 /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = TableViewCells;
 			sourceTree = "<group>";
 		};
 		149BC5D524323F0600CFBBC7 /* FromUser */ = {

@@ -12,7 +12,7 @@ import RxCocoa
 class ExploreCategoryPostingViewModel {
     
     //MARK: - Coordinator
-    weak var coordinator: PostingCoordinatorType? {
+    weak var coordinator: ExploreCategoryPostingCoordinator? {
         didSet {
             setupBindablesToCoordinator()
         }
@@ -22,10 +22,12 @@ class ExploreCategoryPostingViewModel {
     let category: CategoryModel
     
     //MARK: - Bindables
-    var imageButtonTapped: PublishRelay<Void> = PublishRelay<Void>()
-    var videoButtonTapped: PublishRelay<Void> = PublishRelay<Void>()
-    var instagramVideoButtonTapped: PublishRelay<Void> = PublishRelay<Void>()
-    var instagramImageButtonTapped: PublishRelay<Void> = PublishRelay<Void>()
+    var cancelTapped: PublishSubject<Void> = PublishSubject<Void>()
+    
+    var uploadImageSelected: PublishRelay<Void> = PublishRelay<Void>()
+    var uploadVideoSelected: PublishRelay<Void> = PublishRelay<Void>()
+    var uploadInstagramVideoSelected: PublishRelay<Void> = PublishRelay<Void>()
+    var uploadInstagramImageSelected: PublishRelay<Void> = PublishRelay<Void>()
     
     //MARK: - Setup
     init(category: CategoryModel) {
@@ -47,9 +49,10 @@ class ExploreCategoryPostingViewModel {
     private func setupBindablesToCoordinator() {
         guard let coordinator = coordinator else { return }
         
-        imageButtonTapped.bind(to: coordinator.requestedImageUpload).disposed(by: disposeBag)
-        videoButtonTapped.bind(to: coordinator.requestedVideoUpload).disposed(by: disposeBag)
-        instagramVideoButtonTapped.bind(to: coordinator.requestedInstagramVideoUpload).disposed(by: disposeBag)
-        instagramImageButtonTapped.bind(to: coordinator.requestedInstagramImageUpload).disposed(by: disposeBag)
+        cancelTapped.bind(to: coordinator.requestedCancel).disposed(by: disposeBag)
+        uploadImageSelected.bind(to: coordinator.requestedImageUpload).disposed(by: disposeBag)
+        uploadVideoSelected.bind(to: coordinator.requestedVideoUpload).disposed(by: disposeBag)
+        uploadInstagramVideoSelected.bind(to: coordinator.requestedInstagramVideoUpload).disposed(by: disposeBag)
+        uploadInstagramImageSelected.bind(to: coordinator.requestedInstagramImageUpload).disposed(by: disposeBag)
     }
 }

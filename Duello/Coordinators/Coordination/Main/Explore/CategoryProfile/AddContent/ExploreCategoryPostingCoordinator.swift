@@ -27,6 +27,7 @@ class ExploreCategoryPostingCoordinator: PostingCoordinatorType {
     }()
     
     //MARK: - Bindables
+    var requestedCancel = PublishSubject<Void>()
     var requestedVideoUpload = PublishSubject<Void>()
     var requestedImageUpload = PublishSubject<Void>()
     var requestedInstagramVideoUpload = PublishSubject<Void>()
@@ -46,13 +47,8 @@ class ExploreCategoryPostingCoordinator: PostingCoordinatorType {
     //MARK: - Methods
     func start() {
         let postingController = ExploreCategoryPostingController(viewModel: viewModel)
-        presentedController = postingController
-        
-        if let navigationController = rootController as? UINavigationController {
-            navigationController.pushViewController(presentedController!, animated: true)
-        } else {
-            rootController.present(presentedController!, animated: true)
-        }
+        presentedController = UINavigationController(rootViewController: postingController)
+        rootController.present(presentedController!, animated: true, completion: nil)
         setupBindables()
     }
     
@@ -87,10 +83,12 @@ extension ExploreCategoryPostingCoordinator {
     
     //GoTo
     private func goToImagePicker() {
+        guard let presentedController = presentedController else { return }
         let imagePicker = setupImagePicker()
         configureImagePicker(imagePicker: imagePicker)
         imagePicker.modalPresentationStyle = .fullScreen
-        rootController.present(imagePicker, animated: true)
+        presentedController.presentWithPush(imagePicker)
+        
     }
     
     //Setup
@@ -121,7 +119,7 @@ extension ExploreCategoryPostingCoordinator {
             }
             if cancelled {
                 self?.postingUploadPostCoordinator = nil
-                imagePicker.dismiss(animated: true)
+                imagePicker.dismissWithPush()
                 return
             }
             if images.count == 1, let singleImage = images.first {
@@ -141,10 +139,11 @@ extension ExploreCategoryPostingCoordinator {
     
     //GoTo
     private func gotToVideoPicker() {
+        guard let presentedController = presentedController else { return }
         let videoPicker = setupVideoPicker()
         configureVideoPicker(videoPicker: videoPicker)
         videoPicker.modalPresentationStyle = .fullScreen
-        rootController.present(videoPicker, animated: true)
+        presentedController.presentWithPush(videoPicker)
     }
     
     //Setup
@@ -168,7 +167,7 @@ extension ExploreCategoryPostingCoordinator {
             
             if cancelled {
                 self?.postingUploadPostCoordinator = nil
-                videoPicker.dismiss(animated: true)
+                videoPicker.dismissWithPush()
                 return
             }
             
@@ -188,8 +187,8 @@ extension ExploreCategoryPostingCoordinator {
     
     //GoTo
     private func goToUploadInstagramLink(forVideo: Bool) {
-        guard let rootController = presentedController else { return }
-        postingUploadInstagramLinkCoordinator = ExploreCategoryPostingUploadInstagramLinkCoordinator(rootController: rootController, forVideo: forVideo)
+        guard let presentedController = presentedController else { return }
+        postingUploadInstagramLinkCoordinator = ExploreCategoryPostingUploadInstagramLinkCoordinator(rootController: presentedController, forVideo: forVideo)
         postingUploadInstagramLinkCoordinator?.start()
         setupUploadInstagramLinkBindables()
     }

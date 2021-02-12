@@ -9,7 +9,7 @@
 import RxCocoa
 import RxSwift
 
-class HomeSettingsController: UIViewController {
+class HomeSettingsController: ViewController {
     
     //MARK: - ViewModel
     private let viewModel: HomeSettingsViewModel
@@ -27,7 +27,6 @@ class HomeSettingsController: UIViewController {
     
     private func setup() {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        tableView.dataSource = self
     
         setupLayout()
         setupBindablesToViewModel()
@@ -45,6 +44,7 @@ class HomeSettingsController: UIViewController {
         tv.backgroundColor = BLACK
         tv.separatorColor = .clear
         tv.delegate = self
+        tv.dataSource = self
         return tv
     }()
     
@@ -106,7 +106,7 @@ extension HomeSettingsController: UITableViewDataSource {
         
         if indexPath.section == 0 {
             cell.textLabel?.text = viewModel.disclosureItems[indexPath.row]
-            cell.accessoryType = .disclosureIndicator
+//            cell.accessoryType = .disclosureIndicator
             let image = #imageLiteral(resourceName: "disclosureIcon").withRenderingMode(.alwaysTemplate)
             let iv = UIImageView(image: image)
             iv.tintColor = LIGHT_GRAY
