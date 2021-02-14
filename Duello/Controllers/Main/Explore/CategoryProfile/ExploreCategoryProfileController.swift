@@ -75,7 +75,7 @@ class ExploreCategoryProfileController: PostCollectionMasterViewController {
     
     private let bottomInfoLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldCustomFont(size: VERYSMALLFONTSIZE)
+        label.font = UIFont.boldCustomFont(size: EXTREMESMALLFONTSIZE)
         label.textColor = LIGHT_GRAY
         label.text = "Rate whose content is the best"
         return label

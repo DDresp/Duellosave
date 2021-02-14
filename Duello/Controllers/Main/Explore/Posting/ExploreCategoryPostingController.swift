@@ -125,7 +125,7 @@ extension ExploreCategoryPostingController: UITableViewDataSource {
                 cell.textLabel?.text = "Upload images from library"
                 cell.imageView?.image = #imageLiteral(resourceName: "photoIcon").withRenderingMode(.alwaysTemplate)
             case 1:
-                cell.textLabel?.text = "Upload images from instagram"
+                cell.textLabel?.text = "Upload images from Instagram"
                 cell.imageView?.image = #imageLiteral(resourceName: "instagramIcon").withRenderingMode(.alwaysTemplate)
             default:
                 ()
@@ -138,7 +138,7 @@ extension ExploreCategoryPostingController: UITableViewDataSource {
                 cell.textLabel?.text = "Upload video from library"
                 cell.imageView?.image = #imageLiteral(resourceName: "videoIcon").withRenderingMode(.alwaysTemplate)
             case 1:
-                cell.textLabel?.text = "Upload video from instagram"
+                cell.textLabel?.text = "Upload video from Instagram"
                 cell.imageView?.image = #imageLiteral(resourceName: "instagramIcon").withRenderingMode(.alwaysTemplate)
             default:
                 ()

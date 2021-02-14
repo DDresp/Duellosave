@@ -12,7 +12,7 @@ class SmallHeaderLabel: UILabel {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        font = UIFont.mediumCustomFont(size: VERYSMALLFONTSIZE)
+        font = UIFont.mediumCustomFont(size: EXTREMESMALLFONTSIZE)
         textColor = LIGHT_GRAY
         
     }

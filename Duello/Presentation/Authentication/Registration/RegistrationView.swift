@@ -38,8 +38,8 @@ class RegistrationView: UIView {
     //MARK: - Views
     private lazy var textFieldsStackView = RegistrationTextFieldsStackView(parentViewController: self.parentViewController, displayer: self.displayer)
     
-    private lazy var registerButton: DarkSquaredButton = {
-        let button = DarkSquaredButton(type: .system)
+    private lazy var registerButton: CustomButton = {
+        let button = CustomButton(style: .dark, width: nil, height: nil)
         button.setTitle("Register", for: .normal)
         return button
     }()

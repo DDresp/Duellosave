@@ -48,7 +48,7 @@ class UploadUserTableViewCell: UITableViewCell, UITextFieldDelegate {
     }()
 
     private lazy var nameTextField: UITextField = {
-        let textField = CustomTexField(width: 1000, height: 38)
+        let textField = CustomTextField(width: 1000, height: 38)
         textField.tag = nameTextFieldTag
         textField.textColor = WHITE
         textField.autocorrectionType = .no
@@ -77,7 +77,7 @@ class UploadUserTableViewCell: UITableViewCell, UITextFieldDelegate {
     }()
     
     private lazy var linkTextField: UITextField = {
-        let textField = CustomTexField(width: 1000, height: 38)
+        let textField = CustomTextField(width: 1000, height: 38)
         textField.tag = linkTextFieldTag
         textField.textColor = WHITE
         textField.autocorrectionType = .no

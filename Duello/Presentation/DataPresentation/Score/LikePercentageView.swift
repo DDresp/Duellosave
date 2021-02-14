@@ -61,7 +61,7 @@ class LikePercentageView: UIView {
     
     let percentageLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldCustomFont(size: VERYSMALLFONTSIZE)
+        label.font = UIFont.boldCustomFont(size: EXTREMESMALLFONTSIZE)
         label.text = "0"
         label.textColor = LIGHT_GRAY
         label.isHidden = true

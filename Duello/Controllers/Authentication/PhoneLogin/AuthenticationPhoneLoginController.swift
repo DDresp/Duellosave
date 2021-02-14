@@ -34,9 +34,9 @@ class AuthenticationPhoneLoginController: ViewController {
     private lazy var phoneNumberView = PhoneNumberView(displayer: self.viewModel)
     private var progressHud: JGProgressHUD?
     
-    private let phoneSubmitButton: DarkSquaredButton = {
-        let button = DarkSquaredButton(type: .system)
-        button.setTitle("Submit", for: .normal)
+    private let phoneSubmitButton: CustomButton = {
+        let button = CustomButton(style: .dark, width: nil, height: nil)
+        button.setTitle("SUBMIT", for: .normal)
         return button
     }()
     

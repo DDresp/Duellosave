@@ -33,7 +33,7 @@ class UploadTitleCell: UITableViewCell {
     
     //MARK: - Views
     let textField: UITextField = {
-        let textField = CustomTexField(width: 1000, height: 44)
+        let textField = CustomTextField(width: 1000, height: 44)
         textField.textColor = WHITE
         textField.autocorrectionType = .no
         textField.font = UIFont.boldCustomFont(size: SMALLFONTSIZE)

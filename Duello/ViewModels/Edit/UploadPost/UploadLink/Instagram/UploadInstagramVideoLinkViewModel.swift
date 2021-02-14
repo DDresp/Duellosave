@@ -30,8 +30,8 @@ class UploadInstagramVideoLinkViewModel: UploadInstagramLinkDisplayer {
     var alert: PublishRelay<Alert> = PublishRelay()
     var isLoading: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     
-    var cancelTapped: PublishRelay<Void> = PublishRelay()
-    var submitTapped: PublishRelay<Void> = PublishRelay()
+    var cancelTapped: PublishSubject<Void> = PublishSubject()
+    var nextTapped: PublishSubject<Void> = PublishSubject()
     
     //MARK: - Setup
     init() {
@@ -42,7 +42,7 @@ class UploadInstagramVideoLinkViewModel: UploadInstagramLinkDisplayer {
     func downloadLink() {
         
         guard linkIsValid.value, let link = link.value else {
-            alert.accept(Alert(alertMessage: "Please provide a valid instagram url", alertHeader: "Invalid"))
+            alert.accept(Alert(alertMessage: "Please provide a valid url to Instagram", alertHeader: "Invalid"))
             return
         }
         

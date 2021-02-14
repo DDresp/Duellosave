@@ -26,30 +26,38 @@ class UploadLinkViewController: ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = LIGHT_GRAY
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(handleCancel))
+        view.backgroundColor = BLACK
+        navigationItem.leftBarButtonItem = cancelButton
+        navigationItem.rightBarButtonItem = nextButton
     }
     
     //MARK: - Views
-    lazy var linkTextField: InputTextField = {
-        let textField = InputTextField()
-        textField.placeholder = "\(displayer.apiDomain) Link"
-        return textField
+    private let cancelButton = UIBarButtonItem(title: "Cancel", style: .done, target: nil, action: nil)
+    private let nextButton = UIBarButtonItem(title: "Next", style: .plain, target: self, action: nil)
+    
+    private let descriptionLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.lightCustomFont(size: SMALLFONTSIZE)
+        label.textColor = LIGHT_GRAY
+        label.text = "Please provide the link to your Instagram post that you would like to add"
+        label.numberOfLines = 0
+        return label
     }()
     
-    let submitButton: DarkSquaredButton = {
-        let button = DarkSquaredButton(type: .system)
-        button.setTitle("Submit", for: .normal)
-        return button
+    lazy var linkTextField: UITextField = {
+        let textField = CustomTextField()
+        textField.textColor = WHITE
+        textField.autocorrectionType = .no
+        textField.font = UIFont.boldCustomFont(size: SMALLFONTSIZE)
+        textField.attributedPlaceholder = NSAttributedString(string: textField.placeholder ?? "placeholder text", attributes: [NSAttributedString.Key.foregroundColor: GRAY, NSAttributedString.Key.font: UIFont.mediumCustomFont(size: SMALLFONTSIZE)])
+        textField.backgroundColor = BLACK
+        textField.placeholder = "\(displayer.apiDomain) Link"
+        return textField
     }()
     
     var progressHud: JGProgressHUD?
     
     //MARK: - Interactions
-    @objc private func handleCancel() {
-        displayer.cancelTapped.accept(())
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         linkTextField.becomeFirstResponder()
@@ -63,10 +71,14 @@ class UploadLinkViewController: ViewController {
     
     //MARK: - Layout
     private func setupLayout() {
+        
+        view.addSubview(descriptionLabel)
+        descriptionLabel.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: STANDARDSPACING, left: STANDARDSPACING, bottom: 0, right: STANDARDSPACING))
+        
+        
         view.addSubview(linkTextField)
-        linkTextField.anchor(top: view.safeAreaLayoutGuide.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 30, left: 0, bottom: 0, right: 0), size: CGSize(width: 0, height: 50))
-        view.addSubview(submitButton)
-        submitButton.anchor(top: linkTextField.bottomAnchor, leading: nil, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: STANDARDSPACING, left: 0, bottom: 0, right: STANDARDSPACING))
+        linkTextField.anchor(top: descriptionLabel.bottomAnchor, leading: view.leadingAnchor, bottom: nil, trailing: view.trailingAnchor, padding: .init(top: 30, left: STANDARDSPACING, bottom: 0, right: 0), size: CGSize(width: 0, height: 50))
+
     }
     
     //MARK: - Reactive
@@ -74,7 +86,8 @@ class UploadLinkViewController: ViewController {
     
     private func setupBindablesToDisplayer() {
         linkTextField.rx.text.bind(to: displayer.link).disposed(by: disposeBag)
-        submitButton.rx.tap.bind(to: displayer.submitTapped).disposed(by: disposeBag)
+        cancelButton.rx.tap.asDriver().drive(displayer.cancelTapped).disposed(by: disposeBag)
+        nextButton.rx.tap.asDriver().drive(displayer.nextTapped).disposed(by: disposeBag)
     }
     
     private func setupBindablesFromDisplayer() {

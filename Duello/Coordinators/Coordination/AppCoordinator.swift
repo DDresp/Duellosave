@@ -109,6 +109,13 @@ extension AppCoordinator {
         guard let mainCoordinator = mainCoordinator else { return }
         
         mainCoordinator.loggedOut.asObservable().subscribe(onNext: { [weak self] (_) in
+            
+            do {
+                try Auth.auth().signOut()
+            } catch let err {
+                print("failed to logout the user", err)
+            }
+            
             self?.goToAuthentication()
         }).disposed(by: disposeBag)
     }

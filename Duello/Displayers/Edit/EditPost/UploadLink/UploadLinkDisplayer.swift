@@ -26,8 +26,8 @@ protocol UploadLinkDisplayer {
     
     //from view
     var link: BehaviorRelay<String?> { get }
-    var cancelTapped: PublishRelay<Void> { get }
-    var submitTapped: PublishRelay<Void> { get }
+    var cancelTapped: PublishSubject<Void> { get }
+    var nextTapped: PublishSubject<Void> { get }
     
     //MARK: - Networking
     func downloadLink()

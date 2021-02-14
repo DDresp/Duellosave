@@ -60,7 +60,7 @@ class CategoryHeader: UICollectionReusableView {
         let label = UILabel()
         label.backgroundColor = .clear
         label.textColor = LIGHT_GRAY
-        label.font = UIFont.lightCustomFont(size: SMALLFONTSIZE)
+        label.font = UIFont.mediumCustomFont(size: VERYSMALLFONTSIZE)
         return label
     }()
     

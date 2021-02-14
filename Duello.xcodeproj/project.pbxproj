@@ -266,7 +266,7 @@
 		1475B0BC2410605D00F1D24F /* PlaySlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475B0BB2410605D00F1D24F /* PlaySlider.swift */; };
 		1475B0BE2410606C00F1D24F /* ProfileImageSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475B0BD2410606B00F1D24F /* ProfileImageSuccessView.swift */; };
 		1475B0C02410607B00F1D24F /* SquashedHorizontalStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475B0BF2410607B00F1D24F /* SquashedHorizontalStackView.swift */; };
-		1475B0C22410608A00F1D24F /* DarkSquaredButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475B0C12410608A00F1D24F /* DarkSquaredButton.swift */; };
+		1475B0C22410608A00F1D24F /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475B0C12410608A00F1D24F /* CustomButton.swift */; };
 		1475B0C42410609800F1D24F /* EllipsisButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475B0C32410609700F1D24F /* EllipsisButton.swift */; };
 		1475B0C6241060A700F1D24F /* SmallHeaderLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475B0C5241060A700F1D24F /* SmallHeaderLabel.swift */; };
 		1475B0C8241060B400F1D24F /* InputLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475B0C7241060B400F1D24F /* InputLabel.swift */; };
@@ -646,7 +646,7 @@
 		1475B0BB2410605D00F1D24F /* PlaySlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaySlider.swift; sourceTree = "<group>"; };
 		1475B0BD2410606B00F1D24F /* ProfileImageSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageSuccessView.swift; sourceTree = "<group>"; };
 		1475B0BF2410607B00F1D24F /* SquashedHorizontalStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquashedHorizontalStackView.swift; sourceTree = "<group>"; };
-		1475B0C12410608A00F1D24F /* DarkSquaredButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkSquaredButton.swift; sourceTree = "<group>"; };
+		1475B0C12410608A00F1D24F /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		1475B0C32410609700F1D24F /* EllipsisButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EllipsisButton.swift; sourceTree = "<group>"; };
 		1475B0C5241060A700F1D24F /* SmallHeaderLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallHeaderLabel.swift; sourceTree = "<group>"; };
 		1475B0C7241060B400F1D24F /* InputLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputLabel.swift; sourceTree = "<group>"; };
@@ -2453,7 +2453,7 @@
 		1475B0B72410603D00F1D24F /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
-				1475B0C12410608A00F1D24F /* DarkSquaredButton.swift */,
+				1475B0C12410608A00F1D24F /* CustomButton.swift */,
 				1475B0C32410609700F1D24F /* EllipsisButton.swift */,
 			);
 			path = Buttons;
@@ -3376,7 +3376,7 @@
 				1475B03824105B1D00F1D24F /* PostCollectionViewDelegate.swift in Sources */,
 				1475AF012410498A00F1D24F /* InstagramSingleImagePost.swift in Sources */,
 				1475B02A24105AA300F1D24F /* SocialMediaCell.swift in Sources */,
-				1475B0C22410608A00F1D24F /* DarkSquaredButton.swift in Sources */,
+				1475B0C22410608A00F1D24F /* CustomButton.swift in Sources */,
 				1475AF3F24104CA500F1D24F /* AuthenticationCoordinator.swift in Sources */,
 				1475B08724105E6100F1D24F /* RegistrationView.swift in Sources */,
 				1475B0AA24105FBE00F1D24F /* UIButton+ReactiveExtension.swift in Sources */,

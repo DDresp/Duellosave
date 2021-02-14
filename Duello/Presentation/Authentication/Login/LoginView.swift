@@ -40,8 +40,8 @@ class LoginView: UIView {
     private lazy var textFieldsStackView = LoginTextFieldsStackView(parentViewController: self.parentViewController, displayer: self.displayer)
     private lazy var socialMediaButtonsStackView = LoginButtonsStackView(parentViewController: self.parentViewController, displayer: self.displayer)
     
-    private let loginButton: DarkSquaredButton = {
-        let button = DarkSquaredButton(type: .system)
+    private let loginButton: CustomButton = {
+        let button = CustomButton(style: .dark, width: nil, height: nil)
         button.setTitle("Login", for: .normal)
         return button
     }()
@@ -57,7 +57,7 @@ class LoginView: UIView {
     private let hintLabel: UILabel = {
         let label = UILabel()
         label.text = "You can also sign in by using facebook, google or your phone number. Click on the corresponding items to do so."
-        label.font = UIFont.mediumCustomFont(size: VERYSMALLFONTSIZE)
+        label.font = UIFont.mediumCustomFont(size: EXTREMESMALLFONTSIZE)
         label.textColor = GRAY
         label.numberOfLines = 0
         label.textAlignment = .center

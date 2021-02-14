@@ -40,7 +40,7 @@ class PostCell: UICollectionViewCell {
     private let categoryLabel: UILabel = {
         let label = UILabel()
         label.text = ""
-        label.font = UIFont.lightCustomFont(size: VERYSMALLFONTSIZE)
+        label.font = UIFont.lightCustomFont(size: EXTREMESMALLFONTSIZE)
         label.textColor = LIGHT_GRAY
         return label
     }()

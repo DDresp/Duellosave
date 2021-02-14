@@ -29,7 +29,7 @@ class UploadDescriptionHeader: UIView {
     //MARK: - Views
     let descriptionLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.mediumCustomFont(size: VERYSMALLFONTSIZE)
+        label.font = UIFont.mediumCustomFont(size: EXTREMESMALLFONTSIZE)
         label.textColor = LIGHT_GRAY
         label.text = "DESCRIPTION"
         return label
@@ -37,7 +37,7 @@ class UploadDescriptionHeader: UIView {
     
     let countLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.mediumCustomFont(size: VERYSMALLFONTSIZE)
+        label.font = UIFont.mediumCustomFont(size: EXTREMESMALLFONTSIZE)
         label.textColor = LIGHT_GRAY
         label.textAlignment = .right
         return label

@@ -8,15 +8,22 @@
 
 import UIKit
 
-class CustomTexField: UITextField {
+class CustomTextField: UITextField {
     
     var width: CGFloat = 1000
     var height: CGFloat = 44
     
-    convenience init(width: CGFloat, height: CGFloat) {
+    convenience init(width: CGFloat?, height: CGFloat?) {
         self.init()
-        self.width = width
-        self.height = height
+        
+        if let width = width {
+            self.width = width
+        }
+        
+        if let height = height {
+            self.height = height
+        }
+
     }
     
     override var intrinsicContentSize: CGSize {

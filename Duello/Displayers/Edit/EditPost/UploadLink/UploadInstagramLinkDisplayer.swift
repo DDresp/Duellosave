@@ -24,7 +24,7 @@ extension UploadInstagramLinkDisplayer {
             }.bind(to: linkIsValid).disposed(by: disposeBag)
         
         
-        submitTapped.subscribe(onNext: { [weak self] (_) in
+        nextTapped.subscribe(onNext: { [weak self] (_) in
             self?.downloadLink()
         }).disposed(by: disposeBag)
         

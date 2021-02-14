@@ -55,6 +55,7 @@ class ExploreCategoryPostingUploadInstagramLinkCoordinator: UploadLinkCoordinato
             postingUploadInstagramLinkController = UIViewController()
         }
         presentedController = UINavigationController(rootViewController: postingUploadInstagramLinkController)
+        presentedController?.modalPresentationStyle = .fullScreen
         rootController.present(presentedController!, animated: true)
     }
     

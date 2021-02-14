@@ -30,7 +30,7 @@ class UploadSimpleHeader: UIView {
     //MARK: - Views
     let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.mediumCustomFont(size: VERYSMALLFONTSIZE)
+        label.font = UIFont.mediumCustomFont(size: EXTREMESMALLFONTSIZE)
         label.textColor = LIGHT_GRAY
         return label
     }()
