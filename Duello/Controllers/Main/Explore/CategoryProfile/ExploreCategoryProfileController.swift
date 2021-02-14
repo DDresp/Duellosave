@@ -149,9 +149,9 @@ class ExploreCategoryProfileController: PostCollectionMasterViewController {
         navigationItem.titleView?.isHidden = false
         if bottomControlView.transform != .identity {
             
-            UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: .curveLinear, animations: { [weak self] in
+            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut) { [weak self] in
                 self?.bottomControlView.transform = .identity
-            })
+            }
             
         }
     }
@@ -159,9 +159,10 @@ class ExploreCategoryProfileController: PostCollectionMasterViewController {
     private func showBottomControlView() {
         navigationItem.titleView?.isHidden = true
         if bottomControlView.transform == .identity {
-            UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: .curveLinear, animations: { [weak self] in
+            
+            UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseIn) { [weak self] in
                 self?.bottomControlView.transform = .init(translationX: 0, y: -120)
-            })
+            }
         }
     }
     
@@ -175,9 +176,9 @@ class ExploreCategoryProfileController: PostCollectionMasterViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: .curveLinear, animations: { [weak self] in
+        UIView.animate(withDuration: 0.3, delay: 0.5, options: .curveEaseIn) { [weak self] in
             self?.bottomControlView.transform = .init(translationX: 0, y: -120)
-        })
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
