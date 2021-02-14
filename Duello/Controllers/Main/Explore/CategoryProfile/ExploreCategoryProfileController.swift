@@ -77,7 +77,7 @@ class ExploreCategoryProfileController: PostCollectionMasterViewController {
         let label = UILabel()
         label.font = UIFont.boldCustomFont(size: EXTREMESMALLFONTSIZE)
         label.textColor = LIGHT_GRAY
-        label.text = "Rate whose content is the best"
+        label.text = "Rate the content"
         return label
     }()
     
@@ -96,9 +96,7 @@ class ExploreCategoryProfileController: PostCollectionMasterViewController {
     
     private let bottomControlView: UIView = {
         let view = UIView()
-        view.backgroundColor = GRAY
-        view.layer.cornerRadius = 16
-        view.clipsToBounds = true
+        view.backgroundColor = BLACK
         return view
     }()
     
@@ -132,7 +130,7 @@ class ExploreCategoryProfileController: PostCollectionMasterViewController {
     private func setupBottomControl() {
         
         view.addSubview(bottomControlView)
-        bottomControlView.anchor(top: nil, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: .init(top: 0, left: 5, bottom: -120, right: 5), size: .init(width: 0, height: 70))
+        bottomControlView.anchor(top: nil, leading: view.safeAreaLayoutGuide.leadingAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, trailing: view.safeAreaLayoutGuide.trailingAnchor, padding: .init(top: 0, left: 0, bottom: -120, right: 0), size: .init(width: 0, height: 70))
         bottomControlView.addSubview(blurView)
         blurView.fillSuperview()
         bottomControlView.addSubview(bottomStackView)
@@ -150,17 +148,19 @@ class ExploreCategoryProfileController: PostCollectionMasterViewController {
     private func hideBottomControlView() {
         navigationItem.titleView?.isHidden = false
         if bottomControlView.transform != .identity {
-            UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: .curveEaseOut, animations: { [weak self] in
+            
+            UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: .curveLinear, animations: { [weak self] in
                 self?.bottomControlView.transform = .identity
             })
+            
         }
     }
     
     private func showBottomControlView() {
         navigationItem.titleView?.isHidden = true
         if bottomControlView.transform == .identity {
-            UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: .curveEaseOut, animations: { [weak self] in
-                self?.bottomControlView.transform = .init(translationX: 0, y: -125)
+            UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: .curveLinear, animations: { [weak self] in
+                self?.bottomControlView.transform = .init(translationX: 0, y: -120)
             })
         }
     }
@@ -175,10 +175,9 @@ class ExploreCategoryProfileController: PostCollectionMasterViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        UIView.animate(withDuration: 0.7, delay: 0.5, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: .curveEaseOut, animations: {
-            self.bottomControlView.transform = .init(translationX: 0, y: -125)
+        UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: .curveLinear, animations: { [weak self] in
+            self?.bottomControlView.transform = .init(translationX: 0, y: -120)
         })
-
     }
     
     override func viewWillDisappear(_ animated: Bool) {
