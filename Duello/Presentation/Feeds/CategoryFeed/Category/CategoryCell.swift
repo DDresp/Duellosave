@@ -25,7 +25,7 @@ class CategoryCell: UICollectionViewCell {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = WHITE
-        label.font = UIFont.boldCustomFont(size: LARGEFONTSIZE)
+        label.font = UIFont.boldCustomFont(size: MEDIUMFONTSIZE)
         label.isUserInteractionEnabled = true
         label.numberOfLines = 0
         return label
@@ -34,7 +34,7 @@ class CategoryCell: UICollectionViewCell {
     private lazy var descriptionLabel: UILabel = {
         let label = UILabel()
         label.textColor = LIGHT_GRAY
-        label.font = UIFont.lightCustomFont(size: SMALLFONTSIZE)
+        label.font = UIFont.lightCustomFont(size: VERYSMALLFONTSIZE)
         label.numberOfLines = 2
         return label
     }()

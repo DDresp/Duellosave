@@ -74,6 +74,9 @@ extension UploadCategoryCoordinator {
         config.showsPhotoFilters = false
         config.shouldSaveNewPicturesToAlbum = false
         config.library.onlySquare = true
+        config.colors.assetViewBackgroundColor = BLACK
+        config.colors.libraryScreenBackgroundColor = BLACK
+        
         let imagePicker = YPImagePicker(configuration: config)
         
         imagePicker.didFinishPicking { [unowned imagePicker, weak self] (items, cancelled) in
