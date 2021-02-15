@@ -34,8 +34,8 @@ class UploadImagesMediaPostCell: UITableViewCell {
     
     //MARK: - Layout
     private func setupLayout() {
-        addSubview(imagesSlider)
-        imagesSlider.anchor(top: topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor)
+        contentView.addSubview(imagesSlider)
+        imagesSlider.anchor(top: contentView.topAnchor, leading: contentView.leadingAnchor, bottom: contentView.bottomAnchor, trailing: contentView.trailingAnchor)
         
     }
     

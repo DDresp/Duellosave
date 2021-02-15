@@ -37,6 +37,9 @@ class UploadPostTableViewController<T: UploadPostDisplayer>: UploadTableViewCont
         tableView.dataSource = datasource
         tableView.delegate = delegate
         
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 100
+        
         registerCells()
         setupBindablesFromDisplayer()
         
@@ -72,11 +75,15 @@ class UploadPostTableViewController<T: UploadPostDisplayer>: UploadTableViewCont
     //MARK: - Reactive
     private func setupBindablesFromDisplayer() {
         displayer?.descriptionDisplayer.description.asDriver().drive(onNext: { [weak self] (description) in
-            guard let self = self else { return }
-            let indexPath = IndexPath(row: 0, section: self.descriptionCellSection)
-            guard let cell = self.tableView.cellForRow(at: indexPath) as? UploadDescriptionCell else { return }
-            let textView = cell.textView
-            self.resizeTextCell(with: textView)
+            guard let self = self, let desc = description, desc.count > 0 else { return }
+            UIView.setAnimationsEnabled(false)
+            self.tableView.beginUpdates()
+            self.tableView.endUpdates()
+            UIView.setAnimationsEnabled(true)
+            
+            let thisIndexPath = IndexPath(row: 0, section: self.descriptionCellSection)
+            self.tableView.scrollToRow(at: thisIndexPath, at: .bottom, animated: false) //Otherwise the scrolling (when text enters new line) is invoked late
+            
         }).disposed(by: disposeBag)
     }
     

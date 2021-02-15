@@ -29,7 +29,7 @@ class ImageViewController: UIViewController {
     }
     
     func setImageUrl(imageUrl: URL) {
-        imageView.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
+        imageView.sd_imageIndicator = SDWebImageActivityIndicator.whiteLarge
         imageView.sd_setImage(with: imageUrl) { [weak self] (image, error, _, _) in
             if image == nil {
                 self?.imageView.image  = #imageLiteral(resourceName: "noInternetIcon").withRenderingMode(.alwaysOriginal)

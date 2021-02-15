@@ -81,11 +81,13 @@ extension ExploreCategoryProfileCoordinator {
         }).disposed(by: disposeBag)
         
         postingCoordinator?.uploadedMedia.subscribe(onNext: { [weak self] (uploadedMedia) in
-            if uploadedMedia, let navigationController = self?.rootController as? UINavigationController {
-                navigationController.popViewController(animated: true)
+            
+            if uploadedMedia, let postingController = self?.postingCoordinator?.presentedController {
+                self?.viewModel.collectionViewModel.needsRestart.accept(true)
+                postingController.dismiss(animated: true)
                 self?.postingCoordinator = nil
-                
             }
+
             }).disposed(by: disposeBag)
     }
     

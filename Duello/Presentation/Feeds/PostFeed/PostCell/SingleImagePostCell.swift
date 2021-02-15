@@ -46,7 +46,7 @@ class SingleImagePostCell: PostCell {
                 self?.singleImageView.isHidden = true
                 return }
             self?.singleImageView.isHidden = false
-            self?.singleImageView.sd_imageIndicator = SDWebImageActivityIndicator.grayLarge
+            self?.singleImageView.sd_imageIndicator = SDWebImageActivityIndicator.whiteLarge
             self?.singleImageView.sd_setImage(with: imageUrl, completed: { (image, error, _, _) in
                 if image == nil {
                     self?.singleImageView.image = #imageLiteral(resourceName: "noInternetIcon").withRenderingMode(.alwaysOriginal)

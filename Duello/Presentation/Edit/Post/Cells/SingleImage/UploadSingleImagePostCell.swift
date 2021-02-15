@@ -15,7 +15,8 @@ class UploadSingleImageMediaPostCell: UITableViewCell {
         didSet {
             
             if let image = displayer?.image {
-                singleImageView.image = image.withAlignmentRectInsets(.init(top: 0, left: 0, bottom: -15, right: 0))
+                singleImageView.image = image
+//                singleImageView.image = image.withAlignmentRectInsets(.init(top: 0, left: 0, bottom: -15, right: 0))
             } else if let imageUrl = displayer?.imageUrl {
                 singleImageView.sd_setImage(with: imageUrl)
             }

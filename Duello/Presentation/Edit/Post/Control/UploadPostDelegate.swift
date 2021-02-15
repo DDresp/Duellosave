@@ -56,6 +56,14 @@ class UploadPostDelegate: NSObject, UITableViewDelegate {
         return 35
     }
     
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        if mediaCellSection == indexPath.section {
+            return 400
+        } else {
+            return 100
+        }
+    }
+    
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         

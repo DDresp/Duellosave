@@ -204,10 +204,10 @@ class ExploreCategoryProfileController: PostCollectionMasterViewController {
     private func setupBindablesFromViewModel() {
         viewModel.collectionViewScrolled.subscribe (onNext: { [weak self] (_) in
 
-            guard let firstCellBottom = self?.collectionView.cellForItem(at: IndexPath(item: 1, section: 0))?.rectCorrespondingToWindow.maxY else { return }
+            guard let cellBottom = self?.collectionView.cellForItem(at: IndexPath(item: 6, section: 0))?.rectCorrespondingToWindow.maxY else { return }
             guard let navBottom = self?.navigationController?.navigationBar.rectCorrespondingToWindow.maxY  else { return }
             
-            if navBottom >= firstCellBottom {
+            if navBottom >= cellBottom {
                 self?.hideBottomControlView()
             } else {
                 self?.showBottomControlView()
