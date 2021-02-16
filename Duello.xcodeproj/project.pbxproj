@@ -282,6 +282,7 @@
 		1475B0DC2410614E00F1D24F /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475B0DB2410614E00F1D24F /* TabBarController.swift */; };
 		1475B0DE2410615B00F1D24F /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475B0DD2410615B00F1D24F /* TableViewController.swift */; };
 		1475B0E02410FCCA00F1D24F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1475B0DF2410FCC900F1D24F /* GoogleService-Info.plist */; };
+		148B445F25DC70200035BA2B /* Timestamp+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148B445E25DC70200035BA2B /* Timestamp+Extension.swift */; };
 		149BC5C2242135E000CFBBC7 /* DeactivatedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149BC5C1242135E000CFBBC7 /* DeactivatedView.swift */; };
 		149BC5CC2422165800CFBBC7 /* PostCollectionDisplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149BC5CB2422165800CFBBC7 /* PostCollectionDisplayer.swift */; };
 		149BC5CE24222F4A00CFBBC7 /* UserPostCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149BC5CD24222F4A00CFBBC7 /* UserPostCollectionViewModel.swift */; };
@@ -663,6 +664,7 @@
 		1475B0DB2410614E00F1D24F /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		1475B0DD2410615B00F1D24F /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		1475B0DF2410FCC900F1D24F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		148B445E25DC70200035BA2B /* Timestamp+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Timestamp+Extension.swift"; sourceTree = "<group>"; };
 		149BC5C1242135E000CFBBC7 /* DeactivatedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeactivatedView.swift; sourceTree = "<group>"; };
 		149BC5CB2422165800CFBBC7 /* PostCollectionDisplayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCollectionDisplayer.swift; sourceTree = "<group>"; };
 		149BC5CD24222F4A00CFBBC7 /* UserPostCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPostCollectionViewModel.swift; sourceTree = "<group>"; };
@@ -2361,6 +2363,7 @@
 		1475B09024105EB800F1D24F /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				148B445D25DC6FFE0035BA2B /* Firebase_Extensions */,
 				1475B09624105F2600F1D24F /* Swift_Extensions */,
 				1475B09524105F1200F1D24F /* UI_Extensions */,
 				1475B09424105F0600F1D24F /* Reactive_Extensions */,
@@ -2493,6 +2496,14 @@
 			children = (
 			);
 			name = TableViewCells;
+			sourceTree = "<group>";
+		};
+		148B445D25DC6FFE0035BA2B /* Firebase_Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				148B445E25DC70200035BA2B /* Timestamp+Extension.swift */,
+			);
+			path = Firebase_Extensions;
 			sourceTree = "<group>";
 		};
 		149BC5D524323F0600CFBBC7 /* FromUser */ = {
@@ -3138,6 +3149,7 @@
 				1475B0C8241060B400F1D24F /* InputLabel.swift in Sources */,
 				1475B0BC2410605D00F1D24F /* PlaySlider.swift in Sources */,
 				1475B02624105A8900F1D24F /* SocialMediaCollectionViewController.swift in Sources */,
+				148B445F25DC70200035BA2B /* Timestamp+Extension.swift in Sources */,
 				1475AE4824103FF500F1D24F /* VideoCacheManager.swift in Sources */,
 				1475AE832410438200F1D24F /* FetchingService_User.swift in Sources */,
 				1475B05D24105C9500F1D24F /* UploadUserHeaderCell.swift in Sources */,

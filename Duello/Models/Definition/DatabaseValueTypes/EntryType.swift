@@ -14,6 +14,7 @@ enum EntryType {
     case Int
     case String
     case Double
+    case Timestamp
     case FineMediaType
     case RoughMediaType
     case Bool

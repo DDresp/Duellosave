@@ -70,7 +70,7 @@ class UploadCategoryViewModel: UploadCategoryDisplayer {
         category.imageUrl.value = imageUrl
         category.description.value = descriptionDisplayer.description.value
         category.title.value = titleDisplayer.title.value
-        category.creationDate.value = Date().timeIntervalSince1970
+        category.creationDate.value = Firebase.Timestamp(date: Date())
         category.roughMediaType.value = roughMediaSelectorDisplayer.mediaType.value
         category.reportStatus.value = CategoryReportStatusType.noReport
         category.numberOfPosts.value = 0

@@ -6,7 +6,7 @@
 //  Copyright © 2020 Darius Dresp. All rights reserved.
 //
 
-import Foundation
+import Firebase
 
 protocol Model {
     
@@ -59,6 +59,10 @@ extension Model {
                 }
             case .String:
                 if let value = attribute.getValue() as? String {
+                    dictionary[attribute.getKey()] = value
+                }
+            case .Timestamp:
+                if let value = attribute.getValue() as? Timestamp {
                     dictionary[attribute.getKey()] = value
                 }
             case .FineMediaType:
@@ -116,6 +120,10 @@ extension Model {
                 }
             case .String:
                 if let value = dic[attribute.getKey()] as? String {
+                    attribute.setValue(of: value)
+                }
+            case .Timestamp:
+                if let value = dic[attribute.getKey()] as? Timestamp {
                     attribute.setValue(of: value)
                 }
             case .FineMediaType:
