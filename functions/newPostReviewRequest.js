@@ -2,8 +2,8 @@ const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 
 //MARK: - Listeners
-exports.newReviewRequest = functions.firestore
-  .document("users/{uid}/reviewRequests/{postId}")
+exports.newPostReviewRequest = functions.firestore
+  .document("users/{uid}/reviewPostRequests/{postId}")
   .onCreate((snapshot, context) => {
     return createNewReview(snapshot.id);
   });

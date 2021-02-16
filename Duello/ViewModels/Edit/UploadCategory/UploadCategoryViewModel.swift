@@ -72,6 +72,10 @@ class UploadCategoryViewModel: UploadCategoryDisplayer {
         category.title.value = titleDisplayer.title.value
         category.creationDate.value = Date().timeIntervalSince1970
         category.roughMediaType.value = roughMediaSelectorDisplayer.mediaType.value
+        category.reportStatus.value = CategoryReportStatusType.noReport
+        category.numberOfPosts.value = 0
+        category.uid.value = Auth.auth().currentUser?.uid
+        category.isActive.value = false
         return category
     }
     

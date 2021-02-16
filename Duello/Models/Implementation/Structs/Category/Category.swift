@@ -19,6 +19,10 @@ struct Category: CategoryModel {
     var description: CategoryAttribute = CategoryAttribute(attributeCase: .description, value: nil)
     var creationDate: CategoryAttribute = CategoryAttribute(attributeCase: .creationDate, value: nil)
     var roughMediaType: CategoryAttribute = CategoryAttribute(attributeCase: .mediaType, value: nil)
+    var reportStatus: CategoryAttribute = CategoryAttribute(attributeCase: .reportStatus, value: nil)
+    var numberOfPosts: CategoryAttribute = CategoryAttribute(attributeCase: .numberOfPosts, value: nil)
+    var uid: CategoryAttribute = CategoryAttribute(attributeCase: .uid, value: nil)
+    var isActive: CategoryAttribute = CategoryAttribute(attributeCase: .isActive, value: nil)
     
     
     //MARK: - Getters
@@ -29,6 +33,10 @@ struct Category: CategoryModel {
             description,
             creationDate,
             roughMediaType,
+            reportStatus,
+            numberOfPosts,
+            uid,
+            isActive
         ]
     }
     

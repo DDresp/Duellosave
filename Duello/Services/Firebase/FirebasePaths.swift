@@ -18,6 +18,6 @@ let CATEGORY_REFERENCE = Firestore.firestore().collection("categories")
 let USER_FAVORITE_CATEGORIES_COLLECTION = "favoriteCategories"
 let USER_REPORTED_POSTS_COLLECTION = "reportedPosts"
 let USER_REPORTED_CATEGORIES_COLLECTION = "reportedCategories"
-let USER_REVIEW_REQUESTS_COLLECTION = "reviewRequests"
+let USER_REVIEW_POST_REQUESTS_COLLECTION = "reviewPostRequests"
 let USER_DEACTIVATE_POSTS_COLLECTION = "deactivatePosts"
 let USER_ACTIVATE_POSTS_COLLECTION = "activatePosts"

@@ -41,17 +41,24 @@ enum CategoryAttributeCase: ModelAttributeCase {
     case creationDate
     case mediaType
     case reportStatus
+    case numberOfPosts
+    case uid
+    case isActive
     
     var entryType: EntryType {
         switch self {
-        case .title, .description, .imageUrl:
+        case .title, .description, .imageUrl, .uid:
             return .String
         case .creationDate:
             return .Double
+        case .numberOfPosts:
+            return .Int
         case .mediaType:
             return .RoughMediaType
         case .reportStatus:
             return .CategoryReportStatusType
+        case .isActive:
+            return .Bool
         }
     }
     
@@ -59,74 +66,17 @@ enum CategoryAttributeCase: ModelAttributeCase {
         
         switch self {
         
+        case .uid: return "uid"
         case .imageUrl: return "imageUrl"
         case .title: return "title"
         case .description: return "description"
         case .creationDate: return "creationDate"
         case .mediaType: return "type"
         case .reportStatus: return "reportStatus"
+        case .numberOfPosts: return "numberOfPosts"
+        case .isActive: return "isActive"
             
         }
     }
     
 }
-
-
-
-//class CategoryAttribute: ModelAttribute {
-//
-//    var attributeCase: CategoryAttributeCase
-//    var value: DatabaseConvertibleType?
-//
-//    init(attributeCase: CategoryAttributeCase, value: DatabaseConvertibleType?) {
-//        self.attributeCase = attributeCase
-//        self.value = value
-//    }
-//
-//    func getCase() -> ModelAttributeCase {
-//        return attributeCase
-//    }
-//
-//    func getValue() -> DatabaseConvertibleType? {
-//        return value
-//    }
-//
-//    func setValue(of value: DatabaseConvertibleType) {
-//        self.value = value
-//    }
-//
-//}
-//
-////MARK: - Attribute Case
-//enum CategoryAttributeCase: ModelAttributeCase {
-//
-//    case title
-//    case description
-//    case creationDate
-//    case type
-//
-//    var entryType: EntryType {
-//        switch self {
-//        case .title, .description:
-//            return .String
-//        case .creationDate:
-//            return .Double
-//        case .type:
-//            return .RoughMediaType
-//        }
-//    }
-//
-//    var key: String {
-//
-//        switch self {
-//
-//        case .title: return "title"
-//        case .description: return "description"
-//        case .creationDate: return "creationDate"
-//        case .type: return "type"
-//
-//        }
-//    }
-//
-//}
-//

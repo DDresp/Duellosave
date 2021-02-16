@@ -125,8 +125,8 @@ class HomeViewModel: SimplePostCollectionMasterViewModel {
         
     }
     
-    func createReviewRequest(for postId: String) {
-        UploadingService.shared.createReviewRequest(postId: postId).subscribe(onNext: { (_) in
+    func createReviewPostRequest(for postId: String) {
+        UploadingService.shared.createReviewPostRequest(postId: postId).subscribe(onNext: { (_) in
             //created review request
             }).disposed(by: disposeBag)
     }
@@ -139,7 +139,7 @@ class HomeViewModel: SimplePostCollectionMasterViewModel {
         }).disposed(by: disposeBag)
         
         homeCollectionViewModel.requestedReviewPost.subscribe(onNext: { [weak self] (postId) in
-            self?.createReviewRequest(for: postId)
+            self?.createReviewPostRequest(for: postId)
         }).disposed(by: disposeBag)
         
     }
