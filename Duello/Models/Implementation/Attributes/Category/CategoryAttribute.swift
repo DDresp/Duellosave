@@ -39,7 +39,8 @@ enum CategoryAttributeCase: ModelAttributeCase {
     case title
     case description
     case creationDate
-    case type
+    case mediaType
+    case reportStatus
     
     var entryType: EntryType {
         switch self {
@@ -47,8 +48,10 @@ enum CategoryAttributeCase: ModelAttributeCase {
             return .String
         case .creationDate:
             return .Double
-        case .type:
+        case .mediaType:
             return .RoughMediaType
+        case .reportStatus:
+            return .CategoryReportStatusType
         }
     }
     
@@ -60,7 +63,8 @@ enum CategoryAttributeCase: ModelAttributeCase {
         case .title: return "title"
         case .description: return "description"
         case .creationDate: return "creationDate"
-        case .type: return "type"
+        case .mediaType: return "type"
+        case .reportStatus: return "reportStatus"
             
         }
     }

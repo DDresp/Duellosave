@@ -101,7 +101,7 @@ class SimplePostCollectionMasterViewModel: PostCollectionMasterDisplayer {
     //MARK: - Reactive
     var disposeBag = DisposeBag()
     
-    private func setupBindables() {
+    func setupBindables() {
         setupDisplayerBindables()
     }
     

@@ -10,7 +10,7 @@ import Foundation
 //WARNING
 //Cloud functions use those keys, so if you change them, you have to change the cloud functions
 
-enum ReportStatusType: String, DatabaseConvertibleType, CaseIterable {
+enum PostReportStatusType: String, DatabaseConvertibleType, CaseIterable {
     
     case noReport
     case deletedButReviewed

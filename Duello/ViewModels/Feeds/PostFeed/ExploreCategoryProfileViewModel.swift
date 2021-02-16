@@ -28,8 +28,10 @@ class ExploreCategoryProfileViewModel: SimplePostCollectionMasterViewModel {
     }
     
     //MARK: - Bindables
-    let requestedAddContent: PublishSubject<Void> = PublishSubject()
-    let goBack: PublishSubject<Void> = PublishSubject()
+    let tappedAddContent: PublishRelay<Void> = PublishRelay()
+    let tappedEllipsis: PublishRelay<Void> = PublishRelay()
+    let tappedReport: PublishRelay<Void> = PublishRelay()
+    let tappedGoBack: PublishRelay<Void> = PublishRelay()
     var isFavorite: BehaviorRelay<Bool?> = BehaviorRelay(value: nil)
     
     //MARK: - Setup
@@ -62,10 +64,16 @@ class ExploreCategoryProfileViewModel: SimplePostCollectionMasterViewModel {
     }
     
     //MARK: - Networking
-    func reportPost(for postId: String, report: ReportStatusType) {
-        UploadingService.shared.createReport(postId: postId, report: report).subscribe(onNext: { (_) in
+    func reportPost(for postId: String, report: PostReportStatusType) {
+        UploadingService.shared.createPostReport(postId: postId, report: report).subscribe(onNext: { (_) in
             //created report
             }).disposed(by: disposeBag)
+    }
+    
+    func reportCategory(report: CategoryReportStatusType) {
+        UploadingService.shared.createCategoryReport(categoryId: category.getId(), report: report).subscribe(onNext: { (_) in
+            //created report
+        }).disposed(by: disposeBag)
     }
     
     func changeFavoriteStatus() {
@@ -86,6 +94,45 @@ class ExploreCategoryProfileViewModel: SimplePostCollectionMasterViewModel {
     }
     
     //MARK: - Reactive
+    override func setupBindables() {
+        super.setupBindables()
+        setupBindablesFromUI()
+    }
+    
+    func setupBindablesFromUI() {
+        
+        tappedEllipsis.map { [weak self] (_) -> ActionSheet in
+            var actions = [AlertAction]()
+            
+            let reportAction = AlertAction(title: "Report") { [weak self] () in
+                self?.tappedReport.accept(())
+            }
+            
+            actions.append(reportAction)
+            let actionSheet = ActionSheet(actionHeader: nil, actionMessage: "select option", actions: actions)
+            return actionSheet
+        }.bind(to: showActionSheet).disposed(by: disposeBag)
+        
+        tappedReport.subscribe(onNext: { [weak self] (_) in
+            var actions = [AlertAction]()
+            let thankYouAlert = Alert(alertMessage: "Thank you for your report!", alertHeader: "Reported")
+            
+            let inappropriateReport = AlertAction(title: "Inappropriate Category") {
+                self?.reportCategory(report: CategoryReportStatusType.inappropriate)
+                self?.showAlert.accept(thankYouAlert)
+            }
+            let inactiveReport = AlertAction(title: "Inactive") {
+                self?.reportCategory(report: CategoryReportStatusType.inactive)
+                self?.showAlert.accept(thankYouAlert)
+            }
+            
+            actions.append(contentsOf: [inappropriateReport, inactiveReport])
+            
+            let actionSheet = ActionSheet(actionHeader: "report", actionMessage: nil, actions: actions)
+            self?.showActionSheet.accept(actionSheet)
+        }).disposed(by: disposeBag)
+    }
+    
     override func setupBindblesFromChildDisplayer() {
         super.setupBindblesFromChildDisplayer()
         
@@ -107,8 +154,8 @@ class ExploreCategoryProfileViewModel: SimplePostCollectionMasterViewModel {
     
     private func setupBindablesToCoordinator() {
         guard let coordinator = coordinator else { return }
-        requestedAddContent.bind(to: coordinator.requestedAddContent).disposed(by: disposeBag)
-        goBack.bind(to: coordinator.goBack).disposed(by: disposeBag)
+        tappedAddContent.bind(to: coordinator.requestedAddContent).disposed(by: disposeBag)
+        tappedGoBack.bind(to: coordinator.goBack).disposed(by: disposeBag)
     }
     
 }

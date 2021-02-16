@@ -14,7 +14,7 @@ extension FetchingService {
     func fetchCategoryPosts(for cid: String, limit: Int?, startId: String?) -> Observable<[PostModel]> {
         
         var equalityConditions = [String: Any]()
-        equalityConditions[PostAttributeCase.reportStatus.key] = ReportStatusType.noReport.toStringValue()
+        equalityConditions[PostAttributeCase.reportStatus.key] = PostReportStatusType.noReport.toStringValue()
         equalityConditions[PostAttributeCase.cid.key] = cid
         equalityConditions[PostAttributeCase.isDeactivated.key] = false
         

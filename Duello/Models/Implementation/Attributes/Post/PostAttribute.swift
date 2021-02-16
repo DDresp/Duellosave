@@ -68,7 +68,7 @@ enum PostAttributeCase: ModelAttributeCase {
         case .isDeactivated, .isVerified, .isBlocked:
             return .Bool
         case .reportStatus:
-            return .ReportStatusType
+            return .PostReportStatusType
         case .imageUrls:
             return .StringArray
         }

@@ -52,17 +52,16 @@ class PostViewModel: PostDisplayer {
     var showActionSheet: PublishRelay<ActionSheet> = PublishRelay()
     var showAlert: PublishRelay<Alert> = PublishRelay()
     var isDeactivated: BehaviorRelay<Bool>
-    var reportStatus: BehaviorRelay<ReportStatusType>
+    var reportStatus: BehaviorRelay<PostReportStatusType>
     
     //from Parent
     var didDisappear: PublishRelay<Void> = PublishRelay()
     var willBeDisplayed: PublishRelay<Void> = PublishRelay()
     
     //to Parent
-//    var updateDeactivation: PublishRelay<Int> = PublishRelay()
     var changeActivationStatusForMe: PublishRelay<(Bool, String)> = PublishRelay()
     var deleteMe: PublishRelay<String> = PublishRelay()
-    var reportMe: PublishRelay<(ReportStatusType, String)> = PublishRelay()
+    var reportMe: PublishRelay<(PostReportStatusType, String)> = PublishRelay()
     var reviewMe: PublishRelay<String> = PublishRelay()
     
     
@@ -167,17 +166,17 @@ class PostViewModel: PostDisplayer {
             
             let inappropriatePostReport = AlertAction(title: "Inappropriate Post") {
                 guard let postId = self?.postId else { return }
-                self?.reportMe.accept((ReportStatusType.inappropriate, postId))
+                self?.reportMe.accept((PostReportStatusType.inappropriate, postId))
                 self?.showAlert.accept(thankYouAlert)
             }
             let fakeUserReport = AlertAction(title: "Fake User") {
                 guard let postId = self?.postId else { return }
-                self?.reportMe.accept((ReportStatusType.fakeUser, postId))
+                self?.reportMe.accept((PostReportStatusType.fakeUser, postId))
                 self?.showAlert.accept(thankYouAlert)
             }
             let wrongCategoryReport = AlertAction(title: "Wrong Category") {
                 guard let postId = self?.postId else { return }
-                self?.reportMe.accept((ReportStatusType.wrongCategory, postId))
+                self?.reportMe.accept((PostReportStatusType.wrongCategory, postId))
                 self?.showAlert.accept(thankYouAlert)
             }
             

@@ -30,7 +30,7 @@ struct LocalVideoPost: LocalVideoPostModel {
     var typeData: PostAttribute = PostAttribute(attributeCase: .type, value: FineMediaType.localVideo)
     var videoUrl: PostAttribute = PostAttribute(attributeCase: .videoUrl, value: nil)
     var thumbNailUrl: PostAttribute = PostAttribute(attributeCase: .thumbNailUrl, value: nil)
-    var reportStatus: PostAttribute = PostAttribute(attributeCase: .reportStatus, value: ReportStatusType.noReport)
+    var reportStatus: PostAttribute = PostAttribute(attributeCase: .reportStatus, value: PostReportStatusType.noReport)
     var user: PostReference = PostReference(attributeCase: .user, model: User())
     var category: PostReference = PostReference(attributeCase: .category, model: Category())
     

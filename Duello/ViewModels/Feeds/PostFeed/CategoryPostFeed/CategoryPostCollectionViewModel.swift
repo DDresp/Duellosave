@@ -24,7 +24,7 @@ class CategoryPostCollectionViewModel: PostCollectionViewModel {
     }
     
     //MARK: - Bindables
-    var reportPost: PublishRelay<(ReportStatusType, String)> = PublishRelay()
+    var reportPost: PublishRelay<(PostReportStatusType, String)> = PublishRelay()
     var changeFavoriteStatus: PublishRelay<Void> = PublishRelay()
     var isFavorite: BehaviorRelay<Bool?> = BehaviorRelay(value: nil)
     

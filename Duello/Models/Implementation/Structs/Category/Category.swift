@@ -18,7 +18,7 @@ struct Category: CategoryModel {
     var title: CategoryAttribute = CategoryAttribute(attributeCase: .title, value: nil)
     var description: CategoryAttribute = CategoryAttribute(attributeCase: .description, value: nil)
     var creationDate: CategoryAttribute = CategoryAttribute(attributeCase: .creationDate, value: nil)
-    var roughMediaType: CategoryAttribute = CategoryAttribute(attributeCase: .type, value: nil)
+    var roughMediaType: CategoryAttribute = CategoryAttribute(attributeCase: .mediaType, value: nil)
     
     
     //MARK: - Getters

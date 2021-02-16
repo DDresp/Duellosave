@@ -24,7 +24,7 @@
 		145DFC062563A1D2001542D9 /* SettingsCoordinatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145DFC052563A1D2001542D9 /* SettingsCoordinatorType.swift */; };
 		14643D7824463D0B00B725EE /* StringArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14643D7724463D0B00B725EE /* StringArray.swift */; };
 		14643D7E24472FE800B725EE /* UploadingService_Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14643D7D24472FE800B725EE /* UploadingService_Report.swift */; };
-		14643D802448425F00B725EE /* ReportStatusType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14643D7F2448425F00B725EE /* ReportStatusType.swift */; };
+		14643D802448425F00B725EE /* PostReportStatusType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14643D7F2448425F00B725EE /* PostReportStatusType.swift */; };
 		146AE3AA24E31E7E00E56924 /* DeletingService_Unfollow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146AE3A924E31E7E00E56924 /* DeletingService_Unfollow.swift */; };
 		146AE3AC24E3284E00E56924 /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146AE3AB24E3284E00E56924 /* General.swift */; };
 		1475AE0424103EAD00F1D24F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AE0324103EAD00F1D24F /* AppDelegate.swift */; };
@@ -340,6 +340,7 @@
 		14B672152440FE770083F663 /* VideoPostDisplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B672142440FE770083F663 /* VideoPostDisplayer.swift */; };
 		14B6721C244140460083F663 /* ImagesPostDisplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B6721B244140460083F663 /* ImagesPostDisplayer.swift */; };
 		14BDEC08241CBF0E00228763 /* Bool+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BDEC07241CBF0E00228763 /* Bool+Extension.swift */; };
+		14C5478D25DBDF6100B1D311 /* CategoryReportStatusType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C5478C25DBDF6100B1D311 /* CategoryReportStatusType.swift */; };
 		14E3F7B224E1D27000706B42 /* UploadingService_Follow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E3F7B124E1D27000706B42 /* UploadingService_Follow.swift */; };
 		14ED672B241A87550047C085 /* Pods_Duello.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14ED672A241A87550047C085 /* Pods_Duello.framework */; };
 		14ED672C241A87550047C085 /* Pods_Duello.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 14ED672A241A87550047C085 /* Pods_Duello.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -398,7 +399,7 @@
 		145DFC052563A1D2001542D9 /* SettingsCoordinatorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCoordinatorType.swift; sourceTree = "<group>"; };
 		14643D7724463D0B00B725EE /* StringArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringArray.swift; sourceTree = "<group>"; };
 		14643D7D24472FE800B725EE /* UploadingService_Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadingService_Report.swift; sourceTree = "<group>"; };
-		14643D7F2448425F00B725EE /* ReportStatusType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportStatusType.swift; sourceTree = "<group>"; };
+		14643D7F2448425F00B725EE /* PostReportStatusType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostReportStatusType.swift; sourceTree = "<group>"; };
 		146AE3A924E31E7E00E56924 /* DeletingService_Unfollow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletingService_Unfollow.swift; sourceTree = "<group>"; };
 		146AE3AB24E3284E00E56924 /* General.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = General.swift; sourceTree = "<group>"; };
 		1475AE0024103EAD00F1D24F /* Duello.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Duello.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -720,6 +721,7 @@
 		14B672142440FE770083F663 /* VideoPostDisplayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPostDisplayer.swift; sourceTree = "<group>"; };
 		14B6721B244140460083F663 /* ImagesPostDisplayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesPostDisplayer.swift; sourceTree = "<group>"; };
 		14BDEC07241CBF0E00228763 /* Bool+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+Extension.swift"; sourceTree = "<group>"; };
+		14C5478C25DBDF6100B1D311 /* CategoryReportStatusType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryReportStatusType.swift; sourceTree = "<group>"; };
 		14E3F7B124E1D27000706B42 /* UploadingService_Follow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadingService_Follow.swift; sourceTree = "<group>"; };
 		14ED672A241A87550047C085 /* Pods_Duello.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_Duello.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		14FB8DD7245A45D80075CBB9 /* UploadingService_ReviewRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadingService_ReviewRequest.swift; sourceTree = "<group>"; };
@@ -1272,7 +1274,8 @@
 				1475AEC3241046FB00F1D24F /* DatabaseConvertibleType.swift */,
 				1475AEC1241046EB00F1D24F /* FineMediaType.swift */,
 				14B6719524362DB70083F663 /* RoughMediaType.swift */,
-				14643D7F2448425F00B725EE /* ReportStatusType.swift */,
+				14643D7F2448425F00B725EE /* PostReportStatusType.swift */,
+				14C5478C25DBDF6100B1D311 /* CategoryReportStatusType.swift */,
 				14643D7724463D0B00B725EE /* StringArray.swift */,
 			);
 			path = DatabaseValueTypes;
@@ -2649,7 +2652,6 @@
 				14B671B6243915DB0083F663 /* ExploreController.swift */,
 				14B6718224361FD20083F663 /* UploadCategory */,
 				14B671E8243A650E0083F663 /* CategoryProfile */,
-				1475AF4A2410502B00F1D24F /* Posting */,
 			);
 			path = Explore;
 			sourceTree = "<group>";
@@ -2759,6 +2761,7 @@
 			isa = PBXGroup;
 			children = (
 				14B671E9243A652E0083F663 /* ExploreCategoryProfileController.swift */,
+				1475AF4A2410502B00F1D24F /* Posting */,
 			);
 			path = CategoryProfile;
 			sourceTree = "<group>";
@@ -3111,7 +3114,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1475AEA02410454F00F1D24F /* RawVideoPost.swift in Sources */,
-				14643D802448425F00B725EE /* ReportStatusType.swift in Sources */,
+				14643D802448425F00B725EE /* PostReportStatusType.swift in Sources */,
 				1475AE72241042A400F1D24F /* UploadingService.swift in Sources */,
 				1475AF912410530100F1D24F /* VideoPostViewModel.swift in Sources */,
 				145DFC062563A1D2001542D9 /* SettingsCoordinatorType.swift in Sources */,
@@ -3161,6 +3164,7 @@
 				1475AF1324104A6400F1D24F /* FlowCoordinatorType.swift in Sources */,
 				1475B04724105B9E00F1D24F /* VideoPostCell.swift in Sources */,
 				1475B0062410595F00F1D24F /* UploadImagesPostDisplayer.swift in Sources */,
+				14C5478D25DBDF6100B1D311 /* CategoryReportStatusType.swift in Sources */,
 				1475B0082410596D00F1D24F /* UploadPostVideoDisplayer.swift in Sources */,
 				1475B04124105B7600F1D24F /* UserHeader.swift in Sources */,
 				1475AFFE2410591D00F1D24F /* UploadPostDisplayer.swift in Sources */,

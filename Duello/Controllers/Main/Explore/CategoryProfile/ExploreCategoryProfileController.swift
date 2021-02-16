@@ -191,13 +191,11 @@ class ExploreCategoryProfileController: PostCollectionMasterViewController {
     
     private func setupBindablesToViewModel() {
         
-        addContentButton.rx.tap.map { (_) -> Void in
-            return ()
-            }.bind(to: viewModel.requestedAddContent).disposed(by: disposeBag)
+        ellipsisButton.rx.tap.bind(to: viewModel.tappedEllipsis).disposed(by: disposeBag)
+        
+        addContentButton.rx.tap.bind(to: viewModel.tappedAddContent).disposed(by: disposeBag)
 
-        backButton.rx.tap.map { (_) -> Void in
-            return ()
-        }.bind(to: viewModel.goBack).disposed(by: disposeBag)
+        backButton.rx.tap.bind(to: viewModel.tappedGoBack).disposed(by: disposeBag)
         
     }
     

@@ -52,7 +52,7 @@ extension PostModel {
     func getIsBlocked() -> Bool { return isBlocked.value as? Bool ?? false }
     func getIsDeactivated() -> Bool { return isDeactivated.value as? Bool ?? false }
     
-    func getReportStatus() -> ReportStatusType { return reportStatus.getValue() as? ReportStatusType ?? ReportStatusType.noReport }
+    func getReportStatus() -> PostReportStatusType { return reportStatus.getValue() as? PostReportStatusType ?? PostReportStatusType.noReport }
     func getUser() -> UserModel { return user.getModel() as? User ?? User() }
     func getCategory() -> CategoryModel { return category.getModel() as? Category ?? Category() }
     

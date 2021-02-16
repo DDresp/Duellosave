@@ -35,8 +35,7 @@ class ExploreController: CategoryCollectionMasterViewController {
     }
     
     //MARK: - Views
-//    private let addCategoryButton = UIBarButtonItem(title: "add category", style: .plain, target: nil, action: nil)
-    
+
     private let searchContainer: UIView = {
         let view = UIView()
         view.backgroundColor = BLACK
@@ -48,14 +47,6 @@ class ExploreController: CategoryCollectionMasterViewController {
         sc.searchBar.showsBookmarkButton = true
         sc.searchBar.setImage(#imageLiteral(resourceName: "addIcon").withRenderingMode(.alwaysTemplate), for: .bookmark, state: .normal)
         sc.searchBar.delegate = self
-        
-//        sc.searchBar.barTintColor = BLACK
-//        sc.searchBar.backgroundColor = .clear
-        //        sc.searchBar.barStyle = .blackOpaque
-//        sc.searchBar.
-//
-//            UINavigationBar.appearance().tintColor = LIGHT_GRAY
-//            UINavigationBar.appearance().barTintColor = BLACK
         return sc
     }()
     
@@ -67,8 +58,6 @@ class ExploreController: CategoryCollectionMasterViewController {
     //MARK: - Layout
     private func setupNavigationItems() {
         
-//        navigationItem.title = "Explore"
-//        navigationItem.rightBarButtonItem = addCategoryButton
     }
     
     private func setupSearchController() {
@@ -88,9 +77,7 @@ class ExploreController: CategoryCollectionMasterViewController {
     //MARK: - Reactive
     private let disposeBag = DisposeBag()
 
-    private func setupBindablesToDisplayer() {
-//        addCategoryButton.rx.tap.asObservable().bind(to: viewModel.addCategoryTapped).disposed(by: disposeBag)
-        
+    private func setupBindablesToDisplayer() {        
         searchController.searchBar.rx.bookmarkButtonClicked.bind(to: viewModel.addCategoryTapped).disposed(by: disposeBag)
     }
     
