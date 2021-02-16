@@ -31,6 +31,7 @@ let DARK_GRAY = UIColor.hexStringToUIColor(hex: "1C1C1E")
 let GREEN = UIColor.hexStringToUIColor(hex: "2BFEC3")
 let PURPLE = UIColor.hexStringToUIColor(hex: "E31BAA")
 let LIGHT_BLUE = UIColor.hexStringToUIColor(hex: "0CCBFD")
+let DARK_BLUE = UIColor.hexStringToUIColor(hex: "03002e")
 
 //LAYOUT
 let STANDARDSPACING: CGFloat = 14
