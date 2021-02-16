@@ -18,6 +18,7 @@ async function createNewReport(reportStatus, postId) {
   const reportData = reportSnapshot.data();
   const countField = reportStatus + "Count";
 
+  //get the most recent post attributes
   const postDoc = admin.firestore().doc(`/posts/${postId}`);
   const postSnapshot = await postDoc.get();
   const postData = postSnapshot.data();

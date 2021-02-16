@@ -1,6 +1,7 @@
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 
+//In Firebase, the admin adds the reviewed post (if not ok) to the blockedPost collection
 exports.blockedPost = functions.firestore
   .document("blockedPosts/{postId}")
   .onCreate(async (snapshot, context) => {

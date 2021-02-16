@@ -8,6 +8,7 @@
 
 import RxCocoa
 import RxSwift
+import AVFoundation
 import YPImagePicker
 
 class ExploreCategoryPostingCoordinator: PostingCoordinatorType {
@@ -163,6 +164,9 @@ extension ExploreCategoryPostingCoordinator {
         config.hidesStatusBar = false
         config.library.maxNumberOfItems = 1
         config.showsPhotoFilters = false
+        config.video.trimmerMaxDuration = 30
+        config.video.libraryTimeLimit = 360
+        config.video.compression = AVAssetExportPresetHighestQuality
         config.isScrollToChangeModesEnabled = false
         config.colors.libraryScreenBackgroundColor = BLACK
         config.colors.assetViewBackgroundColor = BLACK

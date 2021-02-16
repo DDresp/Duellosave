@@ -38,8 +38,7 @@ exports.reportedPosts = functions.firestore
       userInitiatedReview: false
     };
 
-    //Check if potentially inappropriate post should be passed on
-    //If Posts gets reviewed, others aren't checked anymore
+    //Check if potentially inappropriate post should be reviewed/deleted
     var automaticDeleteInappropriate = checkInappropriateAutomaticDelete(inappropriateCount, rate, likes);
     var shouldReviewInappropriate = checkInappropriateShouldReview(inappropriateCount, rate, likes);
 
@@ -47,7 +46,7 @@ exports.reportedPosts = functions.firestore
       return reviewOrDeletePost(automaticDeleteInappropriate, shouldReviewInappropriate, review, "inappropriate", postId);
     }
 
-    //Check if potentially wrongCategory post should be passed on
+    //Check if potentially wrongCategory post should be reviewed/deleted
     var automaticDeleteWrongCategory = checkWrongCategoryAutomaticDelete(wrongCategoryCount, rate, likes);
     var shouldReviewWrongCategory = checkWrongCategoryShouldReview(wrongCategoryCount, rate, likes);
 
@@ -55,7 +54,7 @@ exports.reportedPosts = functions.firestore
       return reviewOrDeletePost(automaticDeleteWrongCategory, shouldReviewWrongCategory, review, "wrongCategory", postId);
     }
 
-    //Check if potentially fakeUser post should be passed on
+    //Check if potentially fakeUser post should be reviewed/deleted
     var automaticDeleteFakeUser = checkFakeUserAutomaticDelete(fakeUserCount, rate, likes);
     var shouldReviewFakeUser = checkFakeUserShouldReview(fakeUserCount, rate, likes);
 
@@ -67,7 +66,7 @@ exports.reportedPosts = functions.firestore
 
 //----------------------------------------------------------------------------------------------------------------------
 //MARK: - Methods
-//rate = 0.5 is important figure because that is the default rate when the post gets created
+//rate == 0.5 and likes == 0 imply that the post got created but hasnt been rated yet (perhaps the post's category new)
 function checkInappropriateAutomaticDelete(count, rate, likes) {
   var automaticDelete = false;
   automaticDelete = count > 1 && rate == 0.5 && likes == 0; //NEED Extra Review
@@ -88,7 +87,7 @@ function checkWrongCategoryAutomaticDelete(count, rate, likes) {
   automaticDelete = count > 2 && rate == 0.5 && likes == 0; //No Extra Review
   automaticDelete = automaticDelete || (count > 1 && rate < 0.25 && likes < 10); //NO Extra Review
   automaticDelete = automaticDelete || (count > 2 && rate < 0.3 && likes >= 10); //NO Extra Review
-  automaticDelete = automaticDelete || (count > 4 && rate < 0.4 && likes >= 10); //NO Extra Review
+  automaticDelete = automaticDelete || (count > 4 && rate < 0.35 && likes >= 10); //NO Extra Review
   return automaticDelete;
 }
 
@@ -110,13 +109,11 @@ function checkFakeUserShouldReview(count, rate, likes) {
   return review;
 }
 
-//Doesn't handle the case where a post is already reviewed but not yet deleted 
 function reviewOrDeletePost(automaticDelete, shouldReview, review, reportStatus, postId) {
   const reviewDoc = admin.firestore().doc(`/reviewPosts/${postId}`);
   const postDoc = admin.firestore().doc(`/posts/${postId}`);
   const reportDoc = admin.firestore().doc(`/reportedPosts/${postId}`)
 
-  //Todo: if automatically deleted, probably should also be deleted from reportedPosts
   if (automaticDelete && shouldReview) {
     review.deleted = true;
     return reviewDoc.set(review).then(() => {
