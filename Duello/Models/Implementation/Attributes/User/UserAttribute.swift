@@ -7,7 +7,7 @@
 //
 
 //MARK: - Attribute
-class UserAttribute: ModelAttributeType {
+class UserAttribute: ModelAttribute {
     
     var attributeCase: UserAttributeCase
     var value: DatabaseConvertibleType?

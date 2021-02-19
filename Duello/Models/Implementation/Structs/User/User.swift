@@ -32,35 +32,11 @@ struct User: UserModel {
     var additionalLink = UserAttribute(attributeCase: .additionalLink, value: nil)
     var instagramLink = UserAttribute(attributeCase: .instagramLink, value: nil)
     var twitterLink = UserAttribute(attributeCase: .twitterLink, value: nil)
-    var snapChatLink = UserAttribute(attributeCase: .snapchatLink, value: nil)
+    var snapchatLink = UserAttribute(attributeCase: .snapchatLink, value: nil)
     
     var imageUrl = UserAttribute(attributeCase: .imageUrl, value: nil)
     
     //MARK: - Getters
-    var allAttributes: [UserAttribute] {
-        
-        return [
-            userName,
-            instagramName,
-            snapchatName,
-            youtubeName,
-            facebookName,
-            twitterName,
-            vimeoName,
-            tikTokName,
-            additionalName,
-            youtubeLink,
-            facebookLink,
-            vimeoLink,
-            additionalLink,
-            instagramLink,
-            snapChatLink,
-            twitterLink,
-            imageUrl
-        ]
-        
-    }
-    
     var addedSocialMediaName: Bool {
         let allSocialMediaNames = getAllSocialMediaNames()
         for socialMediaName in allSocialMediaNames {
@@ -75,29 +51,27 @@ struct User: UserModel {
     }
     
     func getAllSocialMediaNames() -> [UserAttribute] {
-        
         var socialMediaNames = [UserAttribute]()
-        for attribute in allAttributes {
+        guard let attributes = properties.attributes as? [UserAttribute] else { return socialMediaNames }
+        
+        for attribute in attributes {
             if attribute.attributeCase.isSocialMediaName {
                 socialMediaNames.append(attribute)
             }
         }
-        return socialMediaNames
         
+        return socialMediaNames
     }
     
     func getConnectedLink(for attribute: UserAttribute) -> UserAttribute? {
         guard let connectedLinkType = attribute.attributeCase.connectedLinkAttributeCase else { return nil }
+        guard let attributes = properties.attributes as? [UserAttribute] else { return nil }
         
-        for attribute in allAttributes {
+        for attribute in attributes {
             if attribute.attributeCase == connectedLinkType { return attribute }
         }
         
         return nil
     }
-    
-    func getAttributes() -> [ModelAttributeType] {
-        return allAttributes
-    }
-    
+
 }

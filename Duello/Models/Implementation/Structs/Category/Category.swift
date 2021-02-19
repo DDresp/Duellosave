@@ -24,20 +24,4 @@ struct Category: CategoryModel {
     var uid: CategoryAttribute = CategoryAttribute(attributeCase: .uid, value: nil)
     var isActive: CategoryAttribute = CategoryAttribute(attributeCase: .isActive, value: nil)
     
-    
-    //MARK: - Getters
-    func getAttributes() -> [ModelAttributeType] {
-        return [
-            imageUrl,
-            title,
-            description,
-            creationDate,
-            roughMediaType,
-            reportStatus,
-            numberOfPosts,
-            uid,
-            isActive
-        ]
-    }
-    
 }

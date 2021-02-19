@@ -29,7 +29,7 @@ protocol UserModel: Model {
     var additionalLink: UserAttribute { get set }
     var instagramLink: UserAttribute { get set }
     var twitterLink: UserAttribute { get set }
-    var snapChatLink: UserAttribute { get set }
+    var snapchatLink: UserAttribute { get set }
     
     var imageUrl: UserAttribute { get set }
     
@@ -44,7 +44,25 @@ protocol UserModel: Model {
 extension UserModel {
     
     //MARK: - Getters
-    func getUserName() -> String { return userName.value?.toStringValue() ?? "" }
-    func getImageUrl() -> String { return imageUrl.value?.toStringValue() ?? "" }
+    func getUserName() -> String { return userName.value as? String ?? "" }
+    
+    func getInstagramName() -> String { return instagramName.value as? String ?? "" }
+    func getSnapchatName() -> String { return snapchatName.value as? String ?? "" }
+    func getYoutubeName() -> String { return youtubeName.value as? String ?? "" }
+    func getFacebookName() -> String { return facebookName.value as? String ?? "" }
+    func getTwitterName() -> String { return twitterName.value as? String ?? "" }
+    func getVimeoName() -> String { return vimeoName.value as? String ?? "" }
+    func getTikTokName() -> String { return tikTokName.value as? String ?? "" }
+    func getAdditionalName() -> String { return additionalName.value as? String ?? "" }
+    
+    func getYoutubeLink() -> String { return youtubeLink.value as? String ?? "" }
+    func getFacebookLink() -> String { return facebookLink.value as? String ?? "" }
+    func getVimeoLink() -> String { return vimeoLink.value as? String ?? "" }
+    func getAdditionalLink() -> String { return additionalLink.value as? String ?? "" }
+    func getInstagramLink() -> String { return instagramLink.value as? String ?? "" }
+    func getTwitterLink() -> String { return twitterLink.value as? String ?? "" }
+    func getSnapchatLink() -> String { return snapchatLink.value as? String ?? "" }
+    
+    func getImageUrl() -> String { return imageUrl.value as? String ?? "" }
     
 }

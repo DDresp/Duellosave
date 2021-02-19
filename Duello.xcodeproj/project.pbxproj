@@ -78,7 +78,7 @@
 		1475AEB12410461700F1D24F /* RawForgotPasswordUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AEB02410461700F1D24F /* RawForgotPasswordUser.swift */; };
 		1475AEB32410462700F1D24F /* RawRegistrationUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AEB22410462700F1D24F /* RawRegistrationUser.swift */; };
 		1475AEB72410465D00F1D24F /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AEB62410465D00F1D24F /* Model.swift */; };
-		1475AEBB2410467600F1D24F /* ModelAttributeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AEBA2410467600F1D24F /* ModelAttributeType.swift */; };
+		1475AEBB2410467600F1D24F /* ModelAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AEBA2410467600F1D24F /* ModelAttribute.swift */; };
 		1475AEBD241046AA00F1D24F /* ModelReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AEBC241046AA00F1D24F /* ModelReference.swift */; };
 		1475AEC0241046DC00F1D24F /* EntryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AEBF241046DC00F1D24F /* EntryType.swift */; };
 		1475AEC2241046EB00F1D24F /* FineMediaType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1475AEC1241046EB00F1D24F /* FineMediaType.swift */; };
@@ -460,7 +460,7 @@
 		1475AEB02410461700F1D24F /* RawForgotPasswordUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawForgotPasswordUser.swift; sourceTree = "<group>"; };
 		1475AEB22410462700F1D24F /* RawRegistrationUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RawRegistrationUser.swift; sourceTree = "<group>"; };
 		1475AEB62410465D00F1D24F /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
-		1475AEBA2410467600F1D24F /* ModelAttributeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelAttributeType.swift; sourceTree = "<group>"; };
+		1475AEBA2410467600F1D24F /* ModelAttribute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelAttribute.swift; sourceTree = "<group>"; };
 		1475AEBC241046AA00F1D24F /* ModelReference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelReference.swift; sourceTree = "<group>"; };
 		1475AEBF241046DC00F1D24F /* EntryType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryType.swift; sourceTree = "<group>"; };
 		1475AEC1241046EB00F1D24F /* FineMediaType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FineMediaType.swift; sourceTree = "<group>"; };
@@ -1263,7 +1263,7 @@
 			children = (
 				1475AEBE241046B800F1D24F /* DatabaseValueTypes */,
 				1475AEB62410465D00F1D24F /* Model.swift */,
-				1475AEBA2410467600F1D24F /* ModelAttributeType.swift */,
+				1475AEBA2410467600F1D24F /* ModelAttribute.swift */,
 				1475AEBC241046AA00F1D24F /* ModelReference.swift */,
 			);
 			path = Definition;
@@ -3388,7 +3388,7 @@
 				14B67202243F1F490083F663 /* CategoryPostListViewModel.swift in Sources */,
 				1475B04D24105BCE00F1D24F /* EmptyCell.swift in Sources */,
 				1475AF07241049D200F1D24F /* InstagramImagesPost.swift in Sources */,
-				1475AEBB2410467600F1D24F /* ModelAttributeType.swift in Sources */,
+				1475AEBB2410467600F1D24F /* ModelAttribute.swift in Sources */,
 				1475B03824105B1D00F1D24F /* PostCollectionViewDelegate.swift in Sources */,
 				1475AF012410498A00F1D24F /* InstagramSingleImagePost.swift in Sources */,
 				1475B02A24105AA300F1D24F /* SocialMediaCell.swift in Sources */,

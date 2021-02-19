@@ -19,7 +19,7 @@ class UploadingService: NetworkService {
     func saveDatabaseModel(databaseModel: Model, reference: CollectionReference, id: String) -> Observable<Model?> {
         return Observable.create({(observer) -> Disposable in
             
-            let docData = databaseModel.getUploadDictionary()
+            let docData = databaseModel.encode()
             
             reference.document(id).setData(docData, completion: { (error) in
                 if let error = error {

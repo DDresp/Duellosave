@@ -94,9 +94,5 @@ extension ExploreController: UISearchBarDelegate {
         print("debug: button clicked")
     }
     
-    func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
-        print("debug: book clicked")
-    }
-    
 }
 

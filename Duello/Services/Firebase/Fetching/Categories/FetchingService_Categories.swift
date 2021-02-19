@@ -28,7 +28,7 @@ extension FetchingService {
     
     func configureCategory(data: [String: Any], categoryId: String) -> CategoryModel? {
         var category = Category()
-        category.configure(with: data, id: categoryId)
+        category.decode(with: data, id: categoryId)
         return category
     }
 

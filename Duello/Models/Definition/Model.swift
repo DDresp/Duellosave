@@ -8,19 +8,42 @@
 
 import Firebase
 
+struct Properties {
+    var attributes: [ModelAttribute]?
+    var references: [ModelReference]?
+}
+
 protocol Model {
     
     var id: String? { get set }
     
-    func getReferences() -> [ModelReference]?
-    func getAttributes() -> [ModelAttributeType]
-    
 }
 
+//MARK: - Mirror Properties
 extension Model {
     
-    func getReferences() -> [ModelReference]? {
-        return nil
+    var properties: (Properties) {
+        
+        let mirror = Mirror(reflecting: self)
+        
+        var attributes: [ModelAttribute]? = [ModelAttribute]()
+        var references: [ModelReference]? = [ModelReference]()
+        
+        for (_, value) in mirror.children {
+            
+            if let attribute = value as? ModelAttribute {
+                attributes?.append(attribute)
+            } else if let reference = value as? ModelReference {
+                references?.append(reference)
+            }
+            
+        }
+        
+        if let atrs = attributes, atrs.count == 0 { attributes = nil }
+        if let refs = references, refs.count == 0 { references = nil }
+        
+        return Properties(attributes: attributes, references: references)
+        
     }
     
 }
@@ -28,155 +51,136 @@ extension Model {
 //MARK: - Encoding
 extension Model {
     
-    func getUploadDictionary() -> [String: Any] {
+    func encode() -> [String: Any] {
         
-        let attributes = getAttributes()
-        var dictionary = makeDictionary(attributes: attributes)
+        var dictionary = [String: Any]()
         
-        guard let references = getReferences() else { return dictionary }
-        var referenceDictionary = [String: Any]()
-        for reference in references {
-            referenceDictionary[reference.getKey()] = reference.getModel().getUploadDictionary()
+        if let attributes = properties.attributes {
+            dictionary = encode(attributes: attributes)
         }
         
-        dictionary += referenceDictionary
+        if let references = properties.references {
+            var referenceDictionary = [String: Any]()
+            for reference in references {
+                referenceDictionary[reference.getKey()] = reference.getModel().encode()
+            }
+            
+            dictionary += referenceDictionary
+        }
         
         return dictionary
     }
     
-    private func makeDictionary(attributes: [ModelAttributeType]) -> [String: Any] {
+    private func encode(attributes: [ModelAttribute]) -> [String: Any] {
         var dictionary = [String: Any]()
         for attribute in attributes {
             
             switch attribute.getEntryType() {
-            case .Int:
-                if let value = attribute.getValue() as? Int {
-                    dictionary[attribute.getKey()] = value
-                }
-            case .Double:
-                if let value = attribute.getValue() as? Double {
-                    dictionary[attribute.getKey()] = value
-                }
-            case .String:
-                if let value = attribute.getValue() as? String {
-                    dictionary[attribute.getKey()] = value
-                }
-            case .Timestamp:
-                if let value = attribute.getValue() as? Timestamp {
-                    dictionary[attribute.getKey()] = value
-                }
+            case .Int, .Double, .String, .Timestamp, .Bool, .StringArray:
+                dictionary[attribute.getKey()] = attribute.getValue()
             case .FineMediaType:
-                if let value = attribute.getValue() as? FineMediaType {
-                    dictionary[attribute.getKey()] = value.toStringValue()
-                }
+                dictionary += encodeValue(of: attribute, to: dictionary, enum: FineMediaType.self)
             case .RoughMediaType:
-                if let value = attribute.getValue() as? RoughMediaType {
-                    dictionary[attribute.getKey()] = value.toStringValue()
-                }
-            case .Bool:
-                if let value = attribute.getValue() as? Bool {
-                    dictionary[attribute.getKey()] = value
-                }
+                dictionary += encodeValue(of: attribute, to: dictionary, enum: RoughMediaType.self)
             case .PostReportStatusType:
-                if let value = attribute.getValue() as? PostReportStatusType {
-                    dictionary[attribute.getKey()] = value.toStringValue()
-                }
+                dictionary += encodeValue(of: attribute, to: dictionary, enum: PostReportStatusType.self)
             case .CategoryReportStatusType:
-                if let value = attribute.getValue() as? CategoryReportStatusType {
-                    dictionary[attribute.getKey()] = value.toStringValue()
-                }
-            case .StringArray:
-                if let value = attribute.getValue() as? [String] {
-                    dictionary[attribute.getKey()] = value
-                }
+                dictionary += encodeValue(of: attribute, to: dictionary, enum: CategoryReportStatusType.self)
             }
         }
         
         return dictionary
         
     }
+    
+    private func encodeValue<T: DatabaseEnum>(of attribute: ModelAttribute, to dic: [String: Any], enum: T.Type) -> [String: Any] {
+        var newDic = dic
+        if let value = attribute.getValue() as? T {
+            newDic[attribute.getKey()] = value.rawValue
+        }
+        return newDic
+    }
+    
+
 }
 
 //MARK: - Decoding
 extension Model {
     
-    mutating func configure(with dic: [String: Any], id: String?) {
+    mutating func decode(with dic: [String: Any], id: String) {
         self.id = id
-        configure(with: dic)
+        
+        decode(with: dic)
+        
     }
     
-    func configure(with dic: [String: Any]) {
+    private func decode(with dic: [String: Any]) {
         
-        let attributes = getAttributes()
+        if let attributes = properties.attributes {
+            decode(attributes: attributes, with: dic)
+        }
+        
+        if let references = properties.references {
+            
+            for reference in references {
+                if let refDic = dic[reference.getKey()] as? [String: Any] {
+                    reference.getModel().decode(with: refDic)
+                }
+            }
+            
+        }
+        
+    }
+    
+    
+    private func decode(attributes: [ModelAttribute], with dic: [String: Any]) {
+        
         for attribute in attributes {
             switch attribute.getEntryType() {
             case .Int:
-                if let value = dic[attribute.getKey()] as? Int {
-                    attribute.setValue(of: value)
-                }
+                decodeValue(of: attribute, from: dic, class: Int.self)
             case .Double:
-                if let value = dic[attribute.getKey()] as? Double {
-                    attribute.setValue(of: value)
-                }
+                decodeValue(of: attribute, from: dic, class: Double.self)
             case .String:
-                if let value = dic[attribute.getKey()] as? String {
-                    attribute.setValue(of: value)
-                }
-            case .Timestamp:
-                if let value = dic[attribute.getKey()] as? Timestamp {
-                    attribute.setValue(of: value)
-                }
-            case .FineMediaType:
-                if let value = dic[attribute.getKey()] as? String {
-                    FineMediaType.allCases.forEach { (type) in
-                        if value == type.toStringValue() {
-                            return attribute.setValue(of: type)
-                        }
-                    }
-                }
-            case .RoughMediaType:
-                if let value = dic[attribute.getKey()] as? String {
-                    RoughMediaType.allCases.forEach { (type) in
-                        if value == type.toStringValue() {
-                            return attribute.setValue(of: type)
-                        }
-                    }
-                }
+                decodeValue(of: attribute, from: dic, class: String.self)
             case .Bool:
-                if let value = dic[attribute.getKey()] as? Bool {
-                    attribute.setValue(of: value)
-                }
-            case .PostReportStatusType:
-                if let value = dic[attribute.getKey()] as? String {
-                    PostReportStatusType.allCases.forEach { (type) in
-                        if value == type.toStringValue() {
-                            return attribute.setValue(of: type)
-                        }
-                    }
-                }
-            case .CategoryReportStatusType:
-                if let value = dic[attribute.getKey()] as? String {
-                    CategoryReportStatusType.allCases.forEach { (type) in
-                        if value == type.toStringValue() {
-                            return attribute.setValue(of: type)
-                        }
-                    }
-                }
+                decodeValue(of: attribute, from: dic, class: Bool.self)
             case .StringArray:
-                if let value = dic[attribute.getKey()] as? [String] {
-                    attribute.setValue(of: value)
-                }
+                decodeValue(of: attribute, from: dic, class: [String].self)
+            case .Timestamp:
+                decodeValue(of: attribute, from: dic, class: Timestamp.self)
+            case .FineMediaType:
+                decodeValue(of: attribute, from: dic, enum: FineMediaType.self)
+            case .RoughMediaType:
+                decodeValue(of: attribute, from: dic, enum: RoughMediaType.self)
+            case .PostReportStatusType:
+                decodeValue(of: attribute, from: dic, enum: PostReportStatusType.self)
+            case .CategoryReportStatusType:
+                decodeValue(of: attribute, from: dic, enum: CategoryReportStatusType.self)
             }
         }
-        guard let references = getReferences() else { return }
-        for reference in references {
-            if let refDic = dic[reference.getKey()] as? [String: Any] {
-                reference.getModel().configure(with: refDic)
-            }
-        }
+        
+    }
+    
+}
+
+private func decodeValue<T: DatabaseConvertibleType>(of attribute: ModelAttribute, from dic: [String: Any], class: T.Type) {
+    if let value = dic[attribute.getKey()] as? T {
+        attribute.setValue(of: value)
     }
 }
 
+private func decodeValue<T: DatabaseEnum>(of attribute: ModelAttribute, from dic: [String: Any], enum: T.Type) {
+    
+    if let value = dic[attribute.getKey()] as? String {
+        T.allCases.forEach { (type) in
+            if value == type.rawValue {
+                return attribute.setValue(of: type)
+            }
+        }
+    }
+    
+}
 //MARK: - Getters
 extension Model {
     func getId() -> String { return id?.toStringValue() ?? "" }

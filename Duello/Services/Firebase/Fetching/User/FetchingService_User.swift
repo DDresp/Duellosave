@@ -21,7 +21,7 @@ extension FetchingService {
     
     private func configureUser(data: [String: Any], uid: String) -> UserModel {
         var user = User()
-        user.configure(with: data, id: uid)
+        user.decode(with: data, id: uid)
         return user
     }
     

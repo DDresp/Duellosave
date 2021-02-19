@@ -33,30 +33,4 @@ struct LocalImagesPost: LocalImagesPostModel {
     var user: PostReference = PostReference(attributeCase: .user, model: User())
     var category: PostReference = PostReference(attributeCase: .category, model: Category())
     
-    //MARK: - Getters
-    
-    func getAttributes() -> [ModelAttributeType] {
-        return [
-            uid,
-            cid,
-            title,
-            description,
-            creationDate,
-            likes,
-            dislikes,
-            rate,
-            typeData,
-            mediaRatio,
-            isVerified,
-            isBlocked,
-            isDeactivated,
-            imageUrls,
-            reportStatus
-        ]
-    }
-    
-    func getReferences() -> [ModelReference]? {
-        return [user, category]
-    }
-    
 }

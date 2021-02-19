@@ -10,9 +10,9 @@ import Firebase
 
 extension Timestamp: DatabaseConvertibleType {
     
-//    func toStringValue() -> String {
-//        self.dateValue()
-//    }
+    func toStringValue() -> String {
+        return self.dateValue().description
+    }
     
     
 }

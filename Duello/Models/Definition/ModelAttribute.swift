@@ -6,7 +6,7 @@
 //  Copyright © 2020 Darius Dresp. All rights reserved.
 //
 
-protocol ModelAttributeType {
+protocol ModelAttribute {
     
     func getValue() -> DatabaseConvertibleType?
     func setValue(of value: DatabaseConvertibleType) -> ()
@@ -14,7 +14,7 @@ protocol ModelAttributeType {
     func getEntryType() -> EntryType
 }
 
-extension ModelAttributeType {
+extension ModelAttribute {
     
     func getEntryType() -> EntryType {
         return getCase().entryType

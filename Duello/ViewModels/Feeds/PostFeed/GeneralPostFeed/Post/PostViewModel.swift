@@ -78,11 +78,10 @@ class PostViewModel: PostDisplayer {
         self.isBlocked = post.getIsBlocked()
         self.isDeactivated = BehaviorRelay(value: post.getIsDeactivated())
         self.reportStatus = BehaviorRelay(value: post.getReportStatus())
-        self.userProfileImageUrl = post.getUser().imageUrl.value?.toStringValue() ?? ""
+        self.userProfileImageUrl = post.getUser().getImageUrl()
         self.userHasSocialMediaNames = post.getUser().addedSocialMediaName
-        self.userName = post.getUser().userName.value?.toStringValue() ?? ""
-        self.categoryName = post.getCategory().title.value?.toStringValue() ?? ""
-        
+        self.userName = post.getUser().getUserName()
+        self.categoryName = post.getCategory().getTitle()
         self.options = options
         
         socialMediaDisplayer.user.accept(post.getUser())

@@ -6,7 +6,7 @@
 //  Copyright © 2020 Darius Dresp. All rights reserved.
 //
 
-enum RoughMediaType: String, DatabaseConvertibleType, CaseIterable {
+enum RoughMediaType: String, DatabaseEnum {
     
     case video
     case image

@@ -8,7 +8,7 @@
 
 //MARK: - Attribute
 
-class CategoryAttribute: ModelAttributeType {
+class CategoryAttribute: ModelAttribute {
     
     var attributeCase: CategoryAttributeCase
     var value: DatabaseConvertibleType?

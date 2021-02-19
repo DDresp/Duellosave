@@ -159,7 +159,7 @@ class UploadUserViewModel: EditUserDisplayer {
             case .snapchat:
                 user.snapchatName.value = getName(name: item.name.value?.trimmingCharacters(in: .whitespacesAndNewlines))
                 if let name = user.snapchatName.value {
-                    user.snapChatLink.value = "https://www.snapchat.com/add/\(name)/"
+                    user.snapchatLink.value = "https://www.snapchat.com/add/\(name)/"
                 }
             case .youtube:
                 user.youtubeName.value = getName(name: item.name.value)

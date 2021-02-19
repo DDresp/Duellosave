@@ -55,7 +55,7 @@ extension FetchingService {
             ()
         }
         
-        post?.configure(with: data, id: postId)
+        post?.decode(with: data, id: postId)
         return post
         
     }

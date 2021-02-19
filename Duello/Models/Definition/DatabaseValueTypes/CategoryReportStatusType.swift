@@ -11,7 +11,7 @@ import Foundation
 //WARNING
 //Cloud functions use those keys, so if you change them, you have to change the cloud functions
 
-enum CategoryReportStatusType: String, DatabaseConvertibleType, CaseIterable {
+enum CategoryReportStatusType: String, DatabaseEnum {
     
     case noReport
     case inappropriate

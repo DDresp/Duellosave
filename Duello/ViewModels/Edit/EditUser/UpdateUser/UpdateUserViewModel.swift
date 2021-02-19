@@ -24,9 +24,9 @@ class UpdateUserViewModel: UploadUserViewModel {
             
             switch item.itemType {
             case .username:
-                item.name.accept(user.userName.value?.toStringValue() ?? "")
+                item.name.accept(user.getUserName())
             case .instagram:
-                item.name.accept(user.instagramName.value?.toStringValue())
+                item.name.accept(user.getInstagramName())
             case .snapchat:
                 item.name.accept(user.snapchatName.value?.toStringValue())
             case .youtube:
