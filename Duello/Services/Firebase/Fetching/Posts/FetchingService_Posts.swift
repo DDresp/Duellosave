@@ -40,17 +40,17 @@ extension FetchingService {
     
     func configurePost(data: [String: Any], postId: String) -> PostModel? {
     
-        guard let mediaType = data[PostAttributeCase.type.key] as? String else { return nil }
+        guard let mediaType = data[PostAttributeType.type.key] as? String else { return nil }
         
         var post: PostModel?
         
         switch mediaType {
-        case FineMediaType.localImages.rawValue: post = LocalImagesPost()
-        case FineMediaType.localSingleImage.rawValue: post = LocalSingleImagePost()
-        case FineMediaType.localVideo.rawValue: post = LocalVideoPost()
-        case FineMediaType.instagramVideo.rawValue: post = InstagramVideoPost()
-        case FineMediaType.instagramSingleImage.rawValue: post = InstagramSingleImagePost()
-        case FineMediaType.instagramImages.rawValue: post = InstagramImagesPost()
+        case FineMediaEnum.localImages.rawValue: post = LocalImagesPost()
+        case FineMediaEnum.localSingleImage.rawValue: post = LocalSingleImagePost()
+        case FineMediaEnum.localVideo.rawValue: post = LocalVideoPost()
+        case FineMediaEnum.instagramVideo.rawValue: post = InstagramVideoPost()
+        case FineMediaEnum.instagramSingleImage.rawValue: post = InstagramSingleImagePost()
+        case FineMediaEnum.instagramImages.rawValue: post = InstagramImagesPost()
         default:
             ()
         }

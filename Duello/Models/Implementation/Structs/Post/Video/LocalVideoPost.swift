@@ -27,10 +27,10 @@ struct LocalVideoPost: LocalVideoPostModel {
     var isVerified: PostAttribute = PostAttribute(attributeCase: .isVerified, value: false)
     var isBlocked: PostAttribute = PostAttribute(attributeCase: .isBlocked, value: false)
     var isDeactivated: PostAttribute = PostAttribute(attributeCase: .isDeactivated, value: false)
-    var typeData: PostAttribute = PostAttribute(attributeCase: .type, value: FineMediaType.localVideo)
+    var typeData: PostAttribute = PostAttribute(attributeCase: .type, value: FineMediaEnum.localVideo)
     var videoUrl: PostAttribute = PostAttribute(attributeCase: .videoUrl, value: nil)
     var thumbNailUrl: PostAttribute = PostAttribute(attributeCase: .thumbNailUrl, value: nil)
-    var reportStatus: PostAttribute = PostAttribute(attributeCase: .reportStatus, value: PostReportStatusType.noReport)
+    var reportStatus: PostAttribute = PostAttribute(attributeCase: .reportStatus, value: PostReportStatusEnum.noReport)
     var user: PostReference = PostReference(attributeCase: .user, model: User())
     var category: PostReference = PostReference(attributeCase: .category, model: Category())
 

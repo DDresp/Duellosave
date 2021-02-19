@@ -12,7 +12,7 @@ import Foundation
 //every value that should be stored in the database, should be able to be casted into a String
 //the value can be then stored as a String or at its Original Type in the database
 protocol DatabaseConvertibleType {
-    func toStringValue() -> String
+//    func toStringValue() -> String
 }
 
 protocol DatabaseEnum: CaseIterable, RawRepresentable, DatabaseConvertibleType where RawValue == String {}

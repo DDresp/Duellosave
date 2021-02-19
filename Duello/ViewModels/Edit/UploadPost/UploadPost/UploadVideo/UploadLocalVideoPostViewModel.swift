@@ -13,7 +13,7 @@ import AVFoundation
 class UploadLocalVideoPostViewModel: UploadPostViewModel<LocalVideoPost>, UploadVideoPostDisplayer {
     
     //MARK: - Variables
-    var type: FineMediaType = .localVideo
+    var type: FineMediaEnum = .localVideo
     
     //MARK: - Bindables
     let videoUrl: BehaviorRelay<URL?> = BehaviorRelay(value: nil)

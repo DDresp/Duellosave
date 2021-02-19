@@ -14,6 +14,6 @@ protocol UploadRoughMediaSelectorDisplayer {
     var imagesIsOn: BehaviorRelay<Bool> { get }
     var videoIsOn: BehaviorRelay<Bool> { get }
     var mediaTypeIsSelected: BehaviorRelay<Bool> { get }
-    var mediaType: BehaviorRelay<RoughMediaType?> { get }
+    var mediaType: BehaviorRelay<RoughMediaEnum?> { get }
     
 }

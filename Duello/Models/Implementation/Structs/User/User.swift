@@ -46,7 +46,7 @@ struct User: UserModel {
     }
     
     func hasConnectedLink(for attribute: UserAttribute) -> Bool {
-        if !attribute.attributeCase.isSocialMediaName { return false }
+        if !attribute.type.isSocialMediaName { return false }
         return getConnectedLink(for: attribute) == nil ? false : true
     }
     
@@ -55,7 +55,7 @@ struct User: UserModel {
         guard let attributes = properties.attributes as? [UserAttribute] else { return socialMediaNames }
         
         for attribute in attributes {
-            if attribute.attributeCase.isSocialMediaName {
+            if attribute.type.isSocialMediaName {
                 socialMediaNames.append(attribute)
             }
         }
@@ -63,12 +63,16 @@ struct User: UserModel {
         return socialMediaNames
     }
     
+    func getName(for attribute: UserAttribute) -> String {
+        
+    }
+    
     func getConnectedLink(for attribute: UserAttribute) -> UserAttribute? {
-        guard let connectedLinkType = attribute.attributeCase.connectedLinkAttributeCase else { return nil }
+        guard let connectedLinkType = attribute.type.connectedLinkAttributeCase else { return nil }
         guard let attributes = properties.attributes as? [UserAttribute] else { return nil }
         
         for attribute in attributes {
-            if attribute.attributeCase == connectedLinkType { return attribute }
+            if attribute.type == connectedLinkType { return attribute }
         }
         
         return nil

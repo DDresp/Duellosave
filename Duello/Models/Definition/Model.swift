@@ -79,13 +79,13 @@ extension Model {
             case .Int, .Double, .String, .Timestamp, .Bool, .StringArray:
                 dictionary[attribute.getKey()] = attribute.getValue()
             case .FineMediaType:
-                dictionary += encodeValue(of: attribute, to: dictionary, enum: FineMediaType.self)
+                dictionary += encodeValue(of: attribute, to: dictionary, enum: FineMediaEnum.self)
             case .RoughMediaType:
-                dictionary += encodeValue(of: attribute, to: dictionary, enum: RoughMediaType.self)
+                dictionary += encodeValue(of: attribute, to: dictionary, enum: RoughMediaEnum.self)
             case .PostReportStatusType:
-                dictionary += encodeValue(of: attribute, to: dictionary, enum: PostReportStatusType.self)
+                dictionary += encodeValue(of: attribute, to: dictionary, enum: PostReportStatusEnum.self)
             case .CategoryReportStatusType:
-                dictionary += encodeValue(of: attribute, to: dictionary, enum: CategoryReportStatusType.self)
+                dictionary += encodeValue(of: attribute, to: dictionary, enum: CategoryReportStatusEnum.self)
             }
         }
         
@@ -150,13 +150,13 @@ extension Model {
             case .Timestamp:
                 decodeValue(of: attribute, from: dic, class: Timestamp.self)
             case .FineMediaType:
-                decodeValue(of: attribute, from: dic, enum: FineMediaType.self)
+                decodeValue(of: attribute, from: dic, enum: FineMediaEnum.self)
             case .RoughMediaType:
-                decodeValue(of: attribute, from: dic, enum: RoughMediaType.self)
+                decodeValue(of: attribute, from: dic, enum: RoughMediaEnum.self)
             case .PostReportStatusType:
-                decodeValue(of: attribute, from: dic, enum: PostReportStatusType.self)
+                decodeValue(of: attribute, from: dic, enum: PostReportStatusEnum.self)
             case .CategoryReportStatusType:
-                decodeValue(of: attribute, from: dic, enum: CategoryReportStatusType.self)
+                decodeValue(of: attribute, from: dic, enum: CategoryReportStatusEnum.self)
             }
         }
         

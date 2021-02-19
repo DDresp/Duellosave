@@ -15,7 +15,7 @@ class UploadRoughMediaSelectorViewModel: UploadRoughMediaSelectorDisplayer {
     var imagesIsOn: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     var videoIsOn: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     var mediaTypeIsSelected: BehaviorRelay<Bool> = BehaviorRelay(value: false)
-    var mediaType: BehaviorRelay<RoughMediaType?> = BehaviorRelay(value: nil)
+    var mediaType: BehaviorRelay<RoughMediaEnum?> = BehaviorRelay(value: nil)
     
     //MARK: - Setup
     init() {
@@ -27,7 +27,7 @@ class UploadRoughMediaSelectorViewModel: UploadRoughMediaSelectorDisplayer {
     
     private func setupBindablesFromOwnProperties() {
         
-        Observable.combineLatest(imagesIsOn, videoIsOn).map { (imagesIsOn, videoIsOn) -> RoughMediaType? in
+        Observable.combineLatest(imagesIsOn, videoIsOn).map { (imagesIsOn, videoIsOn) -> RoughMediaEnum? in
             if imagesIsOn && videoIsOn {
                 return .videoAndImage
             } else if imagesIsOn {

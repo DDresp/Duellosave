@@ -14,9 +14,9 @@ extension FetchingService {
     func fetchUserPosts(for uid: String, limit: Int?, startId: String?) -> Observable<[PostModel]> {
         
         var equalityConstraints = [String: Any]()
-        equalityConstraints[PostAttributeCase.uid.key] = uid
+        equalityConstraints[PostAttributeType.uid.key] = uid
         
-        return fetchPosts(orderKey: PostAttributeCase.creationDate.key, limit: limit, startId: startId, equalityConditions: equalityConstraints).map { (posts) -> [PostModel] in
+        return fetchPosts(orderKey: PostAttributeType.creationDate.key, limit: limit, startId: startId, equalityConditions: equalityConstraints).map { (posts) -> [PostModel] in
             var orderedPosts = posts
             orderedPosts.sort(by: { (post1, post2) -> Bool in
                 guard let creationDate1 = Double(post1.creationDate.value?.toStringValue() ?? "0") else { return true }

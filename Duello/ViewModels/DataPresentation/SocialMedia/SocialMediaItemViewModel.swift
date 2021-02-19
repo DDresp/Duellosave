@@ -13,13 +13,13 @@ class SocialMediaItemViewModel: SocialMediaItemDisplayer {
     //MARK: - Variables
     var socialMediaName: String
     var hasLink: Bool
-    var type: UserAttributeCase
+    var type: UserAttributeType
     var iconName: String = ""
     var link: UserAttribute?
     var isDarkMode: Bool
     
     //MARK: - Setup
-    init(socialMediaName: String, link: UserAttribute?, type: UserAttributeCase, isDarkMode: Bool) {
+    init(socialMediaName: String, link: UserAttribute?, type: UserAttributeType, isDarkMode: Bool) {
         self.socialMediaName = socialMediaName
         self.isDarkMode = isDarkMode
         self.hasLink = link?.value != nil
@@ -29,7 +29,7 @@ class SocialMediaItemViewModel: SocialMediaItemDisplayer {
     }
     
     //MARK: - Getters
-    private func getIconName(from type: UserAttributeCase) -> String {
+    private func getIconName(from type: UserAttributeType) -> String {
         switch type {
         case .facebookName: return "facebook_hex_icon"
         case .additionalName: return "flckr_hex_icon"

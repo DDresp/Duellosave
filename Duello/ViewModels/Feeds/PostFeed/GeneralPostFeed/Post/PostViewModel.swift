@@ -52,7 +52,7 @@ class PostViewModel: PostDisplayer {
     var showActionSheet: PublishRelay<ActionSheet> = PublishRelay()
     var showAlert: PublishRelay<Alert> = PublishRelay()
     var isDeactivated: BehaviorRelay<Bool>
-    var reportStatus: BehaviorRelay<PostReportStatusType>
+    var reportStatus: BehaviorRelay<PostReportStatusEnum>
     
     //from Parent
     var didDisappear: PublishRelay<Void> = PublishRelay()
@@ -61,7 +61,7 @@ class PostViewModel: PostDisplayer {
     //to Parent
     var changeActivationStatusForMe: PublishRelay<(Bool, String)> = PublishRelay()
     var deleteMe: PublishRelay<String> = PublishRelay()
-    var reportMe: PublishRelay<(PostReportStatusType, String)> = PublishRelay()
+    var reportMe: PublishRelay<(PostReportStatusEnum, String)> = PublishRelay()
     var reviewMe: PublishRelay<String> = PublishRelay()
     
     
@@ -165,17 +165,17 @@ class PostViewModel: PostDisplayer {
             
             let inappropriatePostReport = AlertAction(title: "Inappropriate Post") {
                 guard let postId = self?.postId else { return }
-                self?.reportMe.accept((PostReportStatusType.inappropriate, postId))
+                self?.reportMe.accept((PostReportStatusEnum.inappropriate, postId))
                 self?.showAlert.accept(thankYouAlert)
             }
             let fakeUserReport = AlertAction(title: "Fake User") {
                 guard let postId = self?.postId else { return }
-                self?.reportMe.accept((PostReportStatusType.fakeUser, postId))
+                self?.reportMe.accept((PostReportStatusEnum.fakeUser, postId))
                 self?.showAlert.accept(thankYouAlert)
             }
             let wrongCategoryReport = AlertAction(title: "Wrong Category") {
                 guard let postId = self?.postId else { return }
-                self?.reportMe.accept((PostReportStatusType.wrongCategory, postId))
+                self?.reportMe.accept((PostReportStatusEnum.wrongCategory, postId))
                 self?.showAlert.accept(thankYouAlert)
             }
             

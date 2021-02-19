@@ -28,9 +28,9 @@ struct InstagramSingleImagePost: InstagramSingleImagePostModel {
     var isVerified: PostAttribute = PostAttribute(attributeCase: .isVerified, value: false)
     var isBlocked: PostAttribute = PostAttribute(attributeCase: .isBlocked, value: false)
     var isDeactivated: PostAttribute = PostAttribute(attributeCase: .isDeactivated, value: false)
-    var typeData: PostAttribute = PostAttribute(attributeCase: .type, value: FineMediaType.instagramSingleImage)
+    var typeData: PostAttribute = PostAttribute(attributeCase: .type, value: FineMediaEnum.instagramSingleImage)
     var apiUrl: PostAttribute = PostAttribute(attributeCase: .apiUrl, value: nil)
-    var reportStatus: PostAttribute = PostAttribute(attributeCase: .reportStatus, value: PostReportStatusType.noReport)
+    var reportStatus: PostAttribute = PostAttribute(attributeCase: .reportStatus, value: PostReportStatusEnum.noReport)
     var user: PostReference = PostReference(attributeCase: .user, model: User())
     var category: PostReference = PostReference(attributeCase: .category, model: Category())
     

@@ -12,7 +12,7 @@ protocol InstagramVideoPostModel: ApiVideoPostModel {
 }
 
 extension InstagramVideoPostModel {
-    var type: FineMediaType {
+    var type: FineMediaEnum {
         return .instagramVideo
     }
 }

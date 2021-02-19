@@ -11,7 +11,7 @@ import RxSwift
 class UploadLocalSingleImagePostViewModel: UploadPostViewModel<LocalSingleImagePost>, UploadSingleImagePostDisplayer {
     
     //MARK: - Variables
-    var type: FineMediaType = .localSingleImage
+    var type: FineMediaEnum = .localSingleImage
     var image: UIImage?
     var imageUrl: URL?
     

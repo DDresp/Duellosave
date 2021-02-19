@@ -22,7 +22,7 @@ extension LocalVideoPostModel {
         return thumbNailUrl.value?.toStringValue() ?? ""
     }
     
-    var type: FineMediaType {
+    var type: FineMediaEnum {
         return .localVideo
     }
 }

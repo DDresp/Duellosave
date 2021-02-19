@@ -11,7 +11,7 @@ import RxSwift
 class UploadInstagramSingleImagePostViewModel: UploadPostViewModel<InstagramSingleImagePost>, UploadSingleImagePostDisplayer {
     
     //MARK: - Variables
-    var type: FineMediaType = .instagramSingleImage
+    var type: FineMediaEnum = .instagramSingleImage
     var image: UIImage?
     var imageUrl: URL?
     let apiLink: String

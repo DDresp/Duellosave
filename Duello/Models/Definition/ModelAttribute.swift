@@ -10,22 +10,22 @@ protocol ModelAttribute {
     
     func getValue() -> DatabaseConvertibleType?
     func setValue(of value: DatabaseConvertibleType) -> ()
-    func getCase() -> ModelAttributeCase
+    func getType() -> ModelAttributeType
     func getEntryType() -> EntryType
 }
 
 extension ModelAttribute {
     
     func getEntryType() -> EntryType {
-        return getCase().entryType
+        return getType().entryType
     }
     
     func getKey() -> String {
-        return getCase().key
+        return getType().key
     }
 }
     
-protocol ModelAttributeCase {
+protocol ModelAttributeType {
     var key: String { get }
     var entryType: EntryType { get }
 }

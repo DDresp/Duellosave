@@ -14,7 +14,7 @@ class UploadInstagramImagesPostViewModel: UploadPostViewModel<InstagramImagesPos
     var imagesSliderDisplayer: ImagesSliderDisplayer
     
     //MARK: - Variables
-    var type: FineMediaType = .instagramImages
+    var type: FineMediaEnum = .instagramImages
     var images: [UIImage]?
     var imageUrls: [URL]?
     let apiLink: String

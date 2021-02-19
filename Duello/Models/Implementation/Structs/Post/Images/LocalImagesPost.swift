@@ -28,8 +28,8 @@ struct LocalImagesPost: LocalImagesPostModel {
     var isBlocked: PostAttribute = PostAttribute(attributeCase: .isBlocked, value: false)
     var isDeactivated: PostAttribute = PostAttribute(attributeCase: .isDeactivated, value: false)
     var imageUrls: PostAttribute = PostAttribute(attributeCase: .imageUrls, value: [String]())
-    var typeData: PostAttribute = PostAttribute(attributeCase: .type, value: FineMediaType.localImages)
-    var reportStatus: PostAttribute = PostAttribute(attributeCase: .reportStatus, value: PostReportStatusType.noReport)
+    var typeData: PostAttribute = PostAttribute(attributeCase: .type, value: FineMediaEnum.localImages)
+    var reportStatus: PostAttribute = PostAttribute(attributeCase: .reportStatus, value: PostReportStatusEnum.noReport)
     var user: PostReference = PostReference(attributeCase: .user, model: User())
     var category: PostReference = PostReference(attributeCase: .category, model: Category())
     

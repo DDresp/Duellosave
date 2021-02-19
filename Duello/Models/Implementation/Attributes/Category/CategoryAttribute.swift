@@ -10,16 +10,16 @@
 
 class CategoryAttribute: ModelAttribute {
     
-    var attributeCase: CategoryAttributeCase
+    var type: CategoryAttributeType
     var value: DatabaseConvertibleType?
     
-    init(attributeCase: CategoryAttributeCase, value: DatabaseConvertibleType?) {
-        self.attributeCase = attributeCase
+    init(attributeCase: CategoryAttributeType, value: DatabaseConvertibleType?) {
+        self.type = attributeCase
         self.value = value
     }
     
-    func getCase() -> ModelAttributeCase {
-        return attributeCase
+    func getType() -> ModelAttributeType {
+        return type
     }
     
     func getValue() -> DatabaseConvertibleType? {
@@ -33,7 +33,7 @@ class CategoryAttribute: ModelAttribute {
 }
 
 //MARK: - Attribute Case
-enum CategoryAttributeCase: ModelAttributeCase {
+enum CategoryAttributeType: ModelAttributeType {
     
     case imageUrl
     case title

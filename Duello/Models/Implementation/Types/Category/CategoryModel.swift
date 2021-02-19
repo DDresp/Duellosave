@@ -28,13 +28,13 @@ extension CategoryModel {
     func getTitle() -> String { return title.value?.toStringValue() ?? "" }
     func getDescription() -> String { return description.value?.toStringValue() ?? "" }
     func getCreationDate() -> Double { return Double(creationDate.value?.toStringValue() ?? "0") ?? 0 }
-    func getReportStatus() -> CategoryReportStatusType { return reportStatus.getValue() as? CategoryReportStatusType ?? CategoryReportStatusType.noReport }
+    func getReportStatus() -> CategoryReportStatusEnum { return reportStatus.getValue() as? CategoryReportStatusEnum ?? CategoryReportStatusEnum.noReport }
     func getNumberOfPosts() -> Int { return numberOfPosts.getValue() as? Int ?? 0 }
     func getUID() -> String { return uid.getValue() as? String ?? "" }
     func getIsActive() -> Bool { return isActive.getValue() as? Bool ?? false }
     
     func allowsVideos() -> Bool {
-        guard let mediaType = roughMediaType.getValue() as? RoughMediaType else { return false }
+        guard let mediaType = roughMediaType.getValue() as? RoughMediaEnum else { return false }
         switch mediaType {
         case .image: return false
         case .videoAndImage, .video: return true
@@ -42,7 +42,7 @@ extension CategoryModel {
         
     }
     func allowsImages() -> Bool {
-        guard let mediaType = roughMediaType.getValue() as? RoughMediaType else { return false }
+        guard let mediaType = roughMediaType.getValue() as? RoughMediaEnum else { return false }
         switch mediaType {
         case .image, .videoAndImage: return true
         case .video: return false

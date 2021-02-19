@@ -64,13 +64,13 @@ class ExploreCategoryProfileViewModel: SimplePostCollectionMasterViewModel {
     }
     
     //MARK: - Networking
-    func reportPost(for postId: String, report: PostReportStatusType) {
+    func reportPost(for postId: String, report: PostReportStatusEnum) {
         UploadingService.shared.createPostReport(postId: postId, report: report).subscribe(onNext: { (_) in
             //created report
             }).disposed(by: disposeBag)
     }
     
-    func reportCategory(report: CategoryReportStatusType) {
+    func reportCategory(report: CategoryReportStatusEnum) {
         UploadingService.shared.createCategoryReport(categoryId: category.getId(), report: report).subscribe(onNext: { (_) in
             //created report
         }).disposed(by: disposeBag)
@@ -118,11 +118,11 @@ class ExploreCategoryProfileViewModel: SimplePostCollectionMasterViewModel {
             let thankYouAlert = Alert(alertMessage: "Thank you for your report!", alertHeader: "Reported")
             
             let inappropriateReport = AlertAction(title: "Inappropriate Category") {
-                self?.reportCategory(report: CategoryReportStatusType.inappropriate)
+                self?.reportCategory(report: CategoryReportStatusEnum.inappropriate)
                 self?.showAlert.accept(thankYouAlert)
             }
             let inactiveReport = AlertAction(title: "Inactive") {
-                self?.reportCategory(report: CategoryReportStatusType.inactive)
+                self?.reportCategory(report: CategoryReportStatusEnum.inactive)
                 self?.showAlert.accept(thankYouAlert)
             }
             

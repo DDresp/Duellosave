@@ -11,7 +11,7 @@
 protocol PostModel: Model {
     
     //MARK: - Variables
-    var type: FineMediaType { get }
+    var type: FineMediaEnum { get }
     
     //MARK: - Attributes
     var uid: PostAttribute { get set }
@@ -52,7 +52,7 @@ extension PostModel {
     func getIsBlocked() -> Bool { return isBlocked.value as? Bool ?? false }
     func getIsDeactivated() -> Bool { return isDeactivated.value as? Bool ?? false }
     
-    func getReportStatus() -> PostReportStatusType { return reportStatus.getValue() as? PostReportStatusType ?? PostReportStatusType.noReport }
+    func getReportStatus() -> PostReportStatusEnum { return reportStatus.getValue() as? PostReportStatusEnum ?? PostReportStatusEnum.noReport }
     func getUser() -> UserModel { return user.getModel() as? User ?? User() }
     func getCategory() -> CategoryModel { return category.getModel() as? Category ?? Category() }
     

@@ -12,7 +12,7 @@ import RxCocoa
 class CategoryPostListViewModel: PostListViewModel {
     
     //MARK: - Bindables
-    var reportPost: PublishRelay<(PostReportStatusType, String)> = PublishRelay()
+    var reportPost: PublishRelay<(PostReportStatusEnum, String)> = PublishRelay()
     
     //MARK: - Setup
     init() {

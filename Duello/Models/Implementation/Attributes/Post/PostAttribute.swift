@@ -10,16 +10,16 @@
 
 class PostAttribute: ModelAttribute {
     
-    var attributeCase: PostAttributeCase
+    var type: PostAttributeType
     var value: DatabaseConvertibleType?
     
-    init(attributeCase: PostAttributeCase, value: DatabaseConvertibleType?) {
-        self.attributeCase = attributeCase
+    init(attributeCase: PostAttributeType, value: DatabaseConvertibleType?) {
+        self.type = attributeCase
         self.value = value
     }
     
-    func getCase() -> ModelAttributeCase {
-        return attributeCase
+    func getType() -> ModelAttributeType {
+        return type
     }
     
     func getValue() -> DatabaseConvertibleType? {
@@ -33,7 +33,7 @@ class PostAttribute: ModelAttribute {
 }
 
 //MARK: - Attribute Case
-enum PostAttributeCase: ModelAttributeCase {
+enum PostAttributeType: ModelAttributeType {
     
     case uid
     case cid

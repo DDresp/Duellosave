@@ -13,7 +13,7 @@ protocol InstagramImagesPostModel: ApiImagesPostModel {
 
 extension InstagramImagesPostModel {
     
-    var type: FineMediaType {
+    var type: FineMediaEnum {
         return .instagramImages
     }
 }

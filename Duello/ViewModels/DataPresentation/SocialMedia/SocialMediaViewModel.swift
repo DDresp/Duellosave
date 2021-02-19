@@ -41,12 +41,20 @@ class SocialMediaViewModel: SocialMediaDisplayer {
         let allSocialMediaNames = user.getAllSocialMediaNames()
         
         for socialMediaName in allSocialMediaNames {
-            if let nameString = socialMediaName.value {
+            if let name = socialMediaName.value {
                 let connectedLink = user.getConnectedLink(for: socialMediaName)
-                let itemViewModel = SocialMediaItemViewModel(socialMediaName: nameString.toStringValue(), link: connectedLink, type: socialMediaName.attributeCase, isDarkMode: isDarkMode)
+                let itemViewModel = SocialMediaItemViewModel(socialMediaName: nameString.toStringValue(), link: connectedLink, type: socialMediaName.type, isDarkMode: isDarkMode)
                 items.append(itemViewModel)
             }
         }
+        
+//        for socialMediaName in allSocialMediaNames {
+//            if let nameString = socialMediaName.value {
+//                let connectedLink = user.getConnectedLink(for: socialMediaName)
+//                let itemViewModel = SocialMediaItemViewModel(socialMediaName: nameString.toStringValue(), link: connectedLink, type: socialMediaName.type, isDarkMode: isDarkMode)
+//                items.append(itemViewModel)
+//            }
+//        }
         
         reloadData.accept(())
     }
@@ -82,7 +90,7 @@ class SocialMediaViewModel: SocialMediaDisplayer {
                 guard let link = link else { return }
                 guard let linkString = link.value?.toStringValue() else { return }
                 
-                if link.attributeCase == .additionalLink {
+                if link.type == .additionalLink {
                     self?.showAdditionalLinkAlert.accept(linkString)
                 } else {
                     self?.selectedLink.accept(linkString)
