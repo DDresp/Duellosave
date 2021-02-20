@@ -12,6 +12,9 @@ protocol InstagramVideoPostModel: ApiVideoPostModel {
 }
 
 extension InstagramVideoPostModel {
+    
+    func getApiUrl() -> String { return apiUrl.value as? String ?? "" }
+    
     var type: FineMediaEnum {
         return .instagramVideo
     }

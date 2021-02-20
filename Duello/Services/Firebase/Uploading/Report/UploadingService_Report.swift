@@ -13,11 +13,11 @@ import RxCocoa
 extension UploadingService {
     
     func createPostReport(postId: String, report: PostReportStatusEnum) -> Observable<Void> {
-        return createReport(id: postId, value: report.toStringValue(), collection: USER_REPORTED_POSTS_COLLECTION)
+        return createReport(id: postId, value: report.rawValue, collection: USER_REPORTED_POSTS_COLLECTION)
     }
     
     func createCategoryReport(categoryId: String, report: CategoryReportStatusEnum) -> Observable<Void> {
-        return createReport(id: categoryId, value: report.toStringValue(), collection: USER_REPORTED_CATEGORIES_COLLECTION)
+        return createReport(id: categoryId, value: report.rawValue, collection: USER_REPORTED_CATEGORIES_COLLECTION)
         
     }
     

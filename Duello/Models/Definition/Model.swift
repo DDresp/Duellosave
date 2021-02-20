@@ -183,5 +183,5 @@ private func decodeValue<T: DatabaseEnum>(of attribute: ModelAttribute, from dic
 }
 //MARK: - Getters
 extension Model {
-    func getId() -> String { return id?.toStringValue() ?? "" }
+    func getId() -> String { return id ?? "" }
 }

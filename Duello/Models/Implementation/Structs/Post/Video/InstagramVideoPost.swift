@@ -37,10 +37,8 @@ struct InstagramVideoPost: InstagramVideoPostModel {
     //MARK: - Networking
     func downloadVideoUrlAndThumbnail() -> Observable<(URL?, URL?)> {
         
-        guard let apiUrlString = apiUrl.value?.toStringValue() else {
-            return Observable.empty()
-        }
-
+        let apiUrlString = getApiUrl()
+        
         return InstagramService.shared.downloadInstagramVideoPost(from: apiUrlString).map({ (rawInstagramVideoPost) -> (URL, URL) in
             return (rawInstagramVideoPost.videoURL, rawInstagramVideoPost.thumbnailUrl)
         })

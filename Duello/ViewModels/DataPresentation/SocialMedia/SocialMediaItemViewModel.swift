@@ -19,12 +19,12 @@ class SocialMediaItemViewModel: SocialMediaItemDisplayer {
     var isDarkMode: Bool
     
     //MARK: - Setup
-    init(socialMediaName: String, link: UserAttribute?, type: UserAttributeType, isDarkMode: Bool) {
-        self.socialMediaName = socialMediaName
+    init(user: UserModel, socialMediaNameAttribute: UserAttribute, isDarkMode: Bool) {
+        self.socialMediaName = user.getSocialMediaName(for: socialMediaNameAttribute) ?? ""
         self.isDarkMode = isDarkMode
+        self.type = socialMediaNameAttribute.type
+        self.link = user.getConnectedLink(for: socialMediaNameAttribute)
         self.hasLink = link?.value != nil
-        self.type = type
-        self.link = link
         self.iconName = getIconName(from: type)
     }
     

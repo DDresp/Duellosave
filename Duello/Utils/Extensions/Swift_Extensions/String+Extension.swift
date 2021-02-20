@@ -65,10 +65,3 @@ extension String {
     
 }
 
-extension String: DatabaseConvertibleType {
-    
-    func toStringValue() -> String {
-        return self
-    }
-    
-}

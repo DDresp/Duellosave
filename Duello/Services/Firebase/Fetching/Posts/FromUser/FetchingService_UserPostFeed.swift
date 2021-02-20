@@ -19,8 +19,8 @@ extension FetchingService {
         return fetchPosts(orderKey: PostAttributeType.creationDate.key, limit: limit, startId: startId, equalityConditions: equalityConstraints).map { (posts) -> [PostModel] in
             var orderedPosts = posts
             orderedPosts.sort(by: { (post1, post2) -> Bool in
-                guard let creationDate1 = Double(post1.creationDate.value?.toStringValue() ?? "0") else { return true }
-                guard let creationDate2 = Double(post2.creationDate.value?.toStringValue() ?? "0") else { return true }
+                let creationDate1 = post1.getCreationDate()
+                let creationDate2 = post2.getCreationDate()
                 return (creationDate1 > creationDate2)
             })
             return orderedPosts
@@ -30,10 +30,10 @@ extension FetchingService {
     func fetchAllUserPosts(for uid: String) -> Observable<([PostModel], Double)> {
         return fetchUserPosts(for: uid, limit: nil, startId: nil).map { (orderedPosts) -> ([PostModel], Double) in
             let totalLikes = orderedPosts.map { (post) -> Double in
-                return Double(post.likes.value?.toStringValue() ?? "0") ?? 0
+                return Double(post.getLikes())
             }.reduce(0, +)
             let totalDislikes = orderedPosts.map { (post) -> Double in
-                return Double(post.dislikes.value?.toStringValue() ?? "0") ?? 0
+                return Double(post.getDislikes())
             }.reduce(0, +)
             let rate: Double
             if totalLikes + totalDislikes == 0 {

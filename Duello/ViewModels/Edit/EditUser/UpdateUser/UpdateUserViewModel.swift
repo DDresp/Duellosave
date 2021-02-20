@@ -28,36 +28,36 @@ class UpdateUserViewModel: UploadUserViewModel {
             case .instagram:
                 item.name.accept(user.getInstagramName())
             case .snapchat:
-                item.name.accept(user.snapchatName.value?.toStringValue())
+                item.name.accept(user.getSnapchatName())
             case .youtube:
-                item.name.accept(user.youtubeName.value?.toStringValue())
-                if let name = user.youtubeLink.value?.toStringValue(), name.count > 0  {
-                    item.link?.accept(user.youtubeLink.value?.toStringValue())
+                item.name.accept(user.getYoutubeName())
+                if user.getYoutubeLink().count > 0  {
+                    item.link?.accept(user.getYoutubeLink())
                 } else {
                     item.link?.accept(item.linkPrefix)
                 }
             case .facebook:
-                item.name.accept(user.facebookName.value?.toStringValue())
-                if let name = user.facebookLink.value?.toStringValue(), name.count > 0 {
-                    item.link?.accept(user.facebookLink.value?.toStringValue())
+                item.name.accept(user.getFacebookName())
+                if user.getFacebookLink().count > 0 {
+                    item.link?.accept(user.getFacebookLink())
                 } else {
                     item.link?.accept(item.linkPrefix)
                 }
             case .twitter:
-                item.name.accept(user.twitterName.value?.toStringValue())
+                item.name.accept(user.getTwitterName())
             case .vimeo:
-                item.name.accept(user.vimeoName.value?.toStringValue())
-                if let name = user.vimeoLink.value?.toStringValue(), name.count > 0 {
-                    item.link?.accept(user.vimeoLink.value?.toStringValue())
+                item.name.accept(user.getVimeoName())
+                if user.getVimeoLink().count > 0 {
+                    item.link?.accept(user.getVimeoLink())
                 } else {
                     item.link?.accept(item.linkPrefix)
                 }
             case .tiktok:
-                item.name.accept(user.tikTokName.value?.toStringValue())
+                item.name.accept(user.getTikTokName())
             case .additionalLink:
-                item.name.accept(user.additionalName.value?.toStringValue())
-                if let name = user.additionalLink.value?.toStringValue(), name.count > 0{
-                    item.link?.accept(user.additionalLink.value?.toStringValue())
+                item.name.accept(user.getAdditionalName())
+                if user.getAdditionalLink().count > 0{
+                    item.link?.accept(user.getAdditionalLink())
                 } else {
                     item.link?.accept(item.linkPrefix)
                 }
@@ -65,9 +65,8 @@ class UpdateUserViewModel: UploadUserViewModel {
             
         }
         
-        if let userImageUrl = user.imageUrl.value?.toStringValue() {
-            uploadUserHeaderViewModel.initialImageUrl = userImageUrl
-        }
+        uploadUserHeaderViewModel.initialImageUrl = user.getImageUrl()
+        
     }
     
 }

@@ -19,6 +19,6 @@ extension LocalSingleImagePostModel {
     }
     
     func getSingleImageUrl() -> URL? {
-        return URL(string: imageUrl.value?.toStringValue() ?? "")
+        return URL(string: imageUrl.value as? String ?? "")
     }
 }

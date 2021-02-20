@@ -17,8 +17,4 @@ enum CategoryReportStatusEnum: String, DatabaseEnum {
     case inappropriate
     case inactive
     
-    func toStringValue() -> String {
-        return self.rawValue
-    }
-    
 }

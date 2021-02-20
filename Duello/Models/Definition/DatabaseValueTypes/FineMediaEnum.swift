@@ -15,8 +15,4 @@ enum FineMediaEnum: String, DatabaseEnum {
     case instagramSingleImage
     case instagramImages
     
-    func toStringValue() -> String {
-        return self.rawValue
-    }
-    
 }

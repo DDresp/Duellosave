@@ -38,24 +38,16 @@ class SocialMediaViewModel: SocialMediaDisplayer {
     private func setAttributes() {
         items = []
         guard let user = user.value else { return }
-        let allSocialMediaNames = user.getAllSocialMediaNames()
+        let allSocialMediaNameAttributes = user.getAllSocialMediaNameAttributes()
         
-        for socialMediaName in allSocialMediaNames {
-            if let name = socialMediaName.value {
-                let connectedLink = user.getConnectedLink(for: socialMediaName)
-                let itemViewModel = SocialMediaItemViewModel(socialMediaName: nameString.toStringValue(), link: connectedLink, type: socialMediaName.type, isDarkMode: isDarkMode)
+        for socialMediaNameAttribute in allSocialMediaNameAttributes {
+        
+            if let _ = socialMediaNameAttribute.value {
+                let itemViewModel = SocialMediaItemViewModel(user: user, socialMediaNameAttribute: socialMediaNameAttribute, isDarkMode: isDarkMode)
                 items.append(itemViewModel)
             }
         }
-        
-//        for socialMediaName in allSocialMediaNames {
-//            if let nameString = socialMediaName.value {
-//                let connectedLink = user.getConnectedLink(for: socialMediaName)
-//                let itemViewModel = SocialMediaItemViewModel(socialMediaName: nameString.toStringValue(), link: connectedLink, type: socialMediaName.type, isDarkMode: isDarkMode)
-//                items.append(itemViewModel)
-//            }
-//        }
-        
+
         reloadData.accept(())
     }
     
@@ -87,8 +79,8 @@ class SocialMediaViewModel: SocialMediaDisplayer {
             guard let link = self?.items[index].link else { return nil}
             return link
             }.subscribe(onNext: { [weak self] (link) in
-                guard let link = link else { return }
-                guard let linkString = link.value?.toStringValue() else { return }
+                guard let link = link, let user = self?.user.value else { return }
+                guard let linkString = user.getLinkName(for: link) else { return }
                 
                 if link.type == .additionalLink {
                     self?.showAdditionalLinkAlert.accept(linkString)

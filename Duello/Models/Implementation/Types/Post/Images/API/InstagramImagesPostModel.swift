@@ -13,6 +13,8 @@ protocol InstagramImagesPostModel: ApiImagesPostModel {
 
 extension InstagramImagesPostModel {
     
+    func getApiUrl() -> String { return apiUrl.value as? String ?? "" }
+    
     var type: FineMediaEnum {
         return .instagramImages
     }

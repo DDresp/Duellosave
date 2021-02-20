@@ -38,7 +38,7 @@ struct User: UserModel {
     
     //MARK: - Getters
     var addedSocialMediaName: Bool {
-        let allSocialMediaNames = getAllSocialMediaNames()
+        let allSocialMediaNames = getAllSocialMediaNameAttributes()
         for socialMediaName in allSocialMediaNames {
             if socialMediaName.value != nil { return true}
         }
@@ -50,7 +50,7 @@ struct User: UserModel {
         return getConnectedLink(for: attribute) == nil ? false : true
     }
     
-    func getAllSocialMediaNames() -> [UserAttribute] {
+    func getAllSocialMediaNameAttributes() -> [UserAttribute] {
         var socialMediaNames = [UserAttribute]()
         guard let attributes = properties.attributes as? [UserAttribute] else { return socialMediaNames }
         
@@ -63,9 +63,6 @@ struct User: UserModel {
         return socialMediaNames
     }
     
-    func getName(for attribute: UserAttribute) -> String {
-        
-    }
     
     func getConnectedLink(for attribute: UserAttribute) -> UserAttribute? {
         guard let connectedLinkType = attribute.type.connectedLinkAttributeCase else { return nil }

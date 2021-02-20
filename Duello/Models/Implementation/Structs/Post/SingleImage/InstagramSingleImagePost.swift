@@ -37,9 +37,8 @@ struct InstagramSingleImagePost: InstagramSingleImagePostModel {
     //MARK: - Networking
     func downloadSingleImageUrl() -> Observable<URL?> {
         
-        guard let apiUrlString = apiUrl.value?.toStringValue() else {
-            return Observable.empty()
-        }
+        let apiUrlString = getApiUrl()
+        
         return InstagramService.shared.downloadInstagramImagesPost(from: apiUrlString).map({ (rawInstagramImagesPost) -> (URL?) in
             if let post = rawInstagramImagesPost as? RawInstagramSingleImagePost {
                 return post.singleImageUrl

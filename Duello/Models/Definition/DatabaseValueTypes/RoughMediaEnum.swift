@@ -11,10 +11,6 @@ enum RoughMediaEnum: String, DatabaseEnum {
     case video
     case image
     case videoAndImage
-    
-    func toStringValue() -> String {
-        return self.rawValue
-    }
-    
+
 }
 

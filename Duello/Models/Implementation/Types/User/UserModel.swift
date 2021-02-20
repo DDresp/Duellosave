@@ -36,7 +36,7 @@ protocol UserModel: Model {
     //MARK: - Getters
     var addedSocialMediaName: Bool { get }
     func hasConnectedLink(for attribute: UserAttribute) -> Bool
-    func getAllSocialMediaNames() -> [UserAttribute]
+    func getAllSocialMediaNameAttributes() -> [UserAttribute]
     func getConnectedLink(for attribute: UserAttribute) -> UserAttribute?
     
 }
@@ -64,5 +64,13 @@ extension UserModel {
     func getSnapchatLink() -> String { return snapchatLink.value as? String ?? "" }
     
     func getImageUrl() -> String { return imageUrl.value as? String ?? "" }
+    
+    func getSocialMediaName(for attribute: UserAttribute) -> String? {
+        return attribute.value as? String
+    }
+    
+    func getLinkName(for attribute: UserAttribute) -> String? {
+        return attribute.value as? String
+    }
     
 }

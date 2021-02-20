@@ -18,8 +18,4 @@ enum PostReportStatusEnum: String, DatabaseEnum {
     case fakeUser
     case wrongCategory
     
-    func toStringValue() -> String {
-        return self.rawValue
-    }
-    
 }
