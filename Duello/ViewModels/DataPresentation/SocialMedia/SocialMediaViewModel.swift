@@ -42,7 +42,7 @@ class SocialMediaViewModel: SocialMediaDisplayer {
         
         for socialMediaNameAttribute in allSocialMediaNameAttributes {
         
-            if let _ = socialMediaNameAttribute.value {
+            if user.getIsAvailable(attribute: socialMediaNameAttribute) {
                 let itemViewModel = SocialMediaItemViewModel(user: user, socialMediaNameAttribute: socialMediaNameAttribute, isDarkMode: isDarkMode)
                 items.append(itemViewModel)
             }
@@ -82,7 +82,7 @@ class SocialMediaViewModel: SocialMediaDisplayer {
                 guard let link = link, let user = self?.user.value else { return }
                 guard let linkString = user.getLinkName(for: link) else { return }
                 
-                if link.type == .additionalLink {
+                if user.getUserAttributeType(for: link) == .additionalLink {
                     self?.showAdditionalLinkAlert.accept(linkString)
                 } else {
                     self?.selectedLink.accept(linkString)

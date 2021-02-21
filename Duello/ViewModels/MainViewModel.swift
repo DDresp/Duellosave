@@ -16,7 +16,7 @@ class MainViewModel {
     
     
     //MARK: - Setup
-    init() {}
+    init() { }
     
 }
 

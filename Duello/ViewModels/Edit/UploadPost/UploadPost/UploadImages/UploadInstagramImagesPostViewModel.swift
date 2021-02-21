@@ -33,7 +33,7 @@ class UploadInstagramImagesPostViewModel: UploadPostViewModel<InstagramImagesPos
     //MARK: - Methods
     private func makePost() {
         post = InstagramImagesPost()
-        post?.apiUrl.value = apiLink
+        post?.setApiUrl(apiLink)
     }
     
     //MARK: - Networking

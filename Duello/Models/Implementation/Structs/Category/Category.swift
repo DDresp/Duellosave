@@ -14,14 +14,14 @@ struct Category: CategoryModel {
     var id: String?
     
     //MARK: - Attributes
-    var imageUrl: CategoryAttribute = CategoryAttribute(attributeCase: .imageUrl, value: nil)
-    var title: CategoryAttribute = CategoryAttribute(attributeCase: .title, value: nil)
-    var description: CategoryAttribute = CategoryAttribute(attributeCase: .description, value: nil)
-    var creationDate: CategoryAttribute = CategoryAttribute(attributeCase: .creationDate, value: nil)
-    var roughMediaType: CategoryAttribute = CategoryAttribute(attributeCase: .mediaType, value: nil)
-    var reportStatus: CategoryAttribute = CategoryAttribute(attributeCase: .reportStatus, value: nil)
-    var numberOfPosts: CategoryAttribute = CategoryAttribute(attributeCase: .numberOfPosts, value: nil)
-    var uid: CategoryAttribute = CategoryAttribute(attributeCase: .uid, value: nil)
-    var isActive: CategoryAttribute = CategoryAttribute(attributeCase: .isActive, value: nil)
+    var imageUrl: CategoryAttribute = CategoryAttribute(attributeType: .imageUrl, value: nil)
+    var title: CategoryAttribute = CategoryAttribute(attributeType: .title, value: nil)
+    var description: CategoryAttribute = CategoryAttribute(attributeType: .description, value: nil)
+    var creationDate: CategoryAttribute = CategoryAttribute(attributeType: .creationDate, value: nil)
+    var roughMediaType: CategoryAttribute = CategoryAttribute(attributeType: .mediaType, value: nil)
+    var reportStatus: CategoryAttribute = CategoryAttribute(attributeType: .reportStatus, value: nil)
+    var numberOfPosts: CategoryAttribute = CategoryAttribute(attributeType: .numberOfPosts, value: nil)
+    var uid: CategoryAttribute = CategoryAttribute(attributeType: .uid, value: nil)
+    var isActive: CategoryAttribute = CategoryAttribute(attributeType: .isActive, value: nil)
     
 }

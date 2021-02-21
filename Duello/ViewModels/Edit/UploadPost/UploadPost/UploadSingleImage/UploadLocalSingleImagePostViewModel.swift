@@ -24,7 +24,7 @@ class UploadLocalSingleImagePostViewModel: UploadPostViewModel<LocalSingleImageP
     //MARK: - Methods
     private func makePost(imageUrl: String) {
         post = LocalSingleImagePost()
-        post?.imageUrl.value = imageUrl
+        post?.setSingleImageUrl(imageUrl)
     }
     
     //MARK: - Networking

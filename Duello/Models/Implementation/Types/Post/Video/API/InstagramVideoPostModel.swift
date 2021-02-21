@@ -15,6 +15,8 @@ extension InstagramVideoPostModel {
     
     func getApiUrl() -> String { return apiUrl.value as? String ?? "" }
     
+    func setApiUrl(_ url: String) { apiUrl.value = url }
+    
     var type: FineMediaEnum {
         return .instagramVideo
     }

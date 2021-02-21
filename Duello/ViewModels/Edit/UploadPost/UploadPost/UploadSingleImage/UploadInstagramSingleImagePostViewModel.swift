@@ -27,7 +27,7 @@ class UploadInstagramSingleImagePostViewModel: UploadPostViewModel<InstagramSing
     //MARK: - Methods
     private func makePost() {
         post = InstagramSingleImagePost()
-        post?.apiUrl.value = apiLink
+        post?.setApiUrl(apiLink)
     }
     
     //MARK: - Networking

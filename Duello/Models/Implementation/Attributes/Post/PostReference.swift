@@ -10,25 +10,25 @@
 class PostReference: ModelReference {
 
     var model: Model
-    let attributeCase: PostReferenceCase
+    let type: PostReferenceType
     
-    init(attributeCase: PostReferenceCase, model: Model) {
+    init(referenceType: PostReferenceType, model: Model) {
         self.model = model
-        self.attributeCase = attributeCase
+        self.type = referenceType
     }
     
     func getModel() -> Model {
         return model
     }
     
-    func getCase() -> ModelReferenceCase {
-        return attributeCase
+    func getType() -> ModelReferenceType {
+        return type
     }
     
 }
 
 //MARK: - Attribute Case
-enum PostReferenceCase: ModelReferenceCase {
+enum PostReferenceType: ModelReferenceType {
     
     case user
     case category

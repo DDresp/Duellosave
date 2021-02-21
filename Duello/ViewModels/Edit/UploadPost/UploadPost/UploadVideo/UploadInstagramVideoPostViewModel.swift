@@ -43,7 +43,7 @@ class UploadInstagramVideoPostViewModel: UploadPostViewModel<InstagramVideoPost>
     //MARK: - Methods
     private func makePost() {
         post = InstagramVideoPost()
-        post?.apiUrl.value = apiLink
+        post?.setApiUrl(apiLink)
     }
     
     //MARK: - Networking

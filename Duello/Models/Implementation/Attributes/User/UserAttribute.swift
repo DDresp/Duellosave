@@ -9,11 +9,11 @@
 //MARK: - Attribute
 class UserAttribute: ModelAttribute {
     
-    var type: UserAttributeType
-    var value: DatabaseConvertibleType?
+    private var type: UserAttributeType
+    private var value: DatabaseConvertibleType?
     
-    init(attributeCase: UserAttributeType, value: DatabaseConvertibleType?) {
-        self.type = attributeCase
+    init(attributeType: UserAttributeType, value: DatabaseConvertibleType?) {
+        self.type = attributeType
         self.value = value
     }
     
@@ -21,7 +21,8 @@ class UserAttribute: ModelAttribute {
         return value
     }
     
-    func setValue(of value: DatabaseConvertibleType) {
+    func setValue(of value: DatabaseConvertibleType?) {
+        guard let value = value else { return }
         self.value = value
     }
     
@@ -81,7 +82,7 @@ enum UserAttributeType: ModelAttributeType {
         }
     }
     
-    var connectedLinkAttributeCase: UserAttributeType? {
+    var connectedLinkAttributeType: UserAttributeType? {
         
         switch self {
         case .youtubeName: return .youtubeLink

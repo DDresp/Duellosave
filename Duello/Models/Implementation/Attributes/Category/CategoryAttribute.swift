@@ -10,11 +10,11 @@
 
 class CategoryAttribute: ModelAttribute {
     
-    var type: CategoryAttributeType
-    var value: DatabaseConvertibleType?
+    private var type: CategoryAttributeType
+    private var value: DatabaseConvertibleType?
     
-    init(attributeCase: CategoryAttributeType, value: DatabaseConvertibleType?) {
-        self.type = attributeCase
+    init(attributeType: CategoryAttributeType, value: DatabaseConvertibleType?) {
+        self.type = attributeType
         self.value = value
     }
     
@@ -26,7 +26,8 @@ class CategoryAttribute: ModelAttribute {
         return value
     }
     
-    func setValue(of value: DatabaseConvertibleType) {
+    func setValue(of value: DatabaseConvertibleType?) {
+        guard let value = value else { return }
         self.value = value
     }
     

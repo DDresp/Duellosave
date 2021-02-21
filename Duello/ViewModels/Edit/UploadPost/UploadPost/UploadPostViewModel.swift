@@ -61,19 +61,19 @@ class UploadPostViewModel<T: PostModel>: UploadPostDisplayer {
     //MARK: - Methods
     func initialisePost() {
         guard let uploadPost = post else { return }
-        uploadPost.description.value = descriptionDisplayer.description.value
-        uploadPost.title.value = titleDisplayer.title.value
-        uploadPost.creationDate.value = Date().timeIntervalSince1970
+        uploadPost.setDescription(descriptionDisplayer.description.value)
+        uploadPost.setTitle(titleDisplayer.title.value)
+        uploadPost.setCreationDate(Date().timeIntervalSince1970)
         let likes = Int(arc4random_uniform(12) + 1)
         let dislikes = Int(arc4random_uniform(12) + 1)
-        uploadPost.likes.value = likes
-        uploadPost.dislikes.value = dislikes
+        uploadPost.setLikes(likes)
+        uploadPost.setDislikes(dislikes)
         let rate: Double = Double(likes)/Double(likes + dislikes)
-        uploadPost.rate.value = rate
-        uploadPost.mediaRatio.value = mediaRatio ?? 1
-        uploadPost.uid.value = Auth.auth().currentUser?.uid
-        uploadPost.cid.value = category.getId()
-        uploadPost.category.model = category
+        uploadPost.setRate(rate)
+        uploadPost.setMediaRatio(mediaRatio)
+        uploadPost.setUID(Auth.auth().currentUser?.uid)
+        uploadPost.setCID(category.getId())
+        uploadPost.setCategory(category)
         
     }
     

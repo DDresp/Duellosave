@@ -39,8 +39,8 @@ class UploadLocalVideoPostViewModel: UploadPostViewModel<LocalVideoPost>, Upload
     //MARK: - Methods
     private func makePost(thumbnailUrl: String, videoUrl: String) {
         post = LocalVideoPost()
-        post?.thumbNailUrl.value = thumbnailUrl
-        post?.videoUrl.value = videoUrl
+        post?.setThumbnailUrl(thumbnailUrl)
+        post?.setVideoUrl(videoUrl)
     }
     
     //MARK: - Networking

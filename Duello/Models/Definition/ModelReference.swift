@@ -9,15 +9,15 @@
 //Database Attribute (map) that stores another Model
 protocol ModelReference {
     func getModel() -> Model
-    func getCase() -> ModelReferenceCase
+    func getType() -> ModelReferenceType
 }
 
 extension ModelReference {
     func getKey() -> String {
-        return getCase().key
+        return getType().key
     }
 }
 
-protocol ModelReferenceCase {
+protocol ModelReferenceType {
     var key: String { get }
 }

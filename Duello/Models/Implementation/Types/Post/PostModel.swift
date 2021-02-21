@@ -38,6 +38,7 @@ extension PostModel {
     
     //MARK: - Getters
     func getId() -> String { return id ?? "" }
+    
     func getUID() -> String { return uid.value as? String ?? "" }
     func getCID() -> String { return cid.value as? String ?? "" }
     func getTitle() -> String { return title.value as? String ?? "" }
@@ -56,4 +57,22 @@ extension PostModel {
     func getUser() -> UserModel { return user.getModel() as? User ?? User() }
     func getCategory() -> CategoryModel { return category.getModel() as? Category ?? Category() }
     
+    //MARK: - Setters
+    func setUID(_ uid: String?) { self.uid.value = uid }
+    func setCID(_ cid: String?) { self.cid.value = cid }
+    func setTitle(_ title: String?) { self.title.value = title }
+    func setDescription(_ description: String?) { self.description.value = description }
+    func setCreationDate(_ date: Double?) { self.creationDate.value = date }
+    func setLikes(_ likes: Int?) { self.likes.value = likes }
+    func setDislikes(_ dislikes: Int?) { self.dislikes.value = dislikes }
+    func setRate(_ rate: Double?) { self.rate.value = rate }
+    func setMediaRatio(_ ratio: Double?) { self.mediaRatio.value = ratio ?? 1 }
+    
+    func setIsVerified(_ isVerified: Bool?) { self.isVerified.value = isVerified }
+    func setIsBlocked(_ isBlocked: Bool?) { self.isBlocked.value = isBlocked }
+    func setIsDeactivated(_ isDeactivated: Bool?) { self.isDeactivated.value = isDeactivated }
+    
+    func setReportStatus(_ status: PostReportStatusEnum?) { self.reportStatus.value = status }
+    func setUser(_ user: UserModel) { self.user.model = user }
+    func setCategory(_ category: CategoryModel) { self.category.model = category }
 }

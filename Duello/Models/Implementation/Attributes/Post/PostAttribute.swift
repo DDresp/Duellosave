@@ -13,8 +13,8 @@ class PostAttribute: ModelAttribute {
     var type: PostAttributeType
     var value: DatabaseConvertibleType?
     
-    init(attributeCase: PostAttributeType, value: DatabaseConvertibleType?) {
-        self.type = attributeCase
+    init(attributeType: PostAttributeType, value: DatabaseConvertibleType?) {
+        self.type = attributeType
         self.value = value
     }
     
@@ -26,7 +26,8 @@ class PostAttribute: ModelAttribute {
         return value
     }
     
-    func setValue(of value: DatabaseConvertibleType) {
+    func setValue(of value: DatabaseConvertibleType?) {
+        guard let value = value else { return }
         self.value = value
     }
     

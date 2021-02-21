@@ -9,7 +9,7 @@
 protocol ModelAttribute {
     
     func getValue() -> DatabaseConvertibleType?
-    func setValue(of value: DatabaseConvertibleType) -> ()
+    func setValue(of value: DatabaseConvertibleType?) -> ()
     func getType() -> ModelAttributeType
     func getEntryType() -> EntryType
 }

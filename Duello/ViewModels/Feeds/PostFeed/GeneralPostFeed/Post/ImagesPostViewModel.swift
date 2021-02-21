@@ -29,7 +29,7 @@ class ImagesPostViewModel: PostViewModel, ImagesPostDisplayer {
         
         switch post {
         case let post as LocalImagesPostModel:
-            self.postImageUrls.accept(post.getImageURLS())
+            self.postImageUrls.accept(post.getImageUrls())
         case let post as ApiImagesPostModel:
             self.apiDownloadingTask = post.downloadImageUrls()
         default:

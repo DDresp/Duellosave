@@ -22,14 +22,15 @@ class SocialMediaItemViewModel: SocialMediaItemDisplayer {
     init(user: UserModel, socialMediaNameAttribute: UserAttribute, isDarkMode: Bool) {
         self.socialMediaName = user.getSocialMediaName(for: socialMediaNameAttribute) ?? ""
         self.isDarkMode = isDarkMode
-        self.type = socialMediaNameAttribute.type
         self.link = user.getConnectedLink(for: socialMediaNameAttribute)
-        self.hasLink = link?.value != nil
-        self.iconName = getIconName(from: type)
+        self.hasLink = user.hasLink(for: socialMediaNameAttribute)
+        self.type = user.getUserAttributeType(for: socialMediaNameAttribute)
+        self.iconName = getIconName(from: type) 
     }
     
     //MARK: - Getters
     private func getIconName(from type: UserAttributeType) -> String {
+       
         switch type {
         case .facebookName: return "facebook_hex_icon"
         case .additionalName: return "flckr_hex_icon"

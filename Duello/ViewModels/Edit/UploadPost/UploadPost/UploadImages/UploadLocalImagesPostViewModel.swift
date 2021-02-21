@@ -27,29 +27,18 @@ class UploadLocalImagesPostViewModel: UploadPostViewModel<LocalImagesPost>, Uplo
     
     //MARK: - Methods
     private func makePost(imageUrls: [String]) {
-
+        
         post = LocalImagesPost()
-//        guard let imagesModel = post?.imageUrls.model as? LocalImages else { return LocalImagesPost() }
-//        for (index, imageUrl) in imageUrls.enumerated() {
-//            switch index {
-//            case 0: imagesModel.imageUrl1.value = imageUrl
-//            case 1: imagesModel.imageUrl2.value = imageUrl
-//            case 2: imagesModel.imageUrl3.value = imageUrl
-//            case 3: imagesModel.imageUrl4.value = imageUrl
-//            case 4: imagesModel.imageUrl5.value = imageUrl
-//            case 5: imagesModel.imageUrl6.value = imageUrl
-//            default:
-//                ()
-//            }
-//        }
         
         for imageUrl in imageUrls {
-            var urls = (post?.imageUrls.value as! [String])
-            urls.append(imageUrl)
-            post?.imageUrls.value = urls
+            guard let urls = post?.getImageUrls() else { return }
+            var urlStrings = urls.compactMap({ (url) -> String? in
+                return url.absoluteString
+            })
+            urlStrings.append(imageUrl)
+            post?.setImageUrls(urlStrings)
         }
         
-//        return post ?? LocalImagesPost()
     }
     
     //MARK: - Networking

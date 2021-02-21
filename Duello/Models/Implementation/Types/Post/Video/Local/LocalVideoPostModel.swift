@@ -22,6 +22,9 @@ extension LocalVideoPostModel {
         return thumbNailUrl.value as? String ?? ""
     }
     
+    func setVideoUrl(_ url: String) { videoUrl.value = url }
+    func setThumbnailUrl(_ url: String) { thumbNailUrl.value = url }
+    
     var type: FineMediaEnum {
         return .localVideo
     }

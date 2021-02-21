@@ -147,43 +147,48 @@ class UploadUserViewModel: EditUserDisplayer {
     //MARK: - Methods
     private func makeUser(with imageUrl: String?) -> UserModel {
         let user = User()
+        
         for item in itemViewModels {
             switch item.itemType {
             case .username:
-                user.userName.value = item.name.value ?? "Default User Name"
+                user.setUserName(item.name.value ?? "Default User Name")
             case .instagram:
-                user.instagramName.value = getName(name: item.name.value?.trimmingCharacters(in: .whitespacesAndNewlines))
-                if let name = user.instagramName.value {
-                    user.instagramLink.value = "https://www.instagram.com/\(name)/"
+                let instaName = getName(name: item.name.value?.trimmingCharacters(in: .whitespacesAndNewlines))
+                user.setInstagramName(instaName)
+                if let name = instaName {
+                    user.setInstagramLink("https://www.instagram.com/\(name)/")
                 }
             case .snapchat:
-                user.snapchatName.value = getName(name: item.name.value?.trimmingCharacters(in: .whitespacesAndNewlines))
-                if let name = user.snapchatName.value {
-                    user.snapchatLink.value = "https://www.snapchat.com/add/\(name)/"
+                let snapName = getName(name: item.name.value?.trimmingCharacters(in: .whitespacesAndNewlines))
+                user.setSnapchatName(snapName)
+                if let name = snapName {
+                    user.setSnapchatLink("https://www.snapchat.com/add/\(name)/")
                 }
             case .youtube:
-                user.youtubeName.value = getName(name: item.name.value)
-                user.youtubeLink.value = getLink(link: item.link?.value, linkPrefix: item.linkPrefix)
+                user.setYoutubeName(getName(name: item.name.value))
+                user.setYoutubeLink(getLink(link: item.link?.value, linkPrefix: item.linkPrefix))
             case .facebook:
-                user.facebookName.value = getName(name: item.name.value)
-                user.facebookLink.value = getLink(link: item.link?.value, linkPrefix: item.linkPrefix)
+                user.setFacebookName(getName(name: item.name.value))
+                user.setFacebookLink(getLink(link: item.link?.value, linkPrefix: item.linkPrefix))
             case .twitter:
-                user.twitterName.value = getName(name: item.name.value?.trimmingCharacters(in: .whitespacesAndNewlines))
-                if let name = user.twitterName.value {
-                    user.twitterLink.value = "https://twitter.com/\(name)/"
+                let twiName = getName(name: item.name.value?.trimmingCharacters(in: .whitespacesAndNewlines))
+                user.setTwitterName(twiName)
+                if let name = twiName {
+                    user.setTwitterLink("https://twitter.com/\(name)/")
                 }
             case .vimeo:
-                user.vimeoName.value = getName(name: item.name.value)
-                user.vimeoLink.value = getLink(link: item.link?.value, linkPrefix: item.linkPrefix)
-            case .tiktok: user.tikTokName.value = getName(name: item.name.value)
+                user.setVimeoName(getName(name: item.name.value))
+                user.setVimeoLink(getLink(link: item.link?.value, linkPrefix: item.linkPrefix))
+            case .tiktok:
+                user.setTikTokName(getName(name: item.name.value))
             case .additionalLink:
-                user.additionalName.value = getName(name: item.name.value)
-                user.additionalLink.value = getLink(link: item.link?.value, linkPrefix: item.linkPrefix)
+                user.setAdditionalName(getName(name: item.name.value))
+                user.setAdditionalLink(getLink(link: item.link?.value, linkPrefix: item.linkPrefix))
             }
         }
-        if let imageUrl = imageUrl {
-            user.imageUrl.value = imageUrl
-        }
+        
+        user.setImageUrl(imageUrl)
+        
         return user
     }
     
@@ -202,7 +207,7 @@ class UploadUserViewModel: EditUserDisplayer {
     
     private func uploadUserWithNewImage(for user: UserModel,_ image: UIImage) {
         StoringService.shared.storeProfileImage(image: image).flatMapLatest { (imageUrl) -> Observable<UserModel?> in
-            user.imageUrl.value = imageUrl
+            user.setImageUrl(imageUrl)
             return UploadingService.shared.saveUser(userProfile: user)
             }.subscribe(onNext: { [weak self] (user) in
                 self?.isLoading.accept(false)
