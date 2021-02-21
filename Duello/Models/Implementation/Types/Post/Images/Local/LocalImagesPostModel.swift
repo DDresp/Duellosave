@@ -20,7 +20,7 @@ extension LocalImagesPostModel {
     }
     
     func getImageUrls() -> [URL]? {
-        guard let imageUrlStrings = imageUrls.value as? [String] else { return nil }
+        guard let imageUrlStrings = imageUrls.getValue() as? [String] else { return nil }
         let imageUrls = imageUrlStrings.compactMap { (imageUrlString) -> URL? in
             return URL(string: imageUrlString)
         }
@@ -28,6 +28,6 @@ extension LocalImagesPostModel {
         return imageUrls
     }
     
-    func setImageUrls(_ urls: [String]) { imageUrls.value = urls }
+    func setImageUrls(_ urls: [String]) { imageUrls.setValue(of: urls) }
     
 }

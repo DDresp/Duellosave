@@ -15,15 +15,15 @@ protocol LocalVideoPostModel: VideoPostModel {
 extension LocalVideoPostModel {
     
     func getVideoUrlString() -> String {
-        return videoUrl.value as? String ?? ""
+        return videoUrl.getValue() as? String ?? ""
     }
     
     func getThumbnailUrlString() -> String {
-        return thumbNailUrl.value as? String ?? ""
+        return thumbNailUrl.getValue() as? String ?? ""
     }
     
-    func setVideoUrl(_ url: String) { videoUrl.value = url }
-    func setThumbnailUrl(_ url: String) { thumbNailUrl.value = url }
+    func setVideoUrl(_ url: String) { videoUrl.setValue(of: url) }
+    func setThumbnailUrl(_ url: String) { thumbNailUrl.setValue(of: url) }
     
     var type: FineMediaEnum {
         return .localVideo

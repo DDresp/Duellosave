@@ -50,14 +50,14 @@ extension CategoryModel {
     }
     
     //MARK: - Setters
-    func setImageUrl(_ url: String) { self.imageUrl.setValue(of: url) }
-    func setTitle(_ title: String) { self.title.setValue(of: title) }
-    func setDescription(_ description: String) { self.description.setValue(of: description)}
-    func setCreationDate(_ date: Double) { self.creationDate.setValue(of: date) }
-    func setMediaType(_ type: RoughMediaEnum) { self.roughMediaType.setValue(of: type) }
-    func setReportStatus(_ status: CategoryReportStatusEnum) { self.reportStatus.setValue(of: status) }
-    func setNumberOfPosts(_ number: Int) { self.numberOfPosts.setValue(of: number) }
-    func setUID(_ uid: String) { self.uid.setValue(of: uid) }
-    func setIsActive(_ isActive: Bool) { self.isActive.setValue(of: isActive) }
+    func setImageUrl(_ url: String?) { self.imageUrl.setValue(of: url) }
+    func setTitle(_ title: String?) { self.title.setValue(of: title) }
+    func setDescription(_ description: String?) { self.description.setValue(of: description)}
+    func setCreationDate(_ date: Double?) { self.creationDate.setValue(of: date) }
+    func setMediaType(_ type: RoughMediaEnum?) { self.roughMediaType.setValue(of: type) }
+    func setReportStatus(_ status: CategoryReportStatusEnum?) { self.reportStatus.setValue(of: status ?? CategoryReportStatusEnum.noReport) }
+    func setNumberOfPosts(_ number: Int?) { self.numberOfPosts.setValue(of: number ?? 0) }
+    func setUID(_ uid: String?) { self.uid.setValue(of: uid) }
+    func setIsActive(_ isActive: Bool?) { self.isActive.setValue(of: isActive) }
     
 }

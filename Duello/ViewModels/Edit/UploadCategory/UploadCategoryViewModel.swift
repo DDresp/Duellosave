@@ -68,14 +68,11 @@ class UploadCategoryViewModel: UploadCategoryDisplayer {
     private func makeCategory(imageUrl: String) -> CategoryModel {
         let category = Category()
         category.setImageUrl(imageUrl)
-        category.setDescription(descriptionDisplayer.description.value ?? "")
-        category.setTitle(titleDisplayer.title.value ?? "")
+        category.setDescription(descriptionDisplayer.description.value)
+        category.setTitle(titleDisplayer.title.value)
         category.setCreationDate(Date().timeIntervalSince1970)
-        category.setMediaType(roughMediaSelectorDisplayer.mediaType.value ?? RoughMediaEnum.image)
-        category.setReportStatus(CategoryReportStatusEnum.noReport)
-        category.setNumberOfPosts(0)
-        category.setUID(Auth.auth().currentUser?.uid ?? "")
-        category.setIsActive(false)
+        category.setMediaType(roughMediaSelectorDisplayer.mediaType.value)
+        category.setUID(Auth.auth().currentUser?.uid)
         return category
     }
     

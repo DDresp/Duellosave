@@ -10,8 +10,8 @@
 
 class PostAttribute: ModelAttribute {
     
-    var type: PostAttributeType
-    var value: DatabaseConvertibleType?
+    private var type: PostAttributeType
+    private var value: DatabaseConvertibleType?
     
     init(attributeType: PostAttributeType, value: DatabaseConvertibleType?) {
         self.type = attributeType

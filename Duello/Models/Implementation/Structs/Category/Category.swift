@@ -19,9 +19,9 @@ struct Category: CategoryModel {
     var description: CategoryAttribute = CategoryAttribute(attributeType: .description, value: nil)
     var creationDate: CategoryAttribute = CategoryAttribute(attributeType: .creationDate, value: nil)
     var roughMediaType: CategoryAttribute = CategoryAttribute(attributeType: .mediaType, value: nil)
-    var reportStatus: CategoryAttribute = CategoryAttribute(attributeType: .reportStatus, value: nil)
-    var numberOfPosts: CategoryAttribute = CategoryAttribute(attributeType: .numberOfPosts, value: nil)
+    var reportStatus: CategoryAttribute = CategoryAttribute(attributeType: .reportStatus, value: CategoryReportStatusEnum.noReport)
+    var numberOfPosts: CategoryAttribute = CategoryAttribute(attributeType: .numberOfPosts, value: 0)
     var uid: CategoryAttribute = CategoryAttribute(attributeType: .uid, value: nil)
-    var isActive: CategoryAttribute = CategoryAttribute(attributeType: .isActive, value: nil)
+    var isActive: CategoryAttribute = CategoryAttribute(attributeType: .isActive, value: false)
     
 }

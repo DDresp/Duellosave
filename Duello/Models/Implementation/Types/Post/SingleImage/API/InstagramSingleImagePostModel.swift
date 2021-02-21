@@ -12,9 +12,9 @@ protocol InstagramSingleImagePostModel: ApiSingleImagePostModel {
 
 extension InstagramSingleImagePostModel {
     
-    func getApiUrl() -> String { return apiUrl.value as? String ?? "" }
+    func getApiUrl() -> String { return apiUrl.getValue() as? String ?? "" }
     
-    func setApiUrl(_ url: String) { apiUrl.value = url }
+    func setApiUrl(_ url: String) { apiUrl.setValue(of: url) }
     
     var type: FineMediaEnum {
         return .instagramSingleImage
