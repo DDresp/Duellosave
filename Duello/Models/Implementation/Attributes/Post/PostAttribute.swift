@@ -62,8 +62,10 @@ enum PostAttributeType: ModelAttributeType {
             return .String
         case .dislikes, .likes:
             return .Int
-        case .rate, .creationDate, .mediaRatio:
+        case .rate, .mediaRatio:
             return .Double
+        case .creationDate:
+            return .Timestamp
         case .type:
             return .FineMediaType
         case .isDeactivated, .isVerified, .isBlocked:

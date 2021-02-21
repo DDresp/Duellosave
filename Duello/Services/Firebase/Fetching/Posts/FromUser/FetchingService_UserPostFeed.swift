@@ -16,12 +16,14 @@ extension FetchingService {
         var equalityConstraints = [String: Any]()
         equalityConstraints[PostAttributeType.uid.key] = uid
         
+        
+        
         return fetchPosts(orderKey: PostAttributeType.creationDate.key, limit: limit, startId: startId, equalityConditions: equalityConstraints).map { (posts) -> [PostModel] in
             var orderedPosts = posts
             orderedPosts.sort(by: { (post1, post2) -> Bool in
                 let creationDate1 = post1.getCreationDate()
                 let creationDate2 = post2.getCreationDate()
-                return (creationDate1 > creationDate2)
+                return (creationDate1.dateValue() > creationDate2.dateValue())
             })
             return orderedPosts
         }

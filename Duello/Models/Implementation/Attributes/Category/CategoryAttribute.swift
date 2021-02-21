@@ -51,7 +51,7 @@ enum CategoryAttributeType: ModelAttributeType {
         case .title, .description, .imageUrl, .uid:
             return .String
         case .creationDate:
-            return .Double
+            return .Timestamp
         case .numberOfPosts:
             return .Int
         case .mediaType:

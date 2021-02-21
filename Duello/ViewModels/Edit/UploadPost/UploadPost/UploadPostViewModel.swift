@@ -63,7 +63,7 @@ class UploadPostViewModel<T: PostModel>: UploadPostDisplayer {
         guard let uploadPost = post else { return }
         uploadPost.setDescription(descriptionDisplayer.description.value)
         uploadPost.setTitle(titleDisplayer.title.value)
-        uploadPost.setCreationDate(Date().timeIntervalSince1970)
+        uploadPost.setCreationDate(Timestamp.init(date: Date()))
         let likes = Int(arc4random_uniform(12) + 1)
         let dislikes = Int(arc4random_uniform(12) + 1)
         uploadPost.setLikes(likes)

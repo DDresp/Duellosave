@@ -6,6 +6,8 @@
 //  Copyright © 2020 Darius Dresp. All rights reserved.
 //
 
+import Firebase
+
 protocol CategoryModel: Model {
     
     //MARK: - Attributes
@@ -27,7 +29,7 @@ extension CategoryModel {
     func getImageUrl() -> String? { return imageUrl.getValue() as? String ?? "" }
     func getTitle() -> String { return title.getValue() as? String ?? "" }
     func getDescription() -> String { return description.getValue() as? String ?? "" }
-    func getCreationDate() -> Double { return creationDate.getValue() as? Double ?? 0 }
+    func getCreationDate() -> Timestamp { return creationDate.getValue() as? Timestamp ?? Timestamp(date: Date()) }
     func getReportStatus() -> CategoryReportStatusEnum { return reportStatus.getValue() as? CategoryReportStatusEnum ?? CategoryReportStatusEnum.noReport }
     func getNumberOfPosts() -> Int { return numberOfPosts.getValue() as? Int ?? 0 }
     func getUID() -> String { return uid.getValue() as? String ?? "" }
@@ -53,7 +55,7 @@ extension CategoryModel {
     func setImageUrl(_ url: String?) { self.imageUrl.setValue(of: url) }
     func setTitle(_ title: String?) { self.title.setValue(of: title) }
     func setDescription(_ description: String?) { self.description.setValue(of: description)}
-    func setCreationDate(_ date: Double?) { self.creationDate.setValue(of: date) }
+    func setCreationDate(_ date: Timestamp?) { self.creationDate.setValue(of: date ?? Timestamp.init(date: Date())) }
     func setMediaType(_ type: RoughMediaEnum?) { self.roughMediaType.setValue(of: type) }
     func setReportStatus(_ status: CategoryReportStatusEnum?) { self.reportStatus.setValue(of: status ?? CategoryReportStatusEnum.noReport) }
     func setNumberOfPosts(_ number: Int?) { self.numberOfPosts.setValue(of: number ?? 0) }

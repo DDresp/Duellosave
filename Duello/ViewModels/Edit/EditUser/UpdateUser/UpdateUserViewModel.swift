@@ -14,6 +14,7 @@ class UpdateUserViewModel: UploadUserViewModel {
     //MARK: - Setup
     init(user: UserModel) {
         super.init()
+        isUpdating = true
         cancelTapped = nil //because embedded in NavigationController
         configureViewModels(with: user)
     }

@@ -6,6 +6,8 @@
 //  Copyright © 2020 Darius Dresp. All rights reserved.
 //
 
+import Firebase
+
 //MARK: - Attribute
 class UserAttribute: ModelAttribute {
     
@@ -33,6 +35,8 @@ class UserAttribute: ModelAttribute {
 
 //MARK: - Attribute Case
 enum UserAttributeType: ModelAttributeType {
+    
+    case creationDate
     
     case userName
     
@@ -97,13 +101,21 @@ enum UserAttributeType: ModelAttributeType {
     }
     
     var entryType: EntryType {
-        return .String
+        
+        switch self {
+        case .creationDate:
+            return .Timestamp
+        default:
+            return .String
+        }
+        
     }
     
     var key: String {
         
         switch self {
-            
+        
+        case .creationDate: return "creationDate"
         case .userName: return "username"
         case .instagramName: return "instagramName"
         case .snapchatName: return "snapchatName"

@@ -11,7 +11,7 @@ import Firebase
 
 extension UploadingService {
     
-    func saveUser(userProfile: UserModel) -> Observable<UserModel?> {
+    func saveUser(userProfile: UserModel, shouldUpdate: Bool) -> Observable<UserModel?> {
         guard hasInternetConnection() else { return Observable.error(UploadingError.networkError)}
         guard let uid = Auth.auth().currentUser?.uid else { return Observable.error(UploadingError.userNotLoggedIn)}
         
@@ -21,7 +21,7 @@ extension UploadingService {
                 return self.updatePost(post: post)
             }.toArray()
         }
-        let updatingUser = saveDatabaseModel(databaseModel: userProfile, reference: USERS_REFERENCE, id: uid)
+        let updatingUser = saveDatabaseModel(databaseModel: userProfile, reference: USERS_REFERENCE, id: uid, shouldUpdate: shouldUpdate)
         
         return Observable.zip(updatingsPosts, updatingUser).map { (posts, model) -> UserModel? in
             return model as? UserModel

@@ -6,7 +6,7 @@
 //  Copyright © 2020 Darius Dresp. All rights reserved.
 //
 //
-
+import Firebase
 
 protocol PostModel: Model {
     
@@ -43,7 +43,7 @@ extension PostModel {
     func getCID() -> String { return cid.getValue() as? String ?? "" }
     func getTitle() -> String { return title.getValue() as? String ?? "" }
     func getDescription() -> String { return description.getValue() as? String ?? "" }
-    func getCreationDate() -> Double { return creationDate.getValue() as? Double ?? 0 }
+    func getCreationDate() -> Timestamp { return creationDate.getValue() as? Timestamp ?? Timestamp.init(date: Date()) }
     func getLikes() -> Int { return likes.getValue() as? Int ?? 0 }
     func getDislikes() -> Int { return dislikes.getValue() as? Int ?? 0 }
     func getRate() -> Double { return rate.getValue() as? Double ?? 0 }
@@ -62,7 +62,7 @@ extension PostModel {
     func setCID(_ cid: String?) { self.cid.setValue(of: cid) }
     func setTitle(_ title: String?) { self.title.setValue(of: title) }
     func setDescription(_ description: String?) { self.description.setValue(of: description) }
-    func setCreationDate(_ date: Double?) { self.creationDate.setValue(of: date) }
+    func setCreationDate(_ date: Timestamp?) { self.creationDate.setValue(of: date ?? Timestamp.init(date: Date())) }
     func setLikes(_ likes: Int?) { self.likes.setValue(of: likes) }
     func setDislikes(_ dislikes: Int?) { self.dislikes.setValue(of: dislikes) }
     func setRate(_ rate: Double?) { self.rate.setValue(of: rate) }

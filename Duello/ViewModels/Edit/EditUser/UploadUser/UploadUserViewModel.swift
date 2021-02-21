@@ -37,6 +37,7 @@ class UploadUserViewModel: EditUserDisplayer {
     
     //MARK: - Variables
     var progressHudMessage: String = "loading"
+    var isUpdating = false
     
     //MARK: - Bindables
     var alert: BehaviorRelay<Alert?> = BehaviorRelay<Alert?>(value: nil)
@@ -148,6 +149,10 @@ class UploadUserViewModel: EditUserDisplayer {
     private func makeUser(with imageUrl: String?) -> UserModel {
         let user = User()
         
+        if !isUpdating {
+            user.setCreationDate(Timestamp.init(date: Date()))
+        }
+        
         for item in itemViewModels {
             switch item.itemType {
             case .username:
@@ -206,9 +211,9 @@ class UploadUserViewModel: EditUserDisplayer {
     }
     
     private func uploadUserWithNewImage(for user: UserModel,_ image: UIImage) {
-        StoringService.shared.storeProfileImage(image: image).flatMapLatest { (imageUrl) -> Observable<UserModel?> in
+        StoringService.shared.storeProfileImage(image: image).flatMapLatest { [weak self] (imageUrl) -> Observable<UserModel?> in
             user.setImageUrl(imageUrl)
-            return UploadingService.shared.saveUser(userProfile: user)
+            return UploadingService.shared.saveUser(userProfile: user, shouldUpdate: self?.isUpdating ?? false)
             }.subscribe(onNext: { [weak self] (user) in
                 self?.isLoading.accept(false)
                 self?.coordinator?.didSetUser.accept(user)
@@ -221,7 +226,7 @@ class UploadUserViewModel: EditUserDisplayer {
     }
     
     private func uploadUserWithoutNewImage(for user: UserModel) {
-        UploadingService.shared.saveUser(userProfile: user).subscribe(onNext: { [weak self] (user) in
+        UploadingService.shared.saveUser(userProfile: user, shouldUpdate: isUpdating).subscribe(onNext: { [weak self] (user) in
             self?.isLoading.accept(false)
             self?.coordinator?.didSetUser.accept(user)
             }, onError: { [weak self] (error) in

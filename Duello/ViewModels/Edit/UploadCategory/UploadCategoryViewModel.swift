@@ -70,7 +70,7 @@ class UploadCategoryViewModel: UploadCategoryDisplayer {
         category.setImageUrl(imageUrl)
         category.setDescription(descriptionDisplayer.description.value)
         category.setTitle(titleDisplayer.title.value)
-        category.setCreationDate(Date().timeIntervalSince1970)
+        category.setCreationDate(Timestamp.init(date: Date()))
         category.setMediaType(roughMediaSelectorDisplayer.mediaType.value)
         category.setUID(Auth.auth().currentUser?.uid)
         return category

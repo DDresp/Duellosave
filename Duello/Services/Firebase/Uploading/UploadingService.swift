@@ -16,7 +16,17 @@ class UploadingService: NetworkService {
     
     private init() {}
     
-    func saveDatabaseModel(databaseModel: Model, reference: CollectionReference, id: String) -> Observable<Model?> {
+    func saveDatabaseModel(databaseModel: Model, reference: CollectionReference, id: String, shouldUpdate: Bool = false) -> Observable<Model?> {
+        
+        if shouldUpdate {
+            return updateDatabaseModel(databaseModel: databaseModel, reference: reference, id: id)
+        } else {
+            return setDatabaseModel(databaseModel: databaseModel, reference: reference, id: id)
+        }
+        
+    }
+    
+    private func setDatabaseModel(databaseModel: Model, reference: CollectionReference, id: String) -> Observable<Model?> {
         return Observable.create({(observer) -> Disposable in
             
             let docData = databaseModel.encode()
@@ -36,6 +46,28 @@ class UploadingService: NetworkService {
             
         })
     }
+    
+    private func updateDatabaseModel(databaseModel: Model, reference: CollectionReference, id: String) -> Observable<Model?> {
+        return Observable.create({(observer) -> Disposable in
+            
+            let docData = databaseModel.encode()
+            
+            reference.document(id).updateData(docData, completion: { (error) in
+                if let error = error {
+                    print(error, error.localizedDescription)
+                    observer.onError(UploadingError(error: error))
+                    return
+                }
+                
+                observer.onNext(databaseModel)
+                observer.onCompleted()
+                return
+            })
+            return Disposables.create()
+            
+        })
+    }
+    
     
     func saveDictionary(dic: [String: Any], reference: CollectionReference, id: String) -> Observable<Void> {
         return Observable.create { (observer) -> Disposable in

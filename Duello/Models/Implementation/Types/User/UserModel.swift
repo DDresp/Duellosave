@@ -5,6 +5,7 @@
 //  Created by Darius Dresp on 3/4/20.
 //  Copyright © 2020 Darius Dresp. All rights reserved.
 //
+import Firebase
 
 protocol UserModel: Model {
     
@@ -12,6 +13,8 @@ protocol UserModel: Model {
     var score: Double? { get set }
     
     //MARK: - Attributes
+    var creationDate: UserAttribute { get set }
+    
     var userName: UserAttribute { get set }
     
     var instagramName: UserAttribute { get set }
@@ -44,6 +47,8 @@ protocol UserModel: Model {
 extension UserModel {
     
     //MARK: - Getters
+    func getCreationDate() -> Timestamp? { return creationDate.getValue() as? Timestamp }
+    
     func getUserName() -> String { return userName.getValue() as? String ?? "" }
     
     func getInstagramName() -> String { return instagramName.getValue() as? String ?? "" }
@@ -86,6 +91,8 @@ extension UserModel {
     }
     
     //MARK: - Setters
+    func setCreationDate(_ date: Timestamp?) { return self.creationDate.setValue(of: date ?? Timestamp.init(date: Date())) }
+    
     func setUserName(_ username: String) { self.userName.setValue(of: username)}
     
     func setInstagramName(_ name: String?) { self.instagramName.setValue(of: name) }

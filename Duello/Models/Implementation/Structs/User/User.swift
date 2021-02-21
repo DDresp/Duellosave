@@ -15,6 +15,8 @@ struct User: UserModel {
     var score: Double?
     
     //MARK: - Attributes
+    var creationDate = UserAttribute(attributeType: .creationDate, value: nil)
+    
     var userName = UserAttribute(attributeType: .userName, value: "Default User Name")
     
     var instagramName = UserAttribute(attributeType: .instagramName, value: nil)
