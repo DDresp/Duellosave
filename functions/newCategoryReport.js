@@ -7,12 +7,12 @@ exports.newCategoryReport = functions.firestore
   .onCreate((snapshot, context) => {
     const reportData = snapshot.data();
     const reportStatus = reportData.reportStatus;
-    return createNewReport(reportStatus, snapshot.id);
+    return createNewCategoryReport(reportStatus, snapshot.id);
   });
 
 //------------------------------------------------------------------------------------------------------------------------------------
 //MARK: - Methods
-async function createNewReport(reportStatus, categoryId) {
+async function createNewCategoryReport(reportStatus, categoryId) {
   const reportDoc = admin.firestore().doc(`/reportedCategories/${categoryId}`);
   const reportSnapshot = await reportDoc.get();
   const reportData = reportSnapshot.data();
@@ -20,11 +20,11 @@ async function createNewReport(reportStatus, categoryId) {
 
   //get the most recent category attributes
   const categoryDoc = admin.firestore().doc(`/categories/${categoryId}`);
-  const categorySnapshot = await categoryDoc.get();
+  const categorySnapshot = await categoryDoc.get(); 
   const categoryData = categorySnapshot.data();
 
   if (reportData) {
-    if (categoryData[countField]) {
+    if (reportData[countField]) {
       return reportDoc.update({
         [countField]: admin.firestore.FieldValue.increment(1),
         category: categoryData,

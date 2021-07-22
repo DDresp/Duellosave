@@ -7,12 +7,12 @@ exports.newPostReport = functions.firestore
   .onCreate((snapshot, context) => {
     const reportData = snapshot.data();
     const reportStatus = reportData.reportStatus;
-    return createNewReport(reportStatus, snapshot.id);
+    return createNewPostReport(reportStatus, snapshot.id);
   });
 
 //------------------------------------------------------------------------------------------------------------------------------------
 //MARK: - Methods
-async function createNewReport(reportStatus, postId) {
+async function createNewPostReport(reportStatus, postId) {
   const reportDoc = admin.firestore().doc(`/reportedPosts/${postId}`);
   const reportSnapshot = await reportDoc.get();
   const reportData = reportSnapshot.data();
@@ -25,7 +25,7 @@ async function createNewReport(reportStatus, postId) {
 
   if (reportData) {
     if (reportData[countField]) {
-      return reportDoc.update({
+      return reportDoc.update({ 
         [countField]: admin.firestore.FieldValue.increment(1),
         post: postData,
       });
